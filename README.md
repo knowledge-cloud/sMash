@@ -1,4 +1,4 @@
 sMash
 =====
 
-Semantic Mashup Engine
+Semantic and Mobile Mashup Engine
