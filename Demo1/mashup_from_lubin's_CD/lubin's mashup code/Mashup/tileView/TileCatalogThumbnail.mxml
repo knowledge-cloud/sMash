@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+	width="263" height="45"
+    borderStyle="inset"
+    borderColor="#FFFFFF" borderThickness="0.5"
+    horizontalScrollPolicy="off" verticalScrollPolicy="off"
+    rollOver="rollOverHandler(event)"
+    rollOut="rollOutHandler(event)" 
+    mouseDown="mouseDownHandler(event)"
+    mouseMove="mouseMoveHandler(event)"
+    mouseUp="mouseUpHandler(event)"
+    click="clickHandler(event)"
+    automationName="{tile.name}"
+    dropShadowColor="#FFFFFF"
+    shadowDistance="2" textAlign="right"
+    >
+
+    <mx:Metadata>
+    </mx:Metadata>
+
+    <mx:Script>
+        <![CDATA[
+
+		import mx.events.*;
+        import mx.core.*;  
+		import mx.effects.Glow;
+		        
+		import dart.mashup.tile.TileThumbEvent;
+		import dart.mashup.tile.Tile;
+        
+
+        [Bindable] 
+        public var tile:Tile;
+
+        private function rollOverHandler(event:MouseEvent):void
+		{
+            setStyle("borderColor", "#00CC33");
+            setStyle("dropShadowEnabled", true);
+          //  buttons.visible = true;
+        }
+
+        private function rollOutHandler(event:MouseEvent):void
+		{
+            setStyle("borderColor", "#FFFFFF");
+            setStyle("dropShadowEnabled", false);
+		//	buttons.visible = false;
+        }
+
+        private var dragStartPoint:Point;
+
+        public function mouseDownHandler(event:MouseEvent):void
+        {
+        }
+
+        public function mouseMoveHandler(event:MouseEvent):void
+        {
+        }
+
+        public function mouseUpHandler(event:MouseEvent):void
+        {
+            if (dragStartPoint != null)
+            {
+                dragStartPoint = null;
+            }
+        }
+
+        public function clickHandler(event:MouseEvent):void
+        {
+        }
+
+	]]>
+    </mx:Script>
+
+        <mx:HBox width="258" x="0">
+            <mx:Image id="img" height="45" width="106" source="{tile.image}" />
+			<mx:Label text="{tile.name}" fontWeight="bold" paddingTop="5" paddingRight="10" height="35%" width="141"/>            
+        </mx:HBox>
+
+</mx:Canvas>

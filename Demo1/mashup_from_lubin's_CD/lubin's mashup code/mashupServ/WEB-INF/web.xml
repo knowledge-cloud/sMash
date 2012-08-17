@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+<servlet>
+	<servlet-name>OntologyProcessor</servlet-name>
+	<description>add ontology</description>
+	<servlet-class>dart.mashup.ontologyProcessor.OntologyProcessor</servlet-class>
+</servlet>
+<servlet>
+	<servlet-name>TileProcessor</servlet-name>
+	<description>add tile</description>
+	<servlet-class>dart.mashup.tileProcessor.TileProcessor</servlet-class>
+</servlet>
+<servlet>
+	<servlet-name>AjaxHandler</servlet-name>
+	<description>process tile http request</description>
+	<servlet-class>dart.mashup.ajaxHandler.AjaxHandler</servlet-class>
+</servlet>
+<servlet>
+	<servlet-name>MPIProcessor</servlet-name>
+	<description>process mpis request</description>
+	<servlet-class>dart.mashup.mpiProcessor.MPIProcessor</servlet-class>
+</servlet>
+<servlet>
+	<servlet-name>MashupAppProcessor</servlet-name>
+	<description>process mashupApp save request</description>
+	<servlet-class>dart.mashup.mashupAppProcessor.MashupAppProcessor</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>OntologyProcessor</servlet-name>
+	<url-pattern>/addOntology</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+	<servlet-name>TileProcessor</servlet-name>
+	<url-pattern>/addTile</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+	<servlet-name>AjaxHandler</servlet-name>
+	<url-pattern>/requestProcessor</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+	<servlet-name>MPIProcessor</servlet-name>
+	<url-pattern>/processMPIs</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+	<servlet-name>MashupAppProcessor</servlet-name>
+	<url-pattern>/saveMashupApp</url-pattern>
+</servlet-mapping>
+</web-app>

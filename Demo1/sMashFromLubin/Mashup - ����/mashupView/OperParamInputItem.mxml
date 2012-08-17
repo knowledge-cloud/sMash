@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="384" height="29" >
+	<mx:Label x="7" y="6" text="Label"/>
+	<mx:ComboBox x="47" y="4" width="92"></mx:ComboBox>
+	<mx:TextInput x="149" y="5" visible="true"/>
+</mx:Canvas>

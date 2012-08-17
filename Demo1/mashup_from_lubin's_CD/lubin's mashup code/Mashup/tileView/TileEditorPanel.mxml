@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:tileView="tileView.*"
+    layout="vertical" width="100%" height="100%"
+    verticalScrollPolicy="on"
+    horizontalScrollPolicy="off"
+    styleName="catalogPanel" title="Edit Your Tile" verticalAlign="top" >
+    
+    <mx:Metadata>
+    [Event(name="addTile", type="dart.mashup.tile.TileListEvent")]
+    </mx:Metadata>
+    
+    <mx:Script>
+        <![CDATA[
+        	import mx.events.FlexEvent;
+        	import mx.effects.Fade;
+        	import dart.mashup.tile.TileListEvent;
+        	import dart.mashup.tile.TileOperListEvent;
+        	import mx.controls.TileList;
+        	import dart.mashup.tile.Tile;
+        	import mx.rpc.events.ResultEvent;
+        	import mx.rpc.events.FaultEvent;
+        	import mx.rpc.http.HTTPService;
+        	import mx.events.CollectionEvent;
+        	import mx.collections.ArrayCollection;
+        	import dart.mashup.tile.Param;
+        	import dart.mashup.tile.Service;
+        	import mx.controls.Alert;
+        	import dart.mashup.tile.ParamListEvent;
+        
+        [Bindable]	
+        private var _classArr:Array;
+        private var inputArr:ArrayCollection = new ArrayCollection();
+        private var outputArr:ArrayCollection = new ArrayCollection();
+        [Bindable]
+        private var classNameArr:Array = new Array();
+        [Bindable]
+        private var categoryList:Array = new Array("advertisiing", "answers", "blogSearch", "bloging", "bookmarks", "calendar", "chat", 
+        "community", "database", "display", "email", "enterprise", "events", "feeds", "internet", "jobSearch", "mapping", "mediaManagement", "messaging", "music", "news", "other", "photos",  "shopping", "search",  "storage", "telephony", 
+        "tools","video", "weather", "widgets");
+       	public var isFirstAdd:Boolean = false;
+        [Bindable]
+        public function set classArr(c:Array):void
+        {
+        	_classArr = c;
+        } 
+        public function setClassNameArr():void
+        {
+         	for(var i:int = 0; i < _classArr.length; i++){
+        		classNameArr.push(_classArr[i].className);
+        	}	       	
+        }
+        public function get classArr():Array
+        {
+        	return _classArr;
+        }
+        private function addInputParam(pName:String = "", isRequired:String = "", sClass:String = "",
+        	sClassAttr:String = "", pValue:String = "", pDesc:String = ""):void
+        {
+        	if(!isFirstAdd){
+        		setClassNameArr();
+        		isFirstAdd = true;
+        	}
+        	var index:int = TileContainer.getChildIndex(outputStart);
+        	var input:OperInput = new OperInput();
+        	input.classNameArr = classNameArr;
+        	input.classDic = classArr;
+        	if(pName != ""){
+        //		input.addEventListener(FlexEvent.CREATION_COMPLETE, fillInputParam);
+        		input.fill(pName, isRequired, sClass, sClassAttr, pValue, pDesc);
+        	}
+        	TileContainer.addEventListener(ParamListEvent.REMOVE_INPUT_PARAM, removeParam);
+        	TileContainer.addEventListener(ParamListEvent.REMOVE_OUTPUT_PARAM, removeParam);
+        	TileContainer.addChildAt(input, index );
+        	var fade:Fade = new Fade(input);
+        	fade.play();
+        	inputArr.addItem(input);
+        	input.index = inputArr.length;
+        }
+        
+        private function removeParam(e:ParamListEvent):void
+        {
+        	var i:int;
+        	if(e.type == ParamListEvent.REMOVE_INPUT_PARAM){
+	        	var p:OperInput = e.p;
+	        	for(i = 0; i < inputArr.length; i++){
+	        		var tmp:OperInput = inputArr.getItemAt(i) as OperInput;
+	        		if(tmp.index == p.index){
+	        			//inputArr.removeItemAt(i);
+	        			TileContainer.removeChild(p);
+
+	        			break;
+	        		}
+	        	}	
+        	}
+        	else{
+ 	        	var p2:OperOutput = e.op;
+	        	for(i = 0; i < outputArr.length; i++){
+	        		var tmp2:OperOutput = outputArr.getItemAt(i) as OperOutput;
+	        		if(tmp2.index == p2.index){
+	        			//inputArr.removeItemAt(i);
+	        			TileContainer.removeChild(p2);
+	        			break;
+	        		}
+	        	}	       		
+        	}
+        }
+        private function addOutputParam(pName:String = "", sClass:String = "", sClassAttr:String = ""):void
+        {
+        	if(!isFirstAdd){
+        		setClassNameArr();
+        		isFirstAdd = true;
+        	}        	
+        	var index:int = TileContainer.getChildIndex(addButton);
+        	var output:OperOutput = new OperOutput();
+        	output.classNameArr = classNameArr;
+        	output.classDic = classArr;      
+        	if(pName != ""){
+        		output.fill(pName, sClass, sClassAttr);  	
+        	}
+        	TileContainer.addChildAt(output, index);
+        	var fade:Fade = new Fade(output);
+        	fade.play();    
+        	outputArr.addItem(output);
+        	output.index = outputArr.length;
+        }
+        
+        private function addToOperList():void
+        {
+        	var s:Service = new Service(operName.text, operDesc.text, invokeUrl.text);
+        	
+        	setParam(s, inputArr, true);
+        	setParam(s, outputArr, false);
+        	operList.addOper(s);
+        }
+        
+        private function setParam(s:Service, arr:ArrayCollection, flag:Boolean):void
+        {
+        	var i:int;
+        	
+        	var outIndex:int = TileContainer.getChildIndex(outputStart);
+        	if(flag){
+        		var inIndex:int = TileContainer.getChildIndex(inputStart) + 1;
+	        	while(inIndex != outIndex){
+	        		var p:Param = new Param();
+	        		var operInput:OperInput = TileContainer.getChildAt(inIndex)  as OperInput;
+	        		inIndex++;
+					p.paraName = operInput.pName.text;
+					if(p.paraName == "" || p.paraName.length == 0){
+						continue;
+					}
+					p.className = operInput.cbClass.selectedItem as String;
+					p.classAttr = operInput.cbAttr.selectedItem as String;
+					p.paraValue = operInput.pValue.text;
+					var req:String = operInput.cbRequired.selectedItem as String;
+					if(req == "true")
+						p.required = true;
+					else
+						p.required = false;
+				//	p.required = new Boolean((arr.getItemAt(i) as OperInput).cbRequired.selectedItem as String);
+					p.description = operInput.pDesc.text;
+					s.addInputParam(p);	        		
+	        	}   
+        	}
+        	else{
+        		outIndex = TileContainer.getChildIndex(outputStart) + 1;
+        		var outEndIndex:int = TileContainer.getChildIndex(addButton);
+        		while(outIndex != outEndIndex){
+        			var p2:Param = new Param();
+        			var operOutput:OperOutput = TileContainer.getChildAt(outIndex) as OperOutput;
+        			outIndex++;
+ 					p2.paraName = operOutput.pName.text;
+					if(p2.paraName == "" || p2.paraName.length == 0)
+						continue;
+					p2.className = operOutput.cbClass.selectedItem as String;
+					p2.classAttr = operOutput.cbAttr.selectedItem as String;
+					s.addOutputParam(p2);	       			
+        		}
+        	}     	
+	  /*   	for(i = 0; i < arr.length; i++){
+	        	var p:Param = new Param();
+				if(flag){
+					p.paraName = (arr.getItemAt(i)  as OperInput).pName.text;
+					if(p.paraName == "" || p.paraName.length == 0){
+						continue;
+					}
+					p.className = (arr.getItemAt(i) as OperInput).cbClass.selectedItem as String;
+					p.classAttr = (arr.getItemAt(i) as OperInput).cbAttr.selectedItem as String;
+					p.paraValue = (arr.getItemAt(i) as OperInput).pValue.text;
+					var req:String = (arr.getItemAt(i) as OperInput).cbRequired.selectedItem as String;
+					if(req == "true")
+						p.required = true;
+					else
+						p.required = false;
+				//	p.required = new Boolean((arr.getItemAt(i) as OperInput).cbRequired.selectedItem as String);
+					p.description = (arr.getItemAt(i) as OperInput).pDesc.text;
+					s.addInputParam(p);
+				}
+				else{
+					p.paraName = (arr.getItemAt(i) as OperOutput).pName.text;
+					if(p.paraName == "" || p.paraName.length == 0)
+						continue;
+					p.className = (arr.getItemAt(i) as OperOutput).cbClass.selectedItem as String;
+					p.classAttr = (arr.getItemAt(i) as OperOutput).cbAttr.selectedItem as String;
+					s.addOutputParam(p);			
+				}	
+	        } */
+	        	      	
+        }
+     
+   		
+		private function assert(s:String):Boolean
+		{
+			return s.length == 0 ;
+			
+		}
+		
+		private function escapeQuote(str:String):String
+		{
+			var s:String = " ";
+			
+		//	str = str.replace(/'/g, s);
+			str = str.replace(/\r/g, s);
+			str = str.replace(/\n/g, s);
+			return str;
+		//	return str.replace(/"/g, s);
+		}
+		private var newTile:Tile;
+        private function sendTile():void
+        {
+        	var attrValue:String = "";
+        	var length:int = operList.items.length;
+        	var service:HTTPService;
+        	if(length < 1)
+        		Alert.show("operation list is empty");
+        	else{        	
+	        	service = new HTTPService();
+	        	//service.url = "http://10.214.33.121:8080/mashup/addTile";
+	        	service.url = "http://www.dart.zju.edu.cn/mashup/addTile";
+	        	service.method = "post";
+	        	service.addEventListener("result", httpResult);
+	        	service.addEventListener("fault", httpFault);
+	        	var tileXmlStr:String = "<tile>";
+	        	if(assert(tileName.text) || assert(providerUrl.text) || assert(tileDesc.text) || assert(tags.text)){
+	        		Alert.show("please fill all the required information");
+	        		return;
+	        	}
+	        	newTile = new Tile(); 
+	        	newTile.name = escapeQuote(tileName.text);
+	        	newTile.providerUrl = escapeQuote(providerUrl.text);
+	        	newTile.tags = escapeQuote(tags.text);
+	        	newTile.text = escapeQuote(tileDesc.text);
+	        	newTile.category = categoryBox.selectedItem as String;
+	        	tileXmlStr = tileXmlStr + "<name>" + newTile.name + "</name>";
+	        	tileXmlStr = tileXmlStr + "<providerUrl>" + newTile.providerUrl  + "</providerUrl>";
+	        	tileXmlStr = tileXmlStr + "<description>";
+	        	tileXmlStr = tileXmlStr + "<tags>" + newTile.tags + "</tags>";
+	        	tileXmlStr = tileXmlStr + "<text>" + newTile.text + "</text>";
+	        	tileXmlStr = tileXmlStr + "</description>"; 
+	        	tileXmlStr = tileXmlStr + "<category>" + newTile.category + "</category>";
+	        	tileXmlStr = tileXmlStr + "<services>";
+ 
+	        	for(var i:int = 0; i < length; i++){
+	        		var operItem:TileOperListItem = operList.items[i];
+	        		tileXmlStr = tileXmlStr + operItem.s.toXmlString();
+	        		newTile.addService(operItem.s);
+	        	}
+	        	tileXmlStr = tileXmlStr + "</services>";
+	        	tileXmlStr += "</tile>";
+	        	var para:Object =  new Object();
+	        	para.tileXmlStr = tileXmlStr;
+	        	service.send(para); 
+        	}
+        }
+        private function httpResult(event:ResultEvent):void
+        {
+        	var resultStr:String = event.result.toString();
+        	if(resultStr == "tile already exists!"){
+        		Alert.show("tile already exists!");
+        		return;
+        	}
+        	if(resultStr.search("error") != -1){1
+        		Alert.show(resultStr);
+        		return;
+        	}
+        	var tileId:int = event.result.toString();
+        	
+        	newTile.tileId = tileId;
+        	var e:TileListEvent = new TileListEvent(TileListEvent.ADD_TILE);
+        	e.tile = newTile;
+        	dispatchEvent(e);
+        	Alert.show("add Tile done!");
+        	
+        }
+        private function httpFault(event:FaultEvent):void
+        {
+        	Alert.show("tile add error, please try again!"); 
+        }   
+        
+        private function editOperation(s:Service):void
+        {
+        	/* fill operation editor */
+        	this.operName.text = s.name == null ? "" : s.name;
+        	this.operDesc.text = s.desc == null ? "" : s.desc;
+        	this.invokeUrl.text = s.invokeUrl == null ? "" : s.invokeUrl;
+        	this.inputArr.removeAll();
+        	this.outputArr.removeAll();
+        	var inIndex:int = TileContainer.getChildIndex(inputStart) ;
+        	var outIndex:int = TileContainer.getChildIndex(outputStart);
+        	while(inIndex + 1 != outIndex){
+        		TileContainer.removeChildAt(inIndex + 1);
+        		outIndex --;
+        	}
+        	var i:int;
+        	for(i = 0; i < s.inParam.length; i++){
+        		var p:Param = s.inParam.getItemAt(i) as Param;
+        		this.addInputParam(p.paraName, p.required == true ? "true" : "false", p.className, p.classAttr, p.paraValue, p.description);
+        	}
+        	outIndex = TileContainer.getChildIndex(outputStart);
+        	var outEndIndex:int = TileContainer.getChildIndex(addButton);
+        	while(outIndex + 1!= outEndIndex){
+        		TileContainer.removeChildAt(outIndex + 1);
+        		outEndIndex--;
+        	}
+        	for(i = 0; i < s.outParam.length; i++){
+        		var p2:Param = s.outParam.getItemAt(i) as Param;
+        		this.addOutputParam(p2.paraName, p2.className, p2.classAttr);
+        	} 
+			
+        	
+        }
+        
+        ]]>
+    </mx:Script>
+    <mx:Spacer height="5"/>
+    <mx:VBox height="92.25%" width="100%" id="TileContainer" horizontalScrollPolicy="off">
+        <mx:HBox width="100%">
+            <mx:Label text="Name:" fontWeight="normal" width="71"/>
+            <mx:TextInput id="tileName"/>
+            <mx:Label text="Category:" fontWeight="normal"/>
+            <mx:ComboBox id="categoryBox" width="114" dataProvider="{categoryList}"></mx:ComboBox>
+            <mx:Label text="Tags:" fontWeight="normal"/>
+            <mx:TextInput  id="tags" width="100"/>
+            <mx:Label text="(space seprated;)"/>
+        </mx:HBox>
+        <mx:HBox width="100%">
+            <mx:Label text="providerUrl:" fontWeight="normal"  width="71"/>
+            <mx:TextInput width="601" id="providerUrl"/>
+        </mx:HBox>        
+        <mx:HBox width="100%">
+            <mx:Label text="Description:" fontWeight="normal"  width="71"/>
+            <mx:TextInput width="601" id="tileDesc"/>
+        </mx:HBox>
+        <mx:HRule width="95%" height="2"/>
+        <mx:Label text="Operations of this tile:" width="166" fontWeight="bold" fontSize="11"/>
+            <mx:HBox width="100%">
+                <mx:Label text="OperationName:" />
+                <mx:TextInput  id="operName"/>
+                <mx:Label text="Description:" fontWeight="normal"/>
+                <mx:TextInput  id="operDesc" width="326"/>
+            </mx:HBox>
+            <mx:HBox width="100%">
+                    <mx:Label text="invokeUrl:" width="97"/>
+                    <mx:TextInput width="574" id="invokeUrl"/>
+            </mx:HBox>
+            <mx:HBox width="100%" id="inputStart">
+                <mx:Label text="Input:" fontWeight="bold"/>
+                <mx:Spacer/>
+                <mx:LinkButton label="Add Input Parameter +" color="#193C0B"  fontWeight="normal" click="addInputParam()"/>
+            </mx:HBox>
+            <mx:HBox width="100%" id="outputStart">
+                <mx:Label text="Output:" fontWeight="bold"/>
+                <mx:LinkButton label="Add Output Parameter +" color="#193C0B"  fontWeight="normal" click="addOutputParam()"/>
+            </mx:HBox>
+            <mx:Button label="Add to Operation List" id="addButton" click="addToOperList()"/>
+            <tileView:TileOperList width="95%"  height="129" id="operList" editOper="editOperation(event.service)"/>
+        <mx:Button label="Sumit" click="sendTile()"/>
+
+    </mx:VBox>
+   
+    <mx:StringValidator source="{tileName}" property="text" minLength="1" />
+	<mx:StringValidator source="{tags}" property="text" minLength="1" />     
+	<mx:StringValidator source="{providerUrl}" property="text" minLength="1" />
+	<mx:StringValidator source="{tileDesc}" property="text" minLength="1" />
+
+
+</mx:Panel>

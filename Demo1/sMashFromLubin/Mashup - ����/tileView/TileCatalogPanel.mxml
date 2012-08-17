@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Accordion xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:tileView="tileView.*"
+    height="100%" >
+    
+    <mx:Metadata>
+        [Event(name="details", type="dart.mashup.tile.TileThumbEvent")]
+        [Event(name="edit", type="dart.mashup.tile.TileThumbEvent")]
+    </mx:Metadata>
+    
+    <mx:Script>
+         <![CDATA[
+        import mx.collections.ArrayCollection;
+        import dart.mashup.tile.Tile;
+        
+        private var _tileCatalog:ArrayCollection;
+        private  var thumbnails:Array;
+        private  var accepted:Dictionary = new Dictionary();
+        
+        [Bindable]
+        public function set tileCatalog(c:ArrayCollection):void
+        {
+            _tileCatalog = c;
+            createThumbnails();
+        }
+        
+        public function get tileCatalog():ArrayCollection
+        {
+            return _tileCatalog;
+        }
+        
+        private function removeThumbnailItem(thumbnailItem:TileCatalogThumbnail):void
+        {
+        	var type:String = thumbnailItem.tile.category.toLowerCase();
+        	
+      //  	"advertisiing", "answers", "blogSearch", "bloging", "bookmarks", "calendar", "chat", 
+      //  "community", "database", "email", "enterprise", "events", "feeds", "internet", "jobSearch", "mapping", "mediaManagement", "messaging", "music", "news", "other", "photos",  "shopping", "search",  "storage", "telephony", 
+       // "tools","video", "weather", "widgets"
+        
+        	switch(type){
+        		case "mapping":
+        			thumbContentMapping.removeChild(thumbnailItem);
+        			break;
+        		case "photos":
+        			thumbContentPhotos.removeChild(thumbnailItem);
+        			break;
+        		case "video":
+        			thumbContentVideo.removeChild(thumbnailItem);
+        			break;
+        		case "shopping":
+        			thumbContentShopping.removeChild(thumbnailItem);
+        			break;
+        		case "bookmarks":
+        			thumbContentBookmark.removeChild(thumbnailItem);
+        			break;
+        		case "search":
+        			thumbContentSearch.removeChild(thumbnailItem);
+        			break;
+        		case "community":
+        			thumbContentCommunity.removeChild(thumbnailItem);
+        			break;
+        		case "events":
+        			thumbContentEvents.removeChild(thumbnailItem);
+        			break;
+        		default :
+        			thumbContentOther.removeChild(thumbnailItem);
+        			break;
+        	//	default:	break;	
+        	}
+        }
+        private function addThumb(thumb:TileCatalogThumbnail):void
+        {
+        	var type:String = thumb.tile.category;
+        	switch(type){
+        		case "mapping":
+        			thumbContentMapping.addChild(thumb);
+        			break;
+        		case "photos":
+        			thumbContentPhotos.addChild(thumb);
+        			break;
+        		case "video":
+        			thumbContentVideo.addChild(thumb);
+        			break;
+        		case "shopping":
+        			thumbContentShopping.addChild(thumb);
+        			break;
+        		case "bookmarks":
+        			thumbContentBookmark.addChild(thumb);
+        			break;
+        		case "search":
+        			thumbContentSearch.addChild(thumb);
+        			break;
+        		case "community":
+        			thumbContentCommunity.addChild(thumb);
+        			break;
+        		case "events":
+        			thumbContentEvents.addChild(thumb);
+        			break;
+        		case "other":
+        		default:
+        			thumbContentOther.addChild(thumb);
+        			break;
+        		//default:	break;	
+        	}        	
+        }
+        private function createThumbnails():void
+        {
+            var i:int; //variables are hoisted up in scope so declare here to avoid warning
+            if (thumbnails != null)
+            {
+                for (i=0; i < thumbnails.length; i++)
+                {
+                	removeThumbnailItem(thumbnails[i]);
+                }
+            }
+             
+            var row:int = 0;
+            var col:int = -1;
+            var n:int = tileCatalog.length;
+            thumbnails = new Array(n);
+            
+            for (i=0; i < n; i++)
+            {
+                var thumb:TileCatalogThumbnail = new TileCatalogThumbnail();
+                thumbnails[i] = thumb;
+                thumbnails[i].showInAutomationHierarchy = true;
+                thumb.tile = tileCatalog.getItemAt(i) as Tile;
+                accepted[thumb.tile] = true;
+                addThumb(thumb);
+                
+                //thumbContent.addChild(thumb);
+            }
+
+           // layoutCatalog();
+        }        
+         ]]>
+    </mx:Script>
+   
+    <!-- Define each panel using a VBox container. --> 
+
+	<mx:VBox label="mapping" horizontalScrollPolicy="off">
+        <mx:VBox id="thumbContentMapping" width="100%" height="100%" 
+            horizontalScrollPolicy="off" verticalGap="0"/>
+	</mx:VBox>
+	 
+	<mx:VBox label="photos" horizontalScrollPolicy="off">
+        <mx:VBox id="thumbContentPhotos" width="100%" height="100%" 
+            horizontalScrollPolicy="off" verticalGap="0" />
+	</mx:VBox>
+	
+	<mx:VBox label="video" horizontalScrollPolicy="off">
+        <mx:VBox id="thumbContentVideo" width="100%" height="100%" 
+            horizontalScrollPolicy="off" verticalGap="0"/>
+	</mx:VBox>
+	<mx:VBox label="shopping" horizontalScrollPolicy="off">
+        <mx:VBox id="thumbContentShopping" width="100%" height="100%" 
+            horizontalScrollPolicy="off"/>
+	</mx:VBox>
+	<mx:VBox label="bookmarks" horizontalScrollPolicy="off">
+        <mx:VBox id="thumbContentBookmark" width="100%" height="100%" 
+            horizontalScrollPolicy="off"/>
+	</mx:VBox>
+	<mx:VBox label="search" horizontalScrollPolicy="off">
+        <mx:VBox id="thumbContentSearch" width="100%" height="100%" 
+            horizontalScrollPolicy="off"/>
+	</mx:VBox>
+	<mx:VBox label="community" horizontalScrollPolicy="off">
+        <mx:VBox id="thumbContentCommunity" width="100%" height="100%" 
+            horizontalScrollPolicy="off"/>
+	</mx:VBox>	            	            	            
+	<mx:VBox label="events" horizontalScrollPolicy="off">
+        <mx:VBox id="thumbContentEvents" width="100%" height="100%" 
+            horizontalScrollPolicy="off"/>
+	</mx:VBox>	            
+	<mx:VBox label="other" horizontalScrollPolicy="off">
+        <mx:VBox id="thumbContentOther" width="100%" height="100%" 
+            horizontalScrollPolicy="off"/> 
+	</mx:VBox>	   
+    <!--mx:Canvas width="100%" height="100%" 
+        verticalScrollPolicy="off"
+        horizontalScrollPolicy="off"
+        paddingRight="0">
+        <mx:Canvas id="thumbContent" width="100%" height="100%" 
+            horizontalScrollPolicy="off"/>
+        <classView:ClassDetails id="details"
+            width="{ClassCatalogThumbnail.COL_WIDTH_4 * 3}"
+            height="100%"
+            visible="false"
+            purchase="classThumbEventHandler(event)"
+            browse="classThumbEventHandler(event)" />
+    </mx:Canvas -->
+          
+</mx:Accordion>

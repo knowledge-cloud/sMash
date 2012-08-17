@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+    width="408" height="68" borderStyle="solid"
+    horizontalScrollPolicy="off"
+    backgroundAlpha="0" backgroundColor="#FF0000"> <!-- need a background color for drag and drop but can set alpha to 0 -->
+    
+    <mx:Metadata>
+       [Event(name="removeMashupPathItem", type="dart.mashup.mashup.MashupSelectedListEvent")]
+    </mx:Metadata>
+
+    <mx:Script>
+        <![CDATA[
+        	import mx.collections.ArrayCollection;
+        	import dart.mashup.tile.Service;
+        	import dart.mashup.mashup.TilePacket;
+        import mx.core.*;
+        import mx.effects.*;
+        import mx.events.*;
+        import mx.effects.EffectManager;
+        
+        import dart.mashup.mashup.MashupSelectedListEvent;
+        
+        public var items:Array = [];
+        
+        public var newItemStartX:int;
+        public var newItemStartY:int;
+        [Bindable]
+        public var maxItems:int;
+        public var showQuantity:Boolean;
+        
+        private var playingEffects:Dictionary = new Dictionary(true);
+        
+        public function clear():void
+        {
+     		var n:int = items.length;
+     		
+     		for(var i:int = 0; i < n; i++){
+     			var msi:MashupSelectedItem = items[i] as MashupSelectedItem;
+     			removeChild(msi);		
+     		}
+     		items.splice(0, n);
+        }
+        
+        public function addMashupPathItem(tp1:TilePacket, s1:Service, tp2:TilePacket, s2:Service):Boolean
+		{
+            var index:int = indexOf(tp1, s1, tp2, s2);
+            var event:MashupSelectedListEvent;
+            var item:MashupSelectedItem;
+             
+            if (index != -1)
+			{
+			    item = items[index] as MashupSelectedItem;
+			    //if we don't keep track of what's playing a double-click can
+			    //cause the list item to keep rising
+			    if (playingEffects[item] == null)
+			    {
+                    var jump:Sequence = new Sequence();
+                    var m1:Move = new Move(item)
+                    m1.yBy = -5;
+                    var m2:Move = new Move(item)
+                    m2.yBy = 5;
+                    jump.addChild(m1);
+                    jump.addChild(m2);
+                    jump.duration = 150;
+                    playingEffects[item] = jump;
+                    jump.addEventListener(EffectEvent.EFFECT_END, function(event:Event):void
+                    {
+                       delete playingEffects[item];
+                    });
+                    jump.play();
+                }
+                
+                return false;
+            }
+			else
+			{
+                index = items.length;
+                if (maxItems <= 0 || index < maxItems)
+				{
+				    item = new MashupSelectedItem();
+				    item.s1 = s1;
+				    item.s2 = s2;
+				    item.tp1 = tp1;
+				    item.tp2 = tp2;
+				    item.percentWidth = 100;
+				    item.addEventListener(MashupSelectedListEvent.REMOVE_MASHUPPATHITEM, removeItemHandler);
+                    items[index] = item;
+                    addChild(item);
+                    layoutItems(index, true);
+                //    event = new MashupSelectedListEvent(MashupSelectedListEvent.ADD_MASHUPPATHITEM);
+               //     event.attribute = attribute;
+                 //   dispatchEvent(event);
+                }
+                
+                return true;
+            }
+        }
+        
+        private function removeItemHandler(event:Event):void
+        {
+            var item:MashupSelectedItem = event.target as MashupSelectedItem;
+            var index:int = indexOf(item.tp1, item.s1, item.tp2, item.s2);
+            items.splice(index, 1);
+            removeChild(item);
+            layoutItems(index);
+            var event2:MashupSelectedListEvent = new MashupSelectedListEvent(MashupSelectedListEvent.REMOVE_MASHUPPATHITEM);
+            event2.s1 = item.s1;
+            event2.tp1 = item.tp1;
+            event2.tp2 = item.tp2;
+            event2.s2 = item.s2;
+            dispatchEvent(event2);
+        }
+            
+        private function layoutItems(startIndex:int, scrollToBottom:Boolean=false):void
+		{
+            var n:int = items.length;
+            var e:Move;
+			for (var i:int = startIndex; i < n ; i++)
+			{
+			    var item:MashupSelectedItem = items[i];
+                var yTo:Number = i * (item.height);
+                //still need to prevent items that are already in motion from getting
+                //jumpy
+			    if (playingEffects[item] == null)
+			    {
+                    e = new Move(item);
+                    if (item.x == 0 && item.y == 0)
+    				{
+    					e.xFrom = newItemStartX;
+    					e.yFrom = newItemStartY;
+                    }
+    
+                    e.xTo = 0;
+                    e.yTo = yTo;
+                    playingEffects[item] = e;
+                    e.addEventListener(EffectEvent.EFFECT_END, function(event:Event):void
+                    {
+                       delete playingEffects[item];
+                    });
+                    e.play();
+                }
+                else
+                {
+                    playingEffects[item].pause();
+                    playingEffects[item].yTo = yTo;
+                    playingEffects[item].play();
+                }
+            }
+            //get the last event and if we should scroll make sure we can validate
+            //and scroll to maxVPosition
+            if (scrollToBottom)
+            {
+                e.addEventListener(EffectEvent.EFFECT_END, function(event:Event):void
+                {
+                    validateNow();
+                    verticalScrollPosition = maxVerticalScrollPosition;    
+                });
+            }
+        }
+        
+        private function indexOf(tp1:TilePacket, s1:Service, tp2:TilePacket, s2:Service):int
+		{
+            var index:int = -1;
+
+            var n:int = items.length;
+			for (var i:int = 0; i < items.length; i++)
+			{
+				var msi:MashupSelectedItem = items[i] as MashupSelectedItem;
+                if (msi.tp1.getTile().name == tp1.getTile().name && msi.s1.name == s1.name && msi.tp2.getTile().name == tp2.getTile().name
+                && msi.s2.name == s2.name)
+				{
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
+        }
+ 
+        ]]>
+    </mx:Script>
+    
+</mx:Canvas>

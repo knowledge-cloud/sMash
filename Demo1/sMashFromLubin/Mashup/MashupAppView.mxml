@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:mashupAppView="mashupAppView.*"
+    width="100%" height="100%"
+    >
+
+    <mx:Script>
+        <![CDATA[
+        	import dart.mashup.mashupApp.MashupApp;
+        import mx.collections.ArrayCollection;
+                
+        private var _mashupAppCatalog:ArrayCollection;
+        
+        [Bindable]
+        public function get mashupAppCatalog():ArrayCollection
+        {
+            return _mashupAppCatalog;
+        }
+        
+        public function set mashupAppCatalog(c:ArrayCollection):void
+        {
+            _mashupAppCatalog = c;
+         /*   if (editorPanel != null)
+            {
+                editorPanel.filter.count = c.length;
+            }
+         */
+        }
+        
+        public function addToCatalogPanel(ma:MashupApp):void
+        {
+        	maCatalogPanel.addMashupApp(ma);
+        }
+        
+        
+        ]]>
+    </mx:Script>
+      
+    <mashupAppView:MashupAppCatalogPanel id="maCatalogPanel" y="4" width="100%" height="540"
+        mashupAppCatalog="{mashupAppCatalog}"
+        />
+
+</mx:Canvas>

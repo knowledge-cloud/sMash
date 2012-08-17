@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" 
+    title="Save Your Mashup Application" height="244"> <!-- need a background color for drag and drop but can set alpha to 0 -->
+    
+    <mx:Metadata>
+    [Event(name="save", type="dart.mashup.mashup.MashupSaveEvent")]
+    </mx:Metadata>
+
+    <mx:Script>
+        <![CDATA[
+        	import dart.mashup.mashup.MashupSaveEvent;
+        	import mx.controls.Text;
+		import mx.managers.PopUpManager;
+ 		
+ 		public var nameStr:Text;
+ 		public var descStr:Text;
+ 		private function save():void
+ 		{
+ 			nameStr.text = name1.text;
+ 			descStr.text = desc.text;
+ 			
+ 			var mse:MashupSaveEvent = new MashupSaveEvent(MashupSaveEvent.SAVE);
+ 			dispatchEvent(mse);
+ 			PopUpManager.removePopUp(this);
+ 		}
+        ]]>
+    </mx:Script>
+    
+    <mx:HBox>
+        <mx:Label text="Please input the name of your mashup application: " fontWeight="bold"/>
+       
+    </mx:HBox>
+    <mx:HBox width="100%">
+        <mx:TextInput id="name1" width="371"/>
+    </mx:HBox>
+    <mx:HBox width="100%">
+        <mx:Label text="Description:" fontWeight="bold"/>
+    </mx:HBox>
+    <mx:TextArea id="desc" width="372" height="57"/>
+    <mx:Spacer height="21"/>
+
+    <mx:HBox width="370">
+        <mx:Spacer width="112"/>
+        <mx:Button label="Save" click="save();"/>
+        <mx:Button label="Cancel" click="PopUpManager.removePopUp(this);"/>
+    </mx:HBox>  
+   
+    <mx:StringValidator source="{name1}" property="text" minLength="1" maxLength="100"/>  
+    <mx:StringValidator source="{desc}" property="text" minLength="1" maxLength="200"/> 
+    
+</mx:TitleWindow> 

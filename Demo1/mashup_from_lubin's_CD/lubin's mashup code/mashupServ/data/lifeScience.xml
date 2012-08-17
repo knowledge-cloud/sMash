@@ -1,0 +1,1799 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+<tile tileId="1">
+<name>EBI-ArrayExpress</name>
+<providerUrl>http://www.ebi.ac.uk/microarray-as/ae/xml</providerUrl>
+<description>
+<tags>health</tags>
+<text>European Bioinformatics Institute</text>
+</description>
+<category>health</category>
+<services>
+<service name="findExpAndData">
+<description>Searching for experiments and data files in the ArrayExpress archive</description>
+<invokeUrl>http://www.ebi.ac.uk/microarray-as/ae/xml/experiments</invokeUrl>
+<input>
+<param className="temp.string" name="keywords" required="true">
+<description>input Data</description>
+<defaultValue>cancer</defaultValue>
+</param>
+<param className="temp.string" name="species" required="false">
+<description>input Data</description>
+<defaultValue>holon</defaultValue>
+</param>
+</input>
+<output>
+<param className="experiment.name" name="name"/>
+<param className="experiment.description" name="description"/>
+<param className="experiment.string" name="species"/>
+<param className="experiment.string" name="experimentType"/>
+</output>
+</service> 
+</services>
+</tile>
+<tile tileId="2">
+<name>chEBI</name>
+<providerUrl>http://www.ebi.ac.uk/microarray-as/ae/xml</providerUrl>
+<description>
+<tags>health</tags>
+<text>European Bioinformatics Institute(SOAP)</text>
+</description>
+<category>health</category>
+<services>
+<service name="getLiteEntity">
+<description>Retrieves a list of "lite" entities containing only the ChEBI ASCII name and ChEBI identifier</description>
+<invokeUrl>http://www.ebi.ac.uk/microarray-as/ae/xml/experiments</invokeUrl>
+<input>
+<param className="temp.string" name="search" required="true">
+<description>input Data</description>
+<defaultValue>cancer</defaultValue>
+</param>
+<param className="object.integer" name="maximumResults" required="false">
+<description>maximum number</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="chebiId"/>
+<param className="object.name" name="chebiAsciiName"/>
+<param className="object.number" name="searchScore"/>
+<param className="object.integer" name="entityStar"/>
+</output>
+</service> 
+</services>
+</tile>
+<tile tileId="3">
+<name>EB-eye</name>
+<providerUrl>http://www.ebi.ac.uk/Tools/webservices/services/eb-eye</providerUrl>
+<description>
+<tags>health</tags>
+<text>European Bioinformatics Institute (SOAP)</text>
+</description>
+<category>health</category>
+<services>
+<service name="getResults">
+<description>Executes a query and returns a list of results. Each result contains the values for each field specified in the fields argument in the same order as they appear in the fields list. </description>
+<invokeUrl>http://www.ebi.ac.uk/microarray-as/ae/xml/experiments</invokeUrl>
+<input>
+<param className="object.string" name="domain" required="true">
+<description>the id of the domain to search into</description>
+<defaultValue>cancer</defaultValue>
+</param>
+<param className="object.string" name="query" required="true">
+<description>the terms to look for</description>
+<defaultValue>cancer</defaultValue>
+</param>
+<param className="object.string" name="fields" required="false">
+<description>a list of fields which data will be included in the results </description>
+<defaultValue>{cancer}</defaultValue>
+</param>
+<param className="object.integer" name="size" required="false">
+<description>maximum results to be returned</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="field"/>
+<param className="object.string" name="fileldValue"/>
+</output>
+</service> 
+</services>
+</tile>
+<tile tileId="4">
+<name>EBI-Integr8</name>
+<providerUrl>http://www.ebi.ac.uk/integr8/HelpAction.do?action=searchById</providerUrl>
+<description>
+<tags>science</tags>
+<text>Integr8 Web Portal. (SOAP)</text>
+</description>
+<category>science</category>
+<services>
+<service name="getOrganismsByQueryTerm">
+<description>Returns a list of Organism objects matching a query term.</description>
+<invokeUrl>http://www.ebi.ac.uk/microarray-as/ae/xml/experiments</invokeUrl>
+<input>
+<param className="object.string" name="queryTerms" required="true">
+<description>the terms to look for</description>
+<defaultValue>cancer</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="name"/>
+<param className="object.string" name="description"/>
+</output>
+</service>
+<service name="getGeneIdsByQueryTerm">
+<description>Returns a list of GeneId objects matching query term(s).</description>
+<invokeUrl>http://www.ebi.ac.uk/microarray-as/ae/xml/experiments</invokeUrl>
+<input>
+<param className="object.string" name="queryTerms" required="true">
+<description>the terms to look for</description>
+<defaultValue>cancer</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="name"/>
+<param className="object.string" name="description"/>
+</output>
+</service> 
+</services>
+</tile>
+<tile tileId="5">
+<name>EBI-WSDbfetch</name>
+<providerUrl>http://www.ebi.ac.uk/Tools/webservices/services/dbfetch_rest</providerUrl>
+<description>
+<tags>biological</tags>
+<text>WSDbfetch allows you to retrieve entries from various up-to-date biological databases using entry identifiers or accession numbers.</text>
+</description>
+<category>science</category>
+<services>
+<service name="getEntry">
+<description>retrive an entry in the default database format.</description>
+<invokeUrl>http://www.ebi.ac.uk/Tools/webservices/rest/dbfetch/</invokeUrl>
+<input>
+<param className="object.string" name="db" required="true">
+<description>database name</description>
+<defaultValue>uniprotkb</defaultValue>
+</param>
+<param className="object.string" name="id" required="true">
+<description>entry identifier</description>
+<defaultValue>WAP_RAT</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="name"/>
+<param className="object.string" name="description"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="6">
+<name>EBI-NCBIBlast</name>
+<providerUrl>http://www.ebi.ac.uk/Tools/webservices/services/sss/ncbi_blast_rest</providerUrl>
+<description>
+<tags>biological</tags>
+<text>Find regions of sequence similarity</text>
+</description>
+<category>science</category>
+<services>
+<service name="runJob">
+<description>Submit a job with the specified parameters</description>
+<invokeUrl>tp://www.ebi.ac.uk/Tools/services/rest/ncbiblast/run/</invokeUrl>
+<input>
+<param className="object.string" name="title" required="true">
+<description>title of the job</description>
+<defaultValue>cancer</defaultValue>
+</param>
+<param className="object.string" name="matrix" required="true">
+<description>Scoring matrix to be used in the search.</description>
+<defaultValue>WAP_RAT</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="comparedResult"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="7">
+<name>EBI-ClustalW2</name>
+<providerUrl>http://www.ebi.ac.uk/Tools/webservices/services/msa/clustalw2_rest</providerUrl>
+<description>
+<tags>biological</tags>
+<text>ClustalW2 is a fully automatic program for global multiple alignment of DNA or protein sequences.</text>
+</description>
+<category>science</category>
+<services>
+<service name="runJob">
+<description>Submit a job with the specified parameters</description>
+<invokeUrl>tp://www.ebi.ac.uk/Tools/services/rest/ncbiblast/run/</invokeUrl>
+<input>
+<param className="object.string" name="title" required="true">
+<description>title of the job</description>
+<defaultValue>cancer</defaultValue>
+</param>
+<param className="object.string" name="matrix" required="true">
+<description>Scoring matrix to be used in the search.</description>
+<defaultValue>WAP_RAT</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="alignmentResult"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="8">
+<name>GoogleHealth</name>
+<providerUrl>https://www.google.com/health</providerUrl>
+<description>
+<tags>health</tags>
+<text>The Google Health Data API allows client applications to view and update Health content in the form of Google Data API feeds</text>
+</description>
+<category>health</category>
+<services>
+<service name="insertEntry">
+<description>insert an entry</description>
+<invokeUrl>https://www.google.com/health/</invokeUrl>
+<input>
+<param className="object.string" name="text" required="true">
+<description>text of the entry</description>
+<defaultValue>cancer</defaultValue>
+</param>
+<param className="object.string" name="type" required="true">
+<description>type of the entered entry</description>
+<defaultValue>Prescription Date</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="9">
+<name>Indivo</name>
+<providerUrl>http://wiki.chip.org/indivo/index.php/Indivo_API</providerUrl>
+<description>
+<tags>health</tags>
+<text>The Indivo API provides an interface for Personal Health Applications to extend the functionality of the Indivo PCHR.</text>
+</description>
+<category>health</category>
+<services>
+<service name="createDocument">
+<description>create a document</description>
+<invokeUrl>https://www.google.com/health/</invokeUrl>
+<input>
+<param className="object.string" name="text" required="true">
+<description>text of the document</description>
+<defaultValue>cancer</defaultValue>
+</param>
+<param className="object.string" name="type" required="true">
+<description>type of the entered entry</description>
+<defaultValue>Prescription Date</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="11">
+<name>KEgg</name>
+<providerUrl>http://www.genome.jp/kegg/soap/</providerUrl>
+<description>
+<tags>health</tags>
+<text>KEGG API provides valuable means for accessing the KEGG system, such as for searching and computing biochemical pathways in cellular processes or analyzing the universe of genes in the completely sequenced genomes.</text>
+</description>
+<category>biochemical</category>
+<services>
+<service name="get_genes_by_enzyme">
+<description>Retrieve all genes of the given organism.</description>
+<invokeUrl>http://www.genome.jp/dbget-bin/www_linkdb</invokeUrl>
+<input>
+<param className="object.string" name="organism" required="true">
+<description>the given organism</description>
+<defaultValue>cancer</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="genes"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="12">
+<name>MicrosoftHealthVault</name>
+<providerUrl>http://healthvault.com/</providerUrl>
+<description>
+<tags>health</tags>
+<text>The MicrosoftHealthVault Data API allows client applications to view and update Health content in the form of Microsoft Data API feeds</text>
+</description>
+<category>health</category>
+<services>
+<service name="insertEntry">
+<description>insert an entry</description>
+<invokeUrl>http://healthvault.com/</invokeUrl>
+<input>
+<param className="object.string" name="text" required="true">
+<description>text of the entry</description>
+<defaultValue>cancer</defaultValue>
+</param>
+<param className="object.string" name="type" required="true">
+<description>type of the entered entry</description>
+<defaultValue>Prescription</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="13">
+<name>NCBIEntrez</name>
+<providerUrl>http://healthvault.com/</providerUrl>
+<description>
+<tags>health</tags>
+<text>The Entrez database contains bioinformatics data. (SOAP)</text>
+</description>
+<category>health</category>
+<services>
+<service name="ESearch">
+<description>search in PubMed Central for the keywords input in free fulltext articles</description>
+<invokeUrl>http://www.ncbi.nlm.nih.gov/entrez/query</invokeUrl> 
+<input>
+<param className="object.string" name="searchTerm" required="true">
+<description>search term should be URL encoded </description>
+<defaultValue>stem cells</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="articleID"/>
+</output>
+</service>
+<service name="Query">
+<description>search in PubMed Central for the keywords input in free fulltext articles</description>
+<invokeUrl>http://www.ncbi.nlm.nih.gov/entrez/query</invokeUrl> 
+<input>
+<param className="object.string" name="searchTerm" required="true">
+<description>search term</description>
+<defaultValue>cat</defaultValue>
+</param>
+<param className="object.string" name="DBName" required="true">
+<description>database name</description>
+<defaultValue>stem cells</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="articleID"/>
+<param className="object.title" name="title"/>
+<param className="object.description" name="Abstract"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="14">
+<name>NHS</name>
+<providerUrl>http://www.nhs.uk/nhscwebservices/</providerUrl>
+<description>
+<tags>health</tags>
+<text>NHS Choices has created a set of web services to allow approved partners to interact with the service.</text>
+</description>
+<category>health</category>
+<services>
+<service name="healthInfo">
+<description>provides information and advice on more than 800 conditions and treatments</description>
+<invokeUrl>http://www.nhs.uk/nhscwebservices/</invokeUrl>
+<input>
+</input>
+<output>
+<param className="object.string" name="information"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="15">
+<name>PDBj</name>
+<providerUrl>http://doc.pdbj.org</providerUrl>
+<description>
+<tags>health</tags>
+<text>Data Bank Japan maintains a repository of macromolecular structures and offers tools, in collaboration with the RCSB in the US and the MSD-EBI in the EU. PDBj is supported by JST-BIRD.</text>
+</description>
+<category>health</category>
+<services>
+<service name="healthInfo">
+<description>provides information and advice on more than 800 conditions and treatments</description>
+<invokeUrl>http://doc.pdbj.org</invokeUrl>
+<input>
+</input>
+<output>
+<param className="object.string" name="information"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="16">
+<name>Praxeon</name>
+<providerUrl>http://developer.praxeon.com/</providerUrl>
+<description>
+<tags>health</tags>
+<text>Praxeon provides a web service API for health and medicine.</text>
+</description>
+<category>health</category>
+<services>
+<service name="searchTargetedContent">
+<description>You can select the specific content sources you want, and find the most relevant articles using our award-winning and industry leading search engine.</description>
+<invokeUrl>http://developer.praxeon.com/</invokeUrl>
+<input>
+<param className="object.string" name="searchTerm" required="true">
+<description>search term</description>
+<defaultValue>cat</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="information"/>
+</output>
+</service>
+<service name="semanticSearch">
+<description>The Praxeon search engine accepts naturally phrased medical questions and returns organized answers.</description>
+<invokeUrl>http://developer.praxeon.com/</invokeUrl>
+<input>
+<param className="object.string" name="searchTerm" required="true">
+<description>search term</description>
+<defaultValue>cat</defaultValue>
+</param>
+</input>
+<output>
+<param className="answer.string" name="theAnswer"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="17">
+<name>SeqHound</name>
+<providerUrl>http://www.nhs.uk/nhscwebservices/</providerUrl>
+<description>
+<tags>bioinformatics</tags>
+<text>SeqHound: biological sequence and structure database as a platform for bioinformatics research.</text>
+</description>
+<category>bioinformatics</category>
+<services>
+<service name="healthInfo">
+<description>provides information and advice on more than 800 conditions and treatments</description>
+<invokeUrl>http://www.nhs.uk/nhscwebservices/</invokeUrl>
+<input>
+</input>
+<output>
+<param className="object.string" name="information"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="18">
+<name>UniProt</name>
+<providerUrl>http://www.uniprot.org/uniprot/?query</providerUrl>
+<description>
+<tags>protein</tags>
+<text>UniProt is a protein sequence and annotation database for the scientific community.</text>
+</description>
+<category>bioinformatics</category>
+<services>
+<service name="query">
+<description>retrive entries for further analysis, or a simple list of matching entries.</description>
+<invokeUrl>http://www.uniprot.org/uniprot/?query</invokeUrl>
+<input>
+<param className="object.string" name="query" required="true">
+<description>search term</description>
+<defaultValue>cat</defaultValue>
+</param>
+<param className="object.integer" name="limit" required="false">
+<description>Maximum number of results to retrieve.</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="entryList"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="19">
+<name>Biology</name>
+<providerUrl>http://www.uniprot.org/uniprot/?query</providerUrl>
+<description>
+<tags>bioinformatics</tags>
+<text>access various databases and analysis program easily.</text>
+</description>
+<category>bioinformatics</category>
+<services>
+<service name="ARSA">
+<description>Keyword search system against over 20 life sciences databases developed by DDBJ.</description>
+<invokeUrl>http://xml.nig.ac.jp/rest/Invoke?service=ARSAmethod=searchSimple</invokeUrl>
+<input>
+<param className="object.string" name="query" required="true">
+<description>search term</description>
+<defaultValue>cat</defaultValue>
+</param>
+<param className="object.integer" name="count" required="false">
+<description>Maximum number of results to retrieve.(Max 100)</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="entryList"/>
+</output>
+</service>
+<service name="Blast">
+<description>BLAST finds regions of similarity between biological sequences.</description>
+<invokeUrl>http://xml.nig.ac.jp/rest/Invoke?service=ARSAmethod=searchSimple</invokeUrl>
+<input>
+<param className="object.string" name="program" required="true">
+<description>program to be analyzed</description>
+<defaultValue>blastn</defaultValue>
+</param>
+<param className="object.string" name="database" required="true">
+<description>database name</description>
+<defaultValue>ddbjbct</defaultValue>
+</param>
+<param className="object.string" name="query" required="true">
+<description>query sequence</description>
+<defaultValue>ctgaaat</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="result"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="20">
+<name>cPath</name>
+<providerUrl>http://cbio.mskcc.org/cpath</providerUrl>
+<description>
+<tags>bioinformatics</tags>
+<text>cPath is a database and software suite for storing, visualizing, and analyzing biological pathways.</text>
+</description>
+<category>bioinformatics</category>
+<services>
+<service name="get_by_keyword">
+<description>Finds all interactions that contain the specified keyword(s)</description>
+<invokeUrl>webservice.do?cmd=get_by_keyword</invokeUrl>
+<input>
+<param className="object.string" name="q" required="true">
+<description>search term</description>
+<defaultValue>cat</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="dbName"/>
+<param className="object.name" name="shortLabel"/>
+<param className="object.name" name="fullName"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="21">
+<name>Flickr</name>
+<providerUrl>http://www.flickr.com/services/api/, http://api.flickr.com</providerUrl>
+<description>
+<tags>photos</tags>
+<text>Get photos you wanted</text>
+</description>
+<category>photos</category>
+<services>
+<service name="getGeotaggedPhotos">
+<description>Get photos that have a latitude and longitude and have been tagged as "geotagged"</description>
+<invokeUrl/>
+<input>
+<param className="object.allType" name="search_text" required="true">
+<description>text in title, description, or tags</description>
+<defaultValue>beach</defaultValue>
+</param>
+<param className="object.decimal" name="number" required="false">
+<description>maximum number of photos to return</description>
+<defaultValue>15</defaultValue>
+</param>
+</input>
+<output>
+<param className="photo.title" name="title"/>
+<param className="photo.imageUrl" name="url"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="photo.userName" name="owner"/>
+<param className="photo.url" name="linkUrl"/>
+<param className="photo.imageUrl" name="originalUrl"/>
+<param className="geo.latitude" name="latitude"/>
+<param className="geo.longitude" name="longitude"/>
+<param className="photo.id" name="id"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="22">
+<name>VirtualEarth</name>
+<providerUrl>http://maps.live.com/</providerUrl>
+<description>
+<tags>mapping</tags>
+<text>Adds a pushpin to the map based on latitude and longitude</text>
+</description>
+<category>mapping</category>
+<services>
+<service name="addPushpin">
+<description>Adds a pushpin to the map based on latitude and longitude</description>
+<invokeUrl/>
+<input>
+<param className="geo.latitude" name="latitude" required="true">
+<description>The pushpin's latitude</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="geo.longitude" name="longitude" required="true">
+<description>The pushpin's longitude</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="photo.thumbnailImageUrl" name="url" required="false">
+<description>The URL used for the pushpin's image</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="object.title" name="title" required="false">
+<description>The pushpin's title</description>
+<defaultValue>My Pushpin</defaultValue>
+</param>
+<param className="object.description" name="description" required="false">
+<description>The pushpin's description</description>
+<defaultValue>This is a pushpin on the earth</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+<service name="addPushpinByAdr">
+<description>Adds a pushpin to the map based on adress</description>
+<invokeUrl/>
+<input>
+<param className="adr.street-address" name="address" required="true">
+<description>adress</description>
+<defaultValue>0</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+<service name="addPushpinByAdr">
+<description>Adds a pushpin to the map based on adress</description>
+<invokeUrl/>
+<input>
+<param className="adr.locality" name="address" required="true">
+<description>adress</description>
+<defaultValue>0</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+<service name="addPushpinByAdr">
+<description>Adds a pushpin to the map based on adress</description>
+<invokeUrl/>
+<input>
+<param className="adr.country" name="address" required="true">
+<description>adress</description>
+<defaultValue>0</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+<service name="addPushpinByAdr">
+<description>Adds a pushpin to the map based on adress</description>
+<invokeUrl/>
+<input>
+<param className="adr.region" name="address" required="true">
+<description>adress</description>
+<defaultValue>0</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+<service name="addPushpinByAdr">
+<description>Adds a pushpin to the map based on adress</description>
+<invokeUrl/>
+<input>
+<param className="adr.location" name="address" required="true">
+<description>adress</description>
+<defaultValue>0</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="23">
+<name>GoogleMap</name>
+<providerUrl>http://maps.google.com/</providerUrl>
+<description>
+<tags>mapping</tags>
+<text>Adds a pushpin to the map based on latitude and longitude</text>
+</description>
+<category>mapping</category>
+<services>
+<service name="addPushpin">
+<description>Adds a pushpin to the map based on latitude and longitude</description>
+<invokeUrl/>
+<input>
+<param className="geo.latitude" name="latitude" required="true">
+<description>The pushpin's latitude</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="geo.longitude" name="longitude" required="true">
+<description>The pushpin's longitude</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="photo.thumbnailImageUrl" name="url" required="false">
+<description>The URL used for the pushpin's image</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="object.title" name="title" required="false">
+<description>The pushpin's title</description>
+<defaultValue>My Pushpin</defaultValue>
+</param>
+<param className="object.description" name="description" required="false">
+<description>The pushpin's description</description>
+<defaultValue>This is a pushpin on the earth</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+<service name="addPushpinByAdr">
+<description>Adds a pushpin to the map based on adress</description>
+<invokeUrl/>
+<input>
+<param className="adr.street-address" name="address" required="true">
+<description>adress</description>
+<defaultValue>0</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+<service name="addPushpinByAdr">
+<description>Adds a pushpin to the map based on adress</description>
+<invokeUrl/>
+<input>
+<param className="adr.locality" name="address" required="true">
+<description>adress</description>
+<defaultValue>0</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+<service name="addPushpinByAdr">
+<description>Adds a pushpin to the map based on adress</description>
+<invokeUrl/>
+<input>
+<param className="adr.country" name="address" required="true">
+<description>adress</description>
+<defaultValue>0</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+<service name="addPushpinByAdr">
+<description>Adds a pushpin to the map based on adress</description>
+<invokeUrl/>
+<input>
+<param className="adr.region" name="address" required="true">
+<description>adress</description>
+<defaultValue>0</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+<service name="addPushpinByAdr">
+<description>Adds a pushpin to the map based on adress</description>
+<invokeUrl/>
+<input>
+<param className="adr.location" name="address" required="true">
+<description>adress</description>
+<defaultValue>0</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="24">
+<name>FaceBook</name>
+<providerUrl>http://facebook.com</providerUrl>
+<description>
+<tags>community</tags>
+<text>FaceBook!</text>
+</description>
+<category>community</category>
+<services>
+<service name="getFriends">
+<description>Gets information about your friends</description>
+<input>
+<param className="object.integer" name="number" required="false">
+<description>Maximum number of friends to return </description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.id" name="id"/>
+<param className="person.name" name="name"/>
+<param className="adr.locality" name="city"/>
+<param className="adr.region" name="state"/>
+<param className="adr.country" name="country"/>
+<param className="adr.zipCode" name="zipCode"/>
+<param className="object.string" name="status"/>
+<param className="object.date" name="statusLastChanged"/>
+<param className="object.url" name="profileUrl"/>
+<param className="photo.imageUrl" name="photoUrl"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="object.description" name="aboutMe"/>
+</output>
+</service>
+<service name="getUserInfoById">
+<description>Gets information about your friends</description>
+<input>
+<param className="object.id" name="userID" required="true">
+<description>user id</description>
+<defaultValue>676712790</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.id" name="id"/>
+<param className="person.name" name="name"/>
+<param className="adr.locality" name="city"/>
+<param className="adr.region" name="state"/>
+<param className="adr.country" name="country"/>
+<param className="adr.zipCode" name="zipCode"/>
+<param className="object.string" name="status"/>
+<param className="object.date" name="statusLastChanged"/>
+<param className="object.url" name="profileUrl"/>
+<param className="photo.imageUrl" name="photoUrl"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="object.description" name="aboutMe"/>
+</output>
+</service>
+<service name="getPhotosByName">
+<description>Gets information about your friends</description>
+<input>
+<param className="object.name" name="userName" required="true">
+<description>user name</description>
+<defaultValue>robin</defaultValue>
+</param>
+</input>
+<output>
+<param className="photo.title" name="caption"/>
+<param className="photo.imageUrl" name="imageUrl"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="photo.userName" name="owner"/>
+</output>
+</service>
+<service name="getEvent">
+<description>Gets event info for a specified event ID</description>
+<input>
+<param className="event.id" name="eventId" required="false">
+<description>Event Id</description>
+<defaultValue>5388533932</defaultValue>
+</param>
+</input>
+<output>
+<param className="event.id" name="eid"/>
+<param className="event.title" name="name"/>
+<param className="event.description" name="description"/>
+<param className="event.time" name="start_time"/>
+<param className="event.time" name="end_time"/>
+<param className="photo.imageUrl" name="pic"/>
+<param className="photo.imageUrl" name="pic_big"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="event.userName" name="creator"/>
+<param className="adr.locality" name="city"/>
+<param className="adr.region" name="state"/>
+<param className="adr.country" name="country"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="25">
+<name>imageLoop</name>
+<providerUrl>http://www.imageloop.com/de/api/index.htm</providerUrl>
+<description>
+<tags>photo tools slideshow germany</tags>
+<text>With imageloop you can create your own world of photos.</text>
+</description>
+<category>Photos</category>
+<services>
+<service name="queryImages">
+<description>get a list of photos for a given query</description>
+<invokeUrl>http://www.imageloop.com/httprpc/?f=imagelooop.queryImages</invokeUrl>
+<input>
+<param className="object.string" name="query" required="true">
+<description>key word</description>
+<defaultValue>music</defaultValue>
+</param>
+</input>
+<output>
+<param className="photo.id" name="imageID"/>
+</output>
+</service>
+<service name="queryImageByImageID">
+<description>get photo metadata for a given imageID</description>
+<invokeUrl>http://www.imageloop.com/httprpc/?f=imagelooop.getImageMetaData</invokeUrl>
+<input>
+<param className="photo.id" name="imageID" required="true">
+<description>image id</description>
+<defaultValue>100000</defaultValue>
+</param>
+</input>
+<output>
+<param className="photo.title" name="title"/>
+<param className="photo.tags" name="tags"/>
+<param className="photo.description" name="description"/>
+<param className="photo.imageUrl" name="imageLink"/>
+<param className="person.userName" name="ownerUsername"/>
+</output>
+</service>
+<service name="makeImageLoop">
+<description>make image loop for images</description>
+<invokeUrl>http://www.imageloop.com/httprpc/?f=imagelooop.getImageMetaData</invokeUrl>
+<input>
+<param className="photo.imageUrl" name="iUrl" required="true">
+<description>image Url</description>
+<defaultValue>None</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="26">
+<name>Youtube</name>
+<providerUrl>http://gdata.youtube.com/feeds/api/videos</providerUrl>
+<description>
+<tags>video</tags>
+<text>Search for image</text>
+</description>
+<category>video</category>
+<services>
+<service name="searchVideo">
+<description>search videos in youtube</description>
+<input>
+<param className="object.allType" name="searchText" required="true">
+<description>The term to search for</description>
+<defaultValue>football</defaultValue>
+</param>
+<param className="video.userName" name="author" required="false">
+<description>videos uploaded by a particular YouTube user</description>
+<defaultValue>robin</defaultValue>
+</param>
+<param className="object.integer" name="count" required="false">
+<description>max returned number</description>
+<defaultValue>10</defaultValue>
+</param>
+<param className="object.string" name="category" required="false">
+<description>retrieve videos that are in a particular category or are tagged with a particular keyword or developer tag</description>
+<defaultValue>Sports</defaultValue>
+</param>
+</input>
+<output>
+<param className="video.title" name="title"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="video.description" name="description"/>
+<param className="video.url" name="linkurl"/>
+<param className="adr.location" name="location"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="27">
+<name>YahooMap</name>
+<providerUrl>http://maps.yahoo.com/</providerUrl>
+<description>
+<tags>mapping</tags>
+<text>Adds a pushpin to the map based on latitude and longitude</text>
+</description>
+<category>mapping</category>
+<services>
+<service name="addPushpin">
+<description>Adds a pushpin to the map based on latitude and longitude</description>
+<input>
+<param className="geo.latitude" name="latitude" required="true">
+<description>The pushpin's latitude</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="geo.longitude" name="longitude" required="true">
+<description>The pushpin's longitude</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="photo.thumbnailImageUrl" name="url" required="false">
+<description>The URL used for the pushpin's image</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="object.title" name="title" required="false">
+<description>The pushpin's title</description>
+<defaultValue>My Pushpin</defaultValue>
+</param>
+<param className="object.description" name="description" required="false">
+<description>The pushpin's description</description>
+<defaultValue>This is a pushpin on the earth</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+<service name="addPushpinByAdr">
+<description>Adds a pushpin to the map based on adress</description>
+<invokeUrl/>
+<input>
+<param className="adr.street-address" name="address" required="true">
+<description>adress</description>
+<defaultValue>0</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+<service name="addPushpinByAdr">
+<description>Adds a pushpin to the map based on adress</description>
+<invokeUrl/>
+<input>
+<param className="adr.locality" name="address" required="true">
+<description>adress</description>
+<defaultValue>0</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+<service name="addPushpinByAdr">
+<description>Adds a pushpin to the map based on adress</description>
+<invokeUrl/>
+<input>
+<param className="adr.country" name="address" required="true">
+<description>adress</description>
+<defaultValue>0</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+<service name="addPushpinByAdr">
+<description>Adds a pushpin to the map based on adress</description>
+<invokeUrl/>
+<input>
+<param className="adr.region" name="address" required="true">
+<description>adress</description>
+<defaultValue>0</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+<service name="addPushpinByAdr">
+<description>Adds a pushpin to the map based on adress</description>
+<invokeUrl/>
+<input>
+<param className="adr.location" name="address" required="true">
+<description>adress</description>
+<defaultValue>0</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="28">
+<name>GoogleWebSearch</name>
+<providerUrl>http://ajax.googleapis.com/ajax/services/search/web</providerUrl>
+<description>
+<tags>search</tags>
+<text>google web search</text>
+</description>
+<category>search</category>
+<services>
+<service name="search">
+<description>Get web search results from the Google Search engine</description>
+<input>
+<param className="object.allType" name="query" required="true">
+<description>The term to search for</description>
+<defaultValue>robin</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.url" name="rawUrl"/>
+<param className="object.title" name="title"/>
+<param className="object.string" name="content"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="29">
+<name>GoogleVideoSearch</name>
+<providerUrl>http://ajax.googleapis.com/ajax/services/search/video</providerUrl>
+<description>
+<tags>video</tags>
+<text>Search for video</text>
+</description>
+<category>video</category>
+<services>
+<service name="search">
+<description>Get video search results from the Google Search engine</description>
+<input>
+<param className="object.allType" name="query" required="true">
+<description>The term to search for</description>
+<defaultValue>robin</defaultValue>
+</param>
+</input>
+<output>
+<param className="video.title" name="title"/>
+<param className="video.description" name="content"/>
+<param className="video.url" name="url"/>
+<param className="object.date" name="published"/>
+<param className="video.userName" name="publisher"/>
+<param className="photo.thumbnailImageUrl" name="videoUrl"/>
+<param className="video.url" name="flashVersionUrl"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="30">
+<name>GoogleBlogSearch</name>
+<providerUrl>http://ajax.googleapis.com/ajax/services/search/blog, http://blogsearch.google.com</providerUrl>
+<description>
+<tags>blog</tags>
+<text>Search for blog</text>
+</description>
+<category>blog</category>
+<services>
+<service name="search">
+<description>Get blog search results from the Google Search engine</description>
+<input>
+<param className="object.allType" name="query" required="true">
+<description>The term to search for</description>
+<defaultValue>robin</defaultValue>
+</param>
+</input>
+<output>
+<param className="blog.title" name="title"/>
+<param className="blog.url" name="postUrl"/>
+<param className="blog.description" name="content"/>
+<param className="blog.userName" name="author"/>
+<param className="blog.url" name="blogUrl"/>
+<param className="blog.date" name="publishedDate"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="31">
+<name>GoogleImageSearch</name>
+<providerUrl>http://ajax.googleapis.com/ajax/services/search/image</providerUrl>
+<description>
+<tags>photos</tags>
+<text>Search for image</text>
+</description>
+<category>photos</category>
+<services>
+<service name="search">
+<description>Get image search results from the Google Search engine</description>
+<input>
+<param className="object.allType" name="query" required="true">
+<description>The term to search for</description>
+<defaultValue>robin</defaultValue>
+</param>
+</input>
+<output>
+<param className="photo.title" name="title"/>
+<param className="photo.imageUrl" name="imageUrl"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="photo.description" name="content"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="32">
+<name>YahooAnswers</name>
+<providerUrl>http://answers.yahoo.com/</providerUrl>
+<description>
+<tags>search</tags>
+<text>Retrieves a set of answers for the passed-in term</text>
+</description>
+<category>search</category>
+<services>
+<service name="getAnswers">
+<description>Retrieves a set of answers for the passed-in term</description>
+<input>
+<param className="object.allType" name="term" required="true">
+<description>The desired search term</description>
+<defaultValue>computers</defaultValue>
+</param>
+<param className="object.integer" name="count" required="false">
+<description>max returned number</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.title" name="subject"/>
+<param className="object.description" name="content"/>
+<param className="object.date" name="date"/>
+<param className="object.url" name="link"/>
+<param className="object.string" name="category"/>
+<param className="object.id" name="userId"/>
+<param className="photo.imageUrl" name="userPhotoURL"/>
+<param className="person.userName" name="userNick"/>
+<param className="object.integer" name="numAnswers"/>
+<param className="object.integer" name="numComments"/>
+<param className="object.id" name="chosenAnswererId"/>
+<param className="person.userName" name="chosenAnswererNick"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="33">
+<name>YahooSearch</name>
+<providerUrl>http://search.yahoo.com, http://api.search.yahoo.com</providerUrl>
+<description>
+<tags>search</tags>
+<text>Yahoo web search</text>
+</description>
+<category>search</category>
+<services>
+<service name="search">
+<description>Get web search results from the Yahoo Search engine</description>
+<input>
+<param className="object.allType" name="query" required="true">
+<description>The term to search for</description>
+<defaultValue>robin</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.url" name="rawUrl"/>
+<param className="object.title" name="title"/>
+<param className="object.string" name="content"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="34">
+<name>YahooImage</name>
+<providerUrl>http://images.yahoo.com, http://api.search.yahoo.com</providerUrl>
+<description>
+<tags>photos</tags>
+<text>Retrieves images based on your search term</text>
+</description>
+<category>photos</category>
+<services>
+<service name="search">
+<description>Retrieves images based on your search term</description>
+<input>
+<param className="object.allType" name="term" required="true">
+<description>The term(s) to search for</description>
+<defaultValue>pretty</defaultValue>
+</param>
+<param className="object.integer" name="number" required="false">
+<description>max returned number</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="photo.title" name="title"/>
+<param className="photo.imageUrl" name="imageUrl"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="object.string" name="publisher"/>
+<param className="photo.description" name="description"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="35">
+<name>BingSearch</name>
+<providerUrl>http://search.live.com</providerUrl>
+<description>
+<tags>search</tags>
+<text>live web search</text>
+</description>
+<category>search</category>
+<services>
+<service name="search">
+<description>Get search results from the Windows Live Search engine</description>
+<input>
+<param className="object.allType" name="query" required="true">
+<description>The term to search for</description>
+<defaultValue>cheese</defaultValue>
+</param>
+<param className="object.integer" name="count" required="false">
+<description>The number of returned results </description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.title" name="title"/>
+<param className="object.description" name="description"/>
+<param className="object.url" name="url"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="36">
+<name>GoogleBase</name>
+<providerUrl>http://code.google.com/apis/base/</providerUrl>
+<description>
+<tags>database structured jobs vehicles recipes reviews</tags>
+<text>The Google Base API makes it possible to get items in and out of Base, an index of all kinds of structured and semi-structured data including jobs, vehicles, recipes, events, products, reviews, and others.</text>
+</description>
+<category>shopping</category>
+<services>
+<service name="searchDataFeed">
+<description>find related data feed information</description>
+<invokeUrl>http://www.google.com/base/feeds/items/item_id/media/ </invokeUrl>
+<input>
+<param className="object.allType" name="q" required="true">
+<description>key words to search for</description>
+<defaultValue>Harry Potter</defaultValue>
+</param>
+</input>
+<output>
+<param className="product.title" name="attrib_name"/>
+<param className="object.url" name="attrib_type"/>
+<param className="object.string" name="category"/>
+<param className="photo.thumbnailImageUrl" name="stockPhotoURL"/>
+</output>
+</service>
+<service name="searchDataFeed">
+<description>find related data feed information</description>
+<invokeUrl>http://www.google.com/base/feeds/items/item_id/media/ </invokeUrl>
+<input>
+<param className="object.allType" name="q" required="true">
+<description>key words to search for</description>
+<defaultValue>Harry Potter</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="attrib_name"/>
+<param className="object.string" name="attrib_type"/>
+<param className="object.string" name="attrib_value"/>
+</output>
+</service>
+<service name="searchMediaFeed">
+<description>find related media feed information</description>
+<invokeUrl>http://www.google.com/base/feeds/items/item_id/media/</invokeUrl>
+<input>
+<param className="object.allType" name="q" required="true">
+<description>key words to search for</description>
+<defaultValue>Harry Potter</defaultValue>
+</param>
+</input>
+<output>
+<param className="video.title" name="content"/>
+<param className="video.description" name="description"/>
+<param className="video.url" name="link"/>
+<param className="photo.thumbnailImageUrl" name="thumbnail"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="37">
+<name>GoogleCalendar</name>
+<providerUrl>http://code.google.com/apis/calendar/</providerUrl>
+<description>
+<tags>events calendar</tags>
+<text>Google Calendar allows client applications to view and update calendar events in the form of Google data API, GData, feeds.</text>
+</description>
+<category>calendar</category>
+<services>
+<service name="retriveEvents">
+<description>Retrieving events without query parameters</description>
+<invokeUrl>http://www.google.com/calendar/feeds/userID/private-magicCookie/full</invokeUrl>
+<input>
+</input>
+<output>
+<param className="event.title" name="title"/>
+<param className="event.date" name="publishDate"/>
+<param className="event.url" name="link"/>
+<param className="person.name" name="author"/>
+<param className="adr.location" name="location"/>
+</output>
+</service>
+<service name="retriveEventsByDate">
+<description>Retrieving events by date</description>
+<invokeUrl>http://www.google.com/calendar/feeds/default/private/full</invokeUrl>
+<input>
+<param className="object.date" name="start-min" required="true">
+<description>start date</description>
+<defaultValue>2006-03-16T00:00:00</defaultValue>
+</param>
+<param className="object.date" name="start-max" required="true">
+<description>end date</description>
+<defaultValue>2006-03-24T23:59:59</defaultValue>
+</param>
+</input>
+<output>
+<param className="event.title" name="title"/>
+<param className="event.date" name="publishDate"/>
+<param className="event.url" name="link"/>
+<param className="person.name" name="author"/>
+<param className="adr.location" name="location"/>
+</output>
+</service>
+<service name="searchEvents">
+<description>Retrieving events with query parameters</description>
+<invokeUrl>http://www.google.com/calendar/feeds/default/private/full</invokeUrl>
+<input>
+<param className="object.allType" name="q" required="true">
+<description>search term</description>
+<defaultValue>Tennis</defaultValue>
+</param>
+</input>
+<output>
+<param className="event.title" name="title"/>
+<param className="event.date" name="publishDate"/>
+<param className="event.url" name="link"/>
+<param className="person.name" name="author"/>
+<param className="adr.location" name="location"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="38">
+<name>BBCNews</name>
+<providerUrl>http://newsrss.bbc.co.uk/</providerUrl>
+<description>
+<tags>news</tags>
+<text>Retrieves news from BBC</text>
+</description>
+<category>news</category>
+<services>
+<service name="getNews">
+<description>Retrieves news from BBC</description>
+<input>
+</input>
+<output>
+<param className="news.title" name="title"/>
+<param className="news.description" name="description"/>
+<param className="news.url" name="url"/>
+<param className="news.date" name="publishDate"/>
+<param className="adr.location" name="location"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="39">
+<name>YahooVideo</name>
+<providerUrl>http://video.yahoo.com/, http://api.search.yahoo.com</providerUrl>
+<description>
+<tags>video</tags>
+<text>Retrieves images based on your search term</text>
+</description>
+<category>video</category>
+<services>
+<service name="search">
+<description>Retrieves images based on your search term</description>
+<input>
+<param className="object.allType" name="term" required="true">
+<description>The term(s) to search for</description>
+<defaultValue>cars</defaultValue>
+</param>
+<param className="video.format" name="number" required="false">
+<description>Types of videos to search for. Any combination of "any", "avi", "flash", "mpeg", "msmedia", "quicktime"...</description>
+<defaultValue>flash</defaultValue>
+</param>
+<param className="object.integer" name="number" required="false">
+<description>max returned number</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="video.title" name="title"/>
+<param className="video.description" name="description"/>
+<param className="video.videoUrl" name="videoURL"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailImageURL"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="40">
+<name>blogspot</name>
+<providerUrl>http://www.blogger.com/feeds/blogID/posts/default, http://www.blogspot.com</providerUrl>
+<description>
+<tags>blog</tags>
+<text>retrieve the user's posts</text>
+</description>
+<category>blog</category>
+<services>
+<service name="getPosts">
+<description>get posts from blogspot</description>
+<input>
+<param className="person.userName" name="blogUserName" required="true">
+<description>The userName to search for</description>
+<defaultValue>robin-zju</defaultValue>
+</param>
+</input>
+<output>
+<param className="blog.title" name="title"/>
+<param className="blog.description" name="content"/>
+<param className="person.name" name="author"/>
+<param className="person.email" name="email"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="41">
+<name>YahooLocalSearch</name>
+<providerUrl>http://yahoo.com/services/search/local, http://api.search.yahoo.com</providerUrl>
+<description>
+<tags>local</tags>
+<text>Search for local business listings by name, key word, or location</text>
+</description>
+<category>local</category>
+<services>
+<service name="search">
+<description>Get web search results from the yahoo Search engine</description>
+<input>
+<param className="object.string" name="query" required="true">
+<description>The term to search for</description>
+<defaultValue>hotel</defaultValue>
+</param>
+<param className="object.decimal" name="withinMiles" required="false">
+<description>The miles within</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.title" name="title"/>
+<param className="object.url" name="googleMapUrl"/>
+<param className="geo.latitude" name="latitude"/>
+<param className="geo.longitude" name="longitude"/>
+<param className="adr.street_address" name="streetAddress"/>
+<param className="adr.locality" name="city"/>
+<param className="adr.region" name="region"/>
+<param className="adr.country" name="country"/>
+<param className="object.url" name="ddUrl"/>
+<param className="object.url" name="ddUrlToHere"/>
+<param className="object.url" name="ddUrlFromHere"/>
+<param className="photo.imageUrl" name="mapImage"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="42">
+<name>Technorati</name>
+<providerUrl>http://api.technorati.com/</providerUrl>
+<description>
+<tags>blog</tags>
+<text>Retrieves blog information</text>
+</description>
+<category>blog</category>
+<services>
+<service name="searchBlog">
+<description>Retrieves blog information</description>
+<input>
+<param className="object.allType" name="term" required="true">
+<description>The term(s) to search for</description>
+<defaultValue>cars</defaultValue>
+</param>
+</input>
+<output>
+<param className="blog.title" name="title"/>
+<param className="blog.description" name="description"/>
+<param className="blog.url" name="url"/>
+<param className="blog.date" name="publishDate"/>
+<param className="adr.location" name="location"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="43">
+<name>Blogpulse</name>
+<providerUrl>http://www.blogpulse.com/</providerUrl>
+<description>
+<tags>blog</tags>
+<text>search blog information</text>
+</description>
+<category>blog</category>
+<services>
+<service name="searchBlog">
+<description>Retrieves blog information</description>
+<input>
+<param className="object.allType" name="term" required="true">
+<description>The term(s) to search for</description>
+<defaultValue>cars</defaultValue>
+</param>
+</input>
+<output>
+<param className="blog.title" name="title"/>
+<param className="blog.description" name="description"/>
+<param className="blog.url" name="url"/>
+<param className="blog.date" name="publishDate"/>
+<param className="adr.location" name="location"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="44">
+<name>MySpace</name>
+<providerUrl>http://developer.myspace.com/Community/</providerUrl>
+<description>
+<tags>social opensocial</tags>
+<text>With MDP you will be able to create compelling new products that integrate directly into MySpace pages and get exposure to millions of people around the world.</text>
+</description>
+<category>community</category>
+<services>
+<service name="Photos">
+<description>Returns all photos of the user specified by userid</description>
+<invokeUrl>http://api.myspace.com/v1/users/{userid}/photos</invokeUrl>
+<input>
+<param className="person.id" name="userid" required="true">
+<description>User identifier</description>
+<defaultValue/>
+</param>
+</input>
+<output>
+<param className="photo.title" name="title"/>
+<param className="photo.description" name="description"/>
+<param className="photo.imageUrl" name="imageUrl"/>
+<param className="geo.latitude" name="latitude"/>
+<param className="geo.longitude" name="longitude"/>
+</output>
+</service>
+<service name="Videos">
+<description>Returns the videos of the user specified by userid</description>
+<invokeUrl>http://api.myspace.com/v1/users/{userid}/videos</invokeUrl>
+<input>
+<param className="person.id" name="userid" required="true">
+<description>User identifier</description>
+<defaultValue/>
+</param>
+</input>
+<output>
+<param className="video.title" name="title"/>
+<param className="video.description" name="description"/>
+<param className="video.url" name="link"/>
+<param className="geo.latitude" name="latitude"/>
+<param className="geo.longitude" name="longitude"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="45">
+<name>YahooMapImage</name>
+<providerUrl>http://developer.yahoo.com/maps/rest/V1/index.html</providerUrl>
+<description>
+<tags>mapping</tags>
+<text>allows you to get a URL pointing to a graphic of a map generated according to the parameters you specify</text>
+</description>
+<category>mapping</category>
+<services>
+<service name="Gettingamap">
+<description> provides a reference to a map graphic generated according to the parameters you specify in your request.</description>
+<invokeUrl>http://local.yahooapis.com/MapsService/V1/mapImage</invokeUrl>
+<input>
+<param className="adr.street-address" name="street" required="false">
+<description>Street name</description>
+<defaultValue>none</defaultValue>
+</param>
+<param className="adr.zipCode" name="zipcode" required="false">
+<description>The five-digit zip code, or the five-digit code plus four-digit extension</description>
+<defaultValue>none</defaultValue>
+</param>
+<param className="geo.latitude" name="latitude" required="true">
+<description>latitude</description>
+<defaultValue>none</defaultValue>
+</param>
+<param className="geo.longitude" name="longtitude" required="true">
+<description>longtitude</description>
+<defaultValue>none</defaultValue>
+</param>
+<param className="photo.string" name="imagetype" required="false">
+<description>The image format for the map</description>
+<defaultValue>none</defaultValue>
+</param>
+<param className="object.string" name="output" required="false">
+<description>The format for the output</description>
+<defaultValue>php</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.url" name="mapurl"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="46">
+<name>feedburner</name>
+<providerUrl>http://www.feedburner.com, http://feeds.feedburner.com, http://feedburner.jp</providerUrl>
+<description>
+<tags>news</tags>
+<text>get variety kinds of feeds</text>
+</description>
+<category>news</category>
+<services>
+<service name="getNews">
+<description>get news from a specific feed </description>
+<input>
+<param className="object.string" name="feedName" required="true">
+<description>The feed name to retrive news</description>
+<defaultValue>mashable</defaultValue>
+</param>
+</input>
+<output>
+<param className="news.title" name="title"/>
+<param className="news.description" name="content"/>
+<param className="news.url" name="link"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="47">
+<name>YahooTermExtraction</name>
+<providerUrl>http://developer.yahoo.com/search/content/V1/</providerUrl>
+<description>
+<tags>search</tags>
+<text>provides a list of significant words or phrases extracted from a larger content. It is one of the technologies used in Y!Q.</text>
+</description>
+<category>search</category>
+<services>
+<service name="termExtraction">
+<description>get a list of significant words or phrases extracted from a larger conten</description>
+<invokeUrl>http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction</invokeUrl>
+<input>
+<param className="object.string" name="context" required="true">
+<description>The context to extract terms from (UTF-8 encoded).</description>
+<defaultValue>Italian sculptors and painters of the renaissance favored the Virgin Mary for inspiration.</defaultValue>
+</param>
+<param className="object.string" name="query" required="false">
+<description>An optional query to help with the extraction process.</description>
+<defaultValue>madonna</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="result"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="48">
+<name>GoogleSpreadsheets</name>
+<providerUrl>http://code.google.com/intl/zh-CN/apis/spreadsheets/overview.html</providerUrl>
+<description>
+<tags>office spreadsheet </tags>
+<text>The Google Spreadsheets data API allows client applications to view and update Spreadsheets content in the form of a Google data API ("GData") feeds</text>
+</description>
+<category>office</category>
+<services>
+<service name="InteracteWithFeed">
+<description>Interacting with list-based feeds</description>
+<invokeUrl>http://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full</invokeUrl>
+<input>
+<param className="object.decimal" name="min-row" required="false">
+<description>Send a cell range query</description>
+<defaultValue/>
+</param>
+<param className="object.decimal" name="max-row" required="false">
+<description>Send a cell range query</description>
+<defaultValue/>
+</param>
+<param className="object.decimal" name="min-col" required="false">
+<description>Send a cell range query</description>
+<defaultValue/>
+</param>
+<param className="object.decimal" name="max-col" required="false">
+<description>Send a cell range query</description>
+<defaultValue/>
+</param>
+<param className="object.anyType" name="reverse" required="false">
+<description>Determine whether to get rows in reverse order</description>
+<defaultValue/>
+</param>
+</input>
+<output/>
+</service>
+</services>
+</tile>
+</catalog>

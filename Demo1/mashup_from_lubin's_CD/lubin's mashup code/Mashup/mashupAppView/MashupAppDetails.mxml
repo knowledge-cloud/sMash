@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:mashupAppView="mashupAppView.*"
+    horizontalScrollPolicy="off" verticalScrollPolicy="off">
+
+    <mx:Metadata>
+        [Event(name="browse", type="dart.mashup.mashupApp.MashupAppThumbEvent")]
+    </mx:Metadata>
+
+    <mx:Script>
+        <![CDATA[
+
+		import mx.events.*;
+		
+		import dart.mashup.mashupApp.MashupApp;
+		import dart.mashup.mashupApp.MashupAppThumbEvent;
+
+        private var _mashupApp:MashupApp;
+        
+        [Bindable]
+        public function get mashupApp():MashupApp
+        {
+            return _mashupApp;
+        }
+        
+        public function set mashupApp(p:MashupApp):void
+        {
+            _mashupApp = p;
+            tn.selectedIndex = 0;
+        }
+        
+        public function runMashupApp():void
+        {
+         	var uv:URLVariables = new URLVariables();
+			uv.MPINumber = mashupApp.getMPINumber();
+			uv.MPIs = mashupApp.tileSource;
+			var u:URLRequest = new URLRequest("http://localhost:8080/mashup/processMPIs");
+			u.data = uv;
+			u.method = "POST";
+			navigateToURL(u,"_blank");       	
+        }
+        
+	]]>
+    </mx:Script>
+
+    <mx:TabNavigator id="tn" width="100%" height="100%" 
+                    left="4" right="8" top="4" bottom="4">
+
+        <mx:VBox width="100%" height="100%" label="Features" verticalGap="8"
+            paddingLeft="8" paddingTop="8" paddingRight="8" paddingBottom="8" showEffect="Fade" hideEffect="Fade">
+
+            <mx:HBox width="100%" horizontalGap="12">
+
+                <mx:Image id="img" width="101" height="200" source="{mashupApp.image}"/>
+
+                <mx:VBox id="descr" width="100%" height="100%" paddingTop="0" verticalGap="4">
+
+                    <mx:Label text="{mashupApp.name}" fontSize="11" fontWeight="bold"/>
+   					<mx:Text id="descriptionText" width="100%" height="100%" text="{mashupApp.description}"/>
+                </mx:VBox>
+            </mx:HBox>
+
+	        <mx:DataGrid id="dg" width="100%" height="100%" rowCount="1" dataProvider="{mashupApp.opers}">
+	            <mx:columns>
+	                <mx:DataGridColumn dataField="tpName" headerText="Tile Name"/>
+	                <mx:DataGridColumn dataField="operName" headerText="Operation"/>
+	            </mx:columns>
+	        </mx:DataGrid> 
+        </mx:VBox>
+        <mx:VBox width="100%" height="100%" label="Author Info" verticalGap="8"
+            paddingLeft="8" paddingTop="8" paddingRight="8" paddingBottom="8" showEffect="Fade" hideEffect="Fade">
+            <mx:HBox width="100%" horizontalGap="12">
+            	<mx:Label text="Author: " fontSize="11" fontWeight="bold" />
+            	<mx:Label text="{mashupApp.author}" fontSize="11" fontWeight="normal" />
+            </mx:HBox>
+            <mx:HBox width="100%" horizontalGap="12">
+            	<mx:Label text="Email: " fontSize="11" fontWeight="bold" />
+            	<mx:Label text="{mashupApp.email}" fontSize="11" fontWeight="normal" />
+            </mx:HBox>
+            
+         </mx:VBox> 
+
+    </mx:TabNavigator>
+
+    <mx:VBox verticalGap="4" right="16" top="36">
+        <mx:Spacer width="100%"/>
+        <mx:Button icon="@Embed('/assets/report_add.png')" click="runMashupApp()" width="30" toolTip="Add to selected list"/>
+        <mx:Button icon="@Embed('/assets/icon_tiles.png')" click="dispatchEvent(new MashupAppThumbEvent(MashupAppThumbEvent.BROWSE, mashupApp));" width="30" toolTip="Back to thumbnail view"/>
+    </mx:VBox>
+
+</mx:Canvas>

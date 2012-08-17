@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+	width="100%" height="45"
+    borderStyle="inset"
+    borderColor="#FFFFFF" borderThickness="0.5"
+    horizontalScrollPolicy="off" verticalScrollPolicy="off"
+    rollOver="rollOverHandler(event)"
+    rollOut="rollOutHandler(event)" 
+    dropShadowColor="#FFFFFF"
+    shadowDistance="2" textAlign="left"
+    >
+
+    <mx:Metadata>
+    </mx:Metadata>
+
+    <mx:Script>
+        <![CDATA[
+        	import appSource.AppButton;
+        	import appSource.AppLabel;
+        	import appSource.AppCheckBox;
+        	import appSource.AppTextArea;
+        	import appSource.AppVBox;
+        	import mx.controls.Label;
+        	import mx.controls.Button;
+        	import mx.controls.CheckBox;
+        	import mx.controls.TextArea;
+        	import appSource.Displayer;
+        	import appSource.ControlDragManager;
+
+		import mx.events.*;
+        import mx.core.*;  
+		import mx.effects.Glow;
+		        
+		import dart.mashup.tile.TileThumbEvent;
+		import dart.mashup.tile.Tile;
+        
+
+        [Bindable] 
+        public var blockType:String;
+        [Bindable]
+        public var image:String;
+
+        private function rollOverHandler(event:MouseEvent):void
+		{
+            setStyle("borderColor", "#00CC33");
+            setStyle("dropShadowEnabled", true);
+          //  buttons.visible = true;
+        }
+
+        private function rollOutHandler(event:MouseEvent):void
+		{
+            setStyle("borderColor", "#FFFFFF");
+            setStyle("dropShadowEnabled", false);
+		//	buttons.visible = false;
+        }
+
+        private var dragStartPoint:Point;
+        
+        
+		public var newControl:Object;
+		private function mouseDownHandler(e:MouseEvent):void
+		{
+			switch(blockType){
+				case "Label":
+					newControl = new AppLabel("It's a label!!!");
+					var newLabel:AppLabel = newControl as AppLabel;
+					newLabel.text = "It's a label!!!";
+					this.parentApplication.addChild(newLabel);
+					//trace("hello");
+					newLabel.x = e.stageX-10;
+					newLabel.y = e.stageY-10;
+					newLabel.startDrag();
+					break;
+				case "Button":
+					newControl = new AppButton("It's a Button!!!");
+
+					var newButton:AppButton = newControl as AppButton;
+					newButton.label = "It's a Button!!!";
+					this.parentApplication.addChild(newButton);
+					//trace("hello");
+					newButton.x = e.stageX-10;
+					newButton.y = e.stageY-10;
+					newButton.startDrag();
+					break;
+				case "CheckBox":
+					newControl = new AppCheckBox("It's a Check!!!");
+					var newCheckBox:AppCheckBox = newControl as AppCheckBox;
+					newCheckBox.label = "It's a CheckBox!!!";
+					this.parentApplication.addChild(newCheckBox);
+					//trace("hello");
+					newCheckBox.x = e.stageX-10;
+					newCheckBox.y = e.stageY-10;
+					newCheckBox.startDrag();
+					break;
+				case "TextBox":
+					newControl = new AppTextArea("It's a TextArea!!!");
+					var newTextArea:AppTextArea = newControl as AppTextArea;
+					newTextArea.text = "It's a TextArea!!!";
+					this.parentApplication.addChild(newTextArea);
+					//trace("hello");
+					newTextArea.x = e.stageX-10;
+					newTextArea.y = e.stageY-10;
+					newTextArea.startDrag();
+					break;
+					// no arrangement at the beginning.
+//				case "VerticalBox":
+//					newControl = new AppVBox();
+//					var newAppVBox:AppVBox = newControl as AppVBox;
+//					newAppVBox.label = "It's a TextArea!!!";
+//					this.parentApplication.addChild(newAppVBox);
+//					//trace("hello");
+//					newAppVBox.x = e.stageX-10;
+//					newAppVBox.y = e.stageY-10;
+//					newAppVBox.startDrag();
+//					break;								
+			}
+		}
+
+	]]>
+    </mx:Script>
+
+        <mx:HBox width="100%" x="0" mouseDown="mouseDownHandler(event)">
+            <mx:Image id="img" height="100%" width="25%" source="{image}" />
+			<mx:Label text="{blockType}" fontWeight="bold" paddingTop="5" paddingLeft="10" height="100%" width="100%"/>            
+        </mx:HBox>
+
+</mx:Canvas>

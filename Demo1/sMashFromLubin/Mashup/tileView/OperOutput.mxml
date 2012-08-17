@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>         
+   
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" creationComplete="fillEditor()">
+    <mx:Metadata>
+    	[Event(name="removeOutputParam", type="dart.mashup.tile.ParamListEvent")]
+    </mx:Metadata>
+    <mx:Script>
+        <![CDATA[
+        import dart.mashup.tile.ParamListEvent;
+         public var index:int = 0;
+        [Bindable]
+        public var classDic:Array;
+        [Bindable]
+        public var classNameArr:Array;
+        public var paraName:String = null;
+        public var sClass:String = null;
+        public var sClassAttr:String = null;        
+        public function getClassAttr(className:String):Array
+        {
+        	var tmp:Array;
+        	
+        	for(var i:int = 0; i < classDic.length; i++){
+        		var tName:String = classDic[i].className;
+        		if(tName == className){
+        			tmp =  classDic[i].attrArray;
+        			break;
+        		}	
+        	}
+        	
+        	return tmp;
+        }
+        public function removeParam():void
+        {
+        	var e:ParamListEvent = new ParamListEvent(ParamListEvent.REMOVE_OUTPUT_PARAM);
+        	e.op = this;
+        	dispatchEvent(e);
+        	
+        }    
+        
+       	public function fill(name:String, sClass:String, sClassAttr:String):void
+        {
+        	this.paraName = name == null ? "" : name;
+        	this.sClass = sClass;
+        	this.sClassAttr = sClassAttr;
+        }
+        
+        private function fillEditor():void
+        {
+        	this.pName.text = paraName == null ? "" : paraName;
+        	if(sClass != null){
+        		this.cbClass.selectedItem = sClass;
+        		var tmp:Array = getClassAttr(sClass);
+        		this.cbAttr.dataProvider = tmp;
+        		this.cbAttr.selectedItem = sClassAttr;
+        	}     	
+        }        
+        ]]>
+    </mx:Script>
+    <mx:Label text="ParaName:" width="81"/>
+    <mx:TextInput width="89" id="pName"/>
+    <mx:Label text="Class:" width="70"/>
+    <mx:ComboBox width="90" dataProvider="{classNameArr}" id="cbClass"></mx:ComboBox>
+    <mx:Label text="Attribute:"/>
+    <mx:ComboBox width="100" dataProvider="{getClassAttr(cbClass.selectedItem as String)}" id="cbAttr"></mx:ComboBox>
+    <mx:LinkButton label="-" color="#193C0B" width="26" click="removeParam();" toolTip="delete this param"/>
+</mx:HBox>

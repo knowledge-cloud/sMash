@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:mashupView="mashupView.*"
+    horizontalAlign="left"
+    paddingTop="8"
+    paddingBottom="8"
+    paddingRight="4"
+    paddingLeft="4"
+    width="425" height="254"
+    verticalScrollPolicy="auto" horizontalScrollPolicy="auto"> 
+    
+    <mx:Script>
+        <![CDATA[
+        	import mx.containers.Panel;
+        	import mx.controls.Text;
+        	import dart.mashup.mashup.MashupPathBuilder;
+        	import dart.mashup.mashup.ParamPair;
+        	import mx.core.DragSource;
+        	import mx.events.DropdownEvent;
+        	import mx.events.IndexChangedEvent;
+        	import mx.controls.TextInput;
+        	import mx.containers.GridItem;
+        	import mx.containers.GridRow;
+        	import mx.containers.Grid;
+        	import mx.containers.Canvas;
+        	import mx.controls.ComboBox;
+        	import dart.mashup.tile.Service;
+        	import mx.containers.HBox;
+        	import mx.controls.Label;
+        	import dart.mashup.mashup.MashupPathItem;
+        	import mx.collections.ArrayCollection;
+        	import dart.mashup.tile.Param;
+        	import mx.controls.Alert;
+        	
+        	public var items:ArrayCollection = new ArrayCollection();
+        	public var grid:Grid = new Grid();
+        	public function addParamInputItem(mpi:MashupPathItem, parentMPIs:ArrayCollection, mpBuilder:MashupPathBuilder):void
+        	{
+        		this.removeAllChildren();
+        		grid.removeAllChildren();
+        		var parentNum:int = parentMPIs.length;
+        		var s:Service = mpi.getService();
+        		var paramArr:ArrayCollection = s.inParam;
+        		var i:int;
+        		var maxLength:int = 0;
+        		
+        		this.addChild(grid);
+        		var dataProvider:ArrayCollection = new ArrayCollection();
+        		dataProvider.addItem("[Custom]");
+        		var parentMPI:MashupPathItem;
+        		var tmpS:String;
+        		if(parentNum == 1){
+        			parentMPI = parentMPIs.getItemAt(0) as MashupPathItem;
+        			tmpS = parentMPI.getTilePacket().getTile().name + "." + parentMPI.getService().name;
+        			dataProvider.addItem(tmpS);
+        		}
+        		else{
+        			if(parentNum > 1){
+        				dataProvider.addItem("[Combine]");
+        			}	
+        		}        		
+        		for(i = 0; i < paramArr.length; i++){
+        			var gridRow:GridRow = new GridRow();
+        			var gridItem:GridItem = new GridItem();
+        			var param:Param = paramArr.getItemAt(i) as Param;
+	        		var label:Label = new Label();
+	        		label.text = param.paraName + ":";
+	        		gridItem.addChild(label);
+	        		gridRow.addChild(gridItem);
+	        		var gridItem2:GridItem = new GridItem();
+	        		var combox:ComboBox = new ComboBox();
+	        		combox.id = String(i);
+	        		combox.dataProvider = dataProvider;
+	        		combox.addEventListener(DropdownEvent.CLOSE, comboxCloseHandler);
+	        		gridItem2.addChild(combox);
+	        		gridRow.addChild(gridItem2);
+	        		grid.addChild(gridRow);
+	        		var gridItem3:GridItem = new GridItem();
+	        		var canvas:Canvas = new Canvas();  
+	        		canvas.name = "canvas";  
+	        		var textInput:TextInput = new TextInput();
+	        		textInput.name = "textInput";
+	        		textInput.visible = true;
+	        		canvas.addChild(textInput);
+	        		gridItem3.addChild(canvas);
+	        		var combox2:ComboBox;
+	        		var hBox:HBox;
+	        		if(parentNum == 1){
+	        			combox2 = new ComboBox();
+	        			combox2.name = "combox";
+	        			combox2.dataProvider = parentMPI.getService().outParam;
+	        			canvas.addChild(combox2);
+	        			combox2.visible = false;	        			
+	        		}
+	        		else{
+	        			if(parentNum > 1){
+	        				hBox = new HBox();
+	        				hBox.name = "hBox";
+	        				for(var j:int = 0; j < parentNum; j++){
+	        					var tmpParentMPI:MashupPathItem = parentMPIs.getItemAt(j) as MashupPathItem;
+	        					var tmpLabel:Label = new Label();
+	        					tmpLabel.text = tmpParentMPI.getTilePacket().getTile().name + "." + tmpParentMPI.getService().name + ".";
+	        					var tmpCombox:ComboBox = new ComboBox();
+	        					tmpCombox.dataProvider = tmpParentMPI.getService().outParam;
+	        					hBox.addChild(tmpLabel);
+	        					hBox.addChild(tmpCombox);
+	        				}
+	        				canvas.addChild(hBox);
+	        				hBox.visible = false;
+	        			}
+	        		}
+	        		setParamValue(combox, canvas, textInput, combox2, hBox, param, parentMPIs);
+	        		gridRow.addChild(gridItem3);
+        		}
+        		updateDefaultParamValue(mpi, parentNum, parentMPIs, mpBuilder);
+		
+        	}
+        	
+        	public function updateDefaultParamValue(mpi:MashupPathItem, n:int, parentMPIs:ArrayCollection, mpBuilder:MashupPathBuilder):void
+        	{
+        		var i:int = 0;
+        		var j:int = 0;
+        		var relatedParams:ArrayCollection;
+        		var parentNum:int = parentMPIs.length;
+        	//	setParamValue(mpi);
+        		if(!mpi.hasSetParamValue){
+        			relatedParams = mpi.getRelatedFromParams();
+        		//	Alert.show(String(relatedParams.length));
+        			for(i = 0; i < parentNum; i++){
+	        			var parentMPI:MashupPathItem = parentMPIs.getItemAt(i) as MashupPathItem;
+	        			var rpItem:ArrayCollection = relatedParams.getItemAt(mpBuilder.getParentIndexInMPI(mpi, parentMPI)) as ArrayCollection;
+	        			for(j = 0; j < rpItem.length; j++){
+	        				var paramPair:ParamPair = rpItem.getItemAt(j) as ParamPair; 
+	        				var param1:Param = paramPair.getParam1();
+	        				var param2:Param = paramPair.getParam2();
+	        				doUpdate(param1, param2, parentNum, parentMPI); 
+	        			}
+	        		}
+        		}
+        			
+        	}
+        	
+        	private function setParamValue(combox1:ComboBox, canvas:Canvas, textInput:TextInput, combox:ComboBox, hBox:HBox, param:Param, parentMPIs:ArrayCollection):void
+        	{
+        		var parentNum:int = parentMPIs.length;
+				var value:String = param.getValue();
+				var i:int;
+				var j:int;
+				var k:int;
+				if(value == "")
+					return;
+				if(value.search("{") == -1){
+					textInput.text = value;
+					setVisible2(canvas, true, false, false, combox1);
+				}
+				else{
+					var tmpStr:String = value.substr(1, value.length - 2);
+					var valueArr:Array = tmpStr.split(",");
+					if(parentNum == 1){
+						var mpi:MashupPathItem = parentMPIs.getItemAt(0) as MashupPathItem;
+						var s:Service = mpi.getService();
+						var outParams:ArrayCollection = s.outParam;
+						for(i = 0; i < outParams.length; i++){
+							var tmpParam:Param = outParams.getItemAt(i) as Param;
+							var text:String = mpi.getTilePacket().getTile().name + "." + s.name + "." + tmpParam.toString();
+							for(j = 0; j < valueArr.length; j++){
+								var tmpStr2:String = valueArr[j];
+								if(tmpStr2.search(text) != -1){
+									combox.selectedItem = tmpParam;
+									setVisible2(canvas, false, true, false, combox1);
+									break;
+								}	
+							}
+						}		
+					}
+					else{
+						for(k = 0; k < parentNum * 2; k+=2){
+							var label:Label = hBox.getChildAt(k) as Label;
+							var combox:ComboBox = hBox.getChildAt(k + 1) as ComboBox;
+							var dp:ArrayCollection = combox.dataProvider as ArrayCollection;
+							for(j = 0; j < dp.length; j++){
+								var p:Param = dp.getItemAt(j) as Param;
+								var dataItem:String = label.text + p.toString();
+								var flag:Boolean = false;
+								for(i = 0; i < valueArr.length; i++ ){
+									var tmpStr3:String = valueArr[i];
+									if(tmpStr3.search(dataItem) != -1){
+										combox.selectedItem = p;
+										flag = true;
+										break;
+									}
+								}
+								if(flag){
+									setVisible2( canvas, false, false, true, combox1);
+									break;
+								}
+							}
+						}
+					}
+				}
+        	}
+        	
+        	private function doUpdate(p1:Param, p2:Param, flag:int, parentMPI:MashupPathItem):void
+        	{
+        		var gridRows:Array = this.grid.getChildren();
+        		var j:int;
+        		var k:int;
+        		
+        		for(var i:int = 0; i < gridRows.length; i++){
+        			var gridRow:GridRow = gridRows[i] as GridRow;
+        			var gridItem:GridItem = gridRow.getChildAt(0) as GridItem;
+        			var label:Label = gridItem.getChildAt(0) as Label;
+        			var text:String = label.text.substr(0, label.text.length - 1);
+        			if(text == p1.paraName){
+        				var gridItemDataSource:GridItem = gridRow.getChildAt(1) as GridItem;
+        				var cbDS:ComboBox = gridItemDataSource.getChildAt(0) as ComboBox;
+        				var gridItemData:GridItem = gridRow.getChildAt(2) as GridItem;
+        				var canvas:Canvas = gridItemData.getChildByName("canvas") as Canvas;
+        				if(flag == 1){
+        					var combox:ComboBox = canvas.getChildByName("combox") as ComboBox;
+        					var dp:ArrayCollection = combox.dataProvider as ArrayCollection;
+        					for(j = 0; j < dp.length; j++){
+        						var tmpP:Param = dp.getItemAt(j) as Param;
+        						if(tmpP.paraName == p2.paraName){
+        							combox.selectedItem = tmpP;
+        							setVisible2(canvas, false, true, false, cbDS);
+        							break;
+        						}
+        					}
+        				}
+        				else{
+        					/* flag > 1 */
+        					var hBox:HBox = canvas.getChildByName("hBox") as HBox;
+        					var headStr:String = parentMPI.getTilePacket().getTile().name + "." + parentMPI.getService().name + ".";
+        					for(j = 0; j < flag * 2; j+=2){
+        						var tmpLabel:Label = hBox.getChildAt(j) as Label;
+        						if(tmpLabel.text.search(headStr) != -1){
+        							var tmpCombox:ComboBox = hBox.getChildAt(j + 1) as ComboBox;
+		        					var dp2:ArrayCollection = tmpCombox.dataProvider as ArrayCollection;
+		        					for(k = 0; k < dp2.length; k++){
+		        						var tmpP2:Param = dp2.getItemAt(k) as Param;
+		        						if(tmpP2.paraName == p2.paraName){
+		        							tmpCombox.selectedItem = tmpP2;
+		        							setVisible2(canvas, false, false, true,cbDS);
+		        							break;
+		        						}
+		        					}        							
+        						}
+        					}	
+        				}
+        			}
+        		}	
+        	}
+        	
+        	public function comboxCloseHandler(event:DropdownEvent):void
+        	{
+        		var combox:ComboBox = event.target as ComboBox; 
+        		var paramIndex:int = parseInt(combox.id);
+        		var selectedStr:String = combox.selectedItem as String;
+        		
+        		var gridItem:GridItem = getGridItem(paramIndex);
+        		var canvas:Canvas = gridItem.getChildAt(0) as Canvas;
+        		if(selectedStr == "[Custom]"){
+        			setVisible2(canvas, true, false, false);
+        		}
+        		else
+        			if(selectedStr == "[Combine]")
+        				setVisible2(canvas, false, false, true);
+        			else
+        				setVisible2(canvas, false, true, false);
+        	}
+        	
+        	private function setVisible2(canvas:Canvas, b1:Boolean, b2:Boolean, b3:Boolean, combox1:ComboBox = null):void
+        	{
+        		if(b1 && combox1)
+        			combox1.selectedIndex = 0;
+        		else
+        			if(combox1)
+        				combox1.selectedIndex = 1;
+      	        var textInput:TextInput = canvas.getChildByName("textInput") as TextInput;
+       			textInput.visible = b1;
+       			var hBox:HBox = canvas.getChildByName("hBox") as HBox;
+       			if(hBox != null)
+        			hBox.visible = b3;
+        		var comBox:ComboBox = canvas.getChildByName("combox") as ComboBox;
+        		if(comBox != null)
+        			comBox.visible = b2;	
+        	}
+        	
+        	public function getGridItem(index:int):GridItem
+        	{
+        		var gridRow:GridRow = this.grid.getChildAt(index) as GridRow;
+        		var gridItem:GridItem = gridRow.getChildAt(2) as GridItem;
+        		
+        		return gridItem;
+        	}
+        	
+        	public function getParamValue(mpi:MashupPathItem):void
+        	{
+        		var gridRows:Array = this.grid.getChildren();
+        		var j:int;
+        		var k:int;
+        		var s:Service = mpi.getService();
+        		
+        		for(var i:int = 0; i < gridRows.length; i++){
+         			var gridRow:GridRow = gridRows[i] as GridRow;
+        			var gridItem:GridItem = gridRow.getChildAt(0) as GridItem;
+        			var gridItem2:GridItem = gridRow.getChildAt(1) as GridItem;
+        			var gridItem3:GridItem = gridRow.getChildAt(2) as GridItem;
+        			var label:Label = gridItem.getChildAt(0) as Label;
+        			var dsCombox:ComboBox = gridItem2.getChildAt(0) as ComboBox;
+					var dataSource:String = dsCombox.selectedItem as String;
+					var paraValue:String;
+					var canvas:Canvas = gridItem3.getChildByName("canvas") as Canvas;
+					if(dataSource == "[Custom]"){
+						var textInput:TextInput = canvas.getChildByName("textInput") as TextInput;
+						paraValue = textInput.text;
+					}
+					else{
+						paraValue = "{";
+						if(dataSource == "[Combine]"){
+							var hBox:HBox = canvas.getChildByName("hBox") as HBox;
+							var childArr:Array = hBox.getChildren();
+							for(j = 0; j < childArr.length; j += 2){
+								var tmpLabel:Label = childArr[j] as Label;
+								var tmpCombox:ComboBox = childArr[j + 1] as ComboBox;
+								var tmpParam:Param = tmpCombox.selectedItem as Param;
+								paraValue = paraValue + tmpLabel.text + tmpParam.paraName; 
+								if(j != childArr.length - 2)
+									paraValue += ",";
+							}
+						}
+						else{
+							var tmpCombox2:ComboBox = canvas.getChildByName("combox") as ComboBox;
+							var tmpParam2:Param = tmpCombox2.selectedItem as Param;
+							paraValue = paraValue + dataSource + "." + tmpParam2.paraName;
+						}
+						paraValue += "}";
+					}
+					var paraName:String = label.text.substr(0, label.text.length - 1);			       				
+					for(j = 0; j < s.inParam.length; j++){
+						var tmpParam3:Param = s.inParam.getItemAt(j) as Param;
+						if(tmpParam3.paraName == paraName){
+							tmpParam3.paraValue = paraValue;
+							break;
+						}
+					}	
+        		}        		
+        	}   
+        	     	
+        ]]>
+    </mx:Script>
+    
+
+</mx:VBox>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="296" height="88" creationComplete="init()"  backgroundAlpha="0.5" borderStyle="solid"
+	 borderColor="0xFFFF00" alpha="1"  >
+    <mx:Script>
+    <![CDATA[
+    	import mx.effects.Zoom;
+    	import mx.core.UIComponent;
+    	import mx.effects.Glow;
+    	import mx.events.EffectEvent;
+    	import mx.effects.Move;
+    	
+    	private var m:Move = new Move();
+    	private var xFrom:Number = 0;
+    	private var xTo:Number = 0;
+    	private var flag:Boolean = false;
+    	
+    	private var g:Glow = new Glow();
+    	private var nowIndex:int = 0;
+		private var fillColorArr:Array = new Array(0xFF9900, 0x993399, 0xFF0099, 0x6600FF, 0xFF6666, 0x00CC33, 0x33CC00, 0x993366, 0xCC66FF, 0x330099 );
+		private var lineColorArr:Array = new Array(0xFFCC00, 0xFF33FF, 0xFF3366, 0x0000FF, 0xFF0000, 0x33FF00, 0x00FF00, 0xFF3366, 0xFF00FF, 0x000CCC);
+		private var childNumber:int = 6;
+		private var z:Zoom = new Zoom();
+    	private function drawCircle(r:Number, index:int, d:Number):void
+    	{
+    		var uic:UIComponent = new UIComponent();
+    		var child:Sprite = new Sprite();
+            child.graphics.beginFill(fillColorArr[index]);
+            child.graphics.lineStyle(2,lineColorArr[index]);
+            child.graphics.drawCircle(index * d + 10, container.height /2 + 5, r);       
+            child.graphics.endFill();
+            uic.addChild(child);
+            uic.x = index * d;		
+			container.addChild(uic);	
+    	}
+    	
+    	private function init():void
+    	{
+    	/*	xFrom = 0;
+    		xTo = path.width - img.width;
+    		m.target = img;
+			m.addEventListener(EffectEvent.EFFECT_END, playAgain);
+			m.duration = 1500;
+		*/	
+			var i:int = 0;
+			var radius:Number = 10;
+			for(i = 0; i < childNumber; i++){
+				drawCircle(radius, i, 30);
+			}
+			z.zoomHeightFrom = 1.0;
+			z.zoomHeightTo = 1.4;
+			z.zoomWidthFrom = 1.0;
+			z.zoomWidthTo = 1.4;
+		//	z.duration = 2000;
+			z.addEventListener(EffectEvent.EFFECT_END, playNext);
+			play();
+        /*	g.alphaFrom = 1.0;
+        	g.alphaTo = 0.3;
+        	g.color = 0x00FF00;
+        	g.blurXFrom = 0.0;
+        	g.blurXTo = 10.0;
+        	g.blurYFrom = 0.0;
+        	g.blurYTo = 5.0;
+			g.addEventListener(EffectEvent.EFFECT_END, playNext);
+			g.duration = 1000;
+			play(); */
+		//	var g:Glow = new Glow();
+			
+    	}
+    	
+		private function play():void
+		{
+		//	m.xFrom = xFrom;
+		//	m.xTo = xTo;		
+		//	m.play();
+		//	g.target = container.getChildAt(nowIndex);
+		//	g.play();
+			z.target = container.getChildAt(nowIndex);
+			z.originX = nowIndex * 30 + 10;
+			z.originY = this.height /2;
+			z.play();
+		}
+		
+		private function playNext(event:EffectEvent):void
+		{
+			//g.stop();
+			z.stop();
+			nowIndex++;
+			if(nowIndex == childNumber)
+				nowIndex = 0;	
+			play();
+		}
+		
+        
+    ]]> 
+    </mx:Script> 
+    <mx:VBox height="100%" width="100%" verticalAlign="middle">
+        <mx:Label text="Constructing Network, please warit..." fontWeight="bold"/>
+        <mx:HBox width="100%" height="36" id="container"> 	
+        </mx:HBox>
+    </mx:VBox>
+</mx:Canvas>

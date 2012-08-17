@@ -1,0 +1,65 @@
+<tile tileId="1">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>VirtualEarth</name>
+<url>http://maps.live.com/</url>
+<description>Adds a pushpin to the map based on latitude and longitude</description>
+<type>mapping</type>
+<services>
+<service name="addPushpin">
+<description>Adds a pushpin to the map based on latitude and longitude</description>
+<input>
+<param className="geo.latitude" name="latitude" required="true">
+<description>The pushpin's latitude</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="geo.longitude" name="longitude" required="true">
+<description>The pushpin's longitude</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="photo.thumbnailImageUrl" name="url" required="false">
+<description>The URL used for the pushpin's image</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="object.title" name="title" required="false">
+<description>The pushpin's title</description>
+<defaultValue>My Pushpin</defaultValue>
+</param>
+<param className="object.description" name="description" required="false">
+<description>The pushpin's description</description>
+<defaultValue>This is a pushpin on the earth</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service> 
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>
+
+
+<tile tileId="1">
+<name>VirtualEarth</name>
+<providerUrl>http://maps.live.com/</providerUrl>
+<category>mapping</category>
+<description>
+<tags>mapping</tags>
+<text>Adds a pushpin to the map based on latitude and longitude</text>
+</description>
+<services>
+<service name="addPushpin">
+<description>Adds a pushpin to the map based on latitude and longitude</description>
+<data>
+<input>
+<param className="geo.latitude" name="latitude" required="true">
+<description>The pushpin's latitude</description>
+<defaultValue>0</defaultValue>
+</param>
+... ...
+</input>
+<output>
+<param className="story.title" name="title"></param>
+...
+</output>
+</data>

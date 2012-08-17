@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+    width="{COL_WIDTH_2}" height="{COL_HEIGHT_2}"
+    borderStyle="solid"
+    borderColor="#FFFFFF"
+    horizontalScrollPolicy="off" verticalScrollPolicy="off"
+    rollOver="rollOverHandler(event)"
+    rollOut="rollOutHandler(event)"
+    click="clickHandler(event)"
+    currentState="4cols"
+    automationName="{mashupApp.name}"
+    dropShadowColor="#000000"
+    shadowDistance="2"
+    >
+
+    <mx:Metadata>
+        [Event(name="details", type="dart.mashup.mashupApp.MashupAppThumbEvent")]
+    </mx:Metadata>
+
+    <mx:Script>
+        <![CDATA[
+
+		import mx.events.*;
+        import mx.core.*;
+        
+		import dart.mashup.mashupApp.MashupAppThumbEvent;
+		import dart.mashup.mashupApp.MashupApp;
+        
+        public static const COL_WIDTH_4:int = 225;
+        public static const COL_HEIGHT_4:int = 122;
+        public static const COL_WIDTH_3:int = 300;
+        public static const COL_HEIGHT_3:int = 165;
+        public static const COL_WIDTH_2:int = 450;
+        public static const COL_HEIGHT_2:int = 250;
+        public static const COMPARE_WIDTH:int = 162;
+        public static const HORIZONTAL_GAP:int = 20;
+        public static const VERTICAL_GAP:int = 3;
+
+        [Bindable]
+        public var mashupApp:MashupApp;
+
+        private function rollOverHandler(event:MouseEvent):void
+		{
+            setStyle("borderColor", "#CCCCCC");
+            setStyle("dropShadowEnabled", true);
+            buttons.visible = true;
+        }
+
+        private function rollOutHandler(event:MouseEvent):void
+		{
+            setStyle("borderColor", "#FFFFFF");
+            setStyle("dropShadowEnabled", false);
+			buttons.visible = false;
+        }
+
+        private var dragStartPoint:Point;
+        
+        public function clickHandler(event:MouseEvent):void
+        {
+            if (event.target != run &&
+                event.target != details)
+            {
+                dispatchEvent(new MashupAppThumbEvent(MashupAppThumbEvent.DETAILS, mashupApp));
+            }
+        }
+        
+        private function runMashupApp():void
+        {
+        	var uv:URLVariables = new URLVariables();
+			uv.MPINumber = mashupApp.getMPINumber();
+			uv.MPIs = mashupApp.tileSource;
+			var u:URLRequest = new URLRequest("http://localhost:8080/mashup/processMPIs");
+			u.data = uv;
+			u.method = "POST";
+			navigateToURL(u,"_blank");
+        }
+
+	]]>
+    </mx:Script>
+
+    <mx:VBox id="vb" width="100%" height="100%"
+        paddingLeft="6" paddingTop="4" paddingRight="8" paddingBottom="4"
+        verticalGap="0">
+
+        <mx:Label text="{mashupApp.name}" fontWeight="bold"/>
+
+        <mx:HBox width="100%" paddingTop="0" horizontalGap="4">
+
+            <mx:Image id="img" height="90" width="45" source="{mashupApp.image}" />
+
+            <mx:VBox id="descr" width="100%" height="100%" verticalGap="0" paddingTop="0">
+	            <mx:Label text="Sources:" fontWeight="bold"/>
+                <mx:Text text="{mashupApp.tileSourceDesc}" selectable="false" width="80" height="48"/>
+				<mx:Spacer height="4"/>
+            </mx:VBox>
+
+        </mx:HBox>
+
+        <mx:Spacer height="8"/>
+
+    </mx:VBox>
+
+    <mx:VBox id="buttons" visible="false" verticalGap="4" paddingRight="8" right="8" top="12">
+        <mx:Button id="run" icon="@Embed('/assets/report_add.png')" 
+            click="runMashupApp()" 
+            width="30" toolTip="Run mashup app"/>
+        <mx:Button id="details" icon="@Embed('/assets/report.png')" 
+            click="dispatchEvent(new MashupAppThumbEvent(MashupAppThumbEvent.DETAILS, mashupApp))" 
+            width="30" toolTip="Show details"/>
+    </mx:VBox>
+
+    <mx:states>
+
+        <mx:State name="4cols">
+            <mx:SetProperty name="width" value="{COL_WIDTH_4}"/>
+            <mx:SetProperty name="height" value="{COL_HEIGHT_4}"/>
+        </mx:State>
+
+        <mx:State name="3cols">
+            <mx:SetProperty name="width" value="{COL_WIDTH_3}"/>
+            <mx:SetProperty name="height" value="{COL_HEIGHT_3}"/>
+            <mx:SetProperty target="{img}" name="width" value="60"/>
+            <mx:SetProperty target="{img}" name="height" value="120"/>
+        </mx:State>
+
+        <mx:State name="2cols" basedOn="3cols">
+            <mx:SetProperty name="width" value="{COL_WIDTH_2}"/>
+            <mx:SetProperty name="height" value="{COL_HEIGHT_2}"/>
+            <mx:SetProperty target="{img}" name="width" value="60"/>
+            <mx:SetProperty target="{img}" name="height" value="120"/>
+            <mx:AddChild relativeTo="{vb}">
+                <mx:Text width="100%" text="{mashupApp.description}"/>
+            </mx:AddChild>
+        </mx:State>
+
+    </mx:states>
+
+</mx:Canvas>

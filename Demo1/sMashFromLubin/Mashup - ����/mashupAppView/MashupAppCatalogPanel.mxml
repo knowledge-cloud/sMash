@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:mashupAppView="mashupAppView.*"
+    layout="vertical" 
+    currentState="browse"
+    verticalScrollPolicy="auto"
+    horizontalScrollPolicy="auto"
+    styleName="catalogPanel">
+    
+    <mx:Metadata>
+        [Event(name="details", type="dart.mashup.mashupApp.MashupAppThumbEvent")]
+    </mx:Metadata>
+    
+    <mx:Script>
+        <![CDATA[
+        import flash.utils.Dictionary;
+        
+        import mx.collections.ArrayCollection;
+        import mx.collections.IViewCursor;
+        import mx.core.DragSource;
+        import mx.core.IUIComponent;
+        import mx.effects.Effect;
+        import mx.effects.Fade;
+        import mx.effects.Move;
+        import mx.events.EffectEvent;
+        import mx.events.DragEvent;
+        import mx.managers.DragManager;
+
+		import dart.mashup.mashupApp.MashupApp;
+		import dart.mashup.mashupApp.MashupAppThumbEvent;
+       
+        private  var accepted:Dictionary = new Dictionary();
+        private  var thumbnails:Array;
+        private var filterCount:int;
+        private  var thumbnailState:String = 'browse'; //either 'browse' or 'details'
+     //   [Bindable]
+     //   private var titleButtons:CatalogTitleButtons; //the buttons that also allow the panel to switch sides
+        
+        override protected function createChildren():void
+        {
+            super.createChildren();
+          //  titleButtons = new CatalogTitleButtons();
+          //  titleBar.addChild(titleButtons);
+        }
+
+        override protected function layoutChrome(unscaledWidth:Number, unscaledHeight:Number):void
+        {        
+            super.layoutChrome(unscaledWidth, unscaledHeight);
+            //when adding to a UIComponent (not a Container) need explicit width/height
+           // titleButtons.width = unscaledWidth / 2; //make it big so as we add cart items we can stretch)
+          //  titleButtons.height = titleButtons.measuredHeight;
+            //this placement algorithm is pretty hacky, there are better ways that probably
+            //involve copying more of the Panel layoutChrome method and supporting methods
+          //  titleButtons.move(statusTextField.x - titleButtons.width, titleTextField.y);
+        }
+        
+        //-----------------------------
+        // catalog
+        //-----------------------------
+        
+        private var _mashupAppCatalog:ArrayCollection;
+        
+        [Bindable]
+        public function set mashupAppCatalog(c:ArrayCollection):void
+        {
+            _mashupAppCatalog = c;
+            createThumbnails();
+        }
+        
+        public function get mashupAppCatalog():ArrayCollection
+        {
+            return _mashupAppCatalog;
+        }
+        
+        //----------------------------------------------------------------------
+        // methods
+        //----------------------------------------------------------------------
+       public function addMashupApp(item:MashupApp):void
+       {
+       		mashupAppCatalog.addItem(item);
+       		createThumbnails();
+       }
+       
+        private function createThumbnails():void
+        {
+            var i:int; //variables are hoisted up in scope so declare here to avoid warning
+            if (thumbnails != null)
+            {
+                for (i=0; i < thumbnails.length; i++)
+                {
+                    thumbContent.removeChild(thumbnails[i]);
+                }
+            }
+            
+            var row:int = 0;
+            var col:int = -1;
+            var n:int = mashupAppCatalog.length;
+            thumbnails = new Array(n);
+            filterCount = n;
+            
+            for (i=0; i < n; i++)
+            {
+                var thumb:MashupAppCatalogThumbnail = new MashupAppCatalogThumbnail();
+                thumbnails[i] = thumb;
+                thumbnails[i].showInAutomationHierarchy = true;
+                thumb.mashupApp = mashupAppCatalog.getItemAt(i) as MashupApp;
+                accepted[thumb.mashupApp] = true;
+                thumbContent.addChild(thumb);
+                thumb.addEventListener(MashupAppThumbEvent.DETAILS, mashupAppThumbEventHandler);
+            }
+
+            layoutCatalog();
+        }
+     
+        
+        private function layoutCatalog():Effect
+        {
+            var tileWidth:Number;
+            var tileHeight:Number;
+            var numCols:int;
+
+            if (filterCount > 9 || currentState == "compare")
+            {
+                numCols = 4;
+                tileWidth = MashupAppCatalogThumbnail.COL_WIDTH_4;
+                tileWidth = currentState == "compare"
+                    ? MashupAppCatalogThumbnail.COMPARE_WIDTH
+                    : MashupAppCatalogThumbnail.COL_WIDTH_4
+                tileHeight = currentState == "compare"
+                    ? height - 4
+                    : MashupAppCatalogThumbnail.COL_HEIGHT_4;
+            }
+            else if (filterCount > 4)
+			{
+                numCols = 3;
+                tileWidth = MashupAppCatalogThumbnail.COL_WIDTH_3;
+                tileHeight = MashupAppCatalogThumbnail.COL_HEIGHT_3;
+            }
+			else if (filterCount <= 9)
+			{
+                numCols = 2;
+                tileWidth = MashupAppCatalogThumbnail.COL_WIDTH_2;
+                tileHeight = MashupAppCatalogThumbnail.COL_HEIGHT_2;
+            }
+			else
+			{
+            }
+            
+            var row:int = 0;
+            var col:int = -1;
+
+			var move:Move = null;
+
+            var n:int = mashupAppCatalog.length;
+			for (var i:int = 0 ; i < n ; i++)
+			{
+                var mashApp:MashupApp = mashupAppCatalog.getItemAt(i) as MashupApp;
+                var thumb:MashupAppCatalogThumbnail = thumbnails[i];
+                if (accepted[mashApp])
+                {
+                    thumb.currentState = "" + numCols + "cols";
+                    col++;
+                    if (col > numCols - 1)
+					{
+                        row++;
+                        col = 0;
+                    }
+
+                    var xTo:Number = col * (tileWidth + MashupAppCatalogThumbnail.HORIZONTAL_GAP);
+                    var yTo:Number = row * (tileHeight + MashupAppCatalogThumbnail.VERTICAL_GAP);
+
+                    // If the thumbnail is already visible
+					// animate it to its new position.
+                    if (thumb.visible)
+					{
+                        // Animate only if the position is different
+						// from its current position.
+                        if (thumb.x != xTo || thumb.y != yTo)
+						{
+                            move = new Move(thumb);
+                            move.xTo = xTo;
+                            move.yTo = yTo;
+                            move.play();
+                        }
+                    }
+
+                    // If the thumbnail was not previously visible, sets its
+					// x and y coordinates. We'll make it reappear after all
+                    // the visible thumbnails have reached their new position.
+					else
+					{
+                        thumb.x = xTo;
+                        thumb.y = yTo;
+                        thumb.includeInLayout = true;
+                    }
+                }
+				else
+				{
+                    thumb.visible = false;
+                    thumb.includeInLayout = false;
+                }
+            }
+
+            if (!move)
+			{
+                // No visible thumbnails were animated to a new position;
+				// fade in newly selected thumbnails right away.
+                fadeInThumbnails();
+            }
+			else
+			{
+			    //since movement is happening get the scrollbar back to the top
+				thumbContent.verticalScrollPosition = 0;
+                // Fade in newly selected thumbnails after the last
+				// visible thumbnail has moved to its new position.
+                move.addEventListener(EffectEvent.EFFECT_END,
+					function(event:EffectEvent):void
+					{
+						fadeInThumbnails();
+					});
+            }
+            //return the last move to watch
+            return move;
+        }
+        
+        //return the last effect so we could add effectEnd handler if desired
+        private function fadeInThumbnails():void
+		{
+			var n:int = thumbnails.length;
+			var effect:Fade = new Fade();
+			effect.alphaTo = 1;
+			var targets:Array = [];
+			for (var i:int = 0; i < n ; i++)
+			{
+			    var thumb:MashupAppCatalogThumbnail = thumbnails[i];
+			    if (accepted[thumb.mashupApp] && !thumb.visible)
+				{
+                    thumb.alpha = 0;
+                    thumb.visible = true;
+                    targets.push(thumb);
+                }
+            }
+            if (targets.length > 0)
+            {
+                effect.targets = targets;
+                effect.play();
+            } 
+        }
+        
+        private function showDetails(mashupApp:MashupApp):void
+        {
+            if (currentState == "details")
+			{
+                details.mashupApp = mashupApp;
+                return;
+            }
+
+            var row:int = -1;
+
+            //should be computed using border metrics instead of hard-coding the 20, but...
+			var xTo:Number = thumbContent.width - MashupAppCatalogThumbnail.COL_WIDTH_4 - 20;
+            var yTo:Number;
+
+            var move:Move;
+            var first:Boolean = true;
+            var selectedThumb:MashupAppCatalogThumbnail;
+
+            var n:int = thumbnails.length;
+			for (var i:int = 0; i < n; i++)
+			{
+			    var thumb:MashupAppCatalogThumbnail = thumbnails[i];
+                if (thumb.visible)
+				{
+                    row++;
+                    yTo = row * (MashupAppCatalogThumbnail.COL_HEIGHT_4 + MashupAppCatalogThumbnail.VERTICAL_GAP);
+
+                    thumb.currentState = "4cols";
+
+                    if (thumb.x != xTo || thumb.y != yTo)
+					{
+                        move = new Move(thumb);
+                        if (first)
+						{
+                            move.addEventListener(EffectEvent.EFFECT_END,
+								function(event:EffectEvent):void
+								{
+									details.mashupApp = mashupApp;
+                                    currentState = "details";
+								});
+
+                            first = false;
+                        }
+                        move.xTo = xTo;
+                        move.yTo = yTo;
+                        move.play();
+                    }
+                    
+                    if (thumb.mashupApp == mashupApp)
+                    {
+                        selectedThumb = thumb;
+                    }
+                }
+            } 
+            if (selectedThumb != null)
+            {
+                //make sure that the selected thumb is visible in the list on the right
+                move.addEventListener(EffectEvent.EFFECT_END,
+					function(e:EffectEvent):void
+					{
+					    var curpos:int = thumbContent.verticalScrollPosition;
+					    if (selectedThumb.y < curpos)
+					    {
+					        thumbContent.verticalScrollPosition = y;
+					    }
+					    else if (selectedThumb.y + MashupAppCatalogThumbnail.COL_HEIGHT_4 > curpos + thumbContent.height)
+					    {
+					        //this logic doesn't seem to be perfect but it will do
+					        var diff:int = selectedThumb.y - (curpos + thumbContent.height)
+					        thumbContent.verticalScrollPosition += diff + MashupAppCatalogThumbnail.COL_HEIGHT_4 + MashupAppCatalogThumbnail.VERTICAL_GAP;
+					    }
+					});
+            } 
+            
+        }
+        
+        private function mashupAppThumbEventHandler(event:MashupAppThumbEvent):void
+        {
+            if (event.type == MashupAppThumbEvent.DETAILS)
+            {
+                showDetails(event.mashupApp);
+            }
+            else if (event.type == MashupAppThumbEvent.BROWSE)
+            {
+                if (thumbnailState == "browse")
+                {                
+                    currentState = "browse";
+                    layoutCatalog();
+                }
+                else
+                {
+               //     compare();
+                }
+            }
+            else
+            {
+                dispatchEvent(event);
+            }
+        }
+        
+ 
+        ]]>
+    </mx:Script>
+
+    <mx:Canvas width="100%" height="100%" 
+        verticalScrollPolicy="off"
+        horizontalScrollPolicy="off"
+        paddingRight="0">
+        <mx:Canvas id="thumbContent" width="100%" height="100%" 
+            horizontalScrollPolicy="off"/>
+        <mashupAppView:MashupAppDetails id="details"
+            width="{MashupAppCatalogThumbnail.COL_WIDTH_4 * 3}"
+            height="100%"
+            visible="false"
+            browse="mashupAppThumbEventHandler(event)" />
+    </mx:Canvas>
+    
+    <mx:states>
+        <mx:State name="browse">
+            <mx:SetProperty name="title" value="Browse"/>
+        </mx:State>
+
+        <mx:State name="details">
+            <mx:SetProperty name="title" value="MashupApp Details"/>
+            <mx:SetProperty target="{details}" name="visible" value="true"/>
+        </mx:State>
+    </mx:states>
+    
+</mx:Panel>

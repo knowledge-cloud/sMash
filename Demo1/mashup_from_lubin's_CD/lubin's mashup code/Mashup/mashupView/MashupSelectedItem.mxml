@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+    styleName="listItem"
+    height="{MashupSelectedItem.HEIGHT}">
+
+    <mx:Metadata>
+       [Event(name="removeMashupPathItem", type="dart.mashup.mashup.MashupSelectedListEvent")]
+    </mx:Metadata>
+    
+    <mx:Script>
+    <![CDATA[
+    	import dart.mashup.tile.Service;
+    	import dart.mashup.mashup.TilePacket;
+    	import dart.mashup.mashup.MashupSelectedListEvent;
+    	import dart.mashup.ontology.Attribute;
+    	import dart.mashup.ontology.AttributeListEvent;
+        
+        public static const HEIGHT:int = 25;
+        
+        [Bindable]
+        public var tp1:TilePacket;
+        [Bindable]
+        public var tp2:TilePacket;
+        [Bindable]
+        public var s1:Service;
+        [Bindable]
+        public var s2:Service;
+        
+        private function removeMashupPathItem():void
+        {
+            var event:MashupSelectedListEvent = new MashupSelectedListEvent(MashupSelectedListEvent.REMOVE_MASHUPPATHITEM);
+            event.s1 = s1;
+            event.s2 = s2;
+            event.tp1 = tp1;
+            event.tp2 = tp2;
+    		dispatchEvent(event);
+        }
+        
+    ]]> 
+    </mx:Script> 
+    
+    <mx:Button id="removeButton"
+        width="14" height="14" 
+        icon="@Embed('/assets/trashcan.png')"
+        toolTip="Remove from selected list"
+        click="removeMashupPathItem()"/>
+
+    <mx:Label id="tp1Name" maxWidth="100" text="{tp1.getTile().name}"/>
+    <mx:Label id="s1Name" maxWidth="100"  text="{s1.name}"/>
+    <mx:Label id="type" maxWidth="100"  text="-->"/>    
+    <mx:Label id="tp2Name" maxWidth="100" text="{tp2.getTile().name}"/>
+    <mx:Label id="s2Name" maxWidth="100"  text="{s2.name}"/>
+    
+    <mx:Spacer width="100%" />
+    
+</mx:HBox>

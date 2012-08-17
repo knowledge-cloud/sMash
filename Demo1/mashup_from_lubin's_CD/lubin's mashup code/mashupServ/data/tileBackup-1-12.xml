@@ -1,0 +1,1854 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog>
+<tile tileId="1">
+<name>VirtualEarth</name>
+<providerUrl>http://maps.live.com/</providerUrl>
+<description>
+<tags>mapping</tags>
+<text>Adds a pushpin to the map based on latitude and longitude</text>
+</description>
+<category>mapping</category>
+<services>
+<service name="addPushpin">
+<description>Adds a pushpin to the map based on latitude and longitude</description>
+<invokeUrl/>
+<input>
+<param className="geo.latitude" name="latitude" required="true">
+<description>The pushpin's latitude</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="geo.longitude" name="longitude" required="true">
+<description>The pushpin's longitude</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="photo.thumbnailImageUrl" name="url" required="false">
+<description>The URL used for the pushpin's image</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="object.title" name="title" required="false">
+<description>The pushpin's title</description>
+<defaultValue>My Pushpin</defaultValue>
+</param>
+<param className="object.description" name="description" required="false">
+<description>The pushpin's description</description>
+<defaultValue>This is a pushpin on the earth</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service> 
+</services>
+</tile>
+<tile tileId="2">
+<name>Flickr</name>
+<providerUrl>http://www.flickr.com/services/api/, http://api.flickr.com</providerUrl>
+<description>
+<tags>photos</tags>
+<text>Get photos you wanted</text>
+</description>
+<category>photos</category>
+<services>
+<service name="getGeotaggedPhotos">
+<description>Get photos that have a latitude and longitude and have been tagged as "geotagged"</description>
+<invokeUrl/>
+<input>
+<param className="object.string" name="search_text" required="true">
+<description>text in title, description, or tags</description>
+<defaultValue>beach</defaultValue>
+</param>
+<param className="object.integer" name="number" required="false">
+<description>maximum number of photos to return</description>
+<defaultValue>15</defaultValue>
+</param>
+</input>
+<output>
+<param className="photo.title" name="title"/>
+<param className="photo.imageUrl" name="url"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="photo.userName" name="owner"/>
+<param className="photo.url" name="linkUrl"/>
+<param className="photo.imageUrl" name="originalUrl"/>
+<param className="geo.latitude" name="latitude"/>
+<param className="geo.longitude" name="longitude"/>
+<param className="photo.id" name="id"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="3">
+<name>Upcoming</name>
+<providerUrl>http://www.upcoming.org/</providerUrl>
+<description>
+<tags>events</tags>
+<text>Get events</text>
+</description>
+<category>events</category>
+<services>
+<service name="findEvents">
+<description>Find events from upcoming.org</description>
+<invokeUrl/>
+<input>
+<param className="object.string" name="searchText" required="true">
+<description>Search terms</description>
+<defaultValue>music</defaultValue>
+</param>
+</input>
+<output>
+<param className="event.id" name="id"/>
+<param className="event.title" name="name"/>
+<param className="event.description" name="description"/>
+<param className="event.date" name="start_date"/>
+<param className="event.date" name="end_date"/>
+<param className="event.time" name="start_time"/>
+<param className="event.time" name="end_time"/>
+<param className="object.string" name="personal"/>
+<param className="object.string" name="selfpromotion"/>
+<param className="object.id" name="metro_id"/>
+<param className="object.id" name="venue_id"/>
+<param className="object.id" name="user_id"/>
+<param className="object.id" name="category_id"/>
+<param className="event.date" name="date_posted"/>
+<param className="geo.latitude" name="latitude"/>
+<param className="geo.longitude" name="longitude"/>
+<param className="object.string" name="geocoding_precision"/>
+<param className="object.string" name="geocoding_ambiguous"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="4">
+<name>Digg</name>
+<providerUrl>http://digg.com/</providerUrl>
+<description>
+<tags>news</tags>
+<text>Get recent stories</text>
+</description>
+<category>news</category>
+<services>
+<service name="getStories">
+<description>Get recent stories</description>
+<invokeUrl/>
+<input>
+<param className="object.integer" name="number" required="true">
+<description>maximum number of stories to return</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="story.title" name="title"/>
+<param className="story.description" name="description"/>
+<param className="person.userName" name="user"/>
+<param className="photo.thumbnailImageUrl" name="userThumbnail"/>
+<param className="object.string" name="topic"/>
+<param className="object.id" name="storyID"/>
+<param className="object.url" name="link"/>
+<param className="story.date" name="submitDate"/>
+<param className="object.integer" name="diggs"/>
+<param className="object.string" name="comments"/>
+<param className="object.url" name="href"/>
+<param className="object.string" name="status"/>
+</output>
+</service>
+<service name="getUsers">
+<description>Get information of all users</description>
+<invokeUrl/>
+<input>
+<param className="object.integer" name="number" required="true">
+<description>maximum number of users to return</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="person.userName" name="name"/>
+<param className="photo.thumbnailImageUrl" name="thumbnail"/>
+<param className="object.date" name="registered"/>
+<param className="object.string" name="profileViews"/>
+</output>
+</service>
+<service name="getUser">
+<description>Get information of a specific user</description>
+<invokeUrl/>
+<input>
+<param className="person.userName" name="userName" required="true">
+<description>Named user</description>
+<defaultValue>kevinrose</defaultValue>
+</param>
+</input>
+<output>
+<param className="person.userName" name="name"/>
+<param className="photo.thumbnailImageUrl" name="thumbnail"/>
+<param className="object.date" name="registered"/>
+<param className="object.string" name="profileViews"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="7">
+<name>Twitter</name>
+<providerUrl>http://twitter.com/</providerUrl>
+<description>
+<tags>community</tags>
+<text>Get News</text>
+</description>
+<category>community</category>
+<services>
+<service name="getLatestPosts">
+<description>Gets the latest updates from Twitter</description>
+<invokeUrl/>
+<input>
+<param className="object.integer" name="number" required="true">
+<description>Maximum number of results to return</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.id" name="messageID"/>
+<param className="object.description" name="text"/>
+<param className="object.date" name="createdAt"/>
+<param className="object.id" name="userID"/>
+<param className="person.userName" name="screenName"/>
+<param className="adr.locality" name="location"/>
+<param className="object.description" name="description"/>
+<param className="photo.thumbnailImageUrl" name="imageUrl"/>
+<param className="object.url" name="url"/>
+</output>
+</service>
+<service name="getLatestUserPosts">
+<description>Gets the latest updates from a Twitter user</description>
+<input>
+<param className="person.userName" name="userID" required="true">
+<description>User's Twitter ID</description>
+<defaultValue>Conversation</defaultValue>
+</param>
+<param className="object.integer" name="number" required="false">
+<description>Maximum number of results to return</description>
+<defaultValue>15</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.id" name="messageID"/>
+<param className="object.description" name="text"/>
+<param className="object.date" name="createdAt"/>
+<param className="object.id" name="userID"/>
+<param className="person.userName" name="screenName"/>
+<param className="adr.locality" name="location"/>
+<param className="object.description" name="description"/>
+<param className="photo.thumbnailImageUrl" name="imageUrl"/>
+<param className="object.url" name="url"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="10">
+<name>MSNShopping</name>
+<providerUrl>http://shopping.msn.com/</providerUrl>
+<description>
+<tags>shopping</tags>
+<text>MSN Shopping</text>
+</description>
+<category>shopping</category>
+<services>
+<service name="getProducts">
+<description>Get products from MSN Shopping</description>
+<input>
+<param className="object.string" name="text" required="true">
+<description>text in title or description</description>
+<defaultValue>xbox 360</defaultValue>
+</param>
+<param className="object.integer" name="number" required="false">
+<description>maximum number of products to return</description>
+<defaultValue>30</defaultValue>
+</param>
+</input>
+<output>
+<param className="product.url" name="productUrl"/>
+<param className="photo.imageUrl" name="url"/>
+<param className="object.id" name="id"/>
+<param className="object.id" name="categoryId"/>
+<param className="object.title" name="title"/>
+<param className="object.title" name="brand"/>
+<param className="person.userName" name="vendorName"/>
+<param className="object.description" name="description"/>
+<param className="object.string" name="rating"/>
+<param className="product.price" name="price"/>
+<param className="object.id" name="vendorId"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="9">
+<name>StockQuotes</name>
+<providerUrl>http://www.webservicex.net/</providerUrl>
+<description>
+<tags>stock</tags>
+<text>Stock Quotes</text>
+</description>
+<category>other</category>
+<services>
+<service name="getStockGraph">
+<description>Returns a graph and vital statistics about a given company's stock</description>
+<input>
+<param className="object.stockSymbol" name="symbol" required="true">
+<description>The stock symbol for the company you are searching for</description>
+<defaultValue>MSFT</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.stockSymbol" name="symbol"/>
+<param className="object.string" name="quote"/>
+<param className="object.string" name="change"/>
+<param className="photo.imageUrl" name="graphURL"/>
+</output>
+</service>
+<service name="getQuote">
+<description>Returns a stock quote based on the given symbol</description>
+<input>
+<param className="object.stockSymbol" name="symbol" required="true">
+<description>The stock symbol for the company you are searching for</description>
+<defaultValue>MSFT</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="price"/>
+<param className="object.date" name="lastUpdated"/>
+<param className="object.string" name="change"/>
+<param className="object.string" name="open"/>
+<param className="object.string" name="high"/>
+<param className="object.string" name="low"/>
+<param className="object.string" name="volume"/>
+<param className="object.string" name="marketCap"/>
+<param className="object.name" name="name"/>
+<param className="object.string" name="peRatio"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="17">
+<name>YahooNews</name>
+<providerUrl>http://news.yahoo.com/, http://api.search.yahoo.com</providerUrl>
+<description>
+<tags>news</tags>
+<text>Retrieves news based on the specified search term in yahoo</text>
+</description>
+<category>news</category>
+<services>
+<service name="searchNews">
+<description>Retrieves news based on the specified search term in Yahoo</description>
+<input>
+<param className="object.string" name="term" required="true">
+<description>The desired search term</description>
+<defaultValue>Internet</defaultValue>
+</param>
+<param className="object.integer" name="count" required="false">
+<description>max returned number</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="news.title" name="title"/>
+<param className="news.description" name="description"/>
+<param className="object.url" name="url"/>
+<param className="object.string" name="newsSource"/>
+<param className="object.url" name="newsSourceURL"/>
+<param className="news.date" name="publishDate"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailImageUrl"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="11">
+<name>GoogleWebSearch</name>
+<providerUrl>http://ajax.googleapis.com/ajax/services/search/web</providerUrl>
+<description>
+<tags>search</tags>
+<text>google web search</text>
+</description>
+<category>search</category>
+<services>
+<service name="search">
+<description>Get web search results from the Google Search engine</description>
+<input>
+<param className="object.string" name="query" required="true">
+<description>The term to search for</description>
+<defaultValue>robin</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.url" name="rawUrl"/>
+<param className="object.title" name="title"/>
+<param className="object.string" name="content"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="12">
+<name>GoogleLocalSearch</name>
+<providerUrl>http://ajax.googleapis.com/ajax/services/search/local</providerUrl>
+<description>
+<tags>localSearch</tags>
+<text>Search for local business listings by name, key word, or location</text>
+</description>
+<category>local</category>
+<services>
+<service name="search">
+<description>Get web search results from the Google Search engine</description>
+<input>
+<param className="object.string" name="query" required="true">
+<description>The term to search for</description>
+<defaultValue>robin</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.title" name="title"/>
+<param className="object.url" name="googleMapUrl"/>
+<param className="geo.latitude" name="latitude"/>
+<param className="geo.longitude" name="longitude"/>
+<param className="adr.street_address" name="streetAddress"/>
+<param className="adr.locality" name="city"/>
+<param className="adr.region" name="region"/>
+<param className="adr.country" name="country"/>
+<param className="object.url" name="ddUrl"/>
+<param className="object.url" name="ddUrlToHere"/>
+<param className="object.url" name="ddUrlFromHere"/>
+<param className="photo.imageUrl" name="mapImage"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="13">
+<name>GoogleVideoSearch</name>
+<providerUrl>http://ajax.googleapis.com/ajax/services/search/video</providerUrl>
+<description>
+<tags>video</tags>
+<text>Search for video</text>
+</description>
+<category>video</category>
+<services>
+<service name="search">
+<description>Get video search results from the Google Search engine</description>
+<input>
+<param className="object.string" name="query" required="true">
+<description>The term to search for</description>
+<defaultValue>robin</defaultValue>
+</param>
+</input>
+<output>
+<param className="video.title" name="title"/>
+<param className="video.description" name="content"/>
+<param className="video.url" name="url"/>
+<param className="object.date" name="published"/>
+<param className="video.userName" name="publisher"/>
+<param className="photo.thumbnailImageUrl" name="videoUrl"/>
+<param className="video.url" name="flashVersionUrl"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="14">
+<name>GoogleBlogSearch</name>
+<providerUrl>http://ajax.googleapis.com/ajax/services/search/blog, http://blogsearch.google.com</providerUrl>
+<description>
+<tags>blog</tags>
+<text>Search for blog</text>
+</description>
+<category>blog</category>
+<services>
+<service name="search">
+<description>Get blog search results from the Google Search engine</description>
+<input>
+<param className="object.string" name="query" required="true">
+<description>The term to search for</description>
+<defaultValue>robin</defaultValue>
+</param>
+</input>
+<output>
+<param className="blog.title" name="title"/>
+<param className="blog.url" name="postUrl"/>
+<param className="blog.description" name="content"/>
+<param className="blog.userName" name="author"/>
+<param className="blog.url" name="blogUrl"/>
+<param className="blog.date" name="publishedDate"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="15">
+<name>GoogleImageSearch</name>
+<providerUrl>http://ajax.googleapis.com/ajax/services/search/image</providerUrl>
+<description>
+<tags>photos</tags>
+<text>Search for image</text>
+</description>
+<category>photos</category>
+<services>
+<service name="search">
+<description>Get image search results from the Google Search engine</description>
+<input>
+<param className="object.string" name="query" required="true">
+<description>The term to search for</description>
+<defaultValue>robin</defaultValue>
+</param>
+</input>
+<output>
+<param className="photo.title" name="title"/>
+<param className="photo.imageUrl" name="imageUrl"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="photo.description" name="content"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="16">
+<name>Youtube</name>
+<providerUrl>http://gdata.youtube.com/feeds/api/videos</providerUrl>
+<description>
+<tags>video</tags>
+<text>Search for image</text>
+</description>
+<category>video</category>
+<services>
+<service name="searchVideo">
+<description>search videos in youtube</description>
+<input>
+<param className="object.string" name="searchText" required="true">
+<description>The term to search for</description>
+<defaultValue>football</defaultValue>
+</param>
+<param className="video.userName" name="author" required="false">
+<description>videos uploaded by a particular YouTube user</description>
+<defaultValue>robin</defaultValue>
+</param>
+<param className="object.integer" name="count" required="false">
+<description>max returned number</description>
+<defaultValue>10</defaultValue>
+</param>
+<param className="object.string" name="category" required="false">
+<description>retrieve videos that are in a particular category or are tagged with a particular keyword or developer tag</description>
+<defaultValue>Sports</defaultValue>
+</param>
+</input>
+<output>
+<param className="video.title" name="title"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="video.description" name="description"/>
+<param className="video.url" name="linkurl"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="8">
+<name>MSNNewsFeed</name>
+<providerUrl>http://msn.com/</providerUrl>
+<description>
+<tags>news</tags>
+<text>Get News</text>
+</description>
+<category>news</category>
+<services>
+<service name="TopBoxOffice">
+<description>Top Box Office</description>
+<input>
+</input>
+<output>
+<param className="news.title" name="title"/>
+<param className="object.url" name="link"/>
+<param className="object.description" name="description"/>
+<param className="object.string" name="source"/>
+<param className="object.url" name="sourceLink"/>
+<param className="object.name" name="author"/>
+<param className="object.description" name="description"/>
+<param className="object.string" name="tags"/>
+<param className="object.string" name="comments"/>
+<param className="object.string" name="comments"/>
+<param className="object.date" name="publishedDate"/>
+<param className="object.url" name="mediaLink"/>
+<param className="object.string" name="mediaType"/>
+</output>
+</service>
+<service name="TopCelebrities">
+<description>Top Celebrities</description>
+<input>
+</input>
+<output>
+<param className="news.title" name="title"/>
+<param className="object.url" name="link"/>
+<param className="object.description" name="description"/>
+<param className="object.string" name="source"/>
+<param className="object.url" name="sourceLink"/>
+<param className="object.name" name="author"/>
+<param className="object.description" name="description"/>
+<param className="object.string" name="tags"/>
+<param className="object.string" name="comments"/>
+<param className="object.string" name="comments"/>
+<param className="object.date" name="publishedDate"/>
+<param className="object.url" name="mediaLink"/>
+<param className="object.string" name="mediaType"/>
+</output>
+</service>
+<service name="InTheaters">
+<description>Now Playing</description>
+<input>
+</input>
+<output>
+<param className="news.title" name="title"/>
+<param className="object.url" name="link"/>
+<param className="object.description" name="description"/>
+<param className="object.string" name="source"/>
+<param className="object.url" name="sourceLink"/>
+<param className="object.name" name="author"/>
+<param className="object.description" name="description"/>
+<param className="object.string" name="tags"/>
+<param className="object.string" name="comments"/>
+<param className="object.string" name="comments"/>
+<param className="object.date" name="publishedDate"/>
+<param className="object.url" name="mediaLink"/>
+<param className="object.string" name="mediaType"/>
+</output>
+</service>
+<service name="TopStories">
+<description>Top headlines</description>
+<input>
+</input>
+<output>
+<param className="news.title" name="title"/>
+<param className="object.url" name="link"/>
+<param className="object.description" name="description"/>
+<param className="object.string" name="source"/>
+<param className="object.url" name="sourceLink"/>
+<param className="object.name" name="author"/>
+<param className="object.description" name="description"/>
+<param className="object.string" name="tags"/>
+<param className="object.string" name="comments"/>
+<param className="object.string" name="comments"/>
+<param className="object.date" name="publishedDate"/>
+<param className="object.url" name="mediaLink"/>
+<param className="object.string" name="mediaType"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="18">
+<name>YahooAnswers</name>
+<providerUrl>http://answers.yahoo.com/</providerUrl>
+<description>
+<tags>search</tags>
+<text>Retrieves a set of answers for the passed-in term</text>
+</description>
+<category>search</category>
+<services>
+<service name="getAnswers">
+<description>Retrieves a set of answers for the passed-in term</description>
+<input>
+<param className="object.string" name="term" required="true">
+<description>The desired search term</description>
+<defaultValue>computers</defaultValue>
+</param>
+<param className="object.integer" name="count" required="false">
+<description>max returned number</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.title" name="subject"/>
+<param className="object.description" name="content"/>
+<param className="object.date" name="date"/>
+<param className="object.url" name="link"/>
+<param className="object.string" name="category"/>
+<param className="object.id" name="userId"/>
+<param className="photo.imageUrl" name="userPhotoURL"/>
+<param className="person.userName" name="userNick"/>
+<param className="object.integer" name="numAnswers"/>
+<param className="object.integer" name="numComments"/>
+<param className="object.id" name="chosenAnswererId"/>
+<param className="person.userName" name="chosenAnswererNick"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="19">
+<name>LiveNews</name>
+<providerUrl>http://search.live.com</providerUrl>
+<description>
+<tags>news</tags>
+<text>Get News results from the Windows Live Search engine</text>
+</description>
+<category>news</category>
+<services>
+<service name="searchNews">
+<description>Retrieves a set of answers for the passed-in term</description>
+<input>
+<param className="object.string" name="term" required="true">
+<description>The desired search term</description>
+<defaultValue>Technology</defaultValue>
+</param>
+<param className="object.integer" name="count" required="false">
+<description>max returned number</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.title" name="subject"/>
+<param className="object.description" name="content"/>
+<param className="object.url" name="url"/>
+<param className="object.url" name="displayUrl"/>
+<param className="object.string" name="source"/>
+<param className="object.integer" name="totalCount"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="20">
+<name>FaceBook</name>
+<providerUrl>http://search.live.com</providerUrl>
+<description>
+<tags>community</tags>
+<text>FaceBook!</text>
+</description>
+<category>community</category>
+<services>
+<service name="getFriends">
+<description>Gets information about your friends</description>
+<input>
+<param className="object.integer" name="number" required="false">
+<description>Maximum number of friends to return </description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.id" name="id"/>
+<param className="person.name" name="name"/>
+<param className="adr.locality" name="city"/>
+<param className="adr.region" name="state"/>
+<param className="adr.country" name="country"/>
+<param className="adr.zipCode" name="zipCode"/>
+<param className="object.string" name="status"/>
+<param className="object.date" name="statusLastChanged"/>
+<param className="object.url" name="profileUrl"/>
+<param className="photo.imageUrl" name="photoUrl"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="object.description" name="aboutMe"/>
+</output>
+</service>
+<service name="getUserInfoById">
+<description>Gets information about your friends</description>
+<input>
+<param className="object.id" name="userID" required="true">
+<description>user id</description>
+<defaultValue>676712790</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.id" name="id"/>
+<param className="person.name" name="name"/>
+<param className="adr.locality" name="city"/>
+<param className="adr.region" name="state"/>
+<param className="adr.country" name="country"/>
+<param className="adr.zipCode" name="zipCode"/>
+<param className="object.string" name="status"/>
+<param className="object.date" name="statusLastChanged"/>
+<param className="object.url" name="profileUrl"/>
+<param className="photo.imageUrl" name="photoUrl"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="object.description" name="aboutMe"/>
+</output>
+</service>
+<service name="getPhotosByName">
+<description>Gets information about your friends</description>
+<input>
+<param className="object.name" name="userName" required="true">
+<description>user name</description>
+<defaultValue>robin</defaultValue>
+</param>
+</input>
+<output>
+<param className="photo.title" name="caption"/>
+<param className="photo.imageUrl" name="imageUrl"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="photo.userName" name="owner"/>
+</output>
+</service>
+<service name="getEvent">
+<description>Gets event info for a specified event ID</description>
+<input>
+<param className="event.id" name="eventId" required="false">
+<description>Event Id</description>
+<defaultValue>5388533932</defaultValue>
+</param>
+</input>
+<output>
+<param className="event.id" name="eid"/>
+<param className="event.title" name="name"/>
+<param className="event.description" name="description"/>
+<param className="event.time" name="start_time"/>
+<param className="event.time" name="end_time"/>
+<param className="photo.imageUrl" name="pic"/>
+<param className="photo.imageUrl" name="pic_big"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="event.userName" name="creator"/>
+<param className="adr.locality" name="city"/>
+<param className="adr.region" name="state"/>
+<param className="adr.country" name="country"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="21">
+<name>YahooImage</name>
+<providerUrl>http://images.yahoo.com, http://api.search.yahoo.com</providerUrl>
+<description>
+<tags>photos</tags>
+<text>Retrieves images based on your search term</text>
+</description>
+<category>photos</category>
+<services>
+<service name="search">
+<description>Retrieves images based on your search term</description>
+<input>
+<param className="object.string" name="term" required="true">
+<description>The term(s) to search for</description>
+<defaultValue>pretty</defaultValue>
+</param>
+<param className="object.integer" name="number" required="false">
+<description>max returned number</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="photo.title" name="title"/>
+<param className="photo.imageUrl" name="imageUrl"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+<param className="object.string" name="publisher"/>
+<param className="photo.description" name="description"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="22">
+<name>YahooVideo</name>
+<providerUrl>http://video.yahoo.com/, http://api.search.yahoo.com</providerUrl>
+<description>
+<tags>video</tags>
+<text>Retrieves images based on your search term</text>
+</description>
+<category>video</category>
+<services>
+<service name="search">
+<description>Retrieves images based on your search term</description>
+<input>
+<param className="object.string" name="term" required="true">
+<description>The term(s) to search for</description>
+<defaultValue>cars</defaultValue>
+</param>
+<param className="video.format" name="number" required="false">
+<description>Types of videos to search for. Any combination of "any", "avi", "flash", "mpeg", "msmedia", "quicktime"...</description>
+<defaultValue>flash</defaultValue>
+</param>
+<param className="object.integer" name="number" required="false">
+<description>max returned number</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="video.title" name="title"/>
+<param className="video.description" name="description"/>
+<param className="video.videoUrl" name="videoURL"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailImageURL"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="23">
+<name>YahooTraffic</name>
+<providerUrl>http://traffic.yahoo.com/, http://api.search.yahoo.com</providerUrl>
+<description>
+<tags>local</tags>
+<text>Returns traffic data for the corresponding address</text>
+</description>
+<category>local</category>
+<services>
+<service name="getTrafficForAddress">
+<description>Returns traffic data for the corresponding address</description>
+<input>
+<param className="adr.street_address" name="street" required="true">
+<description>Street address</description>
+<defaultValue>1 Microsoft Way</defaultValue>
+</param>
+<param className="adr.locality" name="city" required="true">
+<description>City for the address</description>
+<defaultValue>Redmond</defaultValue>
+</param>
+<param className="adr.region" name="state" required="true">
+<description>State for the address</description>
+<defaultValue>WA</defaultValue>
+</param>
+<param className="object.decimal" name="radius" required="false">
+<description>The radius to search within, in miles</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.title" name="title"/>
+<param className="object.string" name="type"/>
+<param className="object.description" name="description"/>
+<param className="geo.latitude" name="latitude"/>
+<param className="geo.longitude" name="longitude"/>
+<param className="object.string" name="direction"/>
+<param className="object.string" name="severity"/>
+<param className="object.date" name="reportDate"/>
+<param className="object.date" name="updateDate"/>
+<param className="object.date" name="endDate"/>
+<param className="photo.thumbnailImageUrl" name="imageURL"/>
+</output>
+</service>
+<service name="getTrafficForZipCode">
+<description>Returns traffic data for the corresponding ZIP code</description>
+<input>
+<param className="adr.zipCode" name="zip" required="true">
+<description>ZIP code</description>
+<defaultValue>98052</defaultValue>
+</param>
+<param className="object.decimal" name="radius" required="false">
+<description>The radius to search within, in miles</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.title" name="title"/>
+<param className="object.string" name="type"/>
+<param className="object.description" name="description"/>
+<param className="geo.latitude" name="latitude"/>
+<param className="geo.longitude" name="longitude"/>
+<param className="object.string" name="direction"/>
+<param className="object.string" name="severity"/>
+<param className="object.date" name="reportDate"/>
+<param className="object.date" name="updateDate"/>
+<param className="object.date" name="endDate"/>
+<param className="photo.thumbnailImageUrl" name="imageURL"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="24">
+<name>LiveWebSearch</name>
+<providerUrl>http://search.live.com</providerUrl>
+<description>
+<tags>search</tags>
+<text>live web search</text>
+</description>
+<category>search</category>
+<services>
+<service name="search">
+<description>Get search results from the Windows Live Search engine</description>
+<input>
+<param className="object.string" name="query" required="true">
+<description>The term to search for</description>
+<defaultValue>cheese</defaultValue>
+</param>
+<param className="object.integer" name="count" required="false">
+<description>The number of returned results </description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.title" name="title"/>
+<param className="object.description" name="description"/>
+<param className="object.url" name="url"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="25">
+<name>eBay</name>
+<providerUrl>http://open.api.ebay.com/shopping</providerUrl>
+<description>
+<tags>shopping</tags>
+<text>get product information</text>
+</description>
+<category>shopping</category>
+<services>
+<service name="findProducts">
+<description>Get shopping information from eBay </description>
+<input>
+<param className="object.string" name="keyWords" required="true">
+<description>The term to search for</description>
+<defaultValue>harry potter</defaultValue>
+</param>
+<param className="object.integer" name="count" required="false">
+<description>The number of returned results </description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="product.title" name="title"/>
+<param className="object.url" name="detailsURL"/>
+<param className="photo.thumbnailImageUrl" name="stockPhotoURL"/>
+</output>
+</service>
+<service name="getUserProfile">
+<description>Retrieves default information about a user</description>
+<input>
+<param className="person.userName" name="userID" required="true">
+<description>user's ID</description>
+<defaultValue>hypothetical-user</defaultValue>
+</param>
+<param className="object.integer" name="count" required="false">
+<description>The number of returned results </description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.date" name="registrationDate"/>
+<param className="person.userName" name="userID"/>
+<param className="object.url" name="sellerItemsURL"/>
+<param className="object.url" name="aboutMeURL"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="26">
+<name>eBayRss</name>
+<providerUrl>http://rss.api.ebay.com/ws/rssapi</providerUrl>
+<description>
+<tags>shopping</tags>
+<text>get latest product information</text>
+</description>
+<category>shopping</category>
+<services>
+<service name="findProductsByCategory">
+<description>Get search results from the Windows Live Search engine</description>
+<input>
+<param className="object.string" name="category" required="true">
+<description>The category product info to search for</description>
+<defaultValue>DVD</defaultValue>
+</param>
+</input>
+<output>
+<param className="product.title" name="title"/>
+<param className="product.url" name="detailsURL"/>
+<param className="product.description" name="description"/>
+<param className="product.price" name="price"/>
+<param className="photo.thumbnailImageUrl" name="stockPhotoURL"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="27">
+<name>amazon</name>
+<providerUrl>http://ecs.amazonaws.com/onca/xml</providerUrl>
+<description>
+<tags>shopping</tags>
+<text>get latest product information from amazon</text>
+</description>
+<category>shopping</category>
+<services>
+<service name="findProducts">
+<description>Get search results from the Windows Live Search engine</description>
+<input>
+<param className="object.string" name="keyWords" required="true">
+<description>The product info to search for</description>
+<defaultValue>Harry Potter</defaultValue>
+</param>
+</input>
+<output>
+<param className="product.title" name="title"/>
+<param className="object.url" name="detailsURL"/>
+<param className="object.string" name="category"/>
+<param className="photo.thumbnailImageUrl" name="stockPhotoURL"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="28">
+<name>delicious</name>
+<providerUrl>https://api.del.icio.us/v1/posts, http://www.delicious.com</providerUrl>
+<description>
+<tags>bookmarks</tags>
+<text>get tags or posts from delicious</text>
+</description>
+<category>bookmarks</category>
+<services>
+<service name="getPostsByTag">
+<description>get posts from delicious</description>
+<input>
+<param className="object.string" name="tag" required="true">
+<description>The tags to search for</description>
+<defaultValue>google</defaultValue>
+</param>
+</input>
+<output>
+<param className="post.title" name="title"/>
+<param className="post.url" name="postUrl"/>
+<param className="post.description" name="description"/>
+<param className="object.string" name="tags"/>
+</output>
+</service>
+<service name="getTags">
+<description>get tags from delicious</description>
+<input>
+</input>
+<output>
+<param className="object.string" name="tags"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="29">
+<name>blogspot</name>
+<providerUrl>http://www.blogger.com/feeds/blogID/posts/default, http://www.blogspot.com</providerUrl>
+<description>
+<tags>blog</tags>
+<text>retrieve the user's posts</text>
+</description>
+<category>blog</category>
+<services>
+<service name="getPosts">
+<description>get posts from blogspot</description>
+<input>
+<param className="person.userName" name="blogUserName" required="true">
+<description>The userName to search for</description>
+<defaultValue>robin-zju</defaultValue>
+</param>
+</input>
+<output>
+<param className="blog.title" name="title"/>
+<param className="blog.description" name="content"/>
+<param className="person.name" name="author"/>
+<param className="person.email" name="email"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="30">
+<name>feedburner</name>
+<providerUrl>http://www.feedburner.com, http://feeds.feedburner.com, http://feedburner.jp</providerUrl>
+<description>
+<tags>news</tags>
+<text>get variety kinds of feeds</text>
+</description>
+<category>news</category>
+<services>
+<service name="getNews">
+<description>get news from a specific feed </description>
+<input>
+<param className="object.string" name="feedName" required="true">
+<description>The feed name to retrive news</description>
+<defaultValue>mashable</defaultValue>
+</param>
+</input>
+<output>
+<param className="news.title" name="title"/>
+<param className="news.description" name="content"/>
+<param className="news.url" name="link"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="31">
+<name>YahooLocalSearch</name>
+<providerUrl>http://yahoo.com/services/search/local, http://api.search.yahoo.com</providerUrl>
+<description>
+<tags>local</tags>
+<text>Search for local business listings by name, key word, or location</text>
+</description>
+<category>local</category>
+<services>
+<service name="search">
+<description>Get web search results from the yahoo Search engine</description>
+<input>
+<param className="object.string" name="query" required="true">
+<description>The term to search for</description>
+<defaultValue>hotel</defaultValue>
+</param>
+<param className="object.decimal" name="withinMiles" required="false">
+<description>The miles within</description>
+<defaultValue>10</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.title" name="title"/>
+<param className="object.url" name="googleMapUrl"/>
+<param className="geo.latitude" name="latitude"/>
+<param className="geo.longitude" name="longitude"/>
+<param className="adr.street_address" name="streetAddress"/>
+<param className="adr.locality" name="city"/>
+<param className="adr.region" name="region"/>
+<param className="adr.country" name="country"/>
+<param className="object.url" name="ddUrl"/>
+<param className="object.url" name="ddUrlToHere"/>
+<param className="object.url" name="ddUrlFromHere"/>
+<param className="photo.imageUrl" name="mapImage"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="32">
+<name>YahooMap</name>
+<providerUrl>http://maps.yahoo.com/</providerUrl>
+<description>
+<tags>mapping</tags>
+<text>Adds a pushpin to the map based on latitude and longitude</text>
+</description>
+<category>mapping</category>
+<services>
+<service name="addPushpin">
+<description>Adds a pushpin to the map based on latitude and longitude</description>
+<input>
+<param className="geo.latitude" name="latitude" required="true">
+<description>The pushpin's latitude</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="geo.longitude" name="longitude" required="true">
+<description>The pushpin's longitude</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="photo.thumbnailImageUrl" name="url" required="false">
+<description>The URL used for the pushpin's image</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="object.title" name="title" required="false">
+<description>The pushpin's title</description>
+<defaultValue>My Pushpin</defaultValue>
+</param>
+<param className="object.description" name="description" required="false">
+<description>The pushpin's description</description>
+<defaultValue>This is a pushpin on the earth</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service> 
+</services>
+</tile>
+<tile tileId="34">
+<name>Bloglines</name>
+<providerUrl>http://www.bloglines.com</providerUrl>
+<description>
+<tags>news</tags>
+<text>retrieve Bloglines blog search results for a given query, gather unread items of a given bloglines account</text>
+</description>
+<category>news</category>
+<services>
+<service name="search">
+<description>retrieve Bloglines blog search results for a given query, gather unread items of a given bloglines account</description>
+<input>
+<param className="person.userName" name="user" required="true">
+<description>retrieve Bloglines blog search results for a given query</description>
+<defaultValue>myUserName</defaultValue>
+</param>
+<param className="object.string" name="query" required="true">
+<description>search term</description>
+<defaultValue>freedback</defaultValue>
+</param>
+</input>
+<output>
+<param className="news.title" name="title"/>
+<param className="news.url" name="url"/>
+<param className="news.description" name="content"/>
+<param className="news.name" name="author"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="35">
+<name>Craigslist</name>
+<providerUrl>http://sfbay.craigslist.org/, http://craigslist.org/</providerUrl>
+<description>
+<tags>search</tags>
+<text>search for jobs, personal information, service, sales... almost everything..</text>
+</description>
+<category>search</category>
+<services>
+<service name="search">
+<description>search for jobs, personal information, service, sales... almost everything..</description>
+<input>
+<param className="object.string" name="query" required="true">
+<description>search term</description>
+<defaultValue>freedback</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.title" name="title"/>
+<param className="object.url" name="url"/>
+<param className="geo.location" name="location"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="36">
+<name>NYTimes</name>
+<providerUrl>http://www.nytimes.com</providerUrl>
+<description>
+<tags>news</tags>
+<text>New York Times Rss Feed</text>
+</description>
+<category>news</category>
+<services>
+<service name="search">
+<description>search for jobs, personal information, service, sales... almost everything..</description>
+<input>
+<param className="object.string" name="filter" required="false">
+<description>search term</description>
+<defaultValue>business</defaultValue>
+</param>
+</input>
+<output>
+<param className="news.title" name="headline"/>
+<param className="new.description" name="summary"/>
+<param className="news.url" name="link"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="37">
+<name>YahooSearch</name>
+<providerUrl>http://search.yahoo.com, http://api.search.yahoo.com</providerUrl>
+<description>
+<tags>search</tags>
+<text>Yahoo web search</text>
+</description>
+<category>search</category>
+<services>
+<service name="search">
+<description>Get web search results from the Yahoo Search engine</description>
+<input>
+<param className="object.string" name="query" required="true">
+<description>The term to search for</description>
+<defaultValue>robin</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.url" name="rawUrl"/>
+<param className="object.title" name="title"/>
+<param className="object.string" name="content"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="38">
+<name>WordPress</name>
+<providerUrl>http://www.wordpress.com</providerUrl>
+<description>
+<tags>blog</tags>
+<text>retrieve the user's posts</text>
+</description>
+<category>blog</category>
+<services>
+<service name="getPosts">
+<description>get posts from wordpress</description>
+<input>
+<param className="person.userName" name="blogUserName" required="true">
+<description>The userName to search for</description>
+<defaultValue>robin-zju</defaultValue>
+</param>
+</input>
+<output>
+<param className="blog.title" name="title"/>
+<param className="blog.description" name="content"/>
+<param className="person.name" name="author"/>
+<param className="person.email" name="email"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="39">
+<name>Audioscrobbler</name>
+<providerUrl>http://www.Audioscrobbler.com, http://www.last.fm, http://ws.Audioscrobbler.com</providerUrl>
+<description>
+<tags>music</tags>
+<text>retrieve the music information, such as users, artists</text>
+</description>
+<category>music</category>
+<services>
+<service name="getTracksByArtist">
+<description>get artist's track</description>
+<input>
+<param className="person.userName" name="artist" required="true">
+<description>The userName to search for</description>
+<defaultValue>Cher</defaultValue>
+</param>
+</input>
+<output>
+<param className="track.name" name="name"/>
+<param className="track.url" name="playUrl"/>
+<param className="photo.imageURL" name="imageUrl"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+</output>
+</service>
+<service name="getWeeklyTopTracks">
+<description>get weekly top track</description>
+<input>
+</input>
+<output>
+<param className="track.name" name="name"/>
+<param className="track.url" name="playUrl"/>
+<param className="photo.imageURL" name="imageUrl"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+</output>
+</service>
+<service name="getWeeklyTopArtists">
+<description>get weekly top artists</description>
+<input>
+</input>
+<output>
+<param className="person.name" name="name"/>
+<param className="person.url" name="playUrl"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="41">
+<name>CNN</name>
+<providerUrl>http://www.cnn.com, rss.cnn.com</providerUrl>
+<description>
+<tags>news</tags>
+<text>Retrieves breaking news, business news, entertainment from CNN</text>
+</description>
+<category>news</category>
+<services>
+<service name="getTopStories">
+<description>Retrieves top stories from cnn</description>
+<input>
+</input>
+<output>
+<param className="story.title" name="title"/>
+<param className="story.description" name="description"/>
+<param className="story.url" name="url"/>
+</output>
+</service>
+<service name="getTechnologyNews">
+<description>Retrieves technology news from cnn</description>
+<input>
+</input>
+<output>
+<param className="news.title" name="title"/>
+<param className="news.description" name="description"/>
+<param className="news.url" name="url"/>
+</output>
+</service>
+<service name="getEntertainmentNews">
+<description>Retrieves entertainment news from cnn</description>
+<input>
+</input>
+<output>
+<param className="news.title" name="title"/>
+<param className="news.description" name="description"/>
+<param className="news.url" name="url"/>
+</output>
+</service>
+<service name="getVideo">
+<description>Retrieves entertainment news from cnn</description>
+<input>
+</input>
+<output>
+<param className="video.title" name="title"/>
+<param className="video.description" name="description"/>
+<param className="video.url" name="playUrl"/>
+<param className="photo.thumbnailImageUrl" name="thumbnailUrl"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="44">
+<name>CNet</name>
+<providerUrl>http://api.cnet.com</providerUrl>
+<description>
+<tags>shopping</tags>
+<text>get product information from cnet</text>
+</description>
+<category>shopping</category>
+<services>
+<service name="findProducts">
+<description>Get search results from the Windows Live Search engine</description>
+<input>
+<param className="object.string" name="keyWords" required="true">
+<description>The product info to search for</description>
+<defaultValue>Harry Potter</defaultValue>
+</param>
+</input>
+<output>
+<param className="product.title" name="title"/>
+<param className="object.url" name="detailsURL"/>
+<param className="object.string" name="category"/>
+<param className="photo.thumbnailImageUrl" name="stockPhotoURL"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="45">
+<name>Dapper</name>
+<providerUrl>http://www.dapper.net</providerUrl>
+<description>
+<tags>Internet</tags>
+<text>get product information from cnet</text>
+</description>
+<category>Internet</category>
+<services>
+<service name="search">
+<description>provides a programmatic interface for searching Dapps and their properties</description>
+<input>
+<param className="object.string" name="keyWords" required="true">
+<description>The key term info to search for</description>
+<defaultValue>health</defaultValue>
+</param>
+</input>
+<output>
+<param className="news.title" name="title"/>
+<param className="news.url" name="domain"/>
+<param className="object.description" name="description"/>
+<param className="object.url" name="link"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="46">
+<name>Engadget</name>
+<providerUrl>http://www.engadget.com, http://feeds.engadget.com</providerUrl>
+<description>
+<tags>news</tags>
+<text>get news from engadget</text>
+</description>
+<category>news</category>
+<services>
+<service name="getNews">
+<description>get news from engadget</description>
+<input>
+</input>
+<output>
+<param className="news.title" name="title"/>
+<param className="news.description" name="content"/>
+<param className="news.url" name="link"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="47">
+<name>Feed43</name>
+<providerUrl>http://www.feed43.com</providerUrl>
+<description>
+<tags>news</tags>
+<text>get news from feed43</text>
+</description>
+<category>news</category>
+<services>
+<service name="getNews">
+<description>get news from feed43</description>
+<input>
+</input>
+<output>
+<param className="news.title" name="title"/>
+<param className="news.description" name="content"/>
+<param className="news.url" name="link"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="48">
+<name>Feedity</name>
+<providerUrl>http://www.feedity.com</providerUrl>
+<description>
+<tags>news</tags>
+<text>get news from feedity</text>
+</description>
+<category>news</category>
+<services>
+<service name="getNews">
+<description>get news from feedity</description>
+<input>
+</input>
+<output>
+<param className="news.title" name="title"/>
+<param className="news.description" name="content"/>
+<param className="news.url" name="link"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="93">
+<name>YahooGeocoding</name>
+<providerUrl>http://developer.yahoo.com/maps/rest/V1/geocode.html</providerUrl>
+<description>
+<tags>mapping</tags>
+<text>The Geocoding Web Service allows you to find the specific latitude and longitude for an address.  </text>
+</description>
+<category>mapping</category>
+<services>
+<service name="geoCode">
+<description>The Geocoding Web Service allows you to find the specific latitude and longitude for an address.</description>
+<invokeUrl>http://local.yahooapis.com/MapsService/V1/geocode</invokeUrl>
+<input>
+<param className="adr.street-address" name="street" required="true">
+<description> 	Street name</description>
+<defaultValue>street</defaultValue>
+</param>
+<param className="adr.locality" name="city" required="false">
+<description>City name.</description>
+<defaultValue>newYork</defaultValue>
+</param>
+<param className="adr.location" name="location" required="false">
+<description>*  city, state    * city, state, zip    * zip    * street, city, state    * street, city, state, zip    * street, zip</description>
+<defaultValue>freeText</defaultValue>
+</param>
+</input>
+<output>
+<param className="geo.latitude" name="Latitude"/>
+<param className="geo.longitude" name="Longitude"/>
+<param className="adr.location" name="Address"/>
+<param className="adr.locality" name="City"/>
+<param className="adr.region" name="State"/>
+<param className="adr.zipCode" name="Zip"/>
+<param className="adr.country" name="Country"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="97">
+<name>GoogleHomePage</name>
+<providerUrl>http://code.google.com/apis/gadgets</providerUrl>
+<description>
+<tags>widgets</tags>
+<text>The Google Gadgets API provides a way to put third-party content onto the Google homepage.</text>
+</description>
+<category>widgets</category>
+<services>
+<service name="display">
+<description>a display tool</description>
+<invokeUrl>http://code.google.com/apis/gadgets</invokeUrl>
+<input>
+<param className="object.anyType" name="inputValue" required="true">
+<description>this is input param for google homepage</description>
+<defaultValue>none</defaultValue>
+</param>
+</input>
+<output/>
+</service>
+</services>
+</tile>
+<tile tileId="99">
+<name>GeoNames</name>
+<providerUrl>http://www.geonames.org/export/</providerUrl>
+<description>
+<tags>mapping</tags>
+<text>Geographic name and postal code lookup </text>
+</description>
+<category>mapping</category>
+<services>
+<service name="search">
+<description>returns the names found for the searchterm </description>
+<invokeUrl>http://ws.geonames.org/search</invokeUrl>
+<input>
+<param className="adr.location" name="q" required="true">
+<description>search term</description>
+<defaultValue>London</defaultValue>
+</param>
+</input>
+<output>
+<param className="adr.location" name="name"/>
+<param className="geo.latitude" name="lat"/>
+<param className="geo.longitude" name="lng"/>
+<param className="adr.country" name="countryName"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="100">
+<name>AmazonS3</name>
+<providerUrl>http://www.amazon.com/gp/browse.html</providerUrl>
+<description>
+<tags>storage</tags>
+<text>the Simple Storage Service is used to store objects using the Amazon online storage infrastructure</text>
+</description>
+<category>storage</category>
+<services>
+<service name="write">
+<description>store information</description>
+<invokeUrl>http://aws.amazon.com/s3/</invokeUrl>
+<input>
+<param className="object.anyType" name="data" required="true">
+<description>object</description>
+<defaultValue>dataIns</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="101">
+<name>ShoppingCom</name>
+<providerUrl>https://partners.shopping.com/app</providerUrl>
+<description>
+<tags>shopping</tags>
+<text>Online retail shopping.</text>
+</description>
+<category>shopping</category>
+<services>
+<service name="findProducts">
+<description>find related product information</description>
+<invokeUrl>https://partners.shopping.com/app</invokeUrl>
+<input>
+<param className="object.string" name="keyWords" required="true">
+<description>The product info to search for</description>
+<defaultValue>Harry Potter</defaultValue>
+</param>
+</input>
+<output>
+<param className="product.title" name="title"/>
+<param className="object.url" name="detailsURL"/>
+<param className="object.string" name="category"/>
+<param className="photo.thumbnailImageUrl" name="stockPhotoURL"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="102">
+<name>GoogleBase</name>
+<providerUrl>http://code.google.com/apis/base/</providerUrl>
+<description>
+<tags>database structured jobs vehicles recipes reviews</tags>
+<text>The Google Base API makes it possible to get items in and out of Base, an index of all kinds of structured and semi-structured data including jobs, vehicles, recipes, events, products, reviews, and others.</text>
+</description>
+<category>shopping</category>
+<services>
+<service name="searchDataFeed">
+<description>find related data feed information</description>
+<invokeUrl>http://www.google.com/base/feeds/items/item_id/media/ </invokeUrl>
+<input>
+<param className="object.string" name="q" required="true">
+<description>key words to search for</description>
+<defaultValue>Harry Potter</defaultValue>
+</param>
+</input>
+<output>
+<param className="product.title" name="attrib_name"/>
+<param className="object.url" name="attrib_type"/>
+<param className="object.string" name="category"/>
+<param className="photo.thumbnailImageUrl" name="stockPhotoURL"/>
+</output>
+</service>
+<service name="searchDataFeed">
+<description>find related data feed information</description>
+<invokeUrl>http://www.google.com/base/feeds/items/item_id/media/ </invokeUrl>
+<input>
+<param className="object.string" name="q" required="true">
+<description>key words to search for</description>
+<defaultValue>Harry Potter</defaultValue>
+</param>
+</input>
+<output>
+<param className="object.string" name="attrib_name"/>
+<param className="object.string" name="attrib_type"/>
+<param className="object.string" name="attrib_value"/>
+</output>
+</service>
+<service name="searchMediaFeed">
+<description>find related media feed information</description>
+<invokeUrl>http://www.google.com/base/feeds/items/item_id/media/</invokeUrl>
+<input>
+<param className="object.string" name="q" required="true">
+<description>key words to search for</description>
+<defaultValue>Harry Potter</defaultValue>
+</param>
+</input>
+<output>
+<param className="video.title" name="content"/>
+<param className="video.description" name="description"/>
+<param className="video.url" name="link"/>
+<param className="photo.thumbnailImageUrl" name="thumbnail"/>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="103">
+<name>GoogleChart</name>
+<providerUrl>http://code.google.com/apis/chart/</providerUrl>
+<description>
+<tags>charts visualization statistics</tags>
+<text>Lets you easily create a chart from some data and embed it in a web page.</text>
+</description>
+<category>other</category>
+<services>
+<service name="getChart">
+<description>store information</description>
+<invokeUrl>http://chart.apis.google.com/chart</invokeUrl>
+<input>
+<param className="object.integer" name="chs" required="true">
+<description>chart's size</description>
+<defaultValue>250</defaultValue>
+</param>
+<param className="object.string" name="chd" required="true">
+<description>chart's data</description>
+<defaultValue>250</defaultValue>
+</param>
+<param className="object.string" name="cht" required="true">
+<description>chart's type</description>
+<defaultValue>p3</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+</services>
+</tile>
+<tile tileId="104">
+<name>GoogleCalendar</name>
+<providerUrl>http://code.google.com/apis/calendar/</providerUrl>
+<description>
+<tags>events calendar</tags>
+<text>Google Calendar allows client applications to view and update calendar events in the form of Google data API, GData, feeds.</text>
+</description>
+<category>calendar</category>
+<services>
+<service name="retriveEvents">
+<description>Retrieving events without query parameters</description>
+<invokeUrl>http://www.google.com/calendar/feeds/userID/private-magicCookie/full</invokeUrl>
+<input>
+</input>
+<output>
+<param className="event.title" name="title"/>
+<param className="event.date" name="publishDate"/>
+<param className="event.url" name="link"/>
+<param className="person.name" name="author"/>
+<param className="adr.location" name="location"/>
+</output>
+</service>
+<service name="retriveEventsByDate">
+<description>Retrieving events by date</description>
+<invokeUrl>http://www.google.com/calendar/feeds/default/private/full</invokeUrl>
+<input>
+<param className="object.date" name="start-min" required="true">
+<description>start date</description>
+<defaultValue>2006-03-16T00:00:00</defaultValue>
+</param>
+<param className="object.date" name="start-max" required="true">
+<description>end date</description>
+<defaultValue>2006-03-24T23:59:59</defaultValue>
+</param>
+</input>
+<output>
+<param className="event.title" name="title"/>
+<param className="event.date" name="publishDate"/>
+<param className="event.url" name="link"/>
+<param className="person.name" name="author"/>
+<param className="adr.location" name="location"/>
+</output>
+</service>
+<service name="searchEvents">
+<description>Retrieving events with query parameters</description>
+<invokeUrl>http://www.google.com/calendar/feeds/default/private/full</invokeUrl>
+<input>
+<param className="object.string" name="q" required="true">
+<description>search term</description>
+<defaultValue>Tennis</defaultValue>
+</param>
+</input>
+<output>
+<param className="event.title" name="title"/>
+<param className="event.date" name="publishDate"/>
+<param className="event.url" name="link"/>
+<param className="person.name" name="author"/>
+<param className="adr.location" name="location"/>
+</output>
+</service>
+</services>
+</tile>
+</catalog>

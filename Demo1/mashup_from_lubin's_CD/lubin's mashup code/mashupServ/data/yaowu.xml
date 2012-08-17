@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+<tile tileId="1">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>大黄</name>
+<description>蓼科植物掌叶大黄、唐古特大黄或药用大黄的干燥根及根茎</description>
+<type>events</type>
+<services>
+<service name="大黄">
+<url>http://upcoming.org</url>
+<description>大黄</description>
+<input>
+<param className="temp.search_text">search_text</param>
+</input>
+<output>
+<param className="event.summary">name</param>
+<param className="photo.owner">id</param>
+<param className="bb.bbb">id2</param>
+</output>
+</service> 
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>
+<tile tileId="2">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>便秘</name>
+<description>排便次数明显减少，每2～3天或更长时间一次，无规律，粪质干硬，常伴有排便困难感的病理现象</description>
+<type>photos</type>
+<services>
+<service name="便秘">
+<url>http://www.flickr.com/services/api/</url>
+<description>便秘</description>
+<input>
+<param className="photo.owner">id</param>
+</input>
+<output>
+<param className="geo.longitude">longitude</param>
+</output>
+</service>
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>
+<tile tileId="3">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>咽喉肿痛</name>
+<description>咽喉肿痛</description>
+<type>photos</type>
+<services>
+<service name="咽喉肿痛">
+<url>http://www.flickr.com/services/api/</url>
+<description>咽喉肿痛</description>
+<input>
+<param className="event.summary">search_text</param>
+</input>
+<output>
+<param className="a.aaaa">id</param>
+</output>
+</service>
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>
+<tile tileId="4">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>丹皮</name>
+<description>为毛茛科多年生落叶小灌木植物牡丹的根皮</description>
+<type>video</type>
+<services>
+<service name="丹皮">
+<url>http://www.flickr.com/services/api/</url>
+<description>丹皮</description>
+<input>
+<param className="event.summary">search_text</param>
+</input>
+<output>
+<param className="geo.latitude">latitude</param>
+</output>
+</service>
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>
+<tile tileId="5">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>黄芩</name>
+<description>唇形科植物黄芩的干燥根</description>
+<type>shopping</type>
+<services>
+<service name="黄芩">
+<url>http://www.flickr.com/services/api/</url>
+<description>黄芩</description>
+<input>
+<param className="event.summary">name</param>
+</input>
+<output>
+<param className="photo.owner">id</param>
+<param className="bb.bbb">id</param>
+</output>
+</service>
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>
+<tile tileId="6">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>苦</name>
+<description>五味之一 《素问·阴阳应象大论》 苦伤气，咸胜苦。</description>
+<type>community</type>
+<services>
+<service name="苦">
+<url>http://www.flickr.com/services/api/</url>
+<description>苦</description>
+<input>
+<param className="bb.bbb">id</param>
+</input>
+<output>
+<param className="cccccc.c">id</param>
+</output>
+</service>
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>
+<tile tileId="7">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>寒</name>
+<description>寒性 《素问·至真要大论》治寒以热，治热以寒</description>
+<type>community</type>
+<services>
+<service name="寒">
+<url>http://www.flickr.com/services/api/</url>
+<description>寒</description>
+<input>
+<param className="bb.bbb">id</param>
+</input>
+<output>
+<param className="cccccc.c">id</param>
+</output>
+</service>
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>
+</catalog>

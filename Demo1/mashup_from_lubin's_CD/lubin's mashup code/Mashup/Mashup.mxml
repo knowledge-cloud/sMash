@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="*"
+    layout="absolute"
+    preinitialize="loadStyle()"
+    creationComplete="startService()"
+    pageTitle="Social Enabled Semantic Data Mashup" visible="true" horizontalAlign="center">
+
+    <mx:Script>
+    <![CDATA[
+    	import mx.collections.Sort;
+    	import mx.collections.SortField;
+    	import dart.mashup.ontology.Attribute;
+    	import dart.mashup.mashup.ModeListEvent;
+    	import dart.mashup.mashupApp.MashupApp;
+    	import dart.mashup.tile.Tile;
+    	import dart.mashup.ontology.Ontology;
+        import mx.collections.IViewCursor;
+        import mx.collections.ArrayCollection;
+        import mx.rpc.events.ResultEvent;
+        import mx.events.StyleEvent;
+        import mx.styles.StyleManager;
+        import flash.ui.ContextMenu;
+        import flash.ui.ContextMenuItem;
+        import flash.events.ContextMenuEvent;
+        import mx.managers.CursorManager;
+
+        [Bindable]
+        private var catalog:ArrayCollection;
+        [Bindable]
+        private var tileCatalog:ArrayCollection;
+        [Bindable]
+        private var mashupAppCatalog:ArrayCollection;
+        [Bindable]
+        private var rootClass:Ontology;
+        [Bindable]
+        private var classArr:Array ;
+
+        private var currentTheme:String = "beige";
+
+        private function toggleTheme():void
+        {
+            if (currentTheme == "beige")
+            {
+                currentTheme = "blue";
+            }
+            else
+            {
+                currentTheme = "beige";
+            }
+
+            loadStyle();
+        }
+
+        private function startService():void
+        {
+        	tileService.send(); 
+            classService.send();
+            mashupAppService.send();
+        //    initListener();
+        }
+		
+
+			
+        private function loadStyle():void
+        {
+            var eventDispatcher:IEventDispatcher =
+                StyleManager.loadStyleDeclarations(currentTheme + ".swf");
+            eventDispatcher.addEventListener(StyleEvent.COMPLETE, completeHandler);
+        }
+
+        private function completeHandler(event:StyleEvent):void
+        {
+            image.source = acb.getStyle("storeLogo");
+            //homeView.updateMapImage();
+            super.initialized = true;
+        }
+
+        private function classServiceResultHandler(event:ResultEvent):void
+        {
+            //HTTPService returns an ArrayCollection for nested arrays
+            var classes:ArrayCollection = event.result.catalog.ontology;
+            var temp:ArrayCollection = new ArrayCollection();
+            var cursor:IViewCursor = classes.createCursor();
+            while (!cursor.afterLast)
+            {
+                var ontology:Ontology = new Ontology();
+                ontology.fill(cursor.current);
+                temp.addItem(ontology);
+                cursor.moveNext();
+            }
+            catalog = temp;
+            var sortField:SortField = new SortField();
+   			var s:Sort = new Sort();
+   			s.fields = [sortField];
+            catalog.sort = s;
+            catalog.refresh();
+            getRootClass();
+            getClassArr();
+        }
+        
+        private function getRootClass():void
+        {
+        	for(var i:int = 0; i < catalog.length; i++){
+        		var o:Ontology = catalog.getItemAt(i) as Ontology;
+        		if(o.name == "object"){
+        			rootClass = o;
+        			break;
+        		}
+        	}
+        }
+        private function tileServiceResultHandler(event:ResultEvent):void
+        {
+            //HTTPService returns an ArrayCollection for nested arrays
+            var tiles:ArrayCollection = event.result.catalog.tile;
+            var temp:ArrayCollection = new ArrayCollection();
+            var cursor:IViewCursor = tiles.createCursor();
+            while (!cursor.afterLast)
+            {
+                var tile:Tile = new Tile();
+                tile.fill(cursor.current);
+                temp.addItem(tile);
+                cursor.moveNext();
+            }
+            tileCatalog = temp;
+        }
+        
+        private function mashupAppServiceResultHandler(event:ResultEvent):void
+        {
+             //HTTPService returns an ArrayCollection for nested arrays
+            var mashupApps:ArrayCollection = event.result.mashupApps.mashupApp;
+            var temp:ArrayCollection = new ArrayCollection();
+            var cursor:IViewCursor = mashupApps.createCursor();
+            while (!cursor.afterLast)
+            {
+                var mashupApp:MashupApp = new MashupApp();
+                mashupApp.fill(cursor.current);
+                temp.addItem(mashupApp);
+                cursor.moveNext();
+            }
+            mashupAppCatalog = temp;       	
+        } 
+        
+        private function addMashupApp(mashupApp:MashupApp):void
+        {
+        //	mashupAppViewer.addToCatalogPanel(mashupApp);
+        }       
+		
+		private function changeParas(mode:String):void
+		{
+			if(mode == "fullscreen"){
+				vBox.percentHeight = vBox.percentWidth = 100;
+		//		vBox.removeChild(acb);
+			}
+			else{
+		//		vBox.addChildAt(acb, 0);
+				//vBox.addChild(acb);
+				vBox.width = 990;
+				vBox.height = 600;
+			}
+		}  
+       public function  getClassArr():void
+        {
+        	classArr = new Array();
+        	var rootAttrArr:ArrayCollection = rootClass.attributes;
+        
+        	for(var i:int = 0; i < catalog.length; i++){
+        		var o:Ontology = catalog.getItemAt(i) as Ontology;
+        		var attrArr:ArrayCollection = o.attributes;
+        		var tmp:Array = new Array();
+        		if(o.name != "object"){
+	        		for(var k:int = 0; k < rootAttrArr.length; k++){
+	        			var ta:Attribute = rootAttrArr.getItemAt(k) as Attribute;
+	        			tmp.push(ta.name);
+	        		}
+        		}
+        		for(var j:int = 0; j < attrArr.length; j++){
+        			var tmpAttr:Attribute = attrArr.getItemAt(j) as Attribute;
+        			tmp.push(tmpAttr.name);
+        		}
+        		tmp.sort();
+         		classArr.push({className:o.name, attrArray:tmp});
+        	}
+        //	return classArr;
+        } 	
+        
+        public function addTileToCatalog(t:Tile):void
+        {
+        	tileCatalog.addItem(t);
+        }	
+        override public function set initialized(value:Boolean):void
+        {
+            // Hold off until the Runtime CSS SWF is done loading.
+            //    <--mx:HTTPService id="tileService" url="http://10.214.33.218:8080/mashup/data/tile.xml"
+        //result="tileServiceResultHandler(event)"/-->
+        } 
+    ]]>
+    </mx:Script> 
+
+    <mx:Style source="css/main.css"/> 
+    
+    <!--mx:HTTPService id="classService" url="http://www.dart.zju.edu.cn/mashup/data/ontology.xml"
+        result="classServiceResultHandler(event)" /> 
+        
+	<mx:HTTPService id="tileService" url="http://www.dart.zju.edu.cn/mashup/data/tileBackup-test.xml"
+       result="tileServiceResultHandler(event)" />
+
+    <mx:HTTPService id="mashupAppService" url="http://www.dart.zju.edu.cn/mashup/data/mashupApp.xml"
+        result="mashupAppServiceResultHandler(event)" /-->
+        
+	<!--mx:HTTPService id="tileService" url="http://58.206.196.207:8080/mashup/data/tileBackup.xml"
+        result="tileServiceResultHandler(event)" /-->
+
+	<!--mx:HTTPService id="mashupAppService" url="http://58.206.196.207:8080/mashup/data/mashupApp.xml"
+        result="mashupAppServiceResultHandler(event)" /-->
+        
+    <mx:HTTPService id="classService" url="http://10.214.33.121:8080/mashup/data/ontology.xml"
+        result="classServiceResultHandler(event)" />
+          
+	<!--mx:HTTPService id="tileService" url="http://localhost:8080/mashup/data/tileBackup-test.xml"
+        result="tileServiceResultHandler(event)" /-->
+	<!--mx:HTTPService id="mashupAppService" url="http://localhost:8080/mashup/data/mashupApp.xml"
+        result="mashupAppServiceResultHandler(event)" /--> 
+	<mx:HTTPService id="tileService" url="http://10.214.33.121:8080/mashup/data/LFandSNS.xml"
+        result="tileServiceResultHandler(event)" />        
+
+	<mx:HTTPService id="mashupAppService" url="http://10.214.33.121:8080/mashup/data/mashupAppLF.xml"
+        result="mashupAppServiceResultHandler(event)" /> 
+                    
+    <mx:VBox id="vBox" width="990" height="600" paddingLeft="0" paddingRight="0" horizontalCenter="0" >
+
+        <mx:ApplicationControlBar width="100%" styleName="storeControlBar" id="acb">
+            <mx:Image id="image" 
+                      click="toggleTheme()"
+                      toolTip="Change Theme"/>
+            <mx:ToggleButtonBar  
+                height="100%"
+                dataProvider="{mashupViews}"
+                styleName="storeButtonBar"/>
+        </mx:ApplicationControlBar>
+
+        <!-- using a creationPolicy of "auto" or "queued" has a bug at time of writing
+             that prevents initial states from applying styles correctly.
+             plus the instantiation of the cart view can cause a performance
+             hiccup which we might prefer at startup -->
+        <mx:ViewStack id="mashupViews" width="100%" height="100%" creationPolicy="all">
+            <MashupView id="mashupViewer" label="Mashup Builder" showEffect="WipeDown" hideEffect="WipeUp" tileCatalog="{tileCatalog}" mashupApp="{mashupAppCatalog}"
+            	modeChange="changeParas(event.mode)" addMashupApp="addMashupApp(event.mashupApp)" rootClass="{rootClass}"/>        
+            <TileView id="tileViewer" label="API Schema Editor" showEffect="WipeDown" hideEffect="WipeUp"  
+            	classArr="{classArr}" tileCatalog="{tileCatalog}" addTile="addTileToCatalog(event.tile)"/>        
+        	<ClassView id="classV" label="Data Type Editor" showEffect="WipeDown" hideEffect="WipeUp" catalog="{catalog}" />
+            <!--MashupAppView id="mashupAppViewer" label="Hot Mashupapps" showEffect="WipeDown" hideEffect="WipeUp" mashupAppCatalog="{mashupAppCatalog}"/-->
+        </mx:ViewStack>    
+         
+    </mx:VBox>        
+
+</mx:Application>    

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+<tile tileId="1">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>upcoming</name>
+<description>Find related public events in Upcoming for a given search text</description>
+<type>events</type>
+<services>
+<service name="GetEvents">
+<url>http://upcoming.org</url>
+<description>get events for given keywords</description>
+<input>
+<param className="temp.search_text">search_text</param>
+</input>
+<output>
+<param className="event.summary">name</param>
+<param className="event.description">description</param>
+<param className="event.dtstart">start_date, start_time</param>
+<param className="event.dtend">end_date, end_time</param>
+<param className="geo.latitude">latitude</param>
+<param className="geo.longitude">longitude</param>
+<param className="adr.street-address">venue_address</param>
+<param className="adr.locality">venue_city</param>
+<param className="adr.region">venue_state_name</param>
+<param className="adr.country-name">venue_country_name</param>
+<param className="adr.postal-code">venue_zip</param>
+</output>
+</service> 
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>
+<tile tileId="2">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>flickr</name>
+<description>Get photos you wanted</description>
+<type>photos</type>
+<services>
+<service name="GetPhotos">
+<url>http://www.flickr.com/services/api/</url>
+<description>get photos for given keywords</description>
+<input>
+<param className="temp.search_text">search_text</param>
+</input>
+<output>
+<param className="photo.id">id</param>
+<param className="photo.owner">id</param>
+<param className="photo.name">title</param>
+<param className="photo.dateTaken">dateTaken</param>
+<param className="photo.thumbnailUrl">thumbnailUrl</param>
+<param className="photo.linkUrl">linkUrl</param>
+<param className="photo.originalUrl">originalUrl</param>
+<param className="geo.latitude">latitude</param>
+<param className="geo.longitude">longitude</param>
+</output>
+</service>
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>
+<tile tileId="3">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>test</name>
+<description>Get photos you wanted</description>
+<type>photos</type>
+<services>
+<service name="testMethod1">
+<url>http://www.flickr.com/services/api/</url>
+<description>get photos for given keywords</description>
+<input>
+<param className="event.summary">search_text</param>
+<param className="photo.id">id</param>
+</input>
+<output>
+<param className="photo.id">id</param>
+<param className="photo.owner">id</param>
+<param className="photo.name">title</param>
+<param className="photo.dateTaken">dateTaken</param>
+<param className="photo.thumbnailUrl">thumbnailUrl</param>
+<param className="photo.linkUrl">linkUrl</param>
+<param className="photo.originalUrl">originalUrl</param>
+<param className="geo.latitude">latitude</param>
+<param className="geo.longitude">longitude</param> 
+</output>
+</service>
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>
+<tile tileId="4">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>test2</name>
+<description>Get photos you wanted</description>
+<type>video</type>
+<services>
+<service name="testMethod2">
+<url>http://www.flickr.com/services/api/</url>
+<description>get photos for given keywords</description>
+<input>
+<param className="event.summary">search_text</param>
+<param className="photo.owner">id</param>
+</input>
+<output>
+<param className="photo.id">id</param>
+<param className="photo.name">title</param>
+<param className="photo.dateTaken">dateTaken</param>
+<param className="photo.thumbnailUrl">thumbnailUrl</param>
+<param className="photo.linkUrl">linkUrl</param>
+<param className="photo.originalUrl">originalUrl</param>
+<param className="geo.latitude">latitude</param>
+<param className="geo.longitude">longitude</param> 
+</output>
+</service>
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>
+<tile tileId="5">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>test3</name>
+<description>Get photos you wanted</description>
+<type>shopping</type>
+<services>
+<service name="testMethod3">
+<url>http://www.flickr.com/services/api/</url>
+<description>get photos for given keywords</description>
+<input>
+<param className="event.summary">search_text</param>
+<param className="photo.owner">id</param>
+<param className="photo.name">title</param>
+</input>
+<output>
+<param className="photo.id">id</param>
+<param className="photo.owner">id</param>
+</output>
+</service>
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>
+<tile tileId="6">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>test4</name>
+<description>Get photos you wanted</description>
+<type>community</type>
+<services>
+<service name="testMethod4">
+<url>http://www.flickr.com/services/api/</url>
+<description>get photos for given keywords</description>
+<input>
+<param className="event.summary">search_text</param>
+<param className="photo.id">id</param>
+<param className="photo.dateTaken">dateTaken</param>
+</input>
+<output>
+<param className="photo.id">id</param>
+<param className="photo.owner">id</param>
+<param className="photo.name">title</param>
+</output>
+</service>
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>
+</catalog>

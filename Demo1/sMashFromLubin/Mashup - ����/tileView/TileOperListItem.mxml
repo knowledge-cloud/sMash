@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" 
+    styleName="listItem"
+    height="{TileOperListItem.HEIGHT}"
+    automationName="{s.name}">
+
+    <mx:Metadata>
+       [Event(name="removeOper", type="dart.mashup.tile.TileOperListEvent")]
+    </mx:Metadata>
+    
+    <mx:Script>
+    <![CDATA[
+    
+    	import dart.mashup.tile.Service;
+    	import dart.mashup.tile.TileOperListEvent;
+        
+        public static const HEIGHT:int = 25;
+        
+        [Bindable]
+        public var s:Service;
+        
+        private function removeItem():void
+        {
+            var event:TileOperListEvent = new TileOperListEvent(TileOperListEvent.REMOVE_OPER);
+            event.service = s;
+    		dispatchEvent(event);
+        }
+        
+        private function editItem():void
+        {
+        	var event:TileOperListEvent = new TileOperListEvent(TileOperListEvent.EDIT_OPER);
+        	event.service = s;
+        	dispatchEvent(event);
+        }
+        
+    ]]> 
+    </mx:Script>
+    
+    <mx:Button id="editButton"
+        width="14" height="14" 
+        icon="@Embed('/assets/icon_tiles.png')"
+        toolTip="edit this operation"
+        click="editItem()"/>   
+         
+    <mx:Button id="removeButton"
+        width="14" height="14" 
+        icon="@Embed('/assets/trashcan.png')"
+        toolTip="Remove from operation list"
+        click="removeItem()"/>
+
+    <mx:Label id="operName" maxWidth="150" text="{s.name}"/>
+    
+    <mx:Label id="operDesc" width="30%"  text="{s.desc}"/>
+    <mx:Label id="operUrl" width="40%"  text="{s.invokeUrl}"/>
+
+    
+</mx:HBox>

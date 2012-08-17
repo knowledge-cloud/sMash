@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+    paddingTop="10"  width="300" height="24">
+    <mx:Script>
+    	<![CDATA[
+    		import dart.mashup.mashup.TileInputEvent;
+    	]]>
+    </mx:Script>
+    
+    <mx:Metadata>
+    [Event(name="enterComplete", type="dart.mashup.mashup.TileInputEvent")]
+    [Event(name="clearView", type="dart.mashup.mashup.TileInputEvent")]
+    </mx:Metadata>
+        
+    <mx:Script>
+        <![CDATA[
+        	import mx.events.ItemClickEvent;
+        	import mx.collections.ArrayCollection;
+        
+        	import dart.mashup.mashup.TileInputEvent;
+        	import mx.controls.Alert;
+        	
+           [Bindable]
+           public var gripTip:String; 
+           
+           [Bindable]
+           private var rList:Array = new Array("", "Flickr", "LiveNews", "Facebook", "VirtualEarth", "Upcoming", "Digg", "Twitter", "Youtube", "Lastfm", 
+           "GoogleMap", "delicious", "GoogleWebSearch");
+           [Bindable]
+           private var blArr:ArrayCollection = new ArrayCollection(new Array("Search", "Clear"));
+           public var tNameArr:ArrayCollection;
+           
+           public function dispatch(label:String):void
+           {
+	         	if(label == "Search" || label == "Add"){	
+	         		blArr.setItemAt("Add", 0);
+		            var tName:String = ti.text;
+		            var tie:TileInputEvent = new TileInputEvent(TileInputEvent.ENTERCOMPLETE);
+		            tie.tileName = tName;
+		            dispatchEvent(tie);
+	            }
+	            else{
+	            //	blArr[0] = "Search"; 
+	            	blArr.setItemAt("Search", 0);
+	            	var tie2:TileInputEvent = new TileInputEvent(TileInputEvent.CLEARVIEW);
+	            	dispatchEvent(tie2);
+	            }
+           }
+		   public function setTextInput(cc:ComboBox):void
+		   {
+		   		var data:String = cc.selectedItem as String;
+		   		ti.text = data;
+		   }
+		   public function dChange():void
+		   {
+		   		var str:String = ti.text;
+		   		if(str == null || str == "")
+		   			return;
+		   		cbSuggest.dataProvider = tNameArr;
+		   		cbSuggest.selectedIndex = -1;
+		   		tNameArr.filterFunction = Filter;
+		   		tNameArr.refresh();
+		   		cbSuggest.open();	   		
+		   	//	cbSuggest.setFocus();
+		   }
+		   private function Filter(item:Object):Boolean
+		   {
+		   		var str:String = ti.text;
+		   		
+		   		var tmp:String = item.toString().substr(0, str.length);
+		   		return tmp.toLowerCase() == str.toLowerCase() ? true : false;
+		   }
+        ]]>
+    </mx:Script>
+    <mx:ComboBox id="cbSuggest" x="0" y="0" width="156" height="25" dataProvider="{rList}" change="setTextInput(cbSuggest)" rowCount="13"></mx:ComboBox>
+    <mx:ComboBox id="cb" x="0" y="0" width="156" height="25" dataProvider="{rList}" change="setTextInput(cb)" rowCount="13"></mx:ComboBox>
+    <mx:TextInput id="ti" x="0" y="0" width="137" height="24" enter="dispatch('Search')" change="dChange()"/>
+    <mx:ButtonBar id="bBar" x="164" y="0" width="120" height="24" styleName="glass" itemClick="dispatch(event.label)" dataProvider="{blArr}" >       	
+	</mx:ButtonBar>
+
+    
+</mx:Canvas>

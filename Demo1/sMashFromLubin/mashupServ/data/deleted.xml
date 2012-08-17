@@ -1,0 +1,66 @@
+<tile tileId="5">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>PhotoViewer</name>
+<url>http://photoViewer.com/</url>
+<description>show photos</description>
+<type>mapping</type>
+<services>
+<service name="addPhoto">
+<description>show photos</description>
+<input>
+<param className="photo.title" name="name" required="false">
+<description>photo's title</description>
+<defaultValue>my photo</defaultValue>
+</param>
+<param className="photo.description" name="desc" required="false">
+<description>photo's description</description>
+<defaultValue>my photo's description</defaultValue>
+</param>
+<param className="photo.imageUrl" name="source" required="true">
+<description>photo's imageUrl</description>
+<defaultValue>my photo's imageUrl</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>
+<tile tileId="6">
+<author>robin</author>
+<email>robinlu1984@gmail.com</email>
+<updated>2008-10-20</updated>
+<name>InfoDisplay</name>
+<url>http://photoViewer.com/</url>
+<description>show photos</description>
+<type>mapping</type>
+<services>
+<service name="showInfo">
+<description>show photos</description>
+<input>
+<param className="object.title" name="name" required="true">
+<description>story's title</description>
+<defaultValue>title</defaultValue>
+</param>
+<param className="object.url" name="url" required="false">
+<description>Info's Url</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="photo.imageUrl" name="imageUrl" required="false">
+<description>Info's image url</description>
+<defaultValue>0</defaultValue>
+</param>
+<param className="object.description" name="desc" required="false">
+<description>story's description</description>
+<defaultValue>my story's description</defaultValue>
+</param>
+</input>
+<output>
+</output>
+</service>
+</services>
+<image>assets/classIcon/class.png</image>
+</tile>

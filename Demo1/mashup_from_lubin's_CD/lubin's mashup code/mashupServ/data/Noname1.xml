@@ -1,0 +1,27 @@
+<tile tileId="1">
+<name>VirtualEarth</name>
+<providerUrl>http://maps.live.com/</providerUrl>
+<category>mapping</category>
+<description>
+<tags>mapping</tags>
+<text>Adds a pushpin to the map based on latitude and longitude</text>
+</description>
+<services>
+<service name="addPushpin">
+<description>Adds a pushpin to the map based on latitude and longitude</description>
+<input>
+<param className="geo.latitude" name="latitude" required="true">
+<description>The pushpin's latitude</description>
+<defaultValue>0</defaultValue>
+</param>
+... ...
+</input>
+<output>
+<param className="story.title" name="title"></param>
+...
+</output>
+</service>
+<service>...</service>
+...
+</services>
+</tile>

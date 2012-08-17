@@ -1,0 +1,1803 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+    width="100%" height="100%" xmlns:mashupView="mashupView.*" creationComplete="initListener()" xmlns:local="*">
+    
+    <mx:Metadata>
+    	[Event(name="addMashupApp", type="dart.mashup.mashupApp.MashupAppListEvent")]
+    	[Event(name="modeChange", type="dart.mashup.mashup.ModeListEvent")]
+    </mx:Metadata>
+    
+   <mx:Script>
+        <![CDATA[
+        	import dart.mashup.mashup.MPathRecommendEvent;
+        	import dart.mashup.mashup.RootToolBarEvent;
+        	import mx.effects.Sequence;
+        	import dart.mashup.mashup.MPCEvent;
+        	import dart.mashup.mashup.MPathRecommendor;
+        	import dart.mashup.mashup.MyCursorEvent;
+        	import mx.core.UIComponent;
+        	import mx.effects.Zoom;
+        	import dart.mashup.mashup.ModeListEvent;
+        	import dart.mashup.ontology.Ontology;
+        	import dart.mashup.mashupApp.MashupApp;
+        	import mx.events.FlexEvent;
+        	import mx.controls.Text;
+        	import mx.rpc.events.ResultEvent;
+        	import mx.rpc.events.FaultEvent;
+        	import mashupView.MashupSaveWindow; 
+        	import mx.rpc.http.HTTPService;
+        	import dart.mashup.tile.Param; 
+        	import mx.controls.ButtonBar;
+        	import dart.mashup.mashup.MashupFlowCursor;
+        	import mx.events.ItemClickEvent;
+        	import dart.mashup.mashup.TilePacketRelationItem;
+        	import dart.mashup.mashup.MashupSelectedListEvent;
+        	import mx.messaging.config.ServerConfig;
+        	import dart.mashup.mashup.MashupPathItem;
+        	import dart.mashup.mashup.MashupPathBuilder;
+        	import dart.mashup.tile.Service; 
+        	import dart.mashup.mashup.ServiceDic;
+        	import dart.mashup.mashup.RelationItem;
+        	import mx.effects.Fade;
+        	import mx.events.EffectEvent;
+        	import mx.effects.Move;
+        	import mx.events.DragEvent;
+        	import dart.mashup.mashup.TilePacketRelationLine;
+        	import mx.events.IndexChangedEvent;
+        	import dart.mashup.mashup.TilePacket;
+        	import dart.mashup.mashup.Relation;
+        	import dart.mashup.mashup.RelationBuilder;
+        	import dart.mashup.tile.Tile;
+        	import dart.mashup.graphics.Line;
+	        import mx.controls.Alert;
+	        import mx.collections.ArrayCollection;
+	        import mx.core.DragSource;
+	        import mx.core.IUIComponent;
+	        import mx.managers.DragManager;
+	        import dart.mashup.graphics.Circle;
+	        import mx.managers.PopUpManager;
+	        import mx.managers.CursorManager;
+            import mx.containers.TitleWindow;
+            import dart.mashup.mashupApp.MashupAppListEvent;
+            import mx.effects.easing.Bounce;
+            
+                
+        private var tilePacketArr:ArrayCollection = new ArrayCollection();
+        private var tpRelationLineArr:ArrayCollection = new ArrayCollection();
+        private var _tileCatalog:ArrayCollection;
+        private var mpBuilder:MashupPathBuilder;
+        private var _rootClass:Ontology;
+        private var _mashupApp:ArrayCollection;
+        private var relationDic:Dictionary;
+       	private var tileDic:Dictionary = new Dictionary();
+       	private var mpRecommendor:MPathRecommendor;
+       	private var loadTile:Boolean = false;
+       	private var loadRootClass:Boolean = false;
+       	[Bindable]
+       	private var tNameArray:ArrayCollection = new ArrayCollection();
+       	
+        [Bindable]
+        public function set tileCatalog(c:ArrayCollection):void
+        {
+            _tileCatalog = c;
+        	
+        	for(var i:int = 0; i < _tileCatalog.length; i++){
+        		var t:Tile = _tileCatalog.getItemAt(i) as Tile;
+        		tileDic[t.name] = t;
+        		tNameArray.addItem(t.name);
+        	}
+        	loadTile = true;
+        	if(loadRootClass)
+        		setupRelationDic();
+        } 
+        
+        public function get tileCatalog():ArrayCollection
+        {
+            return _tileCatalog;
+        }
+        [Bindable] 
+        public function set rootClass(r:Ontology):void
+        {
+            _rootClass = r;
+            loadRootClass = true;
+            if(loadTile)
+            	setupRelationDic();
+        } 
+        public function get rootClass():Ontology
+        {
+            return _rootClass;
+        }        
+		[Bindable]
+		public function set mashupApp(c:ArrayCollection):void
+		{
+			_mashupApp = c;
+		}
+		public function get mashupApp():ArrayCollection
+		{
+			return _mashupApp;	
+		}
+		
+		private function setupRelationDic():Dictionary
+		{
+			relationDic = new Dictionary();
+			var rb:RelationBuilder = new RelationBuilder(_tileCatalog, rootClass);
+			for(var k:int = 0; k < _tileCatalog.length; k++){
+				var tmpT:Tile = _tileCatalog.getItemAt(k) as Tile;
+				relationDic[tmpT.name] = new Dictionary();
+			}
+			for(var i:int = 0; i < _tileCatalog.length; i++){
+				var t1:Tile = _tileCatalog.getItemAt(i) as Tile;
+				var tmpDic:Dictionary = relationDic[t1.name] as Dictionary;
+				for(var j:int = i + 1; j < _tileCatalog.length; j++){
+					var t2:Tile = _tileCatalog.getItemAt(j) as Tile;
+					var r:Relation = rb.match(t1, t2);
+					if(!r.isEmpty()){
+						tmpDic[t2.name] = r;
+						var tDic:Dictionary = relationDic[t2.name] as Dictionary;
+						tDic[t1.name] = rb.swapRelation(r);
+					} 
+				}
+			}
+			
+			return relationDic;
+		}
+		
+		private function initListener():void
+		{
+			var fullscreenCM :ContextMenu = new ContextMenu();
+			fullscreenCM.addEventListener(ContextMenuEvent.MENU_SELECT, menuHandler);
+			fullscreenCM.hideBuiltInItems();
+			
+			var fs:ContextMenuItem = new ContextMenuItem("fullscreen" );
+			fs.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, goFullScreen);
+			fullscreenCM.customItems.push( fs );
+			
+			var xfs:ContextMenuItem = new ContextMenuItem("exit");
+			xfs.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, exitFullScreen);
+			fullscreenCM.customItems.push( xfs );
+			this.contextMenu = fullscreenCM;
+			container.addEventListener(MouseEvent.MOUSE_WHEEL, zoomHandler);
+			container.addEventListener(MouseEvent.MOUSE_DOWN, startDragContainer);
+			container.addEventListener(MouseEvent.MOUSE_UP, stopDragContainer);
+			/* 在初始化的时候把每个tile与其它Tile之间的关系建立好，以便以后与用户交互的时候能够缩短响应时间 */
+			//setupRelationDic();
+		}	
+		private function startDragContainer(e:MouseEvent):void
+		{
+			container.startDrag();
+		}
+		private function stopDragContainer(e:MouseEvent):void
+		{
+			container.stopDrag();
+		}
+		private function changeRootContainer(type:String):void
+		{
+			var d:Number = 0;
+			var dx:Number = 0;
+			switch(type){
+				case "up":
+					d = -50;
+					break;
+				case "down":
+					d = 50;
+					break;
+				case "left":
+					dx = -50;
+					break;
+				case "right":
+					dx = 50;
+					break;
+				case "zoomIn":
+					if(stage.displayState == StageDisplayState.FULL_SCREEN)
+						scaleContainer(6/5, screen.width / 2, screen.height / 2);
+					else
+						scaleContainer(6 / 5, 495, 300);
+					break;
+				case "zoomOut":
+					if(stage.displayState == StageDisplayState.FULL_SCREEN)
+						scaleContainer(5/6, screen.width / 2, screen.height / 2);
+					else
+						scaleContainer(5/6, 495, 300);
+					break;
+				case "fullScreen":
+					if(stage.displayState ==  StageDisplayState.FULL_SCREEN)
+						exitFullScreen(null);
+					else
+						goFullScreen(null);
+					break;
+				default:
+					break;				
+			}
+			if(type == "up" || type == "down" || type == "left" || type == "right"){
+				var m:Move = new Move();
+				m.target = container;
+				m.xBy = dx;
+				m.yBy = d;
+				m.play();
+			}		
+		}
+		private var containerWidth:Number = 20790;
+		private var containerHeight:Number = 12600;
+		private function zoomHandler(event:MouseEvent = null):void
+		{
+			if(event.delta > 0){
+				if(stage.displayState == StageDisplayState.FULL_SCREEN)
+					scaleContainer(6/5, screen.width / 2, screen.height / 2);
+				else
+					scaleContainer(6 / 5, 495, 300);
+			}	
+			else
+				if(event.delta < 0){	
+					if(stage.displayState == StageDisplayState.FULL_SCREEN)
+						scaleContainer(5/6, screen.width / 2, screen.height / 2);
+					else
+						scaleContainer(5/6, 495, 300);
+				}
+			
+			
+		}
+		
+		// Transformations
+		public function scaleContainer( scale : Number, originX : Number, originY : Number ) : void
+		{
+			var affineTransform:Matrix = container.transform.matrix;
+			
+			// move the object to (0/0) relative to the origin
+			affineTransform.translate( -originX, -originY );
+			
+			// scale
+			affineTransform.scale( scale, scale );
+			
+			// move the object back to its original position
+			affineTransform.translate( originX, originY );
+			
+			
+			// apply the new transformation to the object
+			container.transform.matrix = affineTransform;
+		//	scaleNumber *= scale;
+			containerWidth *= scale;
+			containerHeight *= scale;
+		}		
+
+		private function menuHandler(event:ContextMenuEvent):void
+		{
+		   if (stage.displayState == StageDisplayState.NORMAL)
+		   {
+		      event.target.customItems[0].enabled = true;
+		      event.target.customItems[1].enabled = false;
+		   }
+		   else
+		   {
+		      event.target.customItems[0].enabled = false;
+		      event.target.customItems[1].enabled = true;
+		   }
+		}
+		
+		private function goFullScreen(event:Event):void
+		{
+			var event2:ModeListEvent = new ModeListEvent(ModeListEvent.CHANGE_MODE);
+			event2.mode = "fullscreen";
+			dispatchEvent(event2);
+			stage.displayState = StageDisplayState.FULL_SCREEN;
+			//container.x = -container.x - screen.width;
+			container.x = screen.width / 2 - containerWidth / 2;
+			container.y = screen.height / 2 - containerHeight / 2;
+			//container.y = screen.height / 2 - (6000 + 300);
+			tileWindow.alpha = 0.9;
+			twTab.alpha = 0.8;
+		}
+		
+		private function exitFullScreen(event:Event):void
+		{
+			var e:ModeListEvent = new ModeListEvent(ModeListEvent.CHANGE_MODE);
+			e.mode = "normal";
+			dispatchEvent(e);
+			stage.displayState = StageDisplayState.NORMAL;
+			container.x = 495 - containerWidth / 2;
+			container.y = 300 - containerHeight / 2;
+			tileWindow.alpha = 0.7;
+			twTab.alpha = 0.5;			
+		//	chageParas("normal");
+		}
+
+		
+		private function chageParas(mode:String):void
+		{
+			
+		}	        
+		
+		private function clearView():void
+		{
+			container.removeAllChildren();
+			tilePacketArr.removeAll();
+			tpRelationLineArr.removeAll();
+		}
+		private function trySearch(ui:String):void
+		{
+    		if(ui == ""){
+    			Alert.show("please input the name of an API.");
+    			return;
+    		}
+			var t:Tile = find(ui);	
+			if(t == null){
+    			Alert.show("API not exist.");
+    			return;
+   			}
+			if(tilePacketArr.length == 0)
+				buildView(t);
+			else{
+				setTPVisible(t, true, true, false);
+			}
+		}
+		
+    	private function buildView(t:Tile):void
+    	{
+			//showProgressWindow();
+			container.removeAllChildren();
+			this.cursorManager.setBusyCursor();
+			var rb:RelationBuilder = new RelationBuilder( _tileCatalog, rootClass);
+			var depthTpArr:ArrayCollection = rb.build(t, relationDic);
+			var relationArr:ArrayCollection = rb.getRelationArr();
+	
+			/* display relations on the panel */
+			doBuildView(t, relationArr, depthTpArr);
+			container.addChild(tpToolBar);
+		//	container.addChild(zoomBar);
+		//	rootContainer.addChild(tileWindow);
+
+    	}
+    	
+    	public function setCursorStatus(e:MyCursorEvent):void
+    	{
+    		this.cursorManager.removeBusyCursor();
+    	}
+        public function callJSProgress():void
+        {
+        	var s:String;
+        	if(ExternalInterface.available){
+        		var f:String = "showProgressWindow";
+        		s = ExternalInterface.call(f);
+        	}
+        	else
+        		s = "f not available";	
+        }
+            	
+    	public function doBuildView(nowTile:Tile, relationArr:ArrayCollection, depthTileArr:ArrayCollection):void
+    	{
+    		//CursorManager.setBusyCursor();
+    		//this.cursorManager.setBusyCursor();
+    		var intialX:Number = container.width / 2;
+    		var intialY:Number = container.height / 2;
+    		var length:int = relationArr.length;
+    		var radius:Number = 25;
+    		var nowTilePacket:TilePacket = new TilePacket(nowTile, intialX, intialY, radius);
+    		nowTilePacket.visible = true;
+    		var locateObjArr:Array = new Array();
+    		initializeLocateObj(depthTileArr, locateObjArr);
+    		tilePacketArr.addItem(nowTilePacket);
+    		for(var i:int = 0; i < length; i++){
+    			var relation:Relation = relationArr.getItemAt(i) as Relation;
+    			var t1:Tile = relation.getTile1();
+    			var t2:Tile = relation.getTile2();  
+    			var newTilePacket:TilePacket = getTilePacket(t2); 
+    			if(t1.name != nowTilePacket.name){
+    				nowTilePacket = getTilePacket(t1);
+    			}
+    			if(newTilePacket == null){
+    			//	var locatArr:Array = locateTP(depthTileArr, intialX, intialY, t2, locateObjArr);
+    			//	var x:Number = locatArr[0] as Number;
+    			//	var y:Number = locatArr[1] as Number;
+    				var x:Number = 0;
+    				var y:Number = 0;
+    				newTilePacket = new TilePacket(t2, x, y, radius);
+    				nowTilePacket.addRelation(newTilePacket, relation);
+    				/* note: relations't1 and t2 should be reversed; from and to should also be reversed */
+    				newTilePacket.addRelation(nowTilePacket, relation);
+    				tilePacketArr.addItem(newTilePacket);
+    			}
+    			else{
+    				nowTilePacket.addRelation(newTilePacket, relation);
+    				newTilePacket.addRelation(nowTilePacket, relation);
+    			}
+    			tpRelationLineArr.addItem(new TilePacketRelationLine(nowTilePacket, newTilePacket, relation));
+    		}
+    		locateTPPos(intialX, intialY);
+    		var tmpLength:int = tpRelationLineArr.length;
+    		var k:int = 0;
+    		var tmpCount:int = 0;
+    		for(k = 0; k < tmpLength; k++){
+    			var tpr:TilePacketRelationLine = tpRelationLineArr.getItemAt(k) as TilePacketRelationLine;
+    			tpr.alpha = 0.0;
+    			container.addChild(tpr);
+    			/////////////////
+    		//	var str1:String = tpr.getTilePacket1().tile.name;
+    		//	var str2:String = tpr.getTilePacket2().tile.name;
+    		//	if(str1 == "Flickr" || str2 == "Flickr" || str1 == "Facebook" || str2 == "Facebook" || str1 == "Twitter" || str2 == "Twitter")
+    			
+    			// %3, %6, %15
+    		//	if(tmpCount % 15 == 0)
+    		//		tpr.visible = true;
+    		//	if(tmpCount % 12 == 0)
+    		//		tpr.setChosen();
+    			//	tpr.setChosen();
+    		//	tmpCount++;
+    		}
+    	//	trace("tmpCount = " + tmpCount);
+    		/* set tile packet visible */
+    		setTPVisible(nowTile, true, true, false);    		
+    		var length2:int = tilePacketArr.length;
+    		for(var j:int = 0; j < length2; j++){
+    			var tmpTp:TilePacket = tilePacketArr.getItemAt(j) as TilePacket;
+    		//	tmpTp.addEventListener(MouseEvent.CLICK, tpClickHandler);
+    			container.addChild(tmpTp);
+    		//	if(tmpTp.tile.name == "Youtube")
+    		//		tmpTp.setChosen();
+    		/////////////////////
+    		//	tmpTp.visible = true;
+    			tmpTp.addEventListener(MyCursorEvent.NORMAL, setCursorStatus);
+    			/* build a dictionary for each service of each tilepacket */
+    			tmpTp.buildDic();
+    			tmpTp.play(intialX, intialY);
+    			tmpTp.addEventListener(MouseEvent.ROLL_OVER, zoomCircleTP);
+    			tmpTp.addEventListener(MouseEvent.ROLL_OUT, zoomCircleTP);	
+    		}
+    		/* line appear effects */
+    		for(k = 0; k < tmpLength; k++){
+    			var tpr2:TilePacketRelationLine = tpRelationLineArr.getItemAt(k) as TilePacketRelationLine;
+    			tpr2.play();
+    		}
+    		
+    		/* initialize mashupPath builder */
+    		this.mpBuilder = new MashupPathBuilder(); 
+    		this.mpRecommendor = new MPathRecommendor(relationDic, _mashupApp, mpBuilder, tileDic);
+    	}
+    	
+    	public function locateTPPos(centerX:Number, centerY:Number, flag:Boolean = true):void
+    	{
+    		var i:int;
+    		var angel:Number = 360 / (tilePacketArr.length - 1);
+    		var arr:Array = new Array();
+    		var tmp:int = 6;
+    		var dis:Number = 120;
+    		var distanceArr:Array = new Array();
+    		var data:ArrayCollection = new ArrayCollection();
+    		var res:Array = new Array();
+    		var j:int;
+    		
+    		var posNewCenterArr:Array = new Array();
+    		var ttp1:TilePacket = tilePacketArr.getItemAt(0) as TilePacket;
+    		posNewCenterArr.push({nIndex:0, __x:centerX, __y:centerY});
+    		for(i = 0; i < 10; i++){
+    			arr.push(tmp);
+    			distanceArr.push(dis);
+    			dis += 80; 
+    			tmp += 3;
+    			res.push(new Array());
+    		}
+    		
+  			var resIndex:Array = new Array();
+    		for(i = 0; i < tilePacketArr.length; i++){
+    			resIndex.push(-1);
+    			data.addItem(i);
+    		}
+    		
+    		var nowDepth:int = 0;
+    		var nowLength:int = tilePacketArr.length - 1;
+    		var totalLength:int = nowLength;
+    		var count:int = 0;
+    		var startIndex:int = 1;
+
+    		while(nowLength > 0){
+    			var tmpArr:Array = res[nowDepth] as Array;
+    			var k:int = 0;
+    			var sNumber:int = nowLength <= arr[nowDepth] ? 1 : (nowLength / arr[nowDepth] + (nowLength % arr[nowDepth] == 0 ? 0 : 1));
+    			var tmpArr2:Array = new Array();
+    			var lastIndex:int = startIndex + 1;
+    			while(tmpArr.length < arr[nowDepth] && (startIndex + k * sNumber) <= totalLength){
+    				tmpArr.push(data.getItemAt(startIndex + k * sNumber));
+    				resIndex[data.getItemAt(startIndex + k * sNumber)] = nowDepth;
+    				for(j = lastIndex; j < (startIndex + k * sNumber); j++)
+    					tmpArr2.push(data.getItemAt(j));
+    				lastIndex = startIndex + k * sNumber + 1;
+    				k ++;
+    				nowLength--;
+    			}
+    			for(j = lastIndex; j < data.length; j++)
+    				tmpArr2.push(data.getItemAt(j));
+    			data.removeAll();
+    			data.addItem(-1);
+    			for(j = 0; j < tmpArr2.length; j++)
+    				data.addItem(tmpArr2[j]);
+    			nowDepth++;
+    			totalLength = data.length - 1;
+    		}
+    		
+    		var m:int = 0;
+    		for(i = 0; i < nowDepth; i++){
+    			var ar:Array = res[i] as Array;
+    			for(j = 0; j < ar.length; j++){
+    				var tpIndex:int = ar[j];
+    				var tp:TilePacket = tilePacketArr.getItemAt(tpIndex) as TilePacket;
+    				var d:Number = distanceArr[i] as Number;
+    				var a:Number = tpIndex * angel * Math.PI / 180;
+    				var x:Number = centerX + Math.cos(a) * d;
+    				var y:Number = centerY + Math.sin(a) * d;
+    				/* 将重点的tile放在中心点的附近 */
+    				if(i < 2 && tpIndex > 16){
+    					while(m < 17 && resIndex[m] <= 2){m++;}
+    					if(m < 17){
+    						resIndex[m] = -1;
+    						var tp2:TilePacket = tilePacketArr.getItemAt(tpIndex) as TilePacket;
+    						tilePacketArr.setItemAt(tilePacketArr.getItemAt(m), tpIndex);
+    						tilePacketArr.setItemAt(tp2, m);
+    					}
+    				} 	 
+    				var tp3:TilePacket = tilePacketArr.getItemAt(tpIndex) as TilePacket;
+    				if(flag){
+    					tp3.setTileX(x);
+    					tp3.setTileY(y);
+    				}
+    				else
+    					posNewCenterArr.push({nIndex:tpIndex, __x:x, __y:y});
+					
+    			}
+    		}
+    		if(!flag){
+    			for(i = 0; i < posNewCenterArr.length; i++){
+    				var ttp2:TilePacket = tilePacketArr.getItemAt(posNewCenterArr[i].nIndex) as TilePacket;
+    				if(posNewCenterArr[i].nIndex == 0)
+    					trace("hihi");
+    				if(posNewCenterArr[i].__x != ttp2.getTilePacketX() || posNewCenterArr[i].__y != ttp2.getTilePacketY())
+    					ttp2.play2(posNewCenterArr[i].__x, posNewCenterArr[i].__y);
+    			}
+    		}
+    		for(i = 0; i < tpRelationLineArr.length; i++){
+    			var tprl:TilePacketRelationLine = tpRelationLineArr.getItemAt(i) as TilePacketRelationLine;
+    			if(flag)
+    				tprl.drawLine();
+    			else
+    				tprl.redrawLine();
+    		//	flag == true ? tprl.drawLine() : tprl.redrawLine();
+    		}
+    	}
+    	
+    	public function setCenter():void
+    	{
+    	/*	var index:int  = -1;
+    		for(var i:int = 0; i < tilePacketArr.length; i++){
+    			var tmp:TilePacket = tilePacketArr.getItemAt(i) as TilePacket;
+    			if(nowTp.getTile().name == tmp.getTile().name){
+    				index = i;
+    				break;
+    			}
+    		}
+    		var tp:TilePacket = tilePacketArr.getItemAt(0) as TilePacket;
+    	//	nowTp.play2(tp.getTilePacketX(), tp.getTilePacketY());
+    		tilePacketArr.setItemAt(nowTp, 0);
+    		tilePacketArr.setItemAt(tp, index);
+    		locateTPPos(tp.getTilePacketX(), tp.getTilePacketY(), false); */
+    	}
+		/* 计算tp的坐标 */
+    	public function initializeLocateObj(depthTileArr:ArrayCollection, objArr:Array):void
+    	{
+    		var length:int = depthTileArr.length;
+			var distance:Number = 125;
+			switch(depthTileArr.length){
+				case 3:
+					distance = 125;
+					break;
+				case 4:
+				 	distance = 125;
+				 	break;
+				case 5:
+				 	distance = 125;
+				 	break;
+				default:
+					distance = 125;
+					break;
+			}
+			    		
+    		for(var i:int = 0; i < length; i++){
+    			var objItem:Object = new Object();
+    			objItem.startAngel = i * 23;
+    			objItem.nowAngel = i * 23;
+    			objItem.nowDistance = distance * i;
+    			//if(i <= 2)
+    			objItem.angelDistance = Math.ceil(Math.random()* 30) + 60;
+    			//else
+    			//	objItem.angelDistance = 55;
+    			objItem.distance = distance;
+    			objArr.push(objItem);
+    		}
+    	}		
+		public function locateTP(depthTileArr:ArrayCollection, centerX:Number, centerY:Number, dt:Tile, locateObjArr:Array):Array
+		{
+			var i:int;
+			var j:int;
+			var k:int;
+			var depth:int = -1;
+			var locateArr:Array = new Array();
+			for(i = 1; i < depthTileArr.length; i++){
+				var tileArr:ArrayCollection = depthTileArr.getItemAt(i) as ArrayCollection;
+				for(j = 0; j < tileArr.length; j++){
+					var t:Tile = tileArr.getItemAt(j) as Tile;
+					if(t.name == dt.name){
+						depth = i;
+						break;
+					}
+				}
+				if(depth != -1){
+					var x:Number = centerX + Math.cos(locateObjArr[depth].nowAngel * Math.PI / 180) * locateObjArr[depth].nowDistance;
+					var y:Number = centerY + Math.sin(locateObjArr[depth].nowAngel * Math.PI / 180) * locateObjArr[depth].nowDistance;
+					locateObjArr[depth].nowAngel += locateObjArr[depth].angelDistance;
+					/* 更新元信息，避免一个圆内出现过多的TP，而导致TP重叠*/
+					if(locateObjArr[depth].nowAngel + locateObjArr[depth].angelDistance >= locateObjArr[depth].startAngel + 360){
+						locateObjArr[depth].nowDistance = locateObjArr[depth].nowDistance + locateObjArr[depth].distance * 0.5;
+						locateObjArr[depth].nowAngel = Math.ceil(Math.random()* 40) + 40;
+						locateObjArr[depth].startAngel = locateObjArr[depth].nowAngel;
+						locateObjArr[depth].angelDistance = Math.ceil(Math.random()* 40) + 50;
+						while(depth + 1 < depthTileArr.length && locateObjArr[depth].nowDistance + 40 >= locateObjArr[depth + 1].nowDistance ){
+							locateObjArr[depth + 1].nowDistance += 5;
+						}
+						//locateObjArr[depth].startAngel += 360;
+					}
+					locateArr.push(x);
+					locateArr.push(y);
+					break;
+				}
+			}
+			
+			return locateArr;
+			
+		}    	
+    	/* 放大或缩小TP */
+    	public var nowTp:TilePacket = null; /* 用来记录鼠标当前所在的TilePacket */
+		public function zoomCircleTP(event:MouseEvent):void
+		{
+			nowTp = event.currentTarget as TilePacket;
+			if(event.type == MouseEvent.ROLL_OVER){
+				var toolTip:String = "";
+				toolTip += nowTp.tile.text;
+					var length:int = nowTp.tile.services.length;
+					for(var i:int = 0; i < length; i++){
+						var service:Service = nowTp.tile.services.getItemAt(i) as Service;  
+						toolTip += "\n" + service.name + ":  " + service.desc;
+					}
+					nowTp.toolTip = toolTip;
+			}
+			if(!nowTp.isChosen){
+				if(event.type == MouseEvent.ROLL_OUT){
+					scaleTP(nowTp, 2/3, nowTp.tileX, nowTp.tileY);
+					tpToolBar.visible = false;
+				}
+				else{
+					scaleTP(nowTp, 3/2, nowTp.tileX, nowTp.tileY); 
+				}
+					
+			}
+			else
+				if(event.type == MouseEvent.ROLL_OVER){
+					tpToolBar.x = nowTp.tileX + nowTp.radius * 1.5;
+					tpToolBar.y = nowTp.tileY - nowTp.radius * 2;
+					tpToolBar.visible = true;
+				}
+				else
+					tpToolBar.visible = false;
+		}
+		// Transformations
+
+		public function scaleTP( tp:TilePacket, scale : Number, originX : Number, originY : Number ) : void
+		{
+	
+			// get the transformation matrix of this object
+			var affineTransform:Matrix = tp.child.transform.matrix;
+			// move the object to (0/0) relative to the origin
+			affineTransform.translate( -originX, -originY );
+			// scale
+			affineTransform.scale( scale, scale );
+			// move the object back to its original position
+			affineTransform.translate( originX, originY );
+			// apply the new transformation to the object
+			tp.child.transform.matrix = affineTransform;
+			if(scale > 1){
+				tpToolBar.x = tp.tileX + tp.radius * 1.5;
+				tpToolBar.y = tp.tileY - tp.radius * 2;
+				tpToolBar.visible = true;
+			}
+		}
+		
+		/* roll over/out toolBar */
+		public function rollToolBar(event:MouseEvent):void
+		{
+			if(event.type == MouseEvent.ROLL_OUT){
+				if(!nowTp.isChosen)
+					scaleTP(nowTp, 2/3, nowTp.tileX, nowTp.tileY);
+				tpToolBar.visible = false;
+			}
+			else{
+				if(!nowTp.isChosen)
+					scaleTP(nowTp, 3/2, nowTp.tileX, nowTp.tileY);
+				else{
+					tpToolBar.x = nowTp.tileX + nowTp.radius * 1.5;
+					tpToolBar.y = nowTp.tileY - nowTp.radius * 2;
+					tpToolBar.visible = true;					
+				}
+			}
+		}		
+		/* tile click handler */  
+		public function tpClickHandler():void
+		{
+			this.tileWindow.visible = true;
+			var fade:Fade = new Fade(this.tileWindow);
+			fade.alphaFrom = 0.0;
+			fade.alphaTo = 0.8;
+			fade.play();
+			/* fill with data */
+			var tp:TilePacket = nowTp;
+			this.tileWindow.title = tp.getTile().name; 
+			var sda:ArrayCollection = tp.getServiceDicArr();
+			operationList.dataProvider = sda;
+			var sd:ServiceDic = operationList.selectedItem as ServiceDic;
+        	var s:Service = sd.getService();
+        //	suggestCombox.dataProvider
+        	operDesc.text = s.desc;
+        	relationList.dataProvider = sd.getServiceDic();
+        	getSuggestComboxDataProvider(sd.getServiceDic());
+        		
+			/* fill with the selected path item */
+			mashupSelectedList.clear();
+			var length:int = mpBuilder.getItemNumber();
+			var tp1:TilePacket = null;
+			var tp2:TilePacket = null;
+			var s1:Service = null;
+			var s2:Service = null;
+			for(var i:int = 0; i < length; i++){
+				var mpi:MashupPathItem = mpBuilder.getMPIAt(i);
+				var flag:Boolean = false;
+				var tmpTp:TilePacket = mpi.getTilePacket();
+				var tmpService:Service = mpi.getService();
+				if(tmpTp.getTile().name == tp.getTile().name)
+					flag = true;
+				var parentIndexArr:ArrayCollection = mpi.getParentIndexArr();
+			//	Alert.show("mpi is " + mpi.getTilePacket().getTile().name);
+				var tmpLength:int = parentIndexArr.length;
+				for(var j:int = 0; j < tmpLength; j++){
+					var parentIndex:int = parentIndexArr.getItemAt(j) as int;
+					var tmpParentMPI:MashupPathItem = mpBuilder.getMPIAt(parentIndex);
+					var tmpParentTp:TilePacket = tmpParentMPI.getTilePacket();
+				//	Alert.show(mpi.getTilePacket().getTile().name + " 's parent is " + tmpParentMPI.getTilePacket().getTile().name);
+					var tmpParentService:Service = tmpParentMPI.getService();
+					if(flag || tmpParentTp.getTile().name == tp.getTile().name)
+						mashupSelectedList.addMashupPathItem(tmpParentTp, tmpParentService, tmpTp, tmpService);
+				}
+			}
+			
+			/* 得到与选中的Tp相关的MPI*/
+			var mpiArr:ArrayCollection = mpBuilder.getMPIByTp(tp);
+			mOperList.dataProvider = mpiArr;
+			/* fill 'Input your operation params' Tab */
+			if(mpiArr.length > 0){
+				var tmpMPI:MashupPathItem = mOperList.selectedItem as MashupPathItem;
+				fillIYOP(tmpMPI);
+			}
+		}
+		
+		public function getSuggestComboxDataProvider(arr:Array = null):void
+		{
+			if(arr == null){
+				var sd:ServiceDic = operationList.selectedItem as ServiceDic;
+				arr = sd.getServiceDic();
+			}
+			var resArr:Array = new Array();
+			
+			resArr.push("All mashupable operations");
+			for(var i:int = 0; i < arr.length; i++){
+				var tName:String = arr[i].tpName as String;
+				var j:int;
+				for(j = 0; j < resArr.length; j++){
+					var tmp:String = resArr[j] as String;
+					if(tmp == tName)
+						break;
+				}
+				if(j >= resArr.length)
+					resArr.push(tName);
+			}
+			
+			suggestCombox.dataProvider = resArr;
+		//	return resArr;			
+		}
+		
+		public function setRelationListDataProvider():void
+		{
+			var sd:ServiceDic = operationList.selectedItem as ServiceDic;
+			var arr:Array = sd.getServiceDic();
+			var selectedTP:String  = suggestCombox.selectedItem as String;
+			var resArr:Array = new Array();
+			
+			if(selectedTP == "All mashupable operations")
+				relationList.dataProvider = sd.getServiceDic();
+			else{	
+				for(var i:int = 0; i < arr.length; i++){
+					var tpName:String = arr[i].tpName as String;
+					if(tpName.toUpperCase() == selectedTP.toUpperCase())
+						resArr.push(arr[i]);
+				}
+				relationList.dataProvider = resArr;
+			}	
+		}
+		/* show Mashupable APIs for nowTp */
+		public function showMableAPI():void
+		{
+			setTPVisible(nowTp.tile, true);
+		}	
+		
+		/* hide Mashupable APIs for nowTp */
+		public function hideMableAPI():void
+		{
+			setTPVisible(nowTp.tile, false);
+		}	
+		
+		/* do mashup path recommendation */
+		public function getPathCandidates():void
+		{
+			mpRecommendor.setCurrentTP(nowTp.tile);
+			mpRecommendWindow.cb.selectedIndex = 0;
+			mpRecommendor.doRecommend("robot");
+			mpRecommendor.doRecommend("people");
+	//		mpRecommendor.doRecommend("unusual");
+			mpWindowPlayEffect();
+			mpRecommendWindow.init(mpRecommendor.candidateArr, relationDic);
+			mpRecommendWindow.goToPage("current");
+			mpRecommendWindow.addEventListener(MPCEvent.SHOWMPC, showAndHideMPC);
+			mpRecommendWindow.addEventListener(MPCEvent.HIDEMPC, showAndHideMPC);
+			mpRecommendWindow.addEventListener(MPCEvent.CLONEMPC, cloneMPC);
+		}
+		
+		public function getRecommendation(e:MPathRecommendEvent):void
+		{
+			var type:String = e.wantType;
+			var arr:ArrayCollection = type == "robot" ? mpRecommendor.candidateArr : (type == "people" ? mpRecommendor.candidatePeople : mpRecommendor.candidateUnusual);
+			mpRecommendWindow.init(arr, relationDic);
+			mpRecommendWindow.goToPage("current");			
+		}
+		
+		public function mpWindowPlayEffect():void
+		{
+			mpRecommendWindow.visible = true;
+			var seq:Sequence = new Sequence();
+			seq.target = mpRecommendWindow;
+			var m:Move = new Move();
+			m.target = mpRecommendWindow;
+			m.easingFunction = Bounce.easeOut;
+			m.yFrom = 0 - mpRecommendWindow.height;
+			m.yTo = 10;	
+			seq.addChild(m);
+			seq.duration = 1500; 
+			seq.play();
+		}
+		
+		public function cloneMPC(e:MPCEvent):void
+		{
+			var mpiArr:ArrayCollection = e.mpri.mpiArr;
+			mpBuilder.removeAllMPI();
+			/* reset all the selected lines */
+			for(var k:int = 0; k < tpRelationLineArr.length; k++){
+				var tmpTPRL:TilePacketRelationLine = tpRelationLineArr.getItemAt(k) as TilePacketRelationLine;
+				if(tmpTPRL.resetChosen())
+					tmpTPRL.decreaseRefCount();
+			}
+			
+			for(var i:int = 0; i < mpiArr.length; i++){
+				var mpi:MashupPathItem = mpiArr.getItemAt(i) as MashupPathItem;
+				var tp:TilePacket = getTilePacket(mpi.tile);
+				var newMPI:MashupPathItem = new MashupPathItem();
+				newMPI.clone(mpi, tp);
+				tp.setChosen();
+				showEffect(tp, 0.0, 1.0);
+			//	newMPI.increaseRefCount();
+				mpBuilder.addItem(newMPI);
+	    		var parentIndexArr:ArrayCollection = newMPI.getParentIndexArr();
+	    		for(var j:int = 0; j < parentIndexArr.length; j++){
+	    			var index:int = parentIndexArr.getItemAt(j) as int;
+	    			var parentItem:MashupPathItem = mpBuilder.getMPIAt(index);
+	    			parentItem.increaseRefCount();
+	    			newMPI.increaseRefCount();
+	    			var tprl:TilePacketRelationLine = getTPRL(tp, parentItem.tilePacket);
+	    			showEffect(tprl, 0.0, 1.0);
+	    			if(tprl.setChosen())
+	    				tprl.increaseRefCount();
+	    			parentItem.getTilePacket().addVisibleTP(tp);
+	    			tp.addVisibleTP(parentItem.getTilePacket());
+	      		}
+	    				
+			}			
+		}
+		public function showAndHideMPC(e:MPCEvent):void
+		{
+			if(e.type == "showMPC"){
+				mpcWin.visible = true;
+				var mpiArr:ArrayCollection = e.mpri.mpiArr;
+				mpcWin.removeAllChildren();
+				mpcWin.y = e.mpri.y + 10;
+				showMPath(mpiArr);
+			}
+			else
+				mpcWin.visible = false;
+		}
+        public function showMPath(mpiArr:ArrayCollection):void
+        {
+			var i:int;
+			var hashTable:ArrayCollection = new ArrayCollection();
+			
+			var tmpMPI:MashupPathItem = mpiArr.getItemAt(mpiArr.length - 1) as MashupPathItem; 
+			var maxDepth:int = tmpMPI.getDepth();
+			
+			for(i = 0; i < maxDepth + 1; i++)
+				hashTable.addItem(new ArrayCollection());
+			for(i = 0; i < mpiArr.length; i++){
+				var mpi:MashupPathItem = mpiArr.getItemAt(i) as MashupPathItem;
+				var hashItem:ArrayCollection = hashTable.getItemAt(mpi.getDepth()) as ArrayCollection;
+				hashItem.addItem(mpi);
+			}
+			//var d:Number = (this.width - 40) / (maxDepth + 1);
+			var d:Number;
+			var startX:Number = 20;
+			var centerX:Number = mpcWin.width / 2;
+			var radius:Number = 15;
+			switch(maxDepth + 1){
+				case 1:
+					d = 0;
+					startX = centerX;
+					break;
+				case 2:
+					d = 6 * radius;
+					startX = centerX - d / 2;
+					break;
+				case 3:
+					d = 5 * radius;
+					startX = centerX - d;
+					break;
+				case 4:
+					d = 4 * radius;
+					startX = centerX - 6 * radius;
+					break;
+				case 5:
+					d = 4 * radius;
+					startX = centerX - 9 * radius
+					break;
+				default:
+					d = 3 * radius;
+					startX = 0;
+					break;
+			}
+			var nowX:Number = 0;
+			for(i = 0; i < maxDepth + 1; i++){
+				var hi:ArrayCollection = hashTable.getItemAt(i) as ArrayCollection;
+				nowX = startX + i * d;
+				doShowMPath(hi, nowX, mpiArr, radius);	
+			}
+			for(i = 0; i < mpiArr.length; i++){
+				var mpi2:MashupPathItem = mpiArr.getItemAt(i) as MashupPathItem;
+				mpcWin.addChild(mpi2.getTilePacket());
+			}
+        }
+        
+        private function doShowMPath(hi:ArrayCollection, nowX:Number, mpiArr:ArrayCollection, radius:Number):void
+        {
+        	var centerY:Number = mpcWin.height / 2;
+        	var upY:int = 0;
+        	var downY:int = 0;
+        	var nowY:Number = centerY;
+        	var initUpY:Number = 0;
+        	var initDownY:Number = 0;
+        	var d:Number = 0;
+        	
+        	switch(hi.length){
+        		case 2:
+        			d = 6 * radius;
+        			break;
+        		case 3:
+        			d = 4 * radius;
+        			break;
+        		case 4:
+        			d = 3 * radius;
+        			break;	
+        		default:
+        			d = 2.5 * radius;
+        			break;
+        	}       	
+        	if(hi.length % 2 == 0){
+        		initUpY = centerY - d / 2;
+        		initDownY = centerY + d / 2;
+        	}
+        	else{
+        		initUpY = centerY;
+        		initDownY = centerY + d;	
+        	}
+        	for(var i:int = 0; i < hi.length; i++){
+        		var mpi:MashupPathItem = hi.getItemAt(i) as MashupPathItem;
+        		if(i % 2 != 0){
+        			nowY = initDownY + downY * d;
+        			downY++;
+        		}
+        		else{
+        			nowY = initUpY - upY * d;
+        			upY ++;
+        		} 
+        		var tp:TilePacket = new TilePacket(mpi.tile, nowX, nowY, 15, false);
+        		mpi.setTilePacket(tp);
+        		var parentIndexArr:ArrayCollection = mpi.getParentIndexArr();
+        		for(var j:int = 0; j < parentIndexArr.length; j++){
+        			var index:int = parentIndexArr.getItemAt(j) as int;
+        			var parentItem:MashupPathItem = mpiArr.getItemAt(index) as MashupPathItem;
+        			var dic:Dictionary = relationDic[parentItem.getTilePacket().tile.name] as Dictionary;
+        			var r:Relation = dic[mpi.getTilePacket().tile.name] as Relation;
+        			var tprl:TilePacketRelationLine = new TilePacketRelationLine(parentItem.getTilePacket(), mpi.getTilePacket(), r, false);
+        			tprl.drawLine();
+        			mpcWin.addChild(tprl);
+        		}   		
+        	}
+        			
+        } 		
+			    	
+		/* set tile Packet visible */
+		public function setTPVisible(nowTile:Tile, v:Boolean = true, flag:Boolean = false, flag2:Boolean = true):void
+		{
+			var length:int = tpRelationLineArr.length;
+			var selectedTP:TilePacket = null;
+			for(var i:int = 0; i < length; i++){
+				var tpr:TilePacketRelationLine = tpRelationLineArr.getItemAt(i) as TilePacketRelationLine;
+				var tp1:TilePacket = tpr.getTilePacket1();
+				var tp2:TilePacket = tpr.getTilePacket2();
+				if(v == false){
+					if(tp1.getTile().name == "Upcoming" || tp2.getTile().name == "Upcoming")
+						trace("here");
+					if(tp1.getTile().name == nowTile.name){
+						selectedTP = tp1;
+						if(tp2.removeVisibleTP(tp1))
+							//tpr.visible = false;
+							hideEffect(tpr, 0.8, 0.0);
+						if(tp1.removeVisibleTP(tp2))
+							//tpr.visible = false;
+							hideEffect(tpr, 0.8, 0.0);			
+					}
+					else
+						if(tp2.getTile().name == nowTile.name ){
+							selectedTP = tp2;
+							if(tp1.removeVisibleTP(tp2))
+								//tpr.visible = false;
+								hideEffect(tpr, 0.8, 0.0);
+							if(tp2.removeVisibleTP(tp1))
+								//tpr.visible = false;
+								hideEffect(tpr, 0.8, 0.0);	
+						}
+				}
+				else{
+					if(tp1.getTile().name == nowTile.name || tp2.getTile().name == nowTile.name){
+						if(!flag && flag2){
+							showEffect(tpr, 0.0, 0.8);
+							showEffect(tp1, 0.0, 1.0);
+							showEffect(tp2, 0.0, 1.0);
+						}
+						else{
+							if(flag2){
+								tp1.visible = true;
+								tp1.alpha = 1.0;
+								tp2.visible = true;
+								tp2.alpha = 1.0;
+								tpr.visible = true;
+								tpr.alpha = 1.0;
+							}
+							else{
+								if((tp1.getTile().name == nowTile.name && tp2.visible == true) ||
+									(tp2.getTile().name == nowTile.name && tp1.visible == true)){
+									tp1.visible = true;
+									tp2.visible = true;
+									tpr.visible = true;
+									tp1.alpha = tp2.alpha = tpr.alpha = 1.0;
+									tp2.addVisibleTP(tp1);
+									tp1.addVisibleTP(tp2);
+								}
+							}
+						}
+						if(flag2){
+							tp2.addVisibleTP(tp1);
+							tp1.addVisibleTP(tp2);
+						}
+					}
+					
+				}
+			}
+			
+			/* 检查 nowTP 此时的状态 */
+			if(selectedTP != null){
+				if(selectedTP.visibleTPArr.length == 0 && !selectedTP.isChosen)
+					selectedTP.visible = false;
+			}
+		}
+		
+		/* show and hide effects */
+        public function hideEffect(target:UIComponent, af:Number = 1.0, at:Number = 0.0):void
+        {        	
+        	var fade:Fade = new Fade(target);
+        	fade.alphaFrom = af;
+        	fade.alphaTo = at;
+        	fade.play();
+        	target.visible = false;
+        }
+        public function showEffect(target:UIComponent, af:Number = 0.0, at:Number = 1.0):void
+        {        	
+        	var fade:Fade = new Fade(target);
+        	fade.alphaFrom = af;
+        	fade.alphaTo = at;
+        	fade.play();
+        	target.visible = true;
+        }        
+               	
+				
+		//
+		// Methods related to 'Input your operation params' Tab
+		//
+		
+		public function fillIYOP(mpi:MashupPathItem):void
+		{
+			var parentMPI:ArrayCollection = mpBuilder.getParents(mpi);
+			var n:int = parentMPI.length;
+		
+			if(n > 0){
+				operSource.text = "";
+				for(var i:int = 0; i < n; i++){
+					var mpiParent:MashupPathItem = parentMPI.getItemAt(i) as MashupPathItem;
+					operSource.text = operSource.text + mpiParent.getTilePacket().getTile().name + "." + mpiParent.toString() + "   ";
+				}
+			}
+			else{
+				operSource.text = "No tile sends data to this tile.";
+			}
+			inputParams.addParamInputItem(mpi, parentMPI, mpBuilder);
+		} 
+		
+    	public function getTilePacket(tile:Tile):TilePacket
+    	{
+    		var length:int = tilePacketArr.length;
+    		
+    		for(var i:int = 0; i < length; i++){
+    			var tmp:TilePacket = tilePacketArr.getItemAt(i) as TilePacket;
+    			if(tmp.getTile().name == tile.name)
+    				return tmp;
+    		}
+    		return null;
+    	}  	
+    	
+    	public function find(tileName:String):Tile
+    	{
+    		var length:int = _tileCatalog.length;
+    		
+    		for(var i:int = 0; i < length; i++){ 
+    			var t:Tile = _tileCatalog.getItemAt(i) as Tile;
+    			var tmpName:String = t.name.toLowerCase();
+    			if(tmpName == tileName.toLowerCase())
+    				return t;
+    		}
+    		
+    		return null;
+    	}
+        public function closeTileWindow():void
+        {        	
+        	var fade:Fade = new Fade(this.tileWindow);
+        	fade.alphaFrom = 0.8;
+        	fade.alphaTo = 0.0;
+        	fade.play();
+        	fade.addEventListener(EffectEvent.EFFECT_END, cTileWindowCp);
+        }
+        
+        public function cTileWindowCp(event:EffectEvent):void
+        {
+        	this.tileWindow.visible = false;
+        }	
+        
+        public function closeComboBoxHandler(event:Event):void
+        {
+        	var sd:ServiceDic = ComboBox(event.target).selectedItem as ServiceDic;
+        	var s:Service = sd.getService();
+        	operDesc.text = s.desc;
+        	relationList.dataProvider = sd.getServiceDic();
+        	getSuggestComboxDataProvider(sd.getServiceDic());
+        } 
+        
+        public function addMashupPath():void
+        {
+        	if(relationList.selectedItem == null){
+        		Alert.show("please select one mashupable operation");
+        		return;
+        	}
+        	var ri:RelationItem = relationList.selectedItem.relationItem as RelationItem;
+        	var tpSelected:TilePacket = relationList.selectedItem.tilePacket as TilePacket;
+        	var sSelected:Service = relationList.selectedItem.service as Service;
+        	var type:String = relationList.selectedItem.type as String;
+        	var sd:ServiceDic = operationList.selectedItem as ServiceDic;
+        	var sCurrent:Service = sd.getService();
+        	var tpCurrent:TilePacket = sd.getTilePacket();
+        	var relatedFromParams:ArrayCollection;
+        	var mpi:MashupPathItem = null;
+        	var mpiParent:MashupPathItem  = null;
+        	/* [tp1, s1, relatedParams] --> [tp2, s2, relatedParams] */
+        	var s1:Service = null;
+        	var s2:Service = null;
+        	var tp1:TilePacket = null;
+        	var tp2:TilePacket = null;
+        	var oper1:Service = ri.getOper1();
+        	var oper2:Service = ri.getOper2();
+        	if(type.search("-->") != -1 ){
+        		s1 = sSelected;
+        		s2 = sCurrent;
+        		tp1 = tpSelected;
+        		tp2 = tpCurrent;
+        	}
+        	else{
+        		s1 = sCurrent;
+        		s2 = sSelected;
+        		tp1 = tpCurrent;
+        		tp2 = tpSelected;
+        	}
+        	if(s1.name == oper1.name && s2.name == oper2.name){
+        		relatedFromParams = ri.getRelatedToParams();
+       			ri.swapRelatedParams(relatedFromParams);
+       		}
+       		else{
+       			if(s1.name == oper2.name && s2.name == oper1.name){
+       				relatedFromParams = ri.getRelatedFromParams();
+       			}
+       			else
+       				Alert.show("two services wrong here");
+       		}
+       		var addResult:Boolean = mashupSelectedList.addMashupPathItem(tp1, s1, tp2, s2);	
+       		/* update path graphs */
+       		if(addResult){
+	       		var index1:int = mpBuilder.find(tp1, s1);
+	       		if(index1 == -1){
+	       			mpiParent = new MashupPathItem();
+	       			mpiParent.setTilePacket(tp1);
+	       			mpiParent.setService(s1);
+	       			index1 = mpBuilder.addItem(mpiParent);
+	       		}
+	       		else
+	       			mpiParent = mpBuilder.getMPIAt(index1);
+	       		var index2:int = mpBuilder.find(tp2, s2);
+	       		if(index2 == -1){
+	       			mpi = new MashupPathItem();
+	       			mpi.setTilePacket(tp2);
+	       			mpi.setService(s2);
+	       			index2 = mpBuilder.addItem(mpi);
+	       		}
+	       		else
+	       			mpi = mpBuilder.getMPIAt(index2);
+	       		mpi.setParent(index1, relatedFromParams);
+	       	//	Alert.show(mpi.getTilePacket().getTile().name + " 's para length is " + String(mpi.getRelatedFromParams().length));
+	       		/* 增加mpi、mpiParent和它们之间的关系线对象的被引用次数 */
+	       		mpi.increaseRefCount();
+	       		mpiParent.increaseRefCount();
+	       		mpi.getTilePacket().addVisibleTP(mpiParent.getTilePacket());
+	       		mpiParent.getTilePacket().addVisibleTP(mpi.getTilePacket());
+	       		addToChosenList(mpi, mpiParent);
+	       		var tprl:TilePacketRelationLine = getTPRL(tpCurrent, tpSelected);
+				tprl.increaseRefCount();
+				tprlChosenList.addItem(tprl);			
+       		}	
+       		
+        }
+        
+        public function closeTileWindowOK():void
+        {
+        	closeTileWindow();
+	        /* 在关系图上将相关的tp放大显示 */
+     		var n:int = mpiChosenList.length;
+     		var i:int;
+     		var k:int;
+     		for(i = 0; i < n; i++){
+     			var mpi:MashupPathItem = mpiChosenList.getItemAt(i) as MashupPathItem;
+     			if(mpi.getRefCount() > 0){
+     			//	mpi.getTilePacket().visible = true;
+     				showEffect(mpi.getTilePacket(), 0.0, 1.0);
+     				mpi.getTilePacket().setChosen();
+     			}
+     		}
+     		mpiChosenList.removeAll();
+     		/* 将删除的tp在关系图上复位 */
+     		n = mpiResetChosenList.length;
+     		for( k = 0; k < n; k++){
+     			var mpi2:MashupPathItem = mpiResetChosenList.getItemAt(k) as MashupPathItem;
+     			if(mpi2.getRefCount() <= 0)
+     				mpi2.getTilePacket().resetChosen();
+     		}
+     		mpiResetChosenList.removeAll();
+     		
+     		/* 在关系图上将相关的关系线高亮显示 */
+     		n = tprlResetChosenList.length;
+     		for( k = 0; k < n; k++){
+     			var tprl:TilePacketRelationLine = tprlResetChosenList.getItemAt(k) as TilePacketRelationLine;
+     			if(tprl.getRefCount() <= 0)
+     				tprl.resetChosen();
+     		}
+     		tprlResetChosenList.removeAll();
+     		/* 将删除的关系线在关系图上复位 */
+     		n = tprlChosenList.length;
+     		for( k = 0; k < n; k++){
+     			var tprl2:TilePacketRelationLine = tprlChosenList.getItemAt(k) as TilePacketRelationLine;
+     			if(tprl2.getRefCount() > 0){
+     				tprl2.visible = true;
+     				tprl2.setChosen();
+     			}
+     		} 
+     		tprlChosenList.removeAll();
+        }
+        
+        public var mpiChosenList:ArrayCollection = new ArrayCollection();
+        public var tprlChosenList:ArrayCollection = new ArrayCollection;        
+        public function addToChosenList(mpi1:MashupPathItem,  mpi2:MashupPathItem):void
+        {
+        	mpiChosenList.addItem(mpi1);
+        	mpiChosenList.addItem(mpi2);
+        }
+        
+        public var mpiResetChosenList:ArrayCollection = new ArrayCollection();
+        public var tprlResetChosenList:ArrayCollection = new ArrayCollection();
+        public function removeMPI(event:MashupSelectedListEvent):void
+        {
+        	var index:int = mpBuilder.find(event.tp1, event.s1);
+        	var index2:int = mpBuilder.find(event.tp2, event.s2);
+        	if(index == -1 || index2 == -1){
+        		Alert.show("remove MPI error");
+        	}
+        	var mpiParent:MashupPathItem = mpBuilder.getMPIAt(index);
+        	var mpi:MashupPathItem = mpBuilder.getMPIAt(index2);
+        	/* 解除父子关系 */
+        	mpi.removeParent(index);
+        	/* 递减mpi的被引用次数 */
+        	var count:int = mpi.descreaseRefCount(); 
+        	/* 递减mpiParent的被引用次数 */
+        	var count2:int = mpiParent.descreaseRefCount();      	
+        	/* 逻辑删除mpi */
+        	if(count <= 0){
+        		//mpBuilder.removeMPI(index2);
+        		/* 在关系图上将tp复位 */
+        		mpiResetChosenList.addItem(mpi);
+        		//mpi.getTilePacket().resetChosen();
+        	} 
+        	if(count2 <= 0){
+        		mpiResetChosenList.addItem(mpiParent);
+        	}
+			
+     		var tprl:TilePacketRelationLine = getTPRL(event.tp1, event.tp2);
+     		count = tprl.decreaseRefCount();
+     		if(count <= 0)
+     			tprlResetChosenList.addItem(tprl);
+        }
+        
+        public function getTPRL(tp1:TilePacket, tp2:TilePacket):TilePacketRelationLine
+        {
+   			var lineArrLength:int = tpRelationLineArr.length;
+    		for(var j:int = 0; j < lineArrLength; j++){
+     			var tprl:TilePacketRelationLine = tpRelationLineArr.getItemAt(j) as TilePacketRelationLine;
+     			if(tprl.find(tp1, tp2) != null){
+     				return tprl;
+     			}
+     		}
+     		
+     		return null;      	
+        }
+        
+        public function runMashupHandler(event:ItemClickEvent):void
+        {
+        	var clickedLabel:String = event.label;
+        	
+        	var maxDepth:int = mpBuilder.setMPIDepth();
+        	mpBuilder.setMPIType();
+      		switch(clickedLabel){
+      			case "View Your Mashup Flow":
+      			case "Stop":
+      				viewMashupFlow(clickedLabel, maxDepth);
+      				break;
+      			case "Run Your Mashup":
+      				runMashup(maxDepth);
+      				break;
+      			case "Save":
+      				tryToSaveMashupApp();
+      				break;
+      			default:
+      				break;
+      		}
+        }
+        
+        
+        public var mfcArr:ArrayCollection = new ArrayCollection();
+        [Bindable]
+        public var buttonLabelArr:Array = new Array("View Your Mashup Flow", "Run Your Mashup", "Save");
+        public function viewMashupFlow(clickedLabel:String, maxDepth:int):void
+        {
+        	var arr:ArrayCollection = buttonBar.dataProvider as ArrayCollection;
+        	if(clickedLabel == "View Your Mashup Flow")
+        		arr.setItemAt("Stop", 0);
+        	else
+        		arr.setItemAt("View Your Mashup Flow", 0);
+        	var i:int;
+        	/* remove all the mashup flow cursor from container first */
+        	var tmpLength:int = mfcArr.length;
+        	for(i = 0; i < tmpLength; i++){
+        		var tmpMFC:MashupFlowCursor = mfcArr.getItemAt(i) as MashupFlowCursor;
+        		container.removeChild(tmpMFC);
+        	}
+        	mfcArr.removeAll();
+        	if(clickedLabel == "View Your Mashup Flow"){
+	        	var n:int = mpBuilder.getItemNumber(); 
+	        	for(i = 0; i < n; i++){
+	        		var mpi:MashupPathItem = mpBuilder.getMPIAt(i);
+	        		/* 如果这个mpi已被删除 */
+	        		if(mpi.getRefCount() <= 0)
+	        			continue;
+	        		var parentArr:ArrayCollection = mpi.getParentIndexArr();
+	        		var parentNum:int = parentArr.length;
+	        		var tp:TilePacket = mpi.getTilePacket();
+	        		var j:int;
+	        		for(j = 0; j < parentNum; j++){
+	        			var parentIndex:int = parentArr.getItemAt(j) as int;
+	        			var mpiParent:MashupPathItem = mpBuilder.getMPIAt(parentIndex);
+	        			if(mpiParent.getRefCount() <= 0)
+	        				continue;
+	        			var mfc:MashupFlowCursor = new MashupFlowCursor(mpiParent.getTilePacket().getTilePacketX(), mpiParent.getTilePacket().getTilePacketY(),
+	        											tp.getTilePacketX(), tp.getTilePacketY(), mpiParent.getDepth(), maxDepth);
+	        			mfcArr.addItem(mfc);
+	        			/* 把tilepacket置于顶层 */
+	        			var tmpTp:TilePacket = mpiParent.getTilePacket();
+	        			container.removeChild(tmpTp);
+	        			container.addChild(mfc);
+	        			container.addChild(mpiParent.getTilePacket());
+	        			container.removeChild(mpi.getTilePacket());
+	        			container.addChild(mpi.getTilePacket());
+	        		//	container.removeChild(tileWindow);
+	        		//	container.addChild(tileWindow);
+	        			mfc.setPlayOrder();
+	        		}
+	        	}
+        	}	
+        }
+        
+        public function closeParamWindow():void
+        {
+        	var mpi:MashupPathItem = mOperList.selectedItem as MashupPathItem;
+        	inputParams.getParamValue(mpi);
+        	mpi.hasSetParamValue = true;
+        	closeTileWindow();
+        	
+        }
+        
+        public function runMashup(maxDepth:int):void
+        {
+        	/* 按照depth的大小  广度优先的调用MPI的Service */
+        	
+        	var hashTable:ArrayCollection = new ArrayCollection();
+        	var n:int = mpBuilder.getItemNumber();
+        	var i:int;
+        	var mpiArray:Array = new Array();
+        	/* 先按照Depth建立Hash表 */
+        	for(i = 0; i < maxDepth + 10; i++){
+        		hashTable.addItem(new ArrayCollection());
+        	}
+        	for(i = 0; i < n; i++){
+        		var mpi:MashupPathItem = mpBuilder.getMPIAt(i);
+        		if(mpi.getRefCount() <= 0)
+        			continue;
+        		var hashItem:ArrayCollection = hashTable.getItemAt(mpi.getDepth()) as ArrayCollection;
+        		hashItem.addItem(mpi);
+        	}
+        	/* 将要调用的mpi封装成简单的数据结构 */
+        	/* 格式为:
+        		[tpName, operName, type, input[paraName, paraValue], output[paraName], parents[tpName.operName]]
+        		按照深度作为调用次序
+        	*/
+        	for(i = 0; i < maxDepth + 1; i++){
+        		var hashItem2:ArrayCollection = hashTable.getItemAt(i) as ArrayCollection;
+        		for(var j:int = 0; j < hashItem2.length; j++){
+        			var tmpMPI:MashupPathItem = hashItem2.getItemAt(j) as MashupPathItem;
+        			var tmpObj:Object = new Object();
+        			var inputArr:Array = new Array();
+        			var outputArr:Array = new Array();
+        			tmpObj.tpName = tmpMPI.getTilePacket().getTile().name;
+        			tmpObj.operName = tmpMPI.getService().name;
+        			tmpObj.type = tmpMPI.getType();
+        			var inParam:ArrayCollection = tmpMPI.getService().inParam;
+        			var outParam:ArrayCollection = tmpMPI.getService().outParam;
+        			var k:int;
+        			for(k = 0; k < inParam.length; k++){
+        				var inputItem:Object = new Object();
+        				var param:Param = inParam.getItemAt(k) as Param;
+        				inputItem.paraName = param.paraName;
+        				inputItem.paraValue = param.paraValue;
+        				inputArr.push(inputItem);
+        			}
+        			tmpObj.input = inputArr;
+        			for(k = 0; k < outParam.length; k++){
+        			//	var outputItem:Object = new Object;
+        				var paramItem:Param = outParam.getItemAt(k) as Param;
+        			//	outputItem.paraName = paramItem.paraName;
+        				outputArr.push(paramItem.paraName);
+        			}
+        			tmpObj.output = outputArr;
+        			var parentMPIs:ArrayCollection = mpBuilder.getParents(tmpMPI);
+        			var parents:Array = new Array();
+        			for(k = 0; k < parentMPIs.length; k++){
+        				var parentMPI:MashupPathItem = parentMPIs.getItemAt(k) as MashupPathItem;
+        				parents.push(parentMPI.getTilePacket().getTile().name + "." + parentMPI.getService().name);
+        			}
+        			tmpObj.parents = parents;
+        			mpiArray.push(tmpObj);
+        		}
+        	}
+        	//sendMPIs(mpiArray);
+        	openNewWindow(mpiArray);
+        	//callJS(mpiArray);
+        }
+        
+        public function callJS(mpiArray:Array):void
+        {
+        	var s:String;
+        	if(ExternalInterface.available){
+        		var f:String = "startLoadTileData";
+        		s = ExternalInterface.call(f, mpiArray);
+        	}
+        	else
+        		s = "f not available";	
+        }
+        
+        private function convertToString(mpiArr:Array):String
+        {
+        	var i:int;
+        	var j:int;
+        	var s:String = "";
+        	/* 格式： {tpName:...  ,  operName:...  ,  type:...  ,  input:[<paraName paraValue>+++<paraName paraValue>...]  ,  output:[paraName+++paraName...]  ,  paraents: 
+        	[tpName.operName+++tpName.operName...]}    {...} 
+        	*/
+        	for(i = 0; i < mpiArr.length; i++){
+        		var tmpS:String = "{";
+        		var obj:Object = mpiArr[i] as Object;
+        		tmpS = tmpS + "tpName:" + obj.tpName + "  ,  ";
+        		tmpS = tmpS + "operName:" + obj.operName + "  ,  ";
+        		tmpS = tmpS + "type:" + obj.type + "  ,  ";
+        		var input:Array = obj.input;
+        		var inputS:String = "input:[";
+        		for(j = 0; j < input.length; j++){
+        			var inputObj:Object = input[j] as Object;
+        			inputS = inputS + "<" + inputObj.paraName + " " + inputObj.paraValue + ">";
+        			if(j != input.length - 1)
+        				inputS += "+++";
+        		}
+        		tmpS = tmpS + inputS + "]" + "  ,  ";
+        		var output:Array = obj.output;
+        		var outputS:String  = "output:[";
+        		for(j = 0; j < output.length; j++){
+        			//var outObj:Object = output[j] as Object;
+        			outputS = outputS + output[j] as String;
+        			if(j != output.length - 1)
+        				outputS += "+++";
+        		}
+        		tmpS = tmpS + outputS + "]" + "  ,  ";
+        		var parents:Array = obj.parents;
+        		var pS:String = "parents:[";
+        		for(j = 0; j < parents.length; j++){
+        			pS = pS + parents[j] as String;
+        			if(j != parents.length - 1)
+        				pS += "+++";
+        		}
+        		tmpS = tmpS + pS + "]}"
+        		if(i != mpiArr.length - 1)
+        			tmpS += "    ";
+        		s += tmpS;
+        	}
+        	
+        	return s;	
+        }
+        private var mpiResStr:String = ""; 
+        public function sendMPIs(mpiArray:Array):void
+        {
+        	mpiResStr = convertToString(mpiArray);
+	        var service:HTTPService = new HTTPService();
+	      //  service.url = "http://58.206.196.207:8080/mashup/processMPIs";
+	        service.url = "http://www.dart.zju.edu.cn/mashup/addOntology";
+	        service.method = "post";
+	        var sendValue:Object = new Object();
+	        sendValue.MPIs = mpiResStr;
+	        sendValue.MPINumber = mpiArray.length;
+	        service.send(sendValue);
+        }   
+		public function openNewWindow(mpiArray:Array):void {
+			var uv:URLVariables = new URLVariables();
+			uv.MPINumber = mpiArray.length;
+			mpiResStr = convertToString(mpiArray);
+			uv.MPIs = mpiResStr;
+			var u:URLRequest = new URLRequest("http://10.214.33.121:8080/mashup/processMPIs");
+		//	var u:URLRequest = new URLRequest("http://10.214.33.120:8080/mashup/processMPIs");
+		//	var u:URLRequest = new URLRequest("http://www.dart.zju.edu.cn/mashup/processMPIs");
+			u.data = uv;
+			u.method = "POST";  
+			navigateToURL(u,"_blank");
+		//	tryToSaveMashupApp(res);
+		}
+		
+		private function tryToSaveMashupApp():void
+		{
+		//	var saveWindow:MashupSaveWindow = MashupSaveWindow((PopUpManager.createPopUp( this, MashupSaveWindow , true)));
+			if(mpiResStr == ""){
+				Alert.show("The standard flow is :\n Choose APIs you want --> Run Your Mashup --> Save ~");
+				return;
+			}
+			/* show save window */
+			maSaveWindow.visible = true;
+		}
+		private function saveMashupApp():void
+		{
+			var author:String = "robin";
+			var email:String = "robinlu1984@gmail.com";
+			var sendValue:Object = new Object();
+			sendValue.name = maName.text;
+			sendValue.desc = maDesc.text;
+			sendValue.tileSource = mpiResStr;
+		//	sendValue.accessUrl = maUrl.text;
+	        var service:HTTPService = new HTTPService();
+	    //    service.url = "http://10.214.33.121:8080/mashup/saveMashupApp";
+	   //  	service.url = "http://www.dart.zju.edu.cn/mashup/saveMashupApp";
+	   		service.url = "http://localhost:8080/mashup/saveMashupApp";
+	        service.method = "post";
+	        service.addEventListener("result", httpResult); 
+	       	service.addEventListener("fault", httpFault);	        
+	        service.send(sendValue);
+	        			
+		
+		} 
+		
+		public function test(event:FlexEvent):void{
+			Alert.show("fdasfa"); 
+		}
+		
+        private function httpResult(event:ResultEvent):void
+        {
+       // 	Alert.show(event.result.toString());
+       		Alert.show("done!");
+      	 	maSaveWindow.visible = false;
+        	/* add to hot mashupapps */
+       /* 	var mashupApp:MashupApp = new MashupApp();
+       // 	mashupApp.author = "robin";
+       // 	mashupApp.email = "robinlu1984@gmail.com";
+        	mashupApp.name = maName.text;
+        	mashupApp.description = maDesc.text;
+       // 	mashupApp.image = "assets/classIcon/class.png";
+        	var s:String = event.result.toString();
+        	var index:int = s.indexOf("+++");
+        	var id:int = parseInt(s.substring(0, index));
+       // 	var date:String = s.substr(index + 3, s.length);
+       // 	mashupApp.updated = date;
+        	mashupApp.mashupAppId = id;
+        	mashupApp.tileSource = mpiResStr;
+        	var event2:MashupAppListEvent = new MashupAppListEvent(MashupAppListEvent.ADD_MASHUPAPP);
+        	event2.mashupApp = mashupApp;
+        	dispatchEvent(event2); */
+        }
+        private function httpFault(event:FaultEvent):void
+        {
+        	Alert.show("mashupapp add error\np"); 
+        }		
+
+         
+        ]]>
+    </mx:Script> 
+    
+     <mx:VBox
+        dropShadowEnabled="true" 
+        height="100%" width="100%" 
+        horizontalAlign="center"  backgroundColor="#000000" backgroundAlpha="0.8" verticalGap="7" verticalAlign="middle">
+    		<mx:ApplicationControlBar width="850" height="35" styleName="colorPanel">
+	        	<mx:Label text="Input the name of API:"  paddingLeft="20" width="166"/>
+	        	<!--mx:TextInput id="inputTileName" width="137"  height="24" enter="buildView()"/-->
+	        	<mashupView:tileInput id="inputTileName" enterComplete="trySearch(event.tileName)" tNameArr="{tNameArray}" clearView="clearView()" />
+	        	<!--mx:Spacer width="7"/>  
+	        	<mx:Button label="Go" click="buildView()" height="24"/-->
+	        	<mx:ButtonBar id="buttonBar" width="352" height="24" styleName="glass" itemClick="runMashupHandler(event)" dataProvider="{buttonLabelArr}" >       	
+	        	</mx:ButtonBar>
+    		</mx:ApplicationControlBar>
+    		<mx:Canvas id="rootContainer" width="100%" height="100%" verticalScrollPolicy="off" horizontalScrollPolicy="off">
+    			<mx:Canvas id="container" borderStyle="solid" width="20790" height="12600" verticalScrollPolicy="off"  horizontalScrollPolicy="off"  x="-9900" y="-6000">
+    				<mashupView:toolBar id="tpToolBar" backgroundAlpha="0.5" visible="false" rollOver="rollToolBar(event)" rollOut="rollToolBar(event)"
+    				 showMashupableAPI="showMableAPI()" hideMashupableAPI="hideMableAPI()" recommendation="tpClickHandler()" inspire="getPathCandidates()"/>
+    			</mx:Canvas>
+		
+    			<mx:Panel id="tileWindow" x="60" width="500" height="473" alpha="0.7"  horizontalAlign="center" headerHeight="20" visible="false" verticalScrollPolicy="off"> 
+    				<mx:TabNavigator id="twTab"   width="471" height="452" alpha="0.5">
+    				 <mx:VBox paddingLeft="10" height="403" width="463" horizontalAlign="left" verticalAlign="top" verticalScrollPolicy="off" verticalGap="6" 
+    				 	label="Choose Your Mashup Operation" showEffect="Fade" hideEffect="Fade">
+    				 	<mx:HBox width="100%"> 
+    				 		<mx:Label text="Operation: " fontWeight="bold"/>
+    				 		<mx:ComboBox id="operationList" width="150" close="closeComboBoxHandler(event)" >
+    				 		</mx:ComboBox>
+    				 		<mx:Label id="operDesc" />
+    				 	</mx:HBox>
+    				 	<mx:HBox width="449">
+    				 		<mx:Label text="Mashup Suggestions:" fontWeight="bold"/>
+    				 		<mx:ComboBox id="suggestCombox" change="setRelationListDataProvider()" rowCount="15" ></mx:ComboBox>
+    				 		<!--mx:Label text="Order by:"/>
+    				 		<mx:ComboBox width="87" dataProvider="{suggestOrderByList}" change="changeSuggestOrder()"></mx:ComboBox-->
+    				 	</mx:HBox>
+    				 	
+			 			<mx:DataGrid width="446" height="163" id="relationList">
+			 				<mx:columns>
+			 					<mx:DataGridColumn headerText="RelationItem" dataField="relationItem" width="0"/>
+			 					<mx:DataGridColumn headerText="TilePacket" dataField="tilePacket" width="0" />
+			 					<mx:DataGridColumn headerText="Tile" dataField="tpName" />
+			 					<mx:DataGridColumn headerText="Operation"  dataField="service"/>
+			 					<mx:DataGridColumn headerText="Type" dataField="type" />
+			 					<mx:DataGridColumn headerText="Description" dataField="description"/>
+			 				</mx:columns>
+			 			</mx:DataGrid>
+    				 	<mx:Button label="Add to seleced list" click="addMashupPath()"/>
+    				    <mashupView:MashupSelectedList id="mashupSelectedList" width="443" height="111"
+    				        newItemStartX="300" newItemStartY="-100" maxItems="6" 
+    				        removeMashupPathItem="removeMPI(event)"/>				    			
+    				 			<mx:HBox width="100%" height="22" horizontalAlign="center">
+    				 				<mx:LinkButton label="OK" height="20" click="closeTileWindowOK()"/>
+    				 			</mx:HBox>
+    				 </mx:VBox> 
+    				<mx:VBox  height="397" width="467" label="Input Your Operation Params" showEffect="Fade" hideEffect="Fade">
+    					<mx:HBox width="100%">
+    						<mx:Label text="Operation:" fontWeight="bold"/>
+    						<mx:ComboBox id="mOperList"></mx:ComboBox>
+    						<mx:Label width="182"/>
+    					</mx:HBox>
+    					<mx:HBox width="100%">
+    						<mx:Label text="Source:" fontWeight="bold"/>
+    						<mx:Label width="404" text="No Source" id="operSource"/>
+    					</mx:HBox>
+    					<mx:Label text="Inputs:" fontWeight="bold"/>   					
+    					<mashupView:OperParamInputList id="inputParams"  width="447" height="276"/>
+    					<mx:Spacer height="1"/>
+    					<mx:HBox width="100%" horizontalAlign="center">
+    						<mx:LinkButton label="OK" height="20" click="closeParamWindow()"/>
+    					</mx:HBox>
+    				</mx:VBox>
+    				</mx:TabNavigator>
+    			</mx:Panel>    
+    			
+    			<mx:Panel id="maSaveWindow" x="329" y="156" width="412" height="264" layout="absolute" title="Save Your Mashup Application" visible="false" 
+    				 showEffect="Fade" hideEffect="Fade">
+    				<mx:VBox paddingLeft="10">
+					    <mx:HBox>
+					        <mx:Label text="Please input the name of your mashup application: " fontWeight="bold"/>
+					       
+					    </mx:HBox>
+					    <mx:HBox width="100%">
+					        <mx:TextInput id="maName" width="371"/>
+					    </mx:HBox>
+					    <mx:HBox width="100%">
+					        <mx:Label text="Description:" fontWeight="bold"/>
+					    </mx:HBox>
+					    <mx:TextArea id="maDesc" width="372" height="75"/>
+					    <mx:Spacer height="5"/>
+					
+					    <mx:HBox width="370">
+					        <mx:Spacer width="112"/>
+					        <mx:LinkButton label="Save" click="saveMashupApp();"/>
+					        <mx:LinkButton label="Cancel" click="maSaveWindow.visible=false;"/>
+					    </mx:HBox>  
+				   	</mx:VBox>
+    			</mx:Panel>
+				<mashupView:MPathRecommend id="mpRecommendWindow" x="{rootContainer.width - mpRecommendWindow.width - 10}" y="10" width="330" height="95%" 
+					visible="false" changeOption="getRecommendation(event)" />
+				<mx:Canvas id="mpcWin" visible="false" width="270" height="{mpRecommendWindow.height * 0.192}" borderColor="#00CC33" borderStyle="solid" 
+					backgroundColor="#403F3F" backgroundAlpha="0.7" dropShadowEnabled="true" cornerRadius="10" x="{mpRecommendWindow.x - mpcWin.width}"/>
+				<mashupView:rootToolBar id="rootToolBar" up="changeRootContainer(event.type)" down="changeRootContainer(event.type)"
+    				  left="changeRootContainer(event.type)" right="changeRootContainer(event.type)" zoomIn="changeRootContainer(event.type)"
+    				   zoomOut="changeRootContainer(event.type)" fullScreen="changeRootContainer(event.type)" />
+    		</mx:Canvas> 
+    		
+    </mx:VBox>	 
+    <mx:StringValidator source="{maName}" property="text" minLength="1" maxLength="100"/>  
+	<mx:StringValidator source="{maDesc}" property="text" minLength="1" maxLength="300"/> 
+</mx:Canvas>

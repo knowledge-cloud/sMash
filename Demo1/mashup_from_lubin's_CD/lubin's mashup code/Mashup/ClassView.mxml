@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+    xmlns:classView="classView.*"
+    width="100%" height="100%">
+
+    <mx:Script>
+        <![CDATA[
+        import mx.collections.ArrayCollection;
+        import dart.mashup.ontology.Ontology;
+                
+        private var _catalog:ArrayCollection;
+        
+        [Bindable]
+        public function get catalog():ArrayCollection
+        {
+            return _catalog;
+        }
+        
+        public function set catalog(c:ArrayCollection):void
+        {
+            _catalog = c;
+         /*   if (editorPanel != null)
+            {
+                editorPanel.filter.count = c.length;
+            }
+         */
+        }
+        
+        public function addToSelectedList(ontology:Ontology):void
+        {
+            //setting the state before adding the product avoids jumpiness in the transition, not sure why
+          //  currentState = 'showSelectedList'; 
+         //   selectedPanel.classList.addClass(ontology);
+        }    
+        
+        public function addToCatalogPanel(ontology:Ontology):void
+        {
+        	catalogPanel.addClass(ontology);
+        }
+        
+        
+        ]]>
+    </mx:Script>
+    
+    <mx:HBox x="{this.width / 2- 495}"
+        styleName="colorPanel"
+        dropShadowEnabled="true" 
+        height="550" width="990" 
+        verticalScrollPolicy="off" 
+        horizontalGap="0" horizontalAlign="center">
+    
+        <classView:Grip id="editorGrip"/>
+    
+        <classView:ClassEditorPanel id="editorPanel" width="265" height="540" 
+        	addClass="addToCatalogPanel(event.ontology)" />
+     
+        
+        <!--classView:ClassSelectedList id="selectedPanel" width="265" height="100%"/-->
+    <classView:ClassCatalogPanel id="catalogPanel" width="685" height="543" 
+        catalog="{catalog}"
+        purchase="addToSelectedList(event.ontology)"
+        classCount="0"
+        />
+        <classView:Grip id="selectedListGrip" />
+    
+    </mx:HBox>
+        
+    <!-- 
+      make sure to use transitions here instead of applying a Move effect
+      to the Panel itself which will result in odd behavior
+    -->
+    <mx:states>
+       <mx:State name="showEditor">
+          <mx:SetStyle target="{catalogPanel}" name="left" value="285"/>
+       </mx:State>        
+       <mx:State name="showSelectedList">
+           <mx:SetStyle target="{catalogPanel}" name="right" value="285"/>
+       </mx:State>
+    </mx:states>    
+        
+</mx:Canvas>

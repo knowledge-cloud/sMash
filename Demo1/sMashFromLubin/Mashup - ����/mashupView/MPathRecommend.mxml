@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"  horizontalAlign="right" backgroundColor="#403F3F" backgroundAlpha="0.7" dropShadowEnabled="true" verticalGap="0" cornerRadius="10" xmlns:mashupView="mashupView.*">
+    
+    <mx:Metadata>
+    [Event(name="changeOption", type="dart.mashup.mashup.MPathRecommendEvent")]
+    </mx:Metadata>
+    <mx:Script>
+        <![CDATA[
+        	import dart.mashup.mashup.MPathRecommendEvent;
+        	import mx.events.EffectEvent;
+        	import mx.effects.Sequence;
+        	import mx.effects.Move;
+        	import mx.effects.easing.Bounce;
+        	import dart.mashup.mashup.MPCEvent;
+        	import mx.controls.HRule;
+        	import mx.controls.Spacer;
+        	import dart.mashup.mashup.MPathCandidate;
+        	import mx.collections.ArrayCollection;
+        	
+        	public var currentPage:int = 1;
+        	public var totalPage:int = 0;
+        	public var mpiArr:ArrayCollection = new ArrayCollection;
+        	public var itemPerPage:int = 5;
+        	public var pWeight:Number = 18;
+        	[Bindable]
+        	public var wantList:Array = new Array("Recommend popular mashup pathes", "Recommend undiscovered links", "See how others dealt with your mashup state");
+        	
+        	public function init(mpcArr:ArrayCollection, relationDic:Dictionary):void
+        	{
+  				var i:int;
+  				mpiArr.removeAll();
+  				
+  				for(i = mpcArr.length - 1; i >= 0; i--){
+  					var obj:Object = mpcArr.getItemAt(i);
+  					var mpc:MPathCandidate = obj.MCandidate as MPathCandidate;
+  					var mpri:MPathRecomendItem = new MPathRecomendItem();
+  					mpri.addEventListener(MPCEvent.SHOWMPC, handler);
+  					mpri.addEventListener(MPCEvent.HIDEMPC, handler);
+  					mpri.addEventListener(MPCEvent.CLONEMPC, handler);
+  					mpri.mName = mpc.name;
+  					mpri.desc = mpc.description;
+  					mpri.mpiArr = mpc.mpiArr;
+  					mpri.relationDic = relationDic;
+  					mpri.percentHeight = pWeight;
+  					mpri.number = i;
+  					mpri.oper = mpc.oper;
+  					mpiArr.addItem(mpri);	
+  				}
+  				var tmp:int = mpcArr.length % itemPerPage;
+  				totalPage = mpcArr.length / itemPerPage + (tmp == 0 ? 0 : 1); 
+  				hBox.visible = false;       		
+        	}
+  			public function goToPage(flag:String):void
+  			{
+  				var i:int;
+  				
+  				this.removeAllChildren();
+  				this.addChild(hBox1);
+  				this.addChild(new hrule());
+  				if(flag == "next")
+  					currentPage = currentPage >= totalPage ? currentPage : currentPage + 1;
+  				else
+  					if(flag == "last")
+  						currentPage = currentPage > 1 ? currentPage - 1 : currentPage;
+  					else
+  						currentPage = 1;
+  				var count:int = 0;
+  				for(i = (currentPage - 1) * itemPerPage; i < mpiArr.length && i < currentPage * itemPerPage; i++){
+  					var mpi:MPathRecomendItem = mpiArr.getItemAt(i) as MPathRecomendItem;
+  					this.addChild(mpi);
+  				/*	if(mpi.mName == "Youtube-->GoogleMap")
+  					{  	
+  						var event:MPCEvent = new MPCEvent(MPCEvent.SHOWMPC);
+  						event.mpri = mpi;
+  						dispatchEvent(event);
+  						
+  					}
+  				*/
+  					this.addChild(new hrule());
+  					count++;
+  				}
+  				for(var j:int = count; j < itemPerPage && j > 0; j++){
+  					var sp:Spacer = new Spacer();
+  					sp.percentHeight = pWeight;
+  					this.addChild(sp);
+  					this.addChild(new hrule());
+  				}
+  				this.addChild(hBox);
+  				hBox.visible = true;
+  			}
+  			
+  			public function handler(e:MPCEvent):void
+  			{
+  				var event:MPCEvent = new MPCEvent(e.type);
+  				event.mpri = e.mpri;
+  				dispatchEvent(event);
+  			}
+  			public function close():void
+  			{
+				var seq:Sequence = new Sequence();
+				seq.target = this;
+				var m:Move = new Move();
+				m.target = this;
+				m.easingFunction = Bounce.easeIn;
+				m.yFrom = 10;
+				m.yTo = 0 - this.height;	
+				seq.addChild(m);
+				seq.duration = 1500; 
+				seq.play();  
+				seq.addEventListener(EffectEvent.EFFECT_END, setMyVisible);
+			//	this.visible = false;				
+  			}
+  			public function setMyVisible(e:EffectEvent):void
+  			{
+  				this.visible = false;
+  			}
+  			public function handler2():void
+  			{
+  				var o:String = cb.selectedItem as String;
+  				var e:MPathRecommendEvent = new MPathRecommendEvent(MPathRecommendEvent.CHANGEOPTION);
+  				if(o == wantList[0])
+  					e.wantType = "robot";
+  				else
+  					if(o == wantList[1])
+  						e.wantType = "unusual";
+  					else
+  						e.wantType = "people";
+  				dispatchEvent(e);
+  				 
+  			}
+        ]]>
+    </mx:Script>
+    <mx:HBox id="hBox1" width="100%" visible="true" horizontalAlign="left">
+    		<mx:ApplicationControlBar width="100%" horizontalAlign="center">
+        	<!--mx:Label text="Want to:" color="#F0F4F5"/-->
+        	<mx:ComboBox id="cb"  dataProvider="{wantList}" change="handler2()" fontSize="10" ></mx:ComboBox>
+    		</mx:ApplicationControlBar>
+                <!--mx:Label text="Want to:" color="#F0F4F5" fontWeight="bold"/><mx:ComboBox id="cb"  dataProvider="{wantList}" change="handler2()"></mx:ComboBox-->
+    </mx:HBox>    
+    <mx:HBox id="hBox" width="100%" visible="true">
+    	<mx:Spacer width="103" />
+		<mx:LinkButton id="btnLastPage" icon="@Embed('/assets/left.gif')" 
+	            width="25" click="goToPage('last')" toolTip="Pre page"  /> 
+		<mx:LinkButton id="btnNextPage" icon="@Embed('/assets/right.gif')" 
+	            width="25" click="goToPage('next')" toolTip="Next page" />	
+	    <mx:Spacer width="80"  height="1"/>    
+		<mx:LinkButton id="btnClose" icon="@Embed('/assets/close.gif')" 
+	            width="25" click="close()" toolTip="Close" />	                          	
+    </mx:HBox>
+             
+</mx:VBox>

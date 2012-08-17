@@ -1,0 +1,362 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head><title>
+	Reviews For Paper
+</title>
+<style>
+#header
+{
+    width: 100%;
+    font-size: small;
+    background-color:#F7F7F7;
+}
+.printThemeText
+{
+    font-size:small;
+}
+.printThemeTable td
+{
+    vertical-align:top;
+}
+.printThemeGrid th
+{
+    color:white;
+    background:#5D7B9D;
+    font-weight:bold;
+}
+.printThemeGrid
+{
+    border-collapse:collapse;
+}
+.printThemeGrid td, .printThemeGrid th
+{
+    border:solid 1px #D6D3CE;
+    padding:4px 4px 4px 4px;
+}
+.printThemeGrid .row
+{ 
+    background-color:#F7F6F3;
+    color:#333333;
+    vertical-align:top;
+}
+.printThemeGrid .altrow
+{ 
+    background-color:White;
+    color:#284775;
+    vertical-align:top;
+}
+.cellprompt
+{
+	font-weight:bold;
+	white-space:nowrap;
+    width:100px;	
+}
+.paperHeader
+{
+    background-color:#dee3e7;
+    margin:5px 5px 15px 0px;
+    width:99%;
+    font-family:Verdana;
+    font-size:medium;
+    font-weight:bold;
+}
+.sectionHeader
+{
+    background-color:#dee3e7;
+    padding:5px 5px 5px 0px;
+    width:99%;
+    text-decoration:underline;
+    font-family:Verdana;
+    font-size:small;
+    font-weight:bold;
+}
+.underlineheader
+{
+    text-decoration:underline;
+    font-weight:bold;
+    padding:5px 0px;
+}
+.response
+{
+    padding:5px 0px;
+}
+.reviewerlabel
+{
+    padding-right:20px;
+}
+</style>
+</head>
+<body>
+<form name="aspnetForm" method="post" action="ViewReviewsForPaper.aspx?paperId=385" id="aspnetForm">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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FgRmDw8WAh8BBRZPdmVyYWxsIFJlY29tbWVuZGF0aW9uZGQCAQ9kFgJmDxUBC1dlYWsgUmVqZWN0ZAIMD2QWBGYPDxYCHwEFLERldGFpbGVkIGNvbW1lbnRzIChwbGVhc2UgbnVtYmVyIGVhY2ggcG9pbnQpZGQCAQ9kFgJmDxUB3BoxLiBUaGUga2V5IHBvaW50IG9mIHRoaXMgcGFwZXIgaXMgdG8gbW9kZWwgdGhlIFdlYiBtYXNodXAgcmVjb21tZW5kYXRpb24gcHJvYmxlbSBhcyB0aGUgay1uZWFyZXN0IG5laWdoYm9yIHByb2JsZW0gaW4gVm9yb25vaSBkaWFncmFtLg08YnIgLz4gICAgICAgICAgIEFzIG1lbnRpb25lZCBpbiBTZWN0aW9uIDQuMiwgU3RlcCAxfjMgYXJlIHRoZSBwcmVwcm9jZXNzaW5nIHN0ZXBzLg08YnIgLz4gICAgICAgICAgIFRoaXMgbWVhbnMgdGhhdCB0aGUgVm9yb25vaSBkaWFncmFtIGlzIGNvbnN0cnVjdGVkIG9mZmxpbmUuDTxiciAvPiAgICAgICAgICAgV2hhdCBJIHdvbmRlciBpcyB0aGF0IHdoZXRoZXIgRGVmaW5pdGlvbiA0LjIgaXMgbm90IHN1aXRhYmxlIGZvciBhbGwgY2FzZXMuDTxiciAvPiAgICAgICAgICAgQ29uY3JldGVseSBTcGVha2luZywgaWYgdGhlIEFQSXMgb2YgY2hvc2VuIGFyZSBub3QgY29ubmVjdGVkIGluIFZvcm9ub2kgZGlhZ3JhbSwgdXNpbmcgdGhlIGNlbnRlciBvZiB0aGVzZSBjaG9zZW4gQVBJcyB0byBjYWxjdWxhdGUgdGhlIGRpc3RhbmNlIG1heSBub3QgYmUgYXBwcm9wcmlhdGUuIA08YnIgLz4gICAgICAgICAgIFNpbmNlIHRoZSB0b3AtayBBUElzIGFyZSBleHRyYWN0ZWQgbWFpbmx5IGJhc2VkIG9uIHRoaXMgZGVmaW5pdGlvbiwgSSByZWdhcmQgdGhhdCB0aGlzIGlzIGEgc2lnbmlmaWNhbnQgcHJvYmxlbS4NPGJyIC8+ICAgICAgICAgICBUaGUgYWJvdmUtbWVudGlvbmVkIGNhc2UgaXMgbm90IGRpc2N1c3NlZCBpbiB0aGlzIHBhcGVyLg08YnIgLz4gICAgICAgIDIuIFJlZ2FyZGluZyBEZWZpbml0aW9uIDMuMSwgUChBfEIpIG1heSBub3QgYmUgZXF1YWwgdG8gUChCfEEpLg08YnIgLz4gICAgICAgICAgIEFzIG1lbnRpb25lZCBpbiB0aGUgcGFwZXIsIHRoaXMgcHJvYmFiaWxpdHkgaXMgZGVyaXZlZCBmcm9tIHRoZSByZXBvc2l0b3J5IGNvbGxlY3RpbmcgZnJvbSBQcm9ncmFtbWFibGUgV2ViIGFuZCBZYWhvbyEgUGlwZXMuDTxiciAvPiAgICAgICAgICAgSG93ZXZlciwgd2hhdCB3ZSBrbm93IGlzIHRoZSBBUElzIHVzZWQgaW4gYSBtYXNodXAuDTxiciAvPiAgICAgICAgICAgSG93IGNvdWxkIHdlIGtub3cgd2hldGhlciBBUEkgQSBpcyBmb2xsb3dlZCBieSBBUEkgQj8NPGJyIC8+ICAgICAgICAgICBJbiBjb250cmFzdCwgd2hldGhlciBBUEkgQiBpcyBmb2xsb3dlZCBieSBBUEkgQT8NPGJyIC8+ICAgICAgICAgICBTaW5jZSB0aGUgZWZmZWN0aXZlbmVzcyBvZiB0aGUgcHJvcG9zZWQgYXBwcm9hY2ggd2lsbCBiZSBpbmZsdWVuY2VkIG11Y2ggYnkgdGhlIGRpc3RhbmNlIG1hdHJpeCBvZiBBUElzLCB0aGlzIGRldGFpbHMgb2YgZ2VuZXJhdGluZyB0aGUgZGlzdGFuY2UgbWF0cml4IHNob3VsZCBiZSBjbGVhcmx5IGRlcGljdGVkLiANPGJyIC8+ICAgICAgICAzLiBJbiBTdGVwIDMgb2YgU2VjdGlvbiA0LjIsIGFsdGhvdWdoIHRoZSBjb25zdHJ1Y3Rpb24gb2YgVm9yb25vaSBkaWFncmFtIGlzIGRlcml2ZWQgZnJvbSB0aGUgcHJldmlvdXMgd29yaywgdGhlIGRlc2NyaXB0aW9uIG9mIHRoaXMgcGFydCBpcyBub3Qgc28gY2xlYXIuDTxiciAvPiAgICAgICAgICAgSG93IHRvIGl0ZXJhdGUgdGhlIGRpdmlkZSBhbmQgY29ucXVlciBwcm9jZXNzPw08YnIgLz4gICAgICAgICAgIEhvdyB0byBnZW5lcmF0ZSBNTCBhbmQgTVI/DTxiciAvPiAgICAgICAgICAgRnVydGhlciBkZXNjcmlwdGlvbiBpcyBuZWVkZWQgdG8gbWFrZSB0aGlzIHBhcnQgbW9yZSB1bmRlcnN0YW5kYWJsZS4NPGJyIC8+ICAgICAgICA0LiBJbiB0aGUgYmVnaW5uaW5nIG9mIFN0ZXAgMSBpbiBTZWN0aW9uIDQuMiwgaXQgaXMgbWVudGlvbmVkIHRoYXQ6IE91ciB3b3JrIHNob3dzIHRoYXQgdGhlcmUgYXJlIGFsbW9zdCA0LDAwMCBsaW5rcyBhbW9uZ3N0IGFib3V0IDEwMCBBUElzLg08YnIgLz4gICAgICAgICAgIEhvd2V2ZXIsIGluIDEwMCBBUElzLCB0aGUgbGFyZ2VzdCBudW1iZXIgb2YgcG9zc2libGUgY29ubmVjdGlvbnMgaXM6IEMoMTAwLCAyKSA9IDQ5NTAuIChDaG9vc2UgMiBmcm9tIDEwMCkNPGJyIC8+ICAgICAgICAgICBBYm91dCA4MCUgb2YgQVBJcyBoYXZlIGNvbm5lY3Rpb25zIGJldHdlZW4gZWFjaCBvdGhlci4NPGJyIC8+ICAgICAgICAgICBJcyB0aGVyZSBhbnkgcHJvYmxlbSBhYm91dCB0aGlzIHN0YXRpc3RpYz8NPGJyIC8+ICAgICAgICA1LiBTb21lIHBhcnRzIG9mIFN0ZXAgMSBhbmQgU3RlcCAyIGluIFNlY3Rpb24gNC4yIGFyZSBub3QgY2xlYXJseSBzdGF0ZWQuDTxiciAvPiAgICAgICAgICAgSW4gU3RlcCAxICh1cC1sZWZ0IHNpZGUgb2YgcGFnZSA1KSwgd2h5IHRoZSBmdW5jdGlvbiBmKHgpIHNob3VsZCBzYXRpc2Z5IHRob3NlIGNvbnN0cmFpbnRzPw08YnIgLz4gICAgICAgICAgIEluIFN0ZXAgMiAoUHJvcG9zaXRpb24gNC4yKSwgd2hhdCBpcyBnKC4sLik/DTxiciAvPiAgICAgICAgICAgT24gdGhlIG90aGVyIGhhbmQsIGluIHRoZSBsYXN0IHBhcmFncmFwaCBvZiBTZWN0aW9uIDUsIHRoZSBzZXR0aW5ncyBvZiB0aGVzZSBwYXJhbWV0ZXJzIGFyZSBtaXNzaW5nLg08YnIgLz4gICAgICAgIDYuIEFzIG1lbnRpb25lZCBpbiBTZWN0aW9uIDYuMi4xOiBXZSBnYXZlIHRoZSBzdGFuZGFyZCAuLi4sIGFuZCB0aGVuIHRvb2sgdGhlbSBhcyB0aGUgc2VlZCB0byBnZW5lcmF0ZSAxMDAsMDAwIEFQSXMgLi4uDTxiciAvPiAgICAgICAgICAgSXQgaXMgbm90IGNsZWFyIGhvdyB0aGlzIHByb2Nlc3MgaXMgZG9uZS4NPGJyIC8+ICAgICAgICA3LiBJbiBBbGdvcml0aG0gMiBvZiBTdGVwIDMgaW4gU2VjdGlvbiA0LjIsIHRoZSBkZXRhaWxzIG9mIHRoaXMgYWxnb3JpdGhtIGNhbiBiZSBmdXJ0aGVyIGRlc2NyaWJlZC4NPGJyIC8+ICAgICAgICAgICBXaGF0IGRvZXMgQSh4aSx5aSkgaW4gbGluZSAyIHN0YW5kIGZvcj8NPGJyIC8+ICAgICAgICAgICBXaGF0IGFyZSAnbG93JyBhbmQgJ2hpZ2gnIGluIGxpbmUgMTA/DTxiciAvPiAgICAgICAgICAgSXQgaXMgcmVjb21tZW5kZWQgdGhhdCBtb3JlIGRldGFpbHMgY2FuIGJlIGRlc2NyaWJlZCBpbiB0aGUgcGFyYWdyYXBoLg08YnIgLz4gICAgICAgIDguIEZpZ3VyZSAyIHNlZW1zIG5vdCBzbyBjb3JyZWN0Lg08YnIgLz4gICAgICAgICAgIFRoZSB1cC1sZWZ0IGVkZ2Ugc2hvdWxkIGJlIGZhcnRoZXIgYXdheSBmcm9tIHRoZSBjZW50ZXIgcG9pbnQuDTxiciAvPiAgICAgICAgOS4gVGhlcmUgYXJlIHNvbWUgdHlwb3MuDTxiciAvPiAgICAgICAgICAgSW4gU2VjdGlvbiAyLjEsIEgocGkscGkpIC0+IEgocGkscGopLg08YnIgLz4gICAgICAgICAgIEluIERlZmluaXRpb24gMy4xLCAnQ29udGFpbm5pbmcnIC0+ICdjb250YWluaW5nJy4NPGJyIC8+ICAgICAgICAgICBJbiBQcm9wb3NpdGlvbiA0LjIsIGJlICdhbicgc2V0IG9mIC0+IGJlICdhJyBzZXQgb2ZkAg0PDxYCHwBoZGQCCA8VAQBkAgEPZBYGAgMPZBYCZg8VARNBc3NpZ25lZF9SZXZpZXdlcl8yZAIHDzwrAA0BAA8WBB8DZx8CAgxkFgJmD2QWGgIBD2QWBGYPDxYCHwEFNVN1bW1hcnkgb2YgdGhlIHBhcGVyJ3MgbWFpbiBjb250cmlidXRpb25zIGFuZCBpbXBhY3QgZGQCAQ9kFgJmDxUB8ARUaGUgcGFwZXIgcHJvcG9zZXMgYSBtYXNodXAgc3lzdGVtIHRoYXQgcmVjb21tZW5kcyBuZXcgV2ViIHNlcnZpY2VzIHRvIGJlIGludGVncmF0ZWQgd2l0aCBXZWIgc2VydmljZXMgdGhhdCBhcmUgYWxyZWFkeSBjaG9zZW4gYnkgdGhlIHVzZXIuIFRoZSByZWNvbW1lbmRhdGlvbiBpcyBiYXNlZCBvbiB0aGUgbGlua2FnZSBsaWtlbGlob29kIGluIHRoZSBwYXN0IG1hc2h1cHMgKGhvdyBtYW55IHVzZXJzIGFkb3B0IGEgbGluayBmcm9tIEZpbGNrciB0byBHb29nbGVNYXAgaW4gdGhlaXIgbWFzaHVwcykuIEEgVm9yb25vaSBkaWFncmFtIGlzIGludHJvZHVjZWQgaW4gb3JkZXIgdG8gY29tcHV0ZSB0b3AtayByZWNvbW1lbmRhdGlvbiBlZmZpY2llbnRseS4gVG8gZG8gc28sIHRoZSBsaW5rYWdlIGxpa2VsaWhvb2QgaXMgY29udmVydGVkIGludG8gYSBtZXRyaWMgc3BhY2UsIGFuZCBhIHNldCBvZiBXZWIgc2VydmljZSBBUElzIGlzIG1hcHBlZCBvbiBhIDItZGltZW5zaW9uYWwgc3BhY2UgYmFzZWQgb24gbXVsdGktZGltZW5zaW9uYWwgc2NhbGluZy4gVGhlIGVmZmljaWVuY3kgYW5kIGFjY3VyYWN5IG9mIHJlY29tbWVuZGF0aW9uIGFyZSBkZW1vbnN0cmF0ZWQgdGhyb3VnaCBleHBlcmltZW50cy5kAgIPZBYEZg8PFgIfAQU4U3Ryb25nIHBvaW50cyBvZiB0aGUgcGFwZXIgKHBsZWFzZSBudW1iZXIgdGhlbSBTMSxTMiwuLilkZAIBD2QWAmYPFQE/UzE6IEEgcHJvdG90eXBlIGlzIGltcGxlbWVudGVkIGFuZCB0ZXN0ZWQgdGhyb3VnaCBhIHVzZXIgc3R1ZHkuZAIDD2QWBGYPDxYCHwEFN1dlYWsgcG9pbnRzIG9mIHRoZSBwYXBlciAocGxlYXNlIG51bWJlciB0aGVtIFcxLFcyLC4uLilkZAIBD2QWAmYPFQHrAVcxOiBUaGUgbWV0cmljcyBhbmQgdGVjaG5pcXVlcyB1c2VkIGluIHRoZSBwYXBlciBhcmUgbm90IG5ldyBieSB0aGVtc2VsdmVzLg08YnIgLz5XMjogVGhlIHByb2JsZW0gZm9ybXVsYXRpb24gaXMgbm90IHNwZWNpZmljIHRvIG1hc2h1cCwgYW5kIGl0IGRvZXMgbm90IHNlZW0gbmV3Lg08YnIgLz5XMzogRXhwZXJpbWVudHMgZG9lcyBub3QgY29tcGFyZSB0aGUgcHJvcG9zZWQgbWV0cmljcyB3aXRoIG90aGVycy5kAgQPZBYEZg8PFgIfAQULT3JpZ2luYWxpdHlkZAIBD2QWAmYPFQEDTG93ZAIFD2QWBGYPDxYCHwEFF1F1YWxpdHkgb2YgUHJlc2VudGF0aW9uZGQCAQ9kFgJmDxUBBk1lZGl1bWQCBg9kFgRmDw8WAh8BBQxTaWduaWZpY2FuY2VkZAIBD2QWAmYPFQEDTG93ZAIHD2QWBGYPDxYCHwEFPkhvdyBtYW55IGF0dGVuZGVlcyB3aWxsIGJlIGludGVyZXN0ZWQgaW4gYSB0YWxrIG9uIHRoaXMgcGFwZXI/ZGQCAQ9kFgJmDxUBEGF2ZXJhZ2UgaW50ZXJlc3RkAggPZBYEZg8PFgIfAQUPVGVjaG5pY2FsIERlcHRoZGQCAQ9kFgJmDxUBA0xvd2QCCQ9kFgRmDw8WAh8BBSVRdWFsaXR5IG9mIEV4cGVyaW1lbnRzLCBSZXBlYXRhYmlsaXR5ZGQCAQ9kFgJmDxUBBk1lZGl1bWQCCg9kFgRmDw8WAh8BBVpEbyB0aGUgZXhwZXJpbWVudHMgc3VwcG9ydCB0aGUgY2xhaW1zIG1hZGUgaW4gdGhlIHBhcGVyIGFuZCBtYXRjaCB0aGUgbW90aXZhdGluZyBleGFtcGxlcz9kZAIBD2QWAmYPFQECbm9kAgsPZBYEZg8PFgIfAQUWT3ZlcmFsbCBSZWNvbW1lbmRhdGlvbmRkAgEPZBYCZg8VAQZSZWplY3RkAgwPZBYEZg8PFgIfAQUsRGV0YWlsZWQgY29tbWVudHMgKHBsZWFzZSBudW1iZXIgZWFjaCBwb2ludClkZAIBD2QWAmYPFQGsDCgxKSBGcm9tIHRoZSB0aXRsZSAiVm9yb25vaS1iYXNlZC4uLiwiIEkgd291bGQgYXNzdW1lIGEgdXNlIG9mIFZvcm9ub2kgZGlhZ3JhbSBpbiBNYXNodXAgcmVjb21tZW5kYXRpb24gaXMgYSBrZXkgY29udHJpYnV0aW9uIG9mIHRoZSBwYXBlci4gSG93ZXZlciwgYXMgd3JpdHRlbiBpbiBTZWN0aW9uIDcsIHVzZSBvZiBWb3Jvbm9pIGRpYWdyYW0gdG8gSy1uZWFyZXN0IG5laWdoYm9yIGlzIG5vdCBuZXcuIEkgZG8gbm90IGNsZWFybHkgc2VlIGFueSBhZGRpdGlvbmFsIGNvbnRyaWJ1dGlvbiB0byB0aGUgZXhpc3Rpbmcgd29yayBpbiB0aGlzIGFzcGVjdC4NPGJyIC8+KDIpIFRoZSBwcm9ibGVtIGZvcm11bGF0aW9uIGJhc2VkIG9uIHRoZSB1c2VycycgcGFzdCBtYXNodXAgc3RhdGlzdGljcyBpcyBxdWl0ZSBnZW5lcmljIChlLmcuIGN1c3RvbWVycyB3aG8gcHVyY2hhc2VkIEEgYWxzbyBwdXJjaGFzZWQgQikuIEFzIGEgcmVzdWx0LCBJIGRvIG5vdCBzZWUgbm92ZWx0eSBpbiB0aGUgcHJvYmxlbSBpdHNlbGYuDTxiciAvPigzKSBJIHdvdWxkIGV4cGVjdCBuZXcgZmluZGluZ3Mgd2hlbiByZWNvbW1lbmRhdGlvbiBpcyBhcHBsaWVkIHNwZWNpZmljIHRvIG1hc2h1cC4gV2hhdCBraW5kIG9mIGZlYXR1cmVzIHNob3VsZCBiZSBjb25zaWRlcmVkPyBXaGljaCBtZXRyaWMgcGVyZm9ybSBiZXR0ZXI/IGV0Yy4gSXQgd291bGQgYmUgbmljZXIgaWYgdGhlIHBhcGVyIGNvbmR1Y3Qgc3VjaCBhIGNvbXBhcmF0aXZlIHN0dWR5IHJhdGhlciB0aGFuIGp1c3QgcHJlc2VudGluZyBvbmUgYXBwcm9hY2ggdGhhdCBpcyBub3QgZnVuZGFtZW50YWxseSBuZXcgaW4gZ2VuZXJhbC4NPGJyIC8+KDQpIFRoZSBkZXNjcmlwdGlvbiBpbiB0aGUgcGFwZXIgbGFja3MgYWNjdXJhY3kgaW4gc29tZSBwYXJ0cy4gRm9yIGluc3RhbmNlLCBpbiBvcmRlciB0byBtYXAgcHJvYmFiaWxpdHkgUChBfEIpLCBQKEJ8QSkgdG8gYSBtZXRyaWMgc3BhY2UsIHRoZSBwYXBlciBkZXNjcmliZXMgcHJvcGVydGllcyBvZiBmdW5jdGlvbnMgZiBhbmQgZywgYnV0IEkgZG8gbm90IGZpbmQgdGhlIGFjdHVhbCBmdW5jdGlvbnMgdXNlZCBpbiB0aGUgaW1wbGVtZW50YXRpb24uDTxiciAvPig1KSBJbiBTZWN0aW9uIDUsIG5ldyBzY29yaW5nIG1ldHJpY3Mgb24gQVBJIHF1YWxpdHkgaXMgc3VkZGVubHkgaW50cm9kdWNlZC4gSG93IGFyZSB0aGV5IGludGVncmF0ZWQgaW50byB0aGUgZGlzY3Vzc2lvbiB1cCB0byBTZWN0aW9uIDQ/DTxiciAvPig2KSBBIHByb3RvdHlwZSBXSVRIT1VUIHJlY29tbWVuZGF0aW9uIGlzIGNvbXBhcmVkIHRvIFlhaG9vISBQaXBlcyB0aHJvdWdoIGEgdXNlciBzdHVkeSAtLSB3aGF0IGlzIHRoZSBwb2ludCBvZiB0aGlzIHN0dWR5LCBpZiB5b3UgZG9uJ3QgZXZhbHVhdGUgcmVjb21tZW5kYXRpb24/DTxiciAvPig3KSBFeHBlcmltZW50cyBzaG93IHByZWNpc2lvbiBzY29yZXMgb2YgdGhlIHByb3Bvc2VkIGFwcHJvYWNoLiBJdCBtdXN0IGJlIGNvbXBhcmVkIHdpdGggc29tZSBiYXNlbGluZSBtZXRyaWNzIHRvIGRlbW9uc3RyYXRlIGVmZmVjdGl2ZW5lc3Mgb2YgdGhlIHByb3Bvc2VkIG1ldHJpY3MuZAINDw8WAh8AaGRkAggPFQEAZAICD2QWBgIDD2QWAmYPFQETQXNzaWduZWRfUmV2aWV3ZXJfM2QCBw88KwANAQAPFgQfA2cfAgIMZBYCZg9kFhoCAQ9kFgRmDw8WAh8BBTVTdW1tYXJ5IG9mIHRoZSBwYXBlcidzIG1haW4gY29udHJpYnV0aW9ucyBhbmQgaW1wYWN0IGRkAgEPZBYCZg8VAZADVGhpcyBwYXBlciBwcm9wb3NlZCBhIG1ldGhvZCB0byBmaW5kIHRoZSB0b3AtayBuZWFyZXN0IG5laWdoYm9yIEFQSXMgdG8gaGVscCB0aGUgdXNlciANPGJyIC8+ZmluZCB0aGUgcmVsYXRlZCBkYXRhIEFQSSBlZmZlY3RpdmVseSB3aGVuIGRldmVsb3BpbmcgbWFzaHVwIGFwcGxpY2F0aW9ucy4gVGhleSBkZXZlbG9wZWQgYSBzeXN0ZW0sIFN1cmZUb01hc2gsIHdoaWNoIGVuYWJsZXMgdXNlcnMgdG8gc3VyZiBhIGRhdGEgQVBJIHdlYiB0byBtYXNodXAgDTxiciAvPnNlbGVjdCBBUElzLiBUaGUgc3lzdGVtIGFsc28gcHJvdmlkZXMgdXNlciB3aXRoIGNsZWFyIGd1aWRhbmNlIGJ5IHRyYWNlLWJhc2VkIA08YnIgLz5yZWNvbW1lbmRhdGlvbiBiYXNlZCBvbiBhIFZvcm9ub2ktYmFzZWQgdGVjaG5pcXVlLmQCAg9kFgRmDw8WAh8BBThTdHJvbmcgcG9pbnRzIG9mIHRoZSBwYXBlciAocGxlYXNlIG51bWJlciB0aGVtIFMxLFMyLC4uKWRkAgEPZBYCZg8VAfICUzEgVGhlIG92ZXJhbGwgaWRlYSBhbmQgdGhlIHByb2JsZW0gc2V0dGluZyBhcmUgbm92ZWwuIFRoZSBhdXRob3JzIHByb3Bvc2UgdGhlIHByb2JsZW0gDTxiciAvPm9mIHRvcC1rIEFQSXMgcmVjb21tZW5kYXRpb24gYmFzZWQgb24gdXNlcnPigJkgY2hvc2VuIEFQSXMuDTxiciAvPg08YnIgLz5TMiBUaGUgYW5hbHl0aWMgaGllcmFyY2h5IHByb2Nlc3MgdG8gZGVyaXZlIHRoZSB3ZWlnaHQgb2YgdGhlIHJhbmtpbmcgZnVuY3Rpb24gaXMgZWZmZWN0aXZlLg08YnIgLz4NPGJyIC8+UzMgVGhlIHZpc3VhbGl6YXRpb24gb2YgdGhlIHJlY29tbWVuZGF0aW9uIHByb3RvdHlwZSBpcyBlYXN5IGZvciByZWFkZXJz4oCZIHVuZGVyc3RhbmRpbmcuDTxiciAvPmQCAw9kFgRmDw8WAh8BBTdXZWFrIHBvaW50cyBvZiB0aGUgcGFwZXIgKHBsZWFzZSBudW1iZXIgdGhlbSBXMSxXMiwuLi4pZGQCAQ9kFgJmDxUBhAtXMSBUaGUgcGFwZXIgY29udmVydCBhIHJlYWwgd29ybGQgcHJvYmxlbSBpbnRvIG1hdGhlbWF0aWNhbCByZXByZXNlbnRhdGlvbiBhbmQNPGJyIC8+dGhlbiB0cnkgdG8gcHJvdmlkZSBhIHNvbHV0aW9uIHRvIHRoZSByZWFsIHdvcmxkIHByb2JsZW0gYnkgbWFuaXB1bGF0aW5nIHRoZQ08YnIgLz5tYXRoZW1hdGljYWwgbW9kZWwuIEhvd2V2ZXIsIHdoaWxlIGRvaW5nIHNvLCB0aGUgYXV0aG9ycyBkbyBub3QgcmVhbGx5IGxvb2sNPGJyIC8+YmFjayB0byBzZWUgd2hldGhlciB0aGVzZSBtYXRoZW1hdGljYWwgbWFuaXB1bGF0aW9uIG1ha2Ugc2Vuc2UgaW4gcmVhbCB3b3JsZC4NPGJyIC8+QXQgbWFueSBwb2ludHMgaW4gdGltZSwgd2Ugc3RhcnQgYXNraW5nIHdoZXRoZXIgc3VjaCBjb21wbGV4IG1hdGhlbWF0aWNhbCANPGJyIC8+bWFuaXB1bGF0aW9uIGlzIGVzc2VudGlhbCBpbiBzb2x2aW5nIHRoZSBwcm9ibGVtIGNvbXBhcmUgdG8gbW9yZSBzaW1wbGUNPGJyIC8+c29sdXRpb24uDTxiciAvPg08YnIgLz5XMiBUaGUgcGFwZXIgZG9lcyBub3QgcmVhbGx5IGNvbXBhcmUgdG8gb3RoZXIgYXBwcm9hY2hlcyBpbiB3ZWIgbWFzaHVwcyBidXQNPGJyIC8+c2ltcGx5IHdhdmUgdGhlbSBhd2FyZSBhcyBpcnJlbGV2YW50IFNvbWUgb2YgdGhlIGNvbW1lbnRzIGFyZSBub3QgdHJ1ZS4NPGJyIC8+Rm9yIGV4YW1wbGUsIHRoZSBjb21tZW50cyB0aGF0IFs4XSBvbmx5IHNvbHZlIFN0ZXAgMyBhbmQgNCBpcyBub3QgdHJ1ZSBzaW5jZQ08YnIgLz5bOF0gaXMgYWJvdXQgYXV0by1jb21wbGV0ZSBvZiBtYXNodXAgYW5kIHdpbGwgdGh1cyBhbHNvIHByb3Bvc2UgQVBJIHRvIGJlIGNvbm5lY3RlZA08YnIgLz5uZXh0IGluIHRoZSBtYXNodXAuDTxiciAvPg08YnIgLz5XMyBUaGUgcmVzdWx0cyBvZiAgdGhlIGJhc2ljIGFuZCBpbXByb3ZlZCBhbGdvcml0aG0gYXJlIHRvdGFsbHkgZGlmZmVyZW50LiAgDTxiciAvPkFzIHN1Y2gsIGl0IGlzIG5vdCBjbGVhciBob3cgdGhlIGltcHJvdmVkIGFsZ29yaXRobSBjYW4gYmUgY29uc2lkZXJlZCBpbXByb3ZlZC4NPGJyIC8+RnVydGhlcm1vcmUsIHRoZSBhdXRob3JzIGhhdmVu4oCZdCBjb21wYXJlZCB0aGUgYmFzaWMgYWxnb3JpdGhtIGFuZCB0aGUgaW1wcm92ZWQgDTxiciAvPm9uZSBpbiB0aGUgZXhwZXJpbWVudCBzZWN0aW9uLiANPGJyIC8+DTxiciAvPlc0IFRoZSBkZWZpbml0aW9uIG9mIHRoZSBkaXN0YW5jZSBpcyBiYXNlZCBvbiB0aGUgZG91YnRmdWwgYXNzdW1wdGlvbi4gVGhlDTxiciAvPnNlcGFyYXRpb24gb2YgZGlzdGFuY2UgYW5kIHRoZSByYW5raW5nIGZ1bmN0aW9uIHNlZW1zIGEgcmF0aGVyIHN0cmFuZ2UgYXBwcm9hY2guDTxiciAvPg08YnIgLz5XNSBUaGVyZSBleGlzdHMgc2V2ZXJhbCBtaXN0YWtlcyBpbiB0aGUgcGFwZXIuDTxiciAvPmQCBA9kFgRmDw8WAh8BBQtPcmlnaW5hbGl0eWRkAgEPZBYCZg8VAQZNZWRpdW1kAgUPZBYEZg8PFgIfAQUXUXVhbGl0eSBvZiBQcmVzZW50YXRpb25kZAIBD2QWAmYPFQEGTWVkaXVtZAIGD2QWBGYPDxYCHwEFDFNpZ25pZmljYW5jZWRkAgEPZBYCZg8VAQZNZWRpdW1kAgcPZBYEZg8PFgIfAQU+SG93IG1hbnkgYXR0ZW5kZWVzIHdpbGwgYmUgaW50ZXJlc3RlZCBpbiBhIHRhbGsgb24gdGhpcyBwYXBlcj9kZAIBD2QWAmYPFQEQYXZlcmFnZSBpbnRlcmVzdGQCCA9kFgRmDw8WAh8BBQ9UZWNobmljYWwgRGVwdGhkZAIBD2QWAmYPFQEGTWVkaXVtZAIJD2QWBGYPDxYCHwEFJVF1YWxpdHkgb2YgRXhwZXJpbWVudHMsIFJlcGVhdGFiaWxpdHlkZAIBD2QWAmYPFQEDTG93ZAIKD2QWBGYPDxYCHwEFWkRvIHRoZSBleHBlcmltZW50cyBzdXBwb3J0IHRoZSBjbGFpbXMgbWFkZSBpbiB0aGUgcGFwZXIgYW5kIG1hdGNoIHRoZSBtb3RpdmF0aW5nIGV4YW1wbGVzP2RkAgEPZBYCZg8VAQJub2QCCw9kFgRmDw8WAh8BBRZPdmVyYWxsIFJlY29tbWVuZGF0aW9uZGQCAQ9kFgJmDxUBBlJlamVjdGQCDA9kFgRmDw8WAh8BBSxEZXRhaWxlZCBjb21tZW50cyAocGxlYXNlIG51bWJlciBlYWNoIHBvaW50KWRkAgEPZBYCZg8VAf8WVGhlIG92ZXJhbGwgaWRlYSBhbmQgdGhlIHByb2JsZW0gc2V0dGluZyBhcmUgZ29vZC4gVGhlIGF1dGhvcnMgd2FudCB0byBzb2x2ZSB0aGUgDTxiciAvPnByb2JsZW0gb2YgdG9wLWsgQVBJcyByZWNvbW1lbmRhdGlvbiBiYXNlZCBvbiB1c2Vyc+KAmSBjaG9zZW4gQVBJcy4gTW9yZW92ZXIsIHNpbmNlIHRoZXkgIHdhbnQgdG8gcmFuayB0aGUgayBuZWFyZXN0IG5laWdoYm9yIHdpdGggNCBhdHRyaWJ1dGVzLCB0aGV5IHV0aWxpemVkIHRoZSBhbmFseXRpYyAgaGllcmFyY2h5IHByb2Nlc3MgdG8gZGVyaXZlIHRoZSB3ZWlnaHQgb2YgdGhlIHJhbmtpbmcgZnVuY3Rpb24uIFRoaXMgaXMgYSANPGJyIC8+Z29vZCB3YXkgdG8gaGFuZGxlIG11bHRpLWNyaXRlcmlhIGRlY2lzaW9uIG1ha2luZy4gRnVydGhlcm1vcmUsIHRoZSB2aXN1YWxpemF0aW9uIG9mIA08YnIgLz50aGUgcmVjb21tZW5kYXRpb24gcHJvdG90eXBlIGlzIGVhc3kgZm9yIHJlYWRlcnMgdG8gdW5kZXJzdGFuZC4gSG93ZXZlciwgdGhlIGF1dGhvcnMgDTxiciAvPm5lZWQgdG8gY29uc2lkZXIgdGhlIGZvbGxvd2luZyBpc3N1ZXMgdG8gZnVydGhlciBpbXByb3ZlIHRoZSBwYXBlci4gDTxiciAvPg08YnIgLz4xLiBUaGUgZGVmaW5pdGlvbiAzLjEgc2VlbXMgdmVyeSBzaW1pbGFyIHRvIHRoZSBjb25maWRlbmNlIGluIGFzc29jaWF0aW9uIHJ1bGUgbWluaW5nLiAgVGhlIHJlcG9zaXRvcnkgY29udGFpbnMgYSBzZXQgb2YgcnVsZXMsIGFuZCB3ZSBjYW4gbW9kZWwgdGhlIHByb2JsZW0gYXMgZmluZGluZyB0aGUgdG9wLWsgcnVsZXMgd2l0aCBtYXhpbXVtIGNvbmZpZGVuY2UuIElmIHRoZSBwcm9ibGVtIGluIHRoaXMgcGFwZXIgaXMgZGlmZmVyZW50LCB0aGUgYXV0aG9ycyBoYWQgYmV0dGVyIGV4cGxhaW4gaXQgbW9yZSBjYXJlZnVsbHkuIA08YnIgLz4NPGJyIC8+MiBUaGUgZGVmaW5pdGlvbiBvZiB0aGUgZGlzdGFuY2UgYmFzZWQgb24gdGhlIGRvdWJ0ZnVsIGFzc3VtcHRpb24uIFAoQXxDKSA+PSBQKEF8QikgKlAoQnxDKSBpcyByZWFzb25hYmxlIGZvciBzb21lIGNhc2VzLCBidXQgbWF5IGJlIG5vdCBzdWl0YWJsZSBmb3IgdGhlIGdlbmVyYWwgb25lLiBGb3IgZXhhbXBsZSwgUChBfEMpIG1heSBiZSBlcXVhbHMgdG8gMCBzaW5jZSB3ZSBjYW5ub3QgZGlyZWN0bHkgY29ubmVjdCB0aGVzZSB0d28uIEJ1dCBBIGNvdWxkIGNvbm5lY3QgdG8gQyB0aHJvdWdoIEIhICBNb3JlIHRoYW4gdGhhdCwgdGhpcyBhc3N1bXB0aW9uIHRlbmRzIHRvIGZpbmQgdGhlIHNob3J0ZXN0IGNvbm5lY3Rpb24gYmV0d2VlbiBBUElzIHdoaWNoIG1heWJlIG5vdCBpbnRlcmVzdGluZy4gVGhlIGxvbmdlciBwYXRoIGlzIHRoZSBvbmUgdGhhdCBpcyBoYXJkIHRvIGJlIGNvbXBvc2VkIGJ5IGh1bWFuLiBUaGUgc2VwYXJhdGlvbiBvZiBkaXN0YW5jZSBhbmQgdGhlIA08YnIgLz5yYW5raW5nIGZ1bmN0aW9uIGlzIHN0cmFuZ2UuICBUaGUgYWxnb3JpdGhtIGZpbmRzIHRoZSB0b3AtayBBUEkgYmFzZWQgb24gZGlzdGFuY2UgDTxiciAvPmJ1dCB0aGUgcmFuayB0aGVtIGJ5IG90aGVyIHJhbmtpbmcgZnVuY3Rpb24gd2hpY2ggc2VlbXMgbm90IHNvIHJlYXNvbmFibGUuDTxiciAvPg08YnIgLz4zIFRoZSByZXN1bHRzIG9mIGJhc2ljIGFsZ29yaXRobSBhbmQgdGhlIGltcHJvdmVkIGFsZ29yaXRobSBhcmUgdG90YWxseSBkaWZmZXJlbnQsIGR1ZSB0byB0aGUgZGlmZmVyZW50IGRpc3RhbmNlIG1lYXN1cmUuIFRoZSBiYXNpYyBhbGdvcml0aG0gY2FuIGJlIGltcHJvdmVkIGJ5IHByZS1jb21wdXRpbmcgZXZlcnkgUChBfEIpIHRvIHJlZHVjZSB0aGUgY29zdCB0byB0aGUgc2FtZSBsZXZlbCBvZiBWb3Jvbm9pLWJhc2VkIG1ldGhvZCwgIHdoaWNoIGFsc28gcHJlLWNvbXB1dGVzIGV2ZXJ5IFAoQXxCKS4gIEZ1cnRoZXJtb3JlLCB0aGUgYmFzaWMgYWxnb3JpdGhtIGNhbiByZWR1Y2UgdGhlIElPIGNvc3QgYnkgVEEgYmFzZWQgbWV0aG9kLiBSaWdodCBub3cgaXQgaXMgYXNzdW1lZCB0aGF0IHRoZSByZXBvc2l0b3J5IGNhbiBiZSBmaXQgaW50byBtZW1vcnksIHdoaWNoIGlzIG5vdCB0aGUgY2FzZS4gSW4gdGhlIHBhcGVyLCB0aGUgYXV0aG9ycyBzYWlkIGl0IGlzIGEgdmVyeSBjb21wbGV4IG5ldHdvcmssIGFuZCB0aGUgQVBJIGxpbmtzIGlzIE8obipuKS4gIFVzaW5nIHNvbWUgaW5kZXggc3RydWN0dXJlIG1heSBiZSBoZWxwZnVsLiBMYXN0bHksIHRoZSBhdXRob3JzIGhhdmVu4oCZdCBjb21wYXJlZCB0aGUgYmFzaWMgYWxnb3JpdGhtIGFuZCB0aGUgaW1wcm92ZWQgb25lIGluIHRoZSBleHBlcmltZW50IHNlY3Rpb24uIFRoZSBpcyBubyBleHBlcmltZW50cyBkb25lIHRvIGNvbnZpbmNlDTxiciAvPnJlYWRlcnMgdGhhdCB0aGUgaW1wcm92ZWQgYWxnb3J0aWhtIGNhbiBiZWF0IHRoZSBiYXNpYyBhbGdvcml0aG0gYm90aCBpbiB0ZXJtIG9mDTxiciAvPnRpbWUgY29tcGxleGl0eSBhbmQgcXVhbGl0eS4NPGJyIC8+DTxiciAvPg08YnIgLz40IFRoZXJlIGV4aXN0cyBzZXZlcmFsIG1pc3Rha2VzIGluIHRoZSBwYXBlci4gRm9yIGV4YW1wbGUsIFAoQXxCKSA9IFAoQnxBKSA9MSBjYW4gb25seSBndWFyYW50ZWUgQSxCIGFwcGVhciBpbiB0aGUgc2FtZSBzZXQgb2YgbWFzaHVwcywgaW5zdGVhZCBvZiBBPUIuIE1vcmVvdmVyLCBmKHgpIGlzIHRoZSBtb25vdG9uaWMgZGVjcmVhc2luZyBmdW5jdGlvbiwgYnV0IGQoQSxCKSBtYXkgbm90IGJlIG1vbm90b25pYyBkZWNyZWFzaW5nIGFjY29yZGluZyB0byBQKCkuIFRoZXJlZm9yZSwgdGhlIHRvcC1rIEFQSXMgY2Fubm90IGJlIHZpZXdlZCBhcyB0aGUgay1uZWFyZXN0IG5laWdoYm9ycyBvZiB0aGUgY2hvc2VuIHNldC4gQWxzbywgdGhlIHNldCBvZiBBUElzIHVzZXIgY2hvc2VuIG1heSBiZSBuZXh0IHRvIA08YnIgLz5lYWNoIG90aGVyIGluIGEgY29ubmVjdGVkIHJlZ2lvbiBvZiBWLiANPGJyIC8+ZAINDw8WAh8AaGRkAggPFQEAZBgDBR9jdGwwMCRjcGgkZ3ZSZXZpZXdzJGN0bDAyJGN0bDAwDzwrAAkBCAIBZAUfY3RsMDAkY3BoJGd2UmV2aWV3cyRjdGwwMSRjdGwwMA88KwAJAQgCAWQFH2N0bDAwJGNwaCRndlJldmlld3MkY3RsMDAkY3RsMDAPPCsACQEIAgFkwavYSHyIvwo/ibGbsk4+m1VI3aE=" />
+</div>
+
+<table id="header">
+<tr>
+<td><img src='/SIGMOD2010/Images/conferencelogo.gif' /></td>
+<td width="100%"><a href='http%3a%2f%2fwww.sigmod2010.org%2f'>SIGMOD&#39;2010</a><br /><b>ACM SIGMOD International Conference on Management of Data, Indianapolis, 2010</b><br />June 6-11, 2010<br />Indianapolis<br />USA</td>
+</tr>
+</table>
+<table id="content"><tr><td class='contentBorder'>&nbsp;</td><td class="contentContainer">
+<span id="ctl00_cph_Label4" style="font-size:Small;font-weight:bold;">Reviews For Paper</span>
+<span id="ctl00_cph_lblErrorMessage" class="error" style="font-size:Small;"></span>
+<div id="ctl00_cph_pnlReviews">
+	
+    <span style="font-size:Small;">
+<table class="nicetable2" style="text-align:left; width: 100%;">
+    <tr id="ctl00_cph_infoSubmission_trTrack">
+		<td><b>Track</b></td>
+		<td><span id="ctl00_cph_infoSubmission_lblTrack" style="font-size:Small;">Research</span></td>
+	</tr>
+	
+    <tr>
+        <td width="100px"><b>Paper ID</b></td>
+        <td><span id="ctl00_cph_infoSubmission_lblPaperId" style="font-size:Small;">385</span></td>
+    </tr>
+    <tr>
+        <td><b>Title</b></td>
+        <td><span id="ctl00_cph_infoSubmission_lblPaperTitle" style="font-size:Small;">Voronoi-based Navigation for Web Mashups</span></td>
+    </tr>
+    
+    
+    
+    
+    
+</table></span>
+    
+    
+            <hr />
+            <table>
+                <tr>
+                    <td>
+                        <span id="ctl00_cph_gvReviews_ctl00_Label2" style="font-size:Small;font-weight:bold;">Masked Reviewer ID:</span>
+                    </td>
+                    <td>
+                        <span id="ctl00_cph_gvReviews_ctl00_Label1" style="font-size:Small;">Assigned_Reviewer_1</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="ctl00_cph_gvReviews_ctl00_Label3" style="font-size:Small;font-weight:bold;">Review:</span>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+            <div>
+		<table cellspacing="0" cellpadding="4" rules="all" border="1" style="color:#333333;border-width:1px;border-style:None;font-family:Verdana;font-size:Small;border-collapse:collapse;">
+			<tr style="color:White;background-color:#5D7B9D;font-weight:bold;">
+				<th scope="col">Question</th><th scope="col">&nbsp;</th>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">Summary of the paper's main contributions and impact </td><td style="width:80%;">
+                            The authors design a novel visualized mashup system SurfToMash.<br />        A Voronoi diagram based model is proposed to efficiently recommend top-k APIs for users.<br />        Moreover, a comprehensive approach to rank the top-k APIs is also presented.<br />        These techniques are integrated to implement a Web application system SurfToMash.<br />      
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Strong points of the paper (please number them S1,S2,..)</td><td style="width:80%;">
+                                    S1: It is novel to model the Web mashup recommendation problem as the k-nearest neighbor problem in Voronoi diagram.<br />        S2: The problem formulation is clear and complete.<br />     
+                        </td>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">Weak points of the paper (please number them W1,W2,...)</td><td style="width:80%;">
+                                    W1: Definition 4.2 may not be suitable for all situations (will be elaborated in detailed comments).<br />        W2: The description of the generation of Voronoi diagram is not so clear.
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Originality</td><td style="width:80%;">
+                            High
+                        </td>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">Quality of Presentation</td><td style="width:80%;">
+                            Medium
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Significance</td><td style="width:80%;">
+                            Medium
+                        </td>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">How many attendees will be interested in a talk on this paper?</td><td style="width:80%;">
+                            average interest
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Technical Depth</td><td style="width:80%;">
+                            Medium
+                        </td>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">Quality of Experiments, Repeatability</td><td style="width:80%;">
+                            Medium
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Do the experiments support the claims made in the paper and match the motivating examples?</td><td style="width:80%;">
+                            yes
+                        </td>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">Overall Recommendation</td><td style="width:80%;">
+                            Weak Reject
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Detailed comments (please number each point)</td><td style="width:80%;">
+                            1. The key point of this paper is to model the Web mashup recommendation problem as the k-nearest neighbor problem in Voronoi diagram.<br />           As mentioned in Section 4.2, Step 1~3 are the preprocessing steps.<br />           This means that the Voronoi diagram is constructed offline.<br />           What I wonder is that whether Definition 4.2 is not suitable for all cases.<br />           Concretely Speaking, if the APIs of chosen are not connected in Voronoi diagram, using the center of these chosen APIs to calculate the distance may not be appropriate. <br />           Since the top-k APIs are extracted mainly based on this definition, I regard that this is a significant problem.<br />           The above-mentioned case is not discussed in this paper.<br />        2. Regarding Definition 3.1, P(A|B) may not be equal to P(B|A).<br />           As mentioned in the paper, this probability is derived from the repository collecting from Programmable Web and Yahoo! Pipes.<br />           However, what we know is the APIs used in a mashup.<br />           How could we know whether API A is followed by API B?<br />           In contrast, whether API B is followed by API A?<br />           Since the effectiveness of the proposed approach will be influenced much by the distance matrix of APIs, this details of generating the distance matrix should be clearly depicted. <br />        3. In Step 3 of Section 4.2, although the construction of Voronoi diagram is derived from the previous work, the description of this part is not so clear.<br />           How to iterate the divide and conquer process?<br />           How to generate ML and MR?<br />           Further description is needed to make this part more understandable.<br />        4. In the beginning of Step 1 in Section 4.2, it is mentioned that: Our work shows that there are almost 4,000 links amongst about 100 APIs.<br />           However, in 100 APIs, the largest number of possible connections is: C(100, 2) = 4950. (Choose 2 from 100)<br />           About 80% of APIs have connections between each other.<br />           Is there any problem about this statistic?<br />        5. Some parts of Step 1 and Step 2 in Section 4.2 are not clearly stated.<br />           In Step 1 (up-left side of page 5), why the function f(x) should satisfy those constraints?<br />           In Step 2 (Proposition 4.2), what is g(.,.)?<br />           On the other hand, in the last paragraph of Section 5, the settings of these parameters are missing.<br />        6. As mentioned in Section 6.2.1: We gave the standard ..., and then took them as the seed to generate 100,000 APIs ...<br />           It is not clear how this process is done.<br />        7. In Algorithm 2 of Step 3 in Section 4.2, the details of this algorithm can be further described.<br />           What does A(xi,yi) in line 2 stand for?<br />           What are 'low' and 'high' in line 10?<br />           It is recommended that more details can be described in the paragraph.<br />        8. Figure 2 seems not so correct.<br />           The up-left edge should be farther away from the center point.<br />        9. There are some typos.<br />           In Section 2.1, H(pi,pi) -> H(pi,pj).<br />           In Definition 3.1, 'Containning' -> 'containing'.<br />           In Proposition 4.2, be 'an' set of -> be 'a' set of
+                        </td>
+			</tr>
+		</table>
+	</div>
+            
+        
+            <hr />
+            <table>
+                <tr>
+                    <td>
+                        <span id="ctl00_cph_gvReviews_ctl01_Label2" style="font-size:Small;font-weight:bold;">Masked Reviewer ID:</span>
+                    </td>
+                    <td>
+                        <span id="ctl00_cph_gvReviews_ctl01_Label1" style="font-size:Small;">Assigned_Reviewer_2</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="ctl00_cph_gvReviews_ctl01_Label3" style="font-size:Small;font-weight:bold;">Review:</span>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+            <div>
+		<table cellspacing="0" cellpadding="4" rules="all" border="1" style="color:#333333;border-width:1px;border-style:None;font-family:Verdana;font-size:Small;border-collapse:collapse;">
+			<tr style="color:White;background-color:#5D7B9D;font-weight:bold;">
+				<th scope="col">Question</th><th scope="col">&nbsp;</th>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">Summary of the paper's main contributions and impact </td><td style="width:80%;">
+                            The paper proposes a mashup system that recommends new Web services to be integrated with Web services that are already chosen by the user. The recommendation is based on the linkage likelihood in the past mashups (how many users adopt a link from Filckr to GoogleMap in their mashups). A Voronoi diagram is introduced in order to compute top-k recommendation efficiently. To do so, the linkage likelihood is converted into a metric space, and a set of Web service APIs is mapped on a 2-dimensional space based on multi-dimensional scaling. The efficiency and accuracy of recommendation are demonstrated through experiments.
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Strong points of the paper (please number them S1,S2,..)</td><td style="width:80%;">
+                            S1: A prototype is implemented and tested through a user study.
+                        </td>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">Weak points of the paper (please number them W1,W2,...)</td><td style="width:80%;">
+                            W1: The metrics and techniques used in the paper are not new by themselves.<br />W2: The problem formulation is not specific to mashup, and it does not seem new.<br />W3: Experiments does not compare the proposed metrics with others.
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Originality</td><td style="width:80%;">
+                            Low
+                        </td>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">Quality of Presentation</td><td style="width:80%;">
+                            Medium
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Significance</td><td style="width:80%;">
+                            Low
+                        </td>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">How many attendees will be interested in a talk on this paper?</td><td style="width:80%;">
+                            average interest
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Technical Depth</td><td style="width:80%;">
+                            Low
+                        </td>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">Quality of Experiments, Repeatability</td><td style="width:80%;">
+                            Medium
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Do the experiments support the claims made in the paper and match the motivating examples?</td><td style="width:80%;">
+                            no
+                        </td>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">Overall Recommendation</td><td style="width:80%;">
+                            Reject
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Detailed comments (please number each point)</td><td style="width:80%;">
+                            (1) From the title "Voronoi-based...," I would assume a use of Voronoi diagram in Mashup recommendation is a key contribution of the paper. However, as written in Section 7, use of Voronoi diagram to K-nearest neighbor is not new. I do not clearly see any additional contribution to the existing work in this aspect.<br />(2) The problem formulation based on the users' past mashup statistics is quite generic (e.g. customers who purchased A also purchased B). As a result, I do not see novelty in the problem itself.<br />(3) I would expect new findings when recommendation is applied specific to mashup. What kind of features should be considered? Which metric perform better? etc. It would be nicer if the paper conduct such a comparative study rather than just presenting one approach that is not fundamentally new in general.<br />(4) The description in the paper lacks accuracy in some parts. For instance, in order to map probability P(A|B), P(B|A) to a metric space, the paper describes properties of functions f and g, but I do not find the actual functions used in the implementation.<br />(5) In Section 5, new scoring metrics on API quality is suddenly introduced. How are they integrated into the discussion up to Section 4?<br />(6) A prototype WITHOUT recommendation is compared to Yahoo! Pipes through a user study -- what is the point of this study, if you don't evaluate recommendation?<br />(7) Experiments show precision scores of the proposed approach. It must be compared with some baseline metrics to demonstrate effectiveness of the proposed metrics.
+                        </td>
+			</tr>
+		</table>
+	</div>
+            
+        
+            <hr />
+            <table>
+                <tr>
+                    <td>
+                        <span id="ctl00_cph_gvReviews_ctl02_Label2" style="font-size:Small;font-weight:bold;">Masked Reviewer ID:</span>
+                    </td>
+                    <td>
+                        <span id="ctl00_cph_gvReviews_ctl02_Label1" style="font-size:Small;">Assigned_Reviewer_3</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="ctl00_cph_gvReviews_ctl02_Label3" style="font-size:Small;font-weight:bold;">Review:</span>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+            <div>
+		<table cellspacing="0" cellpadding="4" rules="all" border="1" style="color:#333333;border-width:1px;border-style:None;font-family:Verdana;font-size:Small;border-collapse:collapse;">
+			<tr style="color:White;background-color:#5D7B9D;font-weight:bold;">
+				<th scope="col">Question</th><th scope="col">&nbsp;</th>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">Summary of the paper's main contributions and impact </td><td style="width:80%;">
+                            This paper proposed a method to find the top-k nearest neighbor APIs to help the user <br />find the related data API effectively when developing mashup applications. They developed a system, SurfToMash, which enables users to surf a data API web to mashup <br />select APIs. The system also provides user with clear guidance by trace-based <br />recommendation based on a Voronoi-based technique.
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Strong points of the paper (please number them S1,S2,..)</td><td style="width:80%;">
+                            S1 The overall idea and the problem setting are novel. The authors propose the problem <br />of top-k APIs recommendation based on users’ chosen APIs.<br /><br />S2 The analytic hierarchy process to derive the weight of the ranking function is effective.<br /><br />S3 The visualization of the recommendation prototype is easy for readers’ understanding.<br />
+                        </td>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">Weak points of the paper (please number them W1,W2,...)</td><td style="width:80%;">
+                            W1 The paper convert a real world problem into mathematical representation and<br />then try to provide a solution to the real world problem by manipulating the<br />mathematical model. However, while doing so, the authors do not really look<br />back to see whether these mathematical manipulation make sense in real world.<br />At many points in time, we start asking whether such complex mathematical <br />manipulation is essential in solving the problem compare to more simple<br />solution.<br /><br />W2 The paper does not really compare to other approaches in web mashups but<br />simply wave them aware as irrelevant Some of the comments are not true.<br />For example, the comments that [8] only solve Step 3 and 4 is not true since<br />[8] is about auto-complete of mashup and will thus also propose API to be connected<br />next in the mashup.<br /><br />W3 The results of  the basic and improved algorithm are totally different.  <br />As such, it is not clear how the improved algorithm can be considered improved.<br />Furthermore, the authors haven’t compared the basic algorithm and the improved <br />one in the experiment section. <br /><br />W4 The definition of the distance is based on the doubtful assumption. The<br />separation of distance and the ranking function seems a rather strange approach.<br /><br />W5 There exists several mistakes in the paper.<br />
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Originality</td><td style="width:80%;">
+                            Medium
+                        </td>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">Quality of Presentation</td><td style="width:80%;">
+                            Medium
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Significance</td><td style="width:80%;">
+                            Medium
+                        </td>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">How many attendees will be interested in a talk on this paper?</td><td style="width:80%;">
+                            average interest
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Technical Depth</td><td style="width:80%;">
+                            Medium
+                        </td>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">Quality of Experiments, Repeatability</td><td style="width:80%;">
+                            Low
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Do the experiments support the claims made in the paper and match the motivating examples?</td><td style="width:80%;">
+                            no
+                        </td>
+			</tr><tr style="color:#333333;background-color:#F7F6F3;">
+				<td style="width:20%;">Overall Recommendation</td><td style="width:80%;">
+                            Reject
+                        </td>
+			</tr><tr style="color:#284775;background-color:White;">
+				<td style="width:20%;">Detailed comments (please number each point)</td><td style="width:80%;">
+                            The overall idea and the problem setting are good. The authors want to solve the <br />problem of top-k APIs recommendation based on users’ chosen APIs. Moreover, since they  want to rank the k nearest neighbor with 4 attributes, they utilized the analytic  hierarchy process to derive the weight of the ranking function. This is a <br />good way to handle multi-criteria decision making. Furthermore, the visualization of <br />the recommendation prototype is easy for readers to understand. However, the authors <br />need to consider the following issues to further improve the paper. <br /><br />1. The definition 3.1 seems very similar to the confidence in association rule mining.  The repository contains a set of rules, and we can model the problem as finding the top-k rules with maximum confidence. If the problem in this paper is different, the authors had better explain it more carefully. <br /><br />2 The definition of the distance based on the doubtful assumption. P(A|C) >= P(A|B) *P(B|C) is reasonable for some cases, but may be not suitable for the general one. For example, P(A|C) may be equals to 0 since we cannot directly connect these two. But A could connect to C through B!  More than that, this assumption tends to find the shortest connection between APIs which maybe not interesting. The longer path is the one that is hard to be composed by human. The separation of distance and the <br />ranking function is strange.  The algorithm finds the top-k API based on distance <br />but the rank them by other ranking function which seems not so reasonable.<br /><br />3 The results of basic algorithm and the improved algorithm are totally different, due to the different distance measure. The basic algorithm can be improved by pre-computing every P(A|B) to reduce the cost to the same level of Voronoi-based method,  which also pre-computes every P(A|B).  Furthermore, the basic algorithm can reduce the IO cost by TA based method. Right now it is assumed that the repository can be fit into memory, which is not the case. In the paper, the authors said it is a very complex network, and the API links is O(n*n).  Using some index structure may be helpful. Lastly, the authors haven’t compared the basic algorithm and the improved one in the experiment section. The is no experiments done to convince<br />readers that the improved algortihm can beat the basic algorithm both in term of<br />time complexity and quality.<br /><br /><br />4 There exists several mistakes in the paper. For example, P(A|B) = P(B|A) =1 can only guarantee A,B appear in the same set of mashups, instead of A=B. Moreover, f(x) is the monotonic decreasing function, but d(A,B) may not be monotonic decreasing according to P(). Therefore, the top-k APIs cannot be viewed as the k-nearest neighbors of the chosen set. Also, the set of APIs user chosen may be next to <br />each other in a connected region of V. <br />
+                        </td>
+			</tr>
+		</table>
+	</div>
+            
+        
+    <br />
+    <br />
+
+</div>
+</td><td class='contentBorder'>&nbsp;</td></tr></table>
+</form>
+</body>
+</html>

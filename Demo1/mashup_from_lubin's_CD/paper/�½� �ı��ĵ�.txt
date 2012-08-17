@@ -1,0 +1,132 @@
+Enterprise Information Mashups: Integrating Information, Simply
+A Semantic Information Integration Tool Suite 
+Incremental Schema Matching 
+Putting Context into Schema Matching
+iDM: A Unified and Versatile Data Model for Personal Dataspace Management
+LinkClus: Efficient Clustering via Heterogeneous Semantic Links
+Similarity Search: A Matching Based Approach
+Efficiently Linking Text Documents with Relevant Structured Information
+
+KDD 2006
+Event Detection from Evolution of Click-through Data
+Learning to Rank Networked Entities
+A Framework for Analysis of Dynamic Social Networks  (poster)
+
+
+ISWC 2006
+Extracting Relations in Social Networks from Web using Similarity between Collective Contexts
+A Framework for Schema-Driven Relationship Discovery from Unstructured text
+
+WWW 2007
+1.Homepage Live: Automatic Block Tracing for Web Personalization 
+2.Demographic Prediction based on User's Browsing Behavior 
+3.Why We Search? Visualizing and Predicting User Behavior 
+4.Wherefore Art Thou R3579X? Anonymized Social Networks Hidden Patterns and Structural Steganography 
+5.Information Flow Modeling based on Diffusion Rate for Prediction and Ranking 
+6.Google News Personalization: Scalable Online Collaborative Filtering 
+7.Extraction and Classification of Dense Communities in the Web 
+8.Navigating the Intranet with High Precision 
+9.Optimizing Web Search Using Social Annotations 
+10.Answering Relationship Queries on the Web 
+11.Dynamic Personalized Pagerank in Entity-Relation Graphs 
+12.A Large-scale Evaluation and Analysis of Personalized Search Strategies 
+13.Privacy-Enhancing Personalized Web Search 
+14.Using Google Distance to Weight Approximate Ontology Matches 
+15.The Two Cultures: Mashing Up Web 2.0 and the Semantic Web (position paper)
+16.Analysis of Topological Characteristics of Huge Online Social Networking Services 
+
+ISWC 2007
+An Unsupervised Model for Exploring Hierarchical Semantics from Social Annotations
+Ontology-based Interpretation of Keywords for Semantic Search
+Personalization 2.0: Web search personalization via social bookmarking and tagging
+Scalable Cleanup of Information Extraction Data Using Ontologies
+Semplore: An IR Approach to Scalable Hybrid Query of Semantic Web Data
+Sindice.com: Weaving the Open Linked Data
+SPARK: Adapting Keyword Query to Semantic Search
+The Semantic Web and Human Inference: A Lesson from Cognitive Science
+
+SIGMOD 2007
+1.Addressing Diverse User Preferences in SQL-Query-Result Navigation
+2.Fast and Practical Indexing and Querying of Very Large Graphs
+3.Intensional Associations between Data and Metadata
+4.BLINKS: Ranked Keyword Searches on Graphs
+5.Privacy Preserving Schema and Data Matching
+6.WebStudio - Building infrastructure for web data management
+7.DataMator: Mashups for the Masses (demo)
+8.Mashup Feeds: Continuous Queries over Web Services (demo)
+9.User-Centric Personalized Extensibility for Data-Driven Web Applications (demo)
+10. Orchestra: Facilitating Collaborative Data Sharing (demo)
+11. Information Discovery in Loosely Integrated Data (demo)
+
+
+VLDB 2007:
+1.Building Structured Web Community Portals: A Top-Down, Compositional, and Incremental Approach
+2.Data Integration with Uncertainty
+3. DAMIA - A Data Mashup Fabric for Intranet Applications (demo)
+
+KDD 2007:
+1.A Framework For Community Identification in Dynamic Social Networks
+2.Active Exploration for Learning Rankings from Clickthrough Data 
+3.Applying Collaborative Filtering Techniques to Movie Search for Better Ranking and Browsing
+4.iLink: Search and Routing in Social Networks
+
+SIGIR 2007
+1.HITS hits TREC: Exploring IR evaluation results with network analysis 
+2.Random Walks on the Click Graph 
+3.Towards Automatic Extraction of Event and Place Semantics from Flickr Tags 
+4.Effective Missing Data Prediction for Collaborative Filtering
+5.The Influence of Caption Features on Clickthrough Patterns in Web Search 
+6.Efficient Bayesian Hierarchical User Modeling for Recommendation Systems 
+
+
+
+
+WWW 2008
+1. Statistical analysis of the social network and discussion threads in Slashdot 
+2.Yes, There is a Correlation - From Social Networks to Personal Behavior on the Web 
+3.Knowledge Sharing and Yahoo Answers: Everyone Knows Something 
+4.Mining the Search Trails of Surfing Crowds: Identifying Relevant Websites From User Activity 
+5.Personalized Web Exploration with Task Models 
+6.Tag-based Social Interest Discovery
+7.Statistical Properties of Community Structure in Large Social and Information Networks 
+8.Wishful Search: Interactive Composition of Data Mashups 
+9.SMash: Secure Component Model for Cross-Domain Mashups on Unmodified Browsers 
+10.Flickr Tag Recommendation based on Collective Knowledge 
+11.Why Web 2.0 is Good for Learning and for Research: Principles and Prototypes 
+12.Exploring Social Annotations for Information Retrieval 
+13.Personalized Interactive Faceted Search 
+
+ISWC 2008
+1.Semantic Modelling of User Interests based on Cross-Folksonomy Analysis
+
+
+VLDB 2008
+1.Efficient Network-Aware Search in Collaborative Tagging Sites
+2.Hash-based Subgraph Query Processing Method for Graph-structured XML Documents
+3.A Pay-As-You-Go Framework for Query Execution Feedback
+4.Learning to Create Data-Integrating Queries
+5.Simrank++: Query Rewriting through Link Analysis of the Click Graph
+
+SIGIR 2008
+1.Personalized Active Learning for Collaborative Filtering
+2.The Good and the Bad System: Does the Test Collection Predict Users¡¯ Effectiveness?
+3.A User Browsing Model to Predict Search Engine Click Data from Past Observations
+4.Social Tag Prediction
+5.Crosslingual Location Search
+6.BrowseRank: Letting Web Users Vote for Page Importance
+7.EigenRank: A Ranking-Oriented Approach to Collaborative Filtering
+8.Efficient Top-k Querying over Social-Tagging Networks
+10.Real-time Automatic Tag Recommendation
+11.To Personalize or Not to Personalize: Modeling Queries with Variation in User Intent
+
+
+
+
+
+beautiful sentence:
+1. The EKOSS system enables knowledge creators to construct computer-interpretable semantically rich statements describing their knowledge with minimal effort and without any knowledge of semantic web technologies.
+
+
+Possible Titles:
+1. Linking Data APIs and Its Applications to Mashup and User Private data-based Search
+

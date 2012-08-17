@@ -1,0 +1,1173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mashupApps>
+<mashupApp mashupAppId="1">
+<name>FlickrToVirtualEarth</name>
+<description>put photos of flickr to virtualEarth</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:VirtualEarth  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>none</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="3">
+<name>EventPhotoToVirtual</name>
+<description>This is a mashup application used to find events and photos, and show this information in the virtual Earth.</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:VirtualEarth  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Upcoming.findEvents+++Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>none</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="5">
+<name>upcomingToVirtualEarth</name>
+<description>show events of Upcoming in virtual earth</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:VirtualEarth  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Upcoming.findEvents]}]]></tileSource>
+<accessUrl>none</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="7">
+<name>ARealMashup</name>
+<description>This is a real complex mashup application, which is used to try to mashup all the information about technology, computers, and even traffic info.</description>
+<tileSource><![CDATA[{tpName:LiveNews  ,  operName:searchNews  ,  type:root  ,  input:[<term Technology>+++<count 10>]  ,  output:[subject+++content+++url+++displayUrl+++source+++totalCount]  ,  parents:[]}    {tpName:YahooAnswers  ,  operName:getAnswers  ,  type:root  ,  input:[<term computers>+++<count 10>]  ,  output:[subject+++content+++date+++link+++category+++userId+++userNick+++userPhotoURL+++userNick+++numAnswers+++numComments+++chosenAnswererId+++chosenAnswererNick]  ,  parents:[]}    {tpName:Digg  ,  operName:getStories  ,  type:root  ,  input:[<number 10>]  ,  output:[title+++description+++user+++userThumbnail+++topic+++storyID+++link+++submitDate+++diggs+++comments+++href+++status]  ,  parents:[]}    {tpName:Twitter  ,  operName:getLatestPosts  ,  type:midNode  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[LiveNews.searchNews+++YahooAnswers.getAnswers+++Digg.getStories]}    {tpName:MSNShopping  ,  operName:getProducts  ,  type:leaf  ,  input:[<text xbox 360>+++<number 30>]  ,  output:[productUrl+++url+++id+++categoryId+++title+++brand+++vendorName+++description+++rating+++price+++vendorId]  ,  parents:[Digg.getStories]}    {tpName:YahooTraffic  ,  operName:getTrafficForAddress  ,  type:leaf  ,  input:[<street 1 Microsoft Way>+++<city Redmond>+++<state WA>+++<radius 10>]  ,  output:[title+++type+++description+++latitude+++longitude+++direction+++severity+++reportDate+++updateDate+++endDate+++imageURL]  ,  parents:[Twitter.getLatestPosts]}]]></tileSource>
+<accessUrl>none</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="11">
+<name>FindProductBasedonEventsAboutMusic</name>
+<description>I want to find some products based on the information extracted from events</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:MSNShopping  ,  operName:getProducts  ,  type:leaf  ,  input:[<text xbox 360>+++<number 30>]  ,  output:[productUrl+++url+++id+++categoryId+++title+++brand+++vendorName+++description+++rating+++price+++vendorId]  ,  parents:[Upcoming.findEvents]}]]></tileSource>
+<accessUrl>none</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="12">
+<name>smsTunes</name>
+<description>Play video-karaokes for the hot 20 songs of the moment. Create your own with our Online Karaoke Creator.</description>
+<tileSource><![CDATA[{tpName:GoogleWebSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[GoogleWebSearch.search]}]]></tileSource>
+<accessUrl>http://www.smstunes.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="13">
+<name>World of Hollywood</name>
+<description>World of Hollywood has videos of Hollywood movies, actors and actresses. Search for movie videos from multiple channels like Youtube, MySpace, AOL and others</description>
+<tileSource><![CDATA[{tpName:AOLVideo  ,  operName:searchVideo  ,  type:root  ,  input:[<query music>]  ,  output:[title+++description+++playUrl]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[AOLVideo.searchVideo+++Youtube.searchVideo]}]]></tileSource>
+<accessUrl>http://truveohollywoodvideos.googlepages.com/HollywoodVideos.html</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="15">
+<name>Isportif</name>
+<description>Sports Web 2.0. Mashing up Flickr, YouTube and RSS feeds to provide fans a way to track all the most recent videos and news for their favorite teams.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++Youtube.searchVideo]}]]></tileSource>
+<accessUrl>http://www.isportif.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="17">
+<name>Best Buys Zone UK</name>
+<description>A UK shopping comparison engine, covering Amazon UK, eBay UK, and Shopping.com UK.</description>
+<tileSource><![CDATA[{tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:ShoppingCom  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:eBay  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords harry potter>+++<count 10>]  ,  output:[title+++detailsURL+++stockPhotoURL]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[amazon.findProducts+++ShoppingCom.findProducts+++eBay.findProducts]}]]></tileSource>
+<accessUrl>http://bestbuyszone.co.uk</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="19">
+<name>Find</name>
+<description>Meta search engine. Find web sites, photos, news and videos. Uses Flickr, Yahoo Image Search, Yahoo Search, Yahoo Video Search and YouTube.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:YahooImage  ,  operName:search  ,  type:root  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[]}    {tpName:YahooVideo  ,  operName:search  ,  type:root  ,  input:[<term cars>+++<number flash>+++<number 10>]  ,  output:[title+++description+++videoURL+++thumbnailImageURL]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++Youtube.searchVideo+++YahooImage.search+++YahooVideo.search]}]]></tileSource>
+<accessUrl>http://www.find.ma</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="21">
+<name>Webmunism</name>
+<description>Combines YouTube videos, Flickr photos, Last.fm albums and Amazon books, grouped by Wikipedia category.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:Lastfm  ,  operName:getWeeklyTopTracks  ,  type:root  ,  input:[]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++Youtube.searchVideo+++Lastfm.getWeeklyTopTracks+++amazon.findProducts]}]]></tileSource>
+<accessUrl>http://www.webmunism.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="23">
+<name>Zoogle IN</name>
+<description>Zoogle.in search has lots of categories like content sharing, knowledge, blogs, search engines, and jobs. Zoogle categorizes the search results based on the search sources.</description>
+<tileSource><![CDATA[{tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:YahooAnswers  ,  operName:getAnswers  ,  type:root  ,  input:[<term computers>+++<count 10>]  ,  output:[subject+++content+++date+++link+++category+++userId+++userPhotoURL+++userNick+++numAnswers+++numComments+++chosenAnswererId+++chosenAnswererNick]  ,  parents:[]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:midNode  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[amazon.findProducts]}    {tpName:LiveWebSearch  ,  operName:search  ,  type:leaf  ,  input:[<query cheese>+++<count 10>]  ,  output:[title+++description+++url]  ,  parents:[amazon.findProducts]}    {tpName:eBay  ,  operName:findProducts  ,  type:leaf  ,  input:[<keyWords harry potter>+++<count 10>]  ,  output:[title+++detailsURL+++stockPhotoURL]  ,  parents:[GoogleWebSearch.search+++YahooAnswers.getAnswers]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[GoogleWebSearch.search]}]]></tileSource>
+<accessUrl>http://www.zoogle.in</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="25">
+<name>Adactio Elsewhere</name>
+<description>Jeremy Keith combines a variety of personal information from across the web in one place via Ajax scripting and the APIs from Upcoming.org, Flickr, Amazon, and Del.icio.us.</description>
+<tileSource><![CDATA[{tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:YahooAnswers  ,  operName:getAnswers  ,  type:root  ,  input:[<term computers>+++<count 10>]  ,  output:[subject+++content+++date+++link+++category+++userId+++userPhotoURL+++userNick+++numAnswers+++numComments+++chosenAnswererId+++chosenAnswererNick]  ,  parents:[]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:midNode  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[amazon.findProducts]}    {tpName:LiveWebSearch  ,  operName:search  ,  type:leaf  ,  input:[<query cheese>+++<count 10>]  ,  output:[title+++description+++url]  ,  parents:[amazon.findProducts]}    {tpName:eBay  ,  operName:findProducts  ,  type:leaf  ,  input:[<keyWords harry potter>+++<count 10>]  ,  output:[title+++detailsURL+++stockPhotoURL]  ,  parents:[GoogleWebSearch.search+++YahooAnswers.getAnswers]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[GoogleWebSearch.search]}]]></tileSource>
+<accessUrl>http://elsewhere.adactio.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="27">
+<name>5th Bar</name>
+<description>5th Bar community that collects information about mobile phones, cell phone carriers, and accessories from members and sources all over the world.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[]}    {tpName:eBay  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords harry potter>+++<count 10>]  ,  output:[title+++detailsURL+++stockPhotoURL]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:CNet  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo+++eBay.findProducts+++amazon.findProducts+++CNet.findProducts]}]]></tileSource>
+<accessUrl>http://www.5thbar.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="29">
+<name>Acid</name>
+<description>Acid is an enhanced Yahoo Local Services processor. It is an interactive way to gather services data in the U.S.</description>
+<tileSource><![CDATA[{tpName:YahooGeocoding  ,  operName:geoCode  ,  type:root  ,  input:[<street street>+++<city newYork>+++<location freeText>]  ,  output:[Latitude+++Longitude+++Address+++City+++State+++Zip+++Country]  ,  parents:[]}    {tpName:YahooTraffic  ,  operName:getTrafficForAddress  ,  type:midNode  ,  input:[<street 1 Microsoft Way>+++<city Redmond>+++<state WA>+++<radius 10>]  ,  output:[title+++type+++description+++latitude+++longitude+++direction+++severity+++reportDate+++updateDate+++endDate+++imageURL]  ,  parents:[YahooGeocoding.geoCode]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[YahooTraffic.getTrafficForAddress]}]]></tileSource>
+<accessUrl>http://www.tetonpost.com/acid/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="31">
+<name>iPhone Tags</name>
+<description>Get your daily dose of news, blogs, photos, discussions, bookmarks and videos related to the new iPhone by Apple.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[]}    {tpName:delicious  ,  operName:getTags  ,  type:root  ,  input:[]  ,  output:[tags]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++Youtube.searchVideo+++delicious.getTags]}]]></tileSource>
+<accessUrl>http://www.iphonetags.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="33">
+<name>Stuff a Blog</name>
+<description>This webapp for bloggers to create content-rich blog posts. Type in keywords, select content, and it returns the HTML. Returns relevant data from Flickr, Amazon and others.</description>
+<tileSource><![CDATA[{tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:YahooAnswers  ,  operName:getAnswers  ,  type:root  ,  input:[<term computers>+++<count 10>]  ,  output:[subject+++content+++date+++link+++category+++userId+++userPhotoURL+++userNick+++numAnswers+++numComments+++chosenAnswererId+++chosenAnswererNick]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[amazon.findProducts+++YahooAnswers.getAnswers]}    {tpName:VirtualEarth  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://stuffablog.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="35">
+<name>Facebook Widget Slideshow</name>
+<description>Make an imageLoop slideshow on Facebook and show it to friends in your profile.</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:imageLoop  ,  operName:queryImages  ,  type:leaf  ,  input:[<query music>]  ,  output:[query+++imageID]  ,  parents:[FaceBook.getFriends]}]]></tileSource>
+<accessUrl>http://www.facebook.com/tos.php?api_key=686491426b2db748f215dd6a3f320fef&amp;next=http%3A%2F%2Fgadgetlabs.eu%2Ftestapp%2F&amp;v=1.0&amp;canvas</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="37">
+<name>Clipegg</name>
+<description>Clipegg aggregates links to popular media published on social media sites. You can quickly read the most popular news, watch the latest videos and top images.</description>
+<tileSource><![CDATA[{tpName:Digg  ,  operName:getStories  ,  type:root  ,  input:[<number 10>]  ,  output:[title+++description+++user+++userThumbnail+++topic+++storyID+++link+++submitDate+++diggs+++comments+++href+++status]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[Digg.getStories]}]]></tileSource>
+<accessUrl>http://clipegg.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="41">
+<name>Celebrity Ranker</name>
+<description>Uses Google to find out how popular and sexy celebrities are, and shows images from Yahoo Image Search API. Finds celebrities which are similar in popularity...</description>
+<tileSource><![CDATA[{tpName:GoogleWebSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:YahooImage  ,  operName:search  ,  type:leaf  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[GoogleWebSearch.search]}]]></tileSource>
+<accessUrl>http://www.gpeters.com/celeb/celebrity-ranker.php</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="42">
+<name>GameTripping.com Ballpark Guide</name>
+<description>GameTripping.com lets you to share and collect your experiences visiting ballparks across the US. Features a guide and gallery powered by ...</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://www.gametripping.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="43">
+<name>Flotzam</name>
+<description>Watch the data that you care about in this screensaver mashup of Facebook, Flickr, Twitter, and blogs. This visualization lets you configure what you want to watch a...</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:FaceBook  ,  operName:getUserInfoById  ,  type:root  ,  input:[<userID 676712790>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++Twitter.getLatestPosts+++FaceBook.getUserInfoById]}]]></tileSource>
+<accessUrl>http://flotzam.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="45">
+<name>Frisbee Mashup</name>
+<description>Frisbee Mashup newes photos, events, movies, bookmarks and special feeds are published on five pages, frisbee, dog frisbee, disc golf, ultimate and freestyle.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[]}    {tpName:delicious  ,  operName:getPostsByTag  ,  type:root  ,  input:[<tag google>]  ,  output:[title+++postUrl+++description+++tags]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++Upcoming.findEvents+++Youtube.searchVideo+++delicious.getPostsByTag]}]]></tileSource>
+<accessUrl>http://www.pageflakes.com/ole1.ashx?page=1200720</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="47">
+<name>Locale Random Day Out</name>
+<description>The random day out generator. Pick where and the types of things you like to do. Watch it build your itinerary for the day.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:VirtualEarth  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://www.randomdayout.co.uk</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="49">
+<name>Find Parking via ParkingCarma</name>
+<description>Mashup of events from Upcoming.org with local parking facilities. Advanced reservations are also possible at some locations.</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:VirtualEarth  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Upcoming.findEvents]}]]></tileSource>
+<accessUrl>http://www.parkingcarma.com/its/DesktopDefault.aspx?tabid=65</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="51">
+<name>iGoogle Video Search</name>
+<description>With this Truveo gadget, you can perform video search from your iGoogle page.</description>
+<tileSource><![CDATA[{tpName:GoogleWebSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:AOLVideo  ,  operName:searchVideo  ,  type:leaf  ,  input:[<query music>]  ,  output:[title+++description+++playUrl]  ,  parents:[GoogleWebSearch.search]}]]></tileSource>
+<accessUrl>http://www.google.co.in/ig/directory?q=truveo&amp;hl=en&amp;root=%2Fig&amp;dpos=top&amp;start=7&amp;url=gadgetssb2008.googlepages.com/TruveoSearchOrkutGadget.xml</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="53">
+<name>FlickR Slideshow</name>
+<description>Slideshow widget for Flickr photos built using imageLoop API.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:imageLoop  ,  operName:queryImageByImageID  ,  type:leaf  ,  input:[<imageID 100000>]  ,  output:[title+++tags+++description+++imageLink+++ownerUsername]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://www.imageloop.com/de/imageloopr.htm</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="55">
+<name>deliSearch</name>
+<description>deliSearch allows you to do a search through a delicious users bookmark collection. Think Rollyo, with search rolls from delicious.</description>
+<tileSource><![CDATA[{tpName:delicious  ,  operName:getPostsByTag  ,  type:root  ,  input:[<tag google>]  ,  output:[title+++postUrl+++description+++tags]  ,  parents:[]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:leaf  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[delicious.getPostsByTag]}]]></tileSource>
+<accessUrl>http://blogs.open.ac.uk/Maths/ajh59/deliSearch.php</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="57">
+<name>favrats</name>
+<description>favrats makes product suggestions based on your Facebook friends favorite movies, music, books or TV shows.</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:leaf  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[FaceBook.getFriends]}]]></tileSource>
+<accessUrl>http://www.favrats.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="59">
+<name>Netvibez</name>
+<description>Watch videos from YouTube, AOL, Yahoo, Metacafe; view Flickr images, search for music from Pandora, and play games. Use the Hide Me feature to quickly hide the site if you are at work.</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[]}    {tpName:AOLVideo  ,  operName:searchVideo  ,  type:root  ,  input:[<query music>]  ,  output:[title+++description+++playUrl]  ,  parents:[]}    {tpName:YahooVideo  ,  operName:search  ,  type:root  ,  input:[<term cars>+++<number flash>+++<number 10>]  ,  output:[title+++description+++videoURL+++thumbnailImageURL]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[FaceBook.getFriends+++Flickr.getGeotaggedPhotos+++Youtube.searchVideo+++AOLVideo.searchVideo+++YahooVideo.search]}]]></tileSource>
+<accessUrl>http://www.netvibez.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="61">
+<name>Surf Search</name>
+<description>General purpose search mashup that searches video, news, and photos.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[]}    {tpName:YahooImage  ,  operName:search  ,  type:root  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++Youtube.searchVideo+++YahooImage.search]}]]></tileSource>
+<accessUrl>http://ihang10.com/Surf</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="63">
+<name>My Bikram Yoga</name>
+<description>MyBikramYoga.com is dedicated in bringing you the latest in the Bikram yoga community, news, blogs, images and videos.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[]}    {tpName:Technorati  ,  operName:searchBlog  ,  type:root  ,  input:[]  ,  output:[title+++description+++url+++publishDate]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo+++Flickr.getGeotaggedPhotos+++Technorati.searchBlog]}]]></tileSource>
+<accessUrl>http://www.mybikramyoga.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="65">
+<name>Music on Tube</name>
+<description>Combines Flickr, Last.fm and YouTube. Create your own folders, drag your videos, and view videos in a player.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[]}    {tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:root  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo+++Flickr.getGeotaggedPhotos+++Lastfm.getTracksByArtist]}]]></tileSource>
+<accessUrl>http://www.musicontube.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="67">
+<name>Snapp Radio</name>
+<description>The Sun Labs Snapp Radio is a mashup of last.fm and Flickr. When you listen to music from Radio Paradise or last.fm, Snapp Radio....</description>
+<tileSource><![CDATA[{tpName:Lastfm  ,  operName:getWeeklyTopTracks  ,  type:root  ,  input:[]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:leaf  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[Lastfm.getWeeklyTopTracks]}]]></tileSource>
+<accessUrl>http://SnappRadio.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="69">
+<name>Trendite</name>
+<description>Aggregates search trends from Google Trends and Yahoo Buzz. A complete list of the trends is supplemented by Google Search Results, Blog Search Results...</description>
+<tileSource><![CDATA[{tpName:Lastfm  ,  operName:getWeeklyTopTracks  ,  type:root  ,  input:[]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:YahooSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:leaf  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[Lastfm.getWeeklyTopTracks]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[GoogleWebSearch.search+++YahooSearch.search]}]]></tileSource>
+<accessUrl>http://www.trendite.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="71">
+<name>RetroTube</name>
+<description>Japanese site lets you search YouTube videos classified by age and category like music, games, and anime.</description>
+<tileSource><![CDATA[{tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[amazon.findProducts]}]]></tileSource>
+<accessUrl>http://www.retro-tube.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="73">
+<name>Official Flickr Map</name>
+<description>Millions of Flickr photos have been geotagged and placed on a Yahoo Map. Uses the recently added Geo features of Flickr. Add a special tag for photos from Upcoming.org ...</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:midNode  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[Upcoming.findEvents]}    {tpName:VirtualEarth  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://www.flickr.com/map/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="75">
+<name>MyShopping Facebook</name>
+<description>Use the MyShopping application for Facebook to connect with friends, co-workers, or family on your daily shopping activities.</description>
+<tileSource><![CDATA[{tpName:ShoppingCom  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:leaf  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[ShoppingCom.findProducts]}]]></tileSource>
+<accessUrl>http://www.secretprices.com/myshopping/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="77">
+<name>Eventpedia</name>
+<description>See events coming to your neighborhood via this mashup of Google Maps and Upcoming.org.</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:VirtualEarth  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Upcoming.findEvents]}]]></tileSource>
+<accessUrl>http://www.eventpedia.net/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="79">
+<name>Shared Search</name>
+<description>Shared Search is a way for you and your contact to perform searches on the same keywords and view the results together. Results are synchronised...</description>
+<tileSource><![CDATA[{tpName:MSNMessenger  ,  operName:InviteUser  ,  type:root  ,  input:[<returnurl none>+++<privacyurl none>]  ,  output:[Id+++Result]  ,  parents:[]}    {tpName:LiveWebSearch  ,  operName:search  ,  type:leaf  ,  input:[<query cheese>+++<count 10>]  ,  output:[title+++description+++url]  ,  parents:[MSNMessenger.InviteUser]}]]></tileSource>
+<accessUrl>http://www.worldsbestapp.com/EntryDetail.aspx?Value=KHcwjyqeuj8bQs%252bl2LNfm30oLniSN2ZkPPFSZIOEOiE%253d</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="81">
+<name>YahooTraffic</name>
+<description>displaying traffic on Yahoo Map</description>
+<tileSource><![CDATA[{tpName:YahooTraffic  ,  operName:getTrafficForAddress  ,  type:root  ,  input:[<street 1 Microsoft Way>+++<city Redmond>+++<state WA>+++<radius 10>]  ,  output:[title+++type+++description+++latitude+++longitude+++direction+++severity+++reportDate+++updateDate+++endDate+++imageURL]  ,  parents:[]}    {tpName:YahooMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[YahooTraffic.getTrafficForAddress]}]]></tileSource>
+<accessUrl>http://www.andrew.cmu.edu/user/astyler/project/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="83">
+<name>Yahoo! APIs Example with Code</name>
+<description>Example Yahoo! Map with overlay of Local and Traffic information. With link to article on how this was programmed. By Dan Theurer.</description>
+<tileSource><![CDATA[{tpName:YahooTraffic  ,  operName:getTrafficForAddress  ,  type:root  ,  input:[<street 1 Microsoft Way>+++<city Redmond>+++<state WA>+++<radius 10>]  ,  output:[title+++type+++description+++latitude+++longitude+++direction+++severity+++reportDate+++updateDate+++endDate+++imageURL]  ,  parents:[]}    {tpName:YahooLocalSearch  ,  operName:search  ,  type:root  ,  input:[<query hotel>+++<withinMiles 10>]  ,  output:[title+++googleMapUrl+++latitude+++longitude+++streetAddress+++city+++region+++country+++ddUrl+++ddUrlToHere+++ddUrlFromHere+++mapImage]  ,  parents:[]}    {tpName:YahooMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[YahooTraffic.getTrafficForAddress+++YahooLocalSearch.search]}]]></tileSource>
+<accessUrl>http://theurer.cc/maps/y/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="85">
+<name>Youtube Favorites RSS</name>
+<description>Enter your Youtube username and press the button to create an RSS feed with embedded movies of your Youtube Favorites.</description>
+<tileSource><![CDATA[{tpName:Dapper  ,  operName:search  ,  type:root  ,  input:[<keyWords health>]  ,  output:[title+++domain+++description+++link]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[Dapper.search]}]]></tileSource>
+<accessUrl>http://www.metaportaldermedienpolemik.net/blog/Youtube%20Favorites%20RSS</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="87">
+<name>YouTube Made Simple and Visual</name>
+<description>View YouTube in an un-cluttered more visual way, your search terms will display 50 video images, a description is shown by hovering over each image. Google searches are shown for News, Web, Images, Books and Blogs related to search terms.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[GoogleWebSearch.search+++Youtube.searchVideo]}]]></tileSource>
+<accessUrl>http://www.vizband.co.uk</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="89">
+<name>Moodgeist</name>
+<description>Moodgeist is an experiment to show what is currently happening in the Skype Land and the Skype community collective state of mind. It tracks the text that Skype Users put in their mood. From this it extracts YouTube URLs and shows them.</description>
+<tileSource><![CDATA[{tpName:Skype  ,  operName:getCategory  ,  type:root  ,  input:[]  ,  output:[title+++id]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[Skype.getCategory]}]]></tileSource>
+<accessUrl>http://www.moodgeist.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="91">
+<name>Twizon</name>
+<description>Lists recent tweets about Amazon.com products from the Twitter public timeline.</description>
+<tileSource><![CDATA[{tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Twitter.getLatestPosts+++amazon.findProducts]}]]></tileSource>
+<accessUrl>http://twizon.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="93">
+<name>Slideshow gadget</name>
+<description>Create your own slideshows and let them run on your Yahoo Homepage. Multiple styles and effects available.</description>
+<tileSource><![CDATA[{tpName:imageLoop  ,  operName:queryImages  ,  type:root  ,  input:[<query music>]  ,  output:[query+++imageID]  ,  parents:[]}    {tpName:YahooImage  ,  operName:search  ,  type:leaf  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[imageLoop.queryImages]}]]></tileSource>
+<accessUrl>http://www.google.de/ig/directory?q=imagelooop&amp;hl=de&amp;root=/ig&amp;dpos=top&amp;url=http://imageloop.googlepages.com/igoogle-slideshow-en.xml</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="95">
+<name>eGoWalk</name>
+<description>Flickr photos + Yahoo! Maps. Click on a city to see your Flickr contacts and then hover over icons to get details.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:YahooMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://www.androidtech.com/egowalk/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="97">
+<name>RDF Book Mashup</name>
+<description>The RDF book mashup makes information about books, their authors, reviews, and online bookstores available on the Semantic Web. This information can be used by RDF tools and you can link to it from your own Semantic Web data.</description>
+<tileSource><![CDATA[{tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:GoogleBase  ,  operName:searchDataFeed  ,  type:leaf  ,  input:[<q Harry Potter>]  ,  output:[attrib_name+++attrib_type+++category+++stockPhotoURL]  ,  parents:[amazon.findProducts]}]]></tileSource>
+<accessUrl>http://sites.wiwiss.fu-berlin.de/suhl/bizer/bookmashup/index.html</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="99">
+<name>Music Artist Cloud</name>
+<description>Just enter your favorite musical artist and discover all related artists. It has never been easier to find good bands. Youtube videos and amazon links included.</description>
+<tileSource><![CDATA[{tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:root  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:leaf  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[Lastfm.getTracksByArtist]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[Lastfm.getTracksByArtist]}]]></tileSource>
+<accessUrl>http://artistcloud.camaris.be</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="101">
+<name>Music Creek</name>
+<description>Play music videos of artists continuously, sync them between YouTube and local iTunes, and sync them with your iPod or iPhone. Also provides video playlists based on top ranking of iTMS and other sources.</description>
+<tileSource><![CDATA[{tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:root  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[Lastfm.getTracksByArtist]}    {tpName:FaceBook  ,  operName:getPhotosByName  ,  type:leaf  ,  input:[<userName robin>]  ,  output:[caption+++imageUrl+++thumbnailUrl+++owner]  ,  parents:[Lastfm.getTracksByArtist]}]]></tileSource>
+<accessUrl>http://www.musiccreek.net/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="103">
+<name>serendipi Twitterous</name>
+<description>Annotates a Twitter feed with related content from Yahoo search, YouTube, Slideshare, and the OER Recommender. Content of each tweet is analyzed and then used to pull in links related to it.</description>
+<tileSource><![CDATA[{tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[Twitter.getLatestPosts]}    {tpName:YahooSearch  ,  operName:search  ,  type:leaf  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[Twitter.getLatestPosts]}]]></tileSource>
+<accessUrl>http://ouseful.open.ac.uk/serendipitwitterous</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="105">
+<name>Tokyo Front</name>
+<description>Visualized newest interests and buzzwords in Japan. Sources include YouTube and Yahoo.</description>
+<tileSource><![CDATA[{tpName:YahooSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[YahooSearch.search]}    {tpName:YahooImage  ,  operName:search  ,  type:leaf  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[YahooSearch.search]}    {tpName:amazon  ,  operName:findProducts  ,  type:leaf  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[YahooSearch.search]}]]></tileSource>
+<accessUrl>http://www.tokyofront.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="107">
+<name>SomPedia</name>
+<description>Something more about music bands, lyrics, and songs. Portuguese version online. English version in progress.</description>
+<tileSource><![CDATA[{tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:root  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:leaf  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[Lastfm.getTracksByArtist]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:leaf  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[Lastfm.getTracksByArtist]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[Lastfm.getTracksByArtist]}    {tpName:Lyricsfly  ,  operName:search  ,  type:leaf  ,  input:[<i none>+++<a none>+++<t none>]  ,  output:[i+++a+++t+++tx]  ,  parents:[Lastfm.getTracksByArtist]}]]></tileSource>
+<accessUrl>http://www.sompedia.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="109">
+<name>freshMoo</name>
+<description>freshmoo gets you info, plot, and trailers for any movie you want. Integrates YouTube, Yahoo Search and Flickr.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[]}    {tpName:YahooSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++Youtube.searchVideo+++YahooSearch.search]}]]></tileSource>
+<accessUrl>http://www.freshmoo.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="111">
+<name>similags</name>
+<description>This experiment is about relating flickr.com or del.icio.us user to each other based on usage of similar tags. </description>
+<tileSource><![CDATA[{tpName:delicious  ,  operName:getTags  ,  type:root  ,  input:[]  ,  output:[tags]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[delicious.getTags]}]]></tileSource>
+<accessUrl>http://goosebumps4all.net/similags/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="113">
+<name>Recent Del.icio.us Activity FeedFlare</name>
+<description>Shows the last item bookmarked by the blog owner on Del.icio.us the social bookmarking website.</description>
+<tileSource><![CDATA[{tpName:delicious  ,  operName:getPostsByTag  ,  type:root  ,  input:[<tag google>]  ,  output:[title+++postUrl+++description+++tags]  ,  parents:[]}    {tpName:feedburner  ,  operName:getNews  ,  type:leaf  ,  input:[<feedName mashable>]  ,  output:[title+++content+++link]  ,  parents:[delicious.getPostsByTag]}]]></tileSource>
+<accessUrl>http://feedflares.orch8.net/last-del/v1/last-del.html</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="115">
+<name>LoreStorm</name>
+<description>Geekish social site, permitting sharing of feeds, searches, and user posts. Uses the Flickr and YouTube APIs as well as search from Google and Yahoo.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[Youtube.searchVideo]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:leaf  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[Flickr.getGeotaggedPhotos]}    {tpName:YahooSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[Flickr.getGeotaggedPhotos]}    {tpName:YahooImage  ,  operName:search  ,  type:leaf  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://www.lorestorm.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="117">
+<name>HakuHaku</name>
+<description>Mashup using AOL Video, Google Video and Flickr API.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:AOLVideo  ,  operName:searchVideo  ,  type:root  ,  input:[<query music>]  ,  output:[title+++description+++playUrl]  ,  parents:[]}    {tpName:GoogleVideoSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[title+++content+++url+++published+++publisher+++videoUrl+++flashVersionUrl]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++AOLVideo.searchVideo+++GoogleVideoSearch.search]}]]></tileSource>
+<accessUrl>http://www.hakuhaku.fi/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="119">
+<name>Facebook 3Styler</name>
+<description>3Styler for Facebook lets you search for videos; send invitations to watch videos to friends; create your own video searching profile; manage playlists. Winner of AOL Video mashup contest. </description>
+<tileSource><![CDATA[{tpName:AOLVideo  ,  operName:searchVideo  ,  type:root  ,  input:[<query music>]  ,  output:[title+++description+++playUrl]  ,  parents:[]}    {tpName:FaceBook  ,  operName:getUserInfoById  ,  type:root  ,  input:[<userID 676712790>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[AOLVideo.searchVideo+++FaceBook.getUserInfoById]}]]></tileSource>
+<accessUrl>http://www.new.facebook.com/apps/application.php?id=14558787347</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="121">
+<name>Digg Bury Recorder</name>
+<description>Ajaxonomy's Digg Bury Recorder records the buries that a given Digg story receives including the reason for the bury, the number of diggs a story has at the time of the bury, the time and date of the bury and the number buries.</description>
+<tileSource><![CDATA[{tpName:Digg  ,  operName:getStories  ,  type:root  ,  input:[<number 10>]  ,  output:[title+++description+++user+++userThumbnail+++topic+++storyID+++link+++submitDate+++diggs+++comments+++href+++status]  ,  parents:[]}    {tpName:GoogleChart  ,  operName:getChart  ,  type:leaf  ,  input:[<chs 250>+++<chd 250>+++<cht p3>]  ,  output:[]  ,  parents:[Digg.getStories]}]]></tileSource>
+<accessUrl>http://www.ajaxonomy.com/buryrecorder</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="123">
+<name>Delicious Preview</name>
+<description>Preview what everyone is bookmarking in del.icio.us. With this Google gadget, you can preview, add tabs, and remove tabs for the tags in the Tagcloud.</description>
+<tileSource><![CDATA[{tpName:GoogleWebSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:delicious  ,  operName:getPostsByTag  ,  type:leaf  ,  input:[<tag google>]  ,  output:[title+++postUrl+++description+++tags]  ,  parents:[GoogleWebSearch.search]}]]></tileSource>
+<accessUrl>http://www.google.com/ig/directory?url=http://www.therandomhomepage.com/google/gadgets/DeliciousPreview/module.xml</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="125">
+<name>Celebrity CryoSites</name>
+<description>Images, videos, and news about your favorite celebrities from Yahoo, YouTube and Technorati.</description>
+<tileSource><![CDATA[{tpName:Technorati  ,  operName:searchBlog  ,  type:root  ,  input:[]  ,  output:[title+++description+++url+++publishDate]  ,  parents:[]}    {tpName:YahooSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Technorati.searchBlog+++YahooSearch.search+++Youtube.searchVideo]}]]></tileSource>
+<accessUrl>http://www.cryosites.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="127">
+<name>MetroMash</name>
+<description>Yahoo Maps, Local Search, Traffic Reports and Upcoming Events all mashed together.</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:YahooTraffic  ,  operName:getTrafficForAddress  ,  type:root  ,  input:[<street 1 Microsoft Way>+++<city Redmond>+++<state WA>+++<radius 10>]  ,  output:[title+++type+++description+++latitude+++longitude+++direction+++severity+++reportDate+++updateDate+++endDate+++imageURL]  ,  parents:[]}    {tpName:YahooSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[YahooTraffic.getTrafficForAddress]}    {tpName:YahooMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Upcoming.findEvents+++YahooTraffic.getTrafficForAddress]}]]></tileSource>
+<accessUrl>http://www.metromash.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="129">
+<name>seekng</name>
+<description>A swarm of memes, collected via a variety of inputs, presented as news, or search, or bookmarks, or image walls. A work in progress, representing both memetic and swarming APIs, to span many sites.</description>
+<tileSource><![CDATA[{tpName:YahooSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:leaf  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[GoogleWebSearch.search+++YahooSearch.search]}    {tpName:YahooImage  ,  operName:search  ,  type:leaf  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[GoogleWebSearch.search]}]]></tileSource>
+<accessUrl>http://www.seekng.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="131">
+<name>musiCal</name>
+<description>Gives an RSS feed of who from your top 50 artists in last.fm are coming to your town.</description>
+<tileSource><![CDATA[{tpName:Lastfm  ,  operName:getWeeklyTopTracks  ,  type:root  ,  input:[]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[Lastfm.getWeeklyTopTracks]}]]></tileSource>
+<accessUrl>http://www.noesbueno.com/musical/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="133">
+<name>TwitPic</name>
+<description>Share photos on Twitter with TwitPic.</description>
+<tileSource><![CDATA[{tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:leaf  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[Twitter.getLatestPosts]}]]></tileSource>
+<accessUrl>http://twitpic.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="135">
+<name>U.S. of Ajax</name>
+<description>The United States of Ajax allows you to visit 20,261 Cities within 3,140 Counties in the United States. Data is available for each State, County and City. Dozens of data sources linked.</description>
+<tileSource><![CDATA[{tpName:YahooGeocoding  ,  operName:geoCode  ,  type:root  ,  input:[<street street>+++<city newYork>+++<location freeText>]  ,  output:[Latitude+++Longitude+++Address+++City+++State+++Zip+++Country]  ,  parents:[]}    {tpName:YahooMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[YahooGeocoding.geoCode]}]]></tileSource>
+<accessUrl>http://www.tetonpost.com/states/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="137">
+<name>Dual Image Search</name>
+<description>Search Flickr and Yahoo for images at the same time.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:YahooImage  ,  operName:search  ,  type:root  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++YahooImage.search]}]]></tileSource>
+<accessUrl>http://users.ecs.soton.ac.uk/rp805/thirdyearproject/mashup.htm</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="139">
+<name>Keep Up With Jones</name>
+<description>This Facebook app allows you to connect to Zillow from Facebook. View information about your house and see what your friends houses are worth.</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:Zillow  ,  operName:GetZestimate  ,  type:leaf  ,  input:[<zws-id none>+++<zpid none>]  ,  output:[Fulladdress+++Zestimate data+++Links+++Limit-warning]  ,  parents:[FaceBook.getFriends]}]]></tileSource>
+<accessUrl>http://apps.facebook.com/keepingupwiththejone</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="141">
+<name>musiclovr</name>
+<description>Music mashup that allows searching of data from Amazon, news from Yahoo, and blogs via Technorati.</description>
+<tileSource><![CDATA[{tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:YahooVideo  ,  operName:search  ,  type:root  ,  input:[<term cars>+++<number flash>+++<number 10>]  ,  output:[title+++description+++videoURL+++thumbnailImageURL]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:midNode  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[amazon.findProducts]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[YahooVideo.search+++Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://www.musiclovr.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="143">
+<name>eBay API Release Calendar</name>
+<description>Stay informed about what is happening with the eBay API and when it is happening by checking out this eBay API Release Schedule calendar. The color coded events give you a sense of the likely impact.</description>
+<tileSource><![CDATA[{tpName:eBay  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords harry potter>+++<count 10>]  ,  output:[title+++detailsURL+++stockPhotoURL]  ,  parents:[]}    {tpName:GoogleCalendar  ,  operName:searchEvents  ,  type:leaf  ,  input:[<q Tennis>]  ,  output:[title+++publishDate+++link+++author+++location]  ,  parents:[eBay.findProducts]}]]></tileSource>
+<accessUrl>http://developer.ebay.com/calendar/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="145">
+<name>CityServer</name>
+<description>Allows you to plot multiple Yahoo Services, in multiple categories, on a Yahoo Flash map.</description>
+<tileSource><![CDATA[{tpName:eBay  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords harry potter>+++<count 10>]  ,  output:[title+++detailsURL+++stockPhotoURL]  ,  parents:[]}    {tpName:GoogleCalendar  ,  operName:searchEvents  ,  type:leaf  ,  input:[<q Tennis>]  ,  output:[title+++publishDate+++link+++author+++location]  ,  parents:[eBay.findProducts]}]]></tileSource>
+<accessUrl>http://www.tetonpost.com/cityserver/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="147">
+<name>imageloop Gadget iGoogle</name>
+<description>Slideshow in iGoogle.</description>
+<tileSource><![CDATA[{tpName:GoogleImageSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[title+++imageUrl+++thumbnailUrl+++content]  ,  parents:[]}    {tpName:imageLoop  ,  operName:makeImageLoop  ,  type:leaf  ,  input:[<iUrl None>]  ,  output:[]  ,  parents:[GoogleImageSearch.search]}]]></tileSource>
+<accessUrl>http://www.google.de/ig/directory?num=24&amp;url=www.deutscher-pinscher.info/goolooop/imagelooop.xml&amp;q=&amp;start=24</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="149">
+<name>Spicy Pipes</name>
+<description>This Wordpress widget SpicyPipes, once installed and configured displays question and answer from Yahoo Answers and related photos from Flickr. Enhance the blog by allowing the reader to ask questions and get answer on click.</description>
+<tileSource><![CDATA[{tpName:YahooAnswers  ,  operName:getAnswers  ,  type:root  ,  input:[<term computers>+++<count 10>]  ,  output:[subject+++content+++date+++link+++category+++userId+++userPhotoURL+++userNick+++numAnswers+++numComments+++chosenAnswererId+++chosenAnswererNick]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:leaf  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[YahooAnswers.getAnswers]}]]></tileSource>
+<accessUrl>http://gallery.yahoo.com/apps/7390/locale/en</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="151">
+<name>Digg Stalker</name>
+<description>Find those with similar interests and also monitor the strength of your network on digg.</description>
+<tileSource><![CDATA[{tpName:Digg  ,  operName:getStories  ,  type:root  ,  input:[<number 10>]  ,  output:[title+++description+++user+++userThumbnail+++topic+++storyID+++link+++submitDate+++diggs+++comments+++href+++status]  ,  parents:[]}    {tpName:YahooSearch  ,  operName:search  ,  type:leaf  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[Digg.getStories]}]]></tileSource>
+<accessUrl>http://postworthy.com/Worthy/ex/Digg_Stalker/108.aspx</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="153">
+<name>BBC Programmes to iCal</name>
+<description>Takes a BBC Programme search and converts the results in to iCal format for use in Google Calendar.</description>
+<tileSource><![CDATA[{tpName:BBCNews  ,  operName:getNews  ,  type:root  ,  input:[]  ,  output:[title+++description+++url+++publishDate]  ,  parents:[]}    {tpName:GoogleCalendar  ,  operName:searchEvents  ,  type:leaf  ,  input:[<q Tennis>]  ,  output:[title+++publishDate+++link+++author+++location]  ,  parents:[BBCNews.getNews]}]]></tileSource>
+<accessUrl>http://www.kinlan.co.uk/2006/05/google-calander-mashup-with-bbc.html</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="155">
+<name>MusicTonic</name>
+<description>Slick music information mashup with photos, videos and news. Search or browse artists by name or genre.</description>
+<tileSource><![CDATA[{tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:root  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:YahooImage  ,  operName:search  ,  type:leaf  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[Lastfm.getTracksByArtist]}]]></tileSource>
+<accessUrl>http://musictonic.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="157">
+<name>Maps for Photos and Wikipedia</name>
+<description>Find various US locations and get weather forecasts, Wikipedia geo articles and Flickr photos.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:YahooGeocoding  ,  operName:geoCode  ,  type:root  ,  input:[<street street>+++<city newYork>+++<location freeText>]  ,  output:[Latitude+++Longitude+++Address+++City+++State+++Zip+++Country]  ,  parents:[]}    {tpName:YahooMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++YahooGeocoding.geoCode]}]]></tileSource>
+<accessUrl>http://www.allapis.com/Yahoo_Flickr_Weather_Maps.aspx</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="159">
+<name>Upcoming.org mobilised</name>
+<description>Mobile-optimised version of Upcoming.org allows quick searching of events,venues &amp; metros. Where available, small maps of the venue is displayed using yahoo maps.</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:YahooMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Upcoming.findEvents]}]]></tileSource>
+<accessUrl>http://mobilised.net/upcoming.org/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="161">
+<name>GeoFlex888</name>
+<description>A Flex mashup of Yahoo Maps, Yahoo Local Search. The mashup helps determine the driving time area that covers the searched locations.</description>
+<tileSource><![CDATA[{tpName:YahooLocalSearch  ,  operName:search  ,  type:root  ,  input:[<query hotel>+++<withinMiles 10>]  ,  output:[title+++googleMapUrl+++latitude+++longitude+++streetAddress+++city+++region+++country+++ddUrl+++ddUrlToHere+++ddUrlFromHere+++mapImage]  ,  parents:[]}    {tpName:YahooMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[YahooLocalSearch.search]}]]></tileSource>
+<accessUrl>http://www.flex888.com/lab/geoweb/geoyahoo/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="163">
+<name>Beanatomics Traffic</name>
+<description>Links the traffic information from the Yahoo Traffic site and places the locations on a Virtual Earth map.</description>
+<tileSource><![CDATA[{tpName:YahooTraffic  ,  operName:getTrafficForAddress  ,  type:root  ,  input:[<street 1 Microsoft Way>+++<city Redmond>+++<state WA>+++<radius 10>]  ,  output:[title+++type+++description+++latitude+++longitude+++direction+++severity+++reportDate+++updateDate+++endDate+++imageURL]  ,  parents:[]}    {tpName:VirtualEarth  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[YahooTraffic.getTrafficForAddress]}]]></tileSource>
+<accessUrl>http://www.beanatomics.com/VirtualEarth/VEY.html</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="165">
+<name>iamdanielle</name>
+<description>A community-based expert system for answers, questions and problems. Integrates Yahoo Answers API.</description>
+<tileSource><![CDATA[{tpName:YahooAnswers  ,  operName:getAnswers  ,  type:root  ,  input:[<term computers>+++<count 10>]  ,  output:[subject+++content+++date+++link+++category+++userId+++userPhotoURL+++userNick+++numAnswers+++numComments+++chosenAnswererId+++chosenAnswererNick]  ,  parents:[]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:YahooSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[YahooAnswers.getAnswers+++GoogleWebSearch.search+++YahooSearch.search]}]]></tileSource>
+<accessUrl>http://www.iamdanielle.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="167">
+<name>Upcomingscrobbler</name>
+<description>Upcomingscrobbler brings together Last.fm and Upcoming.org to tell you where you can see your favourite bands perform live.</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:root  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Upcoming.findEvents+++Lastfm.getTracksByArtist]}]]></tileSource>
+<accessUrl>http://www.triv.org.uk/~mavit/upcomingscrobbler/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="169">
+<name>showMyCommenters</name>
+<description>This is a mashup application to show where the user who commented my photos on the map</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:FaceBook  ,  operName:getUserInfoById  ,  type:leaf  ,  input:[<userID 676712790>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[Flickr.getGeotaggedPhotos]}    {tpName:VirtualEarth  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[FaceBook.getFriends]}]]></tileSource>
+<accessUrl>none</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="171">
+<name>BidNearBy</name>
+<description>Search local auctions and classified listings (craigslist) and see where they are located on a map view.</description>
+<tileSource><![CDATA[{tpName:eBay  ,  operName:findLocation  ,  type:root  ,  input:[<keyWords harry potter>]  ,  output:[address+++detailsURL]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[eBay.findLocation]}]]></tileSource>
+<accessUrl>http://www.bidnearby.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="173">
+<name>BBC News Map</name>
+<description>See where the latest news is happening in the UK</description>
+<tileSource><![CDATA[{tpName:BBCNews  ,  operName:getNews  ,  type:root  ,  input:[]  ,  output:[title+++description+++url+++publishDate+++location]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[BBCNews.getNews]}]]></tileSource>
+<accessUrl>http://dev.benedictoneill.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="175">
+<name>Adactio Elsewhere</name>
+<description>Jeremy Keith combines a variety of personal information from across the web in one place via Ajax scripting and the APIs from Upcoming.org, Flickr, Amazon, and Del.icio.us.</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:delicious  ,  operName:getTags  ,  type:root  ,  input:[]  ,  output:[tags]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:leaf  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[Upcoming.findEvents+++delicious.getTags+++amazon.findProducts]}]]></tileSource>
+<accessUrl>http://elsewhere.adactio.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="177">
+<name>Celebrity Photos Gallery</name>
+<description>A dyanamic collection of celebrity photo galleries. Data comes from Yahoo Image Search and Yahoo Search.</description>
+<tileSource><![CDATA[{tpName:YahooMapImage  ,  operName:Gettingamap  ,  type:root  ,  input:[<street none>+++<zipcode none>+++<latitude none>+++<longtitude none>+++<imagetype none>+++<output php>]  ,  output:[street+++zipcode+++latitude+++longtitude+++imagetype+++output+++mapurl]  ,  parents:[]}    {tpName:YahooMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[YahooMapImage.Gettingamap]}]]></tileSource>
+<accessUrl>http://www.celebrity-photos.us</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="179">
+<name>100 Most Powerful Celebrities</name>
+<description>Map of Forbes list of the top 100 most powerful and best paid celebrities. Pop-up windows for each includes related YouTube videos.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:YahooGeocoding  ,  operName:geoCode  ,  type:root  ,  input:[<street street>+++<city newYork>+++<location freeText>]  ,  output:[Latitude+++Longitude+++Address+++City+++State+++Zip+++Country]  ,  parents:[]}    {tpName:YahooGeocoding  ,  operName:geoCodeByAdr  ,  type:leaf  ,  input:[<street street>+++<city newYork>+++<location freeText>]  ,  output:[Latitude+++Longitude+++Address+++City+++State+++Zip+++Country]  ,  parents:[Youtube.searchVideo]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[YahooGeocoding.geoCode]}]]></tileSource>
+<accessUrl>http://www.mibazaar.com/top10</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="181">
+<name>Top 99 Women on Google Maps</name>
+<description>Top 99 Women as voted by readers and staff of Askmen Magazine.</description>
+<tileSource><![CDATA[{tpName:YahooGeocoding  ,  operName:geoCode  ,  type:root  ,  input:[<street street>+++<city newYork>+++<location freeText>]  ,  output:[Latitude+++Longitude+++Address+++City+++State+++Zip+++Country]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[YahooGeocoding.geoCode]}]]></tileSource>
+<accessUrl>http://www.mibazaar.com/top99</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="183">
+<name>Daily Mashup</name>
+<description>Combines popular items from Flickr, Del.icio.us, furl, and Yahoo News.</description>
+<tileSource><![CDATA[{tpName:delicious  ,  operName:getTags  ,  type:root  ,  input:[]  ,  output:[tags]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:leaf  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[delicious.getTags]}]]></tileSource>
+<accessUrl>http://dailymashup.com/ </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="185">
+<name>Geowalk</name>
+<description>A useful worldwide travel guide in German and English. With embedded data from Wikipedia, Flickr and Google News. Double-click anywhere on the map for details on that location.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://www.geowalk.de</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="187">
+<name>BlueOkapi</name>
+<description>Mashup of GoogleMaps, YouTube and Flickr.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo]}]]></tileSource>
+<accessUrl>http://www.blueokapi.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="189">
+<name>Amazon Light</name>
+<description>Alternative interface to Amazon. Primarily via Amazon AWS, also incorporates del.icio.us, GMail, DropCash, Blogger and a library lookup.</description>
+<tileSource><![CDATA[{tpName:delicious  ,  operName:getTags  ,  type:root  ,  input:[]  ,  output:[tags]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:leaf  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[delicious.getTags]}]]></tileSource>
+<accessUrl>http://www.kokogiak.com/amazo</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="191">
+<name>Boston T Subway Map</name>
+<description>Google Map of Boston T with search.</description>
+<tileSource><![CDATA[{tpName:YahooLocalSearch  ,  operName:search  ,  type:root  ,  input:[<query hotel>+++<withinMiles 10>]  ,  output:[title+++googleMapUrl+++latitude+++longitude+++streetAddress+++city+++region+++country+++ddUrl+++ddUrlToHere+++ddUrlFromHere+++mapImage]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[YahooLocalSearch.search]}]]></tileSource>
+<accessUrl>http://MetroMapr.com/BostonT. ... </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="193">
+<name>PS3 Seeker</name>
+<description>A mashup to help consumers locate a PS3. Provides retail addresses, locations, shipment dates, and local eBay auctions.</description>
+<tileSource><![CDATA[{tpName:amazon  ,  operName:findLocation  ,  type:root  ,  input:[<keyWords harry potter>]  ,  output:[address+++detailsURL]  ,  parents:[]}    {tpName:eBay  ,  operName:findLocation  ,  type:root  ,  input:[<keyWords harry potter>]  ,  output:[address+++detailsURL]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[amazon.findLocation+++eBay.findLocation]}]]></tileSource>
+<accessUrl>http://www.ps3seeker.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="195">
+<name>Attendr</name>
+<description>Mashing up the unconference. Jeff Marshall created this very slick Google Maps mashup for unconferences, gatherings, parties, etc that shows the locations of attendees and draws relationship connections between people.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:YahooGeocoding  ,  operName:geoCode  ,  type:root  ,  input:[<street street>+++<city newYork>+++<location freeText>]  ,  output:[Latitude+++Longitude+++Address+++City+++State+++Zip+++Country]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[YahooGeocoding.geoCode]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://attendr.com/ </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="197">
+<name>A World of Nirvana</name>
+<description>Dynamic tribute to Kurt Cobain, showing Nirvana live concerts on a Google map by year. Search for videos directly by keywords.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo]}]]></tileSource>
+<accessUrl>http://www.aworldofnirvana.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="199">
+<name>Anuncios Total</name>
+<description>Classified services that tweets ads.</description>
+<tileSource><![CDATA[{tpName:Twitter  ,  operName:getLatestUserPosts  ,  type:root  ,  input:[<userID Conversation>+++<number 15>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[Twitter.getLatestUserPosts]}]]></tileSource>
+<accessUrl>http://www.anunciostotal.net</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="201">
+<name>Arab Channel</name>
+<description>Arabic entertainment website. Integrates photos from Flickr and videos from YouTube.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++Youtube.searchVideo]}]]></tileSource>
+<accessUrl>    http://3arabchannel.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="203">
+<name>Arcane Pillage</name>
+<description>Searches music videos on YouTube and audio tracks on Last.fm. In Japanese and English.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:Lastfm  ,  operName:getWeeklyTopTracks  ,  type:root  ,  input:[]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo+++Lastfm.getWeeklyTopTracks]}]]></tileSource>
+<accessUrl>    http://seeds.fool.jp </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="205">
+<name>Auction Search Kit</name>
+<description>eBay items on a Google Map, plus interactive photo gallery, email alerts of new items, greasemonkey script eBay integration, eBay toolkit in a Firefox extension, show items nearby, and more.</description>
+<tileSource><![CDATA[{tpName:eBay  ,  operName:findLocation  ,  type:root  ,  input:[<keyWords harry potter>]  ,  output:[address+++detailsURL]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[eBay.findLocation]}]]></tileSource>
+<accessUrl>    http://www.auctionsearchkit.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="207">
+<name>auctionReminder - eBay Reminders in Google Calendar</name>
+<description>auctionReminder is a simple tool to add reminders about ending eBay auctions to a Google Calendar.</description>
+<tileSource><![CDATA[{tpName:eBay  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords harry potter>+++<count 10>]  ,  output:[title+++detailsURL+++stockPhotoURL]  ,  parents:[]}    {tpName:GoogleCalendar  ,  operName:searchEvents  ,  type:leaf  ,  input:[<q Tennis>]  ,  output:[title+++publishDate+++link+++author+++location]  ,  parents:[eBay.findProducts]}]]></tileSource>
+<accessUrl>http://www.auctionreminder.net</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="209">
+<name>Celebrity Video Finder</name>
+<description>Not safe for work, NSFW. Search and find all sexy YouTube and Google videos of your favorite female and male celebrities. Contains adult content.</description>
+<tileSource><![CDATA[{tpName:GoogleWebSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[GoogleWebSearch.search]}]]></tileSource>
+<accessUrl>http://www.vergiss-sie-nich</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="211">
+<name>08 celebrity pictures, videos and news</name>
+<description>Watch pictures from Yahoo, videos from YouTube and read the latest news about celebrity actresses, models and singers.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:YahooImage  ,  operName:search  ,  type:root  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[]}    {tpName:GoogleBase  ,  operName:searchDataFeed  ,  type:root  ,  input:[<q Harry Potter>]  ,  output:[attrib_name+++attrib_type+++attrib_value]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo+++YahooImage.search+++GoogleBase.searchDataFeed]}]]></tileSource>
+<accessUrl>    http://www.sexy-celebrity-pic</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="213">
+<name>YoutubeToGoogleMap</name>
+<description>show information of video on Google maps</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo]}]]></tileSource>
+<accessUrl>none</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="215">
+<name>Music Artist Cloud</name>
+<description>Just enter your favorite musical artist and discover all related artists. It has never been easier to find good bands. Youtube videos and amazon links included.</description>
+<tileSource><![CDATA[{tpName:UserInput  ,  operName:InputData  ,  type:root  ,  input:[]  ,  output:[inputValue]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:midNode  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[UserInput.InputData]}    {tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:midNode  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[UserInput.InputData]}    {tpName:amazon  ,  operName:findProducts  ,  type:midNode  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[UserInput.InputData]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:midNode  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[UserInput.InputData]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo+++Lastfm.getTracksByArtist+++GoogleWebSearch.search+++amazon.findProducts]}]]></tileSource>
+<accessUrl>http://artistcloud.camaris.be</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="217">
+<name>Frisbee Mashup</name>
+<description>Frisbee Mashup newes photos, events, movies, bookmarks and special feeds are published on five pages, frisbee, dog frisbee, disc golf, ultimate and freestyle.</description>
+<tileSource><![CDATA[{tpName:UserInput  ,  operName:InputData  ,  type:root  ,  input:[]  ,  output:[inputValue]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:delicious  ,  operName:getPostsByTag  ,  type:root  ,  input:[<tag google>]  ,  output:[title+++postUrl+++description+++tags]  ,  parents:[]}    {tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:midNode  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[UserInput.InputData]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:leaf  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[UserInput.InputData]}]]></tileSource>
+<accessUrl>    http://www.pageflakes.com/ole ... </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="219">
+<name>Virtual Video Map</name>
+<description>Mashup of Google Maps and YouTube videos.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo]}]]></tileSource>
+<accessUrl>http://www.virtualvideomap.co .</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="221">
+<name>DoubleTab Video</name>
+<description>Doubletab.com is a mashup of the YouTube and LiveVideo APIs.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:YahooVideo  ,  operName:search  ,  type:root  ,  input:[<term cars>+++<number flash>+++<number 10>]  ,  output:[title+++description+++videoURL+++thumbnailImageURL]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo+++YahooVideo.search]}]]></tileSource>
+<accessUrl>    http://www.doubletab.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="223">
+<name>Continue the sentence</name>
+<description>This is an online game. Visitors add words to the sentence which is to be continued. The words added can be clicked and tag search results from Flickr and YouTube are shown.</description>
+<tileSource><![CDATA[{tpName:UserInput  ,  operName:InputData  ,  type:root  ,  input:[]  ,  output:[inputValue]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[UserInput.InputData]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:midNode  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[UserInput.InputData]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo+++Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://www.continuethesentenc ... </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="225">
+<name>Webmunism</name>
+<description>Combines YouTube videos, Flickr photos, Last.fm albums and Amazon books, grouped by Wikipedia category.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:root  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo+++Flickr.getGeotaggedPhotos+++Lastfm.getTracksByArtist+++amazon.findProducts]}]]></tileSource>
+<accessUrl>http://www.webmunism.com/ </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="227">
+<name>Webmunism</name>
+<description>Combines YouTube videos, Flickr photos, Last.fm albums and Amazon books, grouped by Wikipedia category.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:root  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo+++Flickr.getGeotaggedPhotos+++Lastfm.getTracksByArtist+++amazon.findProducts]}]]></tileSource>
+<accessUrl>http://www.webmunism.com/ </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="229">
+<name>Webmunism</name>
+<description>Combines YouTube videos, Flickr photos, Last.fm albums and Amazon books, grouped by Wikipedia category.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:root  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo+++Flickr.getGeotaggedPhotos+++Lastfm.getTracksByArtist+++amazon.findProducts]}]]></tileSource>
+<accessUrl>http://www.webmunism.com/ </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="231">
+<name>Webmunism</name>
+<description>Combines YouTube videos, Flickr photos, Last.fm albums and Amazon books, grouped by Wikipedia category.</description>
+<tileSource><![CDATA[{tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:root  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Youtube.searchVideo+++Flickr.getGeotaggedPhotos+++Lastfm.getTracksByArtist+++amazon.findProducts]}]]></tileSource>
+<accessUrl>http://www.webmunism.com/ </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="233">
+<name>Celebrity CryoSites</name>
+<description>Images, videos, and news about your favorite celebrities from Yahoo, YouTube </description>
+<tileSource><![CDATA[{tpName:Technorati  ,  operName:searchBlog  ,  type:root  ,  input:[]  ,  output:[title+++description+++url+++publishDate]  ,  parents:[]}    {tpName:UserInput  ,  operName:InputData  ,  type:root  ,  input:[]  ,  output:[inputValue]  ,  parents:[]}    {tpName:YahooImage  ,  operName:search  ,  type:midNode  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[UserInput.InputData]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:midNode  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[UserInput.InputData]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Technorati.searchBlog+++YahooImage.search+++Youtube.searchVideo]}]]></tileSource>
+<accessUrl>http://www.cryosites.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="235">
+<name>Celebrity CryoSites</name>
+<description>Images, videos, and news about your favorite celebrities from Yahoo, YouTube </description>
+<tileSource><![CDATA[{tpName:Technorati  ,  operName:searchBlog  ,  type:root  ,  input:[]  ,  output:[title+++description+++url+++publishDate]  ,  parents:[]}    {tpName:UserInput  ,  operName:InputData  ,  type:root  ,  input:[]  ,  output:[inputValue]  ,  parents:[]}    {tpName:YahooImage  ,  operName:search  ,  type:midNode  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[UserInput.InputData]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:midNode  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[UserInput.InputData]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Technorati.searchBlog+++YahooImage.search+++Youtube.searchVideo]}]]></tileSource>
+<accessUrl>http://www.cryosites.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="237">
+<name>Celebrity CryoSites</name>
+<description>Images, videos, and news about your favorite celebrities from Yahoo, YouTube </description>
+<tileSource><![CDATA[{tpName:Technorati  ,  operName:searchBlog  ,  type:root  ,  input:[]  ,  output:[title+++description+++url+++publishDate]  ,  parents:[]}    {tpName:UserInput  ,  operName:InputData  ,  type:root  ,  input:[]  ,  output:[inputValue]  ,  parents:[]}    {tpName:YahooImage  ,  operName:search  ,  type:midNode  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[UserInput.InputData]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:midNode  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[UserInput.InputData]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Technorati.searchBlog+++YahooImage.search+++Youtube.searchVideo]}]]></tileSource>
+<accessUrl>http://www.cryosites.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="239">
+<name>Thumb Flash</name>
+<description>Japanese image search application that tiles results in a Flash visualization. Mashes data from Flickr, Amazon, Google, Yahoo and YouTube,</description>
+<tileSource><![CDATA[{tpName:UserInput  ,  operName:InputData  ,  type:root  ,  input:[]  ,  output:[inputValue]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:midNode  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[UserInput.InputData]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:midNode  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[UserInput.InputData]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:midNode  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[UserInput.InputData]}    {tpName:YahooSearch  ,  operName:search  ,  type:midNode  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[UserInput.InputData]}    {tpName:amazon  ,  operName:findProducts  ,  type:midNode  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[UserInput.InputData]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++Youtube.searchVideo+++YahooSearch.search+++GoogleWebSearch.search+++amazon.findProducts]}]]></tileSource>
+<accessUrl>    http://loopring.heteml.jp/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="241">
+<name>Thumb Flash</name>
+<description>Japanese image search application that tiles results in a Flash visualization. Mashes data from Flickr, Amazon, Google, Yahoo and YouTube,</description>
+<tileSource><![CDATA[{tpName:UserInput  ,  operName:InputData  ,  type:root  ,  input:[]  ,  output:[inputValue]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:midNode  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[UserInput.InputData]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:midNode  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[UserInput.InputData]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:midNode  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[UserInput.InputData]}    {tpName:YahooSearch  ,  operName:search  ,  type:midNode  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[UserInput.InputData]}    {tpName:amazon  ,  operName:findProducts  ,  type:midNode  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[UserInput.InputData]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++Youtube.searchVideo+++YahooSearch.search+++GoogleWebSearch.search+++amazon.findProducts]}]]></tileSource>
+<accessUrl>    http://loopring.heteml.jp/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="243">
+<name>Thumb Flash</name>
+<description>Japanese image search application that tiles results in a Flash visualization. Mashes data from Flickr, Amazon, Google, Yahoo and YouTube,</description>
+<tileSource><![CDATA[{tpName:UserInput  ,  operName:InputData  ,  type:root  ,  input:[]  ,  output:[inputValue]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:midNode  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[UserInput.InputData]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:midNode  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[UserInput.InputData]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:midNode  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[UserInput.InputData]}    {tpName:YahooSearch  ,  operName:search  ,  type:midNode  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[UserInput.InputData]}    {tpName:amazon  ,  operName:findProducts  ,  type:midNode  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[UserInput.InputData]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++Youtube.searchVideo+++YahooSearch.search+++GoogleWebSearch.search+++amazon.findProducts]}]]></tileSource>
+<accessUrl>    http://loopring.heteml.jp/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="245">
+<name>alkemis local nyc</name>
+<description>NYC Live Traffic Cams, Yahoo Traffic News, Flickr images, del.icio.us links, and A9 Blockview Photos.</description>
+<tileSource><![CDATA[{tpName:delicious  ,  operName:getPostsByTag  ,  type:root  ,  input:[<tag google>]  ,  output:[title+++postUrl+++description+++tags]  ,  parents:[]}    {tpName:YahooTraffic  ,  operName:getTrafficForAddress  ,  type:root  ,  input:[<street 1 Microsoft Way>+++<city Redmond>+++<state WA>+++<radius 10>]  ,  output:[title+++type+++description+++latitude+++longitude+++direction+++severity+++reportDate+++updateDate+++endDate+++imageURL]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:midNode  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[delicious.getPostsByTag]}]]></tileSource>
+<accessUrl>http://local.alkemis.com/ </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="247">
+<name>localInformation</name>
+<description>NYC Live Traffic Cams, Yahoo Traffic News, Flickr images, del.icio.us links, Blockview Photos.</description>
+<tileSource><![CDATA[{tpName:delicious  ,  operName:getPostsByTag  ,  type:root  ,  input:[<tag google>]  ,  output:[title+++postUrl+++description+++tags]  ,  parents:[]}    {tpName:YahooTraffic  ,  operName:getTrafficForAddress  ,  type:root  ,  input:[<street 1 Microsoft Way>+++<city Redmond>+++<state WA>+++<radius 10>]  ,  output:[title+++type+++description+++latitude+++longitude+++direction+++severity+++reportDate+++updateDate+++endDate+++imageURL]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:midNode  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[delicious.getPostsByTag]}]]></tileSource>
+<accessUrl>http://local.alkemis.com/ </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="249">
+<name>trafficInfo</name>
+<description>Show traffic info in the map</description>
+<tileSource><![CDATA[{tpName:YahooTraffic  ,  operName:getTrafficForAddress  ,  type:root  ,  input:[<street 1 Microsoft Way>+++<city Redmond>+++<state WA>+++<radius 10>]  ,  output:[title+++type+++description+++latitude+++longitude+++direction+++severity+++reportDate+++updateDate+++endDate+++imageURL]  ,  parents:[]}    {tpName:VirtualEarth  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[YahooTraffic.getTrafficForAddress]}]]></tileSource>
+<accessUrl>none</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="251">
+<name>trafficStateInGoogleMap</name>
+<description>This is a mashup to show the current traffic info in google map</description>
+<tileSource><![CDATA[{tpName:YahooTraffic  ,  operName:getTrafficForAddress  ,  type:root  ,  input:[<street 1 Microsoft Way>+++<city Redmond>+++<state WA>+++<radius 10>]  ,  output:[title+++type+++description+++latitude+++longitude+++direction+++severity+++reportDate+++updateDate+++endDate+++imageURL]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[YahooTraffic.getTrafficForAddress]}]]></tileSource>
+<accessUrl>none</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="253">
+<name>Bashr</name>
+<description>A project that bashes together Wikipedia, flickr and del.icio.us. </description>
+<tileSource><![CDATA[{tpName:delicious  ,  operName:getPostsByTag  ,  type:root  ,  input:[<tag google>]  ,  output:[title+++postUrl+++description+++tags]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[delicious.getPostsByTag+++Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>    http://www.bashr.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="255">
+<name>Shdeflickr</name>
+<description>Show the photo of delicious' tags</description>
+<tileSource><![CDATA[{tpName:delicious  ,  operName:getTags  ,  type:root  ,  input:[]  ,  output:[tags]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[delicious.getTags]}]]></tileSource>
+<accessUrl>None</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="257">
+<name>Twitter Top News Trends</name>
+<description>Top terms often appear on Google Trends before the story people are searching for gets indexed. Googling these terms often leads to stale news. TTNT attempts to explain breaking news by gathering relevant information from Twitter.</description>
+<tileSource><![CDATA[{tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:leaf  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[Twitter.getLatestPosts]}]]></tileSource>
+<accessUrl>    http://topnewstrends.com </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="259">
+<name>Twitter Top News Trends</name>
+<description>Top terms often appear on Google Trends before the story people are searching for gets indexed. Googling these terms often leads to stale news. TTNT attempts to explain breaking news by gathering relevant information from Twitter.</description>
+<tileSource><![CDATA[{tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:leaf  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[Twitter.getLatestPosts]}]]></tileSource>
+<accessUrl>    http://topnewstrends.com </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="261">
+<name>Twitter Atlas</name>
+<description>Most recently posted Twitters locations plotted on a map and updated automatically.</description>
+<tileSource><![CDATA[{tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:VirtualEarth  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[Twitter.getLatestPosts]}]]></tileSource>
+<accessUrl>http://atlas.freshlogicstudio</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="263">
+<name>twittervision</name>
+<description>Watch twitters in real time with this live map that dynamically updates to show the latest twitterings</description>
+<tileSource><![CDATA[{tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[Twitter.getLatestPosts]}]]></tileSource>
+<accessUrl>    http://twittervision.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="265">
+<name>Afrous Mashup Builder</name>
+<description>A JavaScript-based mashup engine that runs entirely on your web browser. No software installation, no server hosting. Numerous web services are now available and mashable under this JavaScript engine.</description>
+<tileSource><![CDATA[{tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[Twitter.getLatestPosts+++Youtube.searchVideo]}]]></tileSource>
+<accessUrl>    http://www.afrous.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="267">
+<name>dewspot</name>
+<description>The dewspot.com allows you to mix with video, map, photo, weather forecasts and twitter messages. It has impressive interface. Developers periodicaly add new features. Wishes are welcome.</description>
+<tileSource><![CDATA[{tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Twitter.getLatestPosts+++Youtube.searchVideo]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>    http://dewspot.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="269">
+<name>Flotzam</name>
+<description>Watch the data that you care about in this screensaver mashup of Facebook, Flickr, Twitter, and blogs. This visualization lets you configure what you want to watch and the speed in which you see it.</description>
+<tileSource><![CDATA[{tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[FaceBook.getFriends+++Flickr.getGeotaggedPhotos+++Twitter.getLatestPosts]}]]></tileSource>
+<accessUrl>http://flotzam.com </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="271">
+<name>Fireball</name>
+<description>Uses Twitter as an interface to bring your social graph to bear;uses Upcoming for cross-correlating events and locations.</description>
+<tileSource><![CDATA[{tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:Upcoming  ,  operName:findEvents  ,  type:leaf  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[Twitter.getLatestPosts]}]]></tileSource>
+<accessUrl>http://fireballapp.com/ </accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="273">
+<name>ePassport</name>
+<description>ePassport is numeric passport generated with results from Google search, Ziki, Google images, Twitter, and Flickr.</description>
+<tileSource><![CDATA[{tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Twitter.getLatestPosts+++GoogleWebSearch.search+++Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>    http://api-exploration.net/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="275">
+<name>FizzBoost</name>
+<description>Brings together Facebook desktop alert programs into one interface. View recent notifications, photos, an alphabetical Friend list, and receive alerts and upload photos. FizzBoost is a companion to Facebook.</description>
+<tileSource><![CDATA[{tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:FaceBook  ,  operName:getUserInfoById  ,  type:leaf  ,  input:[<userID 676712790>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[Twitter.getLatestPosts]}]]></tileSource>
+<accessUrl>    http://www.fizzboost.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="277">
+<name>SocialPeek</name>
+<description>Take a glance into the community. SocialPeek looks at various popular social media services and user-generated media sites to generate real-time peeks into what people are really talking about right now.</description>
+<tileSource><![CDATA[{tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:leaf  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[Twitter.getLatestPosts]}]]></tileSource>
+<accessUrl>    http://www.socialpeek.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="279">
+<name>Ipoki</name>
+<description>A GPS-based social network that allows people to share geolocation data using a small application installed in their mobile devices. Follow in Google Earth real-time, send photos to Flickr, map to blogs, and more.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:FaceBook  ,  operName:getUserInfoById  ,  type:root  ,  input:[<userID 676712790>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:Twitter  ,  operName:getLatestUserPosts  ,  type:root  ,  input:[<userID Conversation>+++<number 15>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[FaceBook.getUserInfoById+++Twitter.getLatestUserPosts]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>    http://www.ipoki.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="281">
+<name>Blog on a Map</name>
+<description>SadakMap has developed a framework that allows blogging on the backdrop of a Map. Built on top of Google Maps and is integrated with Facebook and Flickr.</description>
+<tileSource><![CDATA[{tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[FaceBook.getFriends]}]]></tileSource>
+<accessUrl>http://www.sadakmap.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="283">
+<name>Facebook 3Styler</name>
+<description>3Styler for Facebook lets you search for videos; send invitations to watch videos to friends; create your own video searching profile; manage playlists. Winner of AOL Video mashup contest.</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:AOLVideo  ,  operName:searchVideo  ,  type:leaf  ,  input:[<query music>]  ,  output:[title+++description+++playUrl]  ,  parents:[FaceBook.getFriends]}]]></tileSource>
+<accessUrl>http://www.facebook.com/apps/application.php?id=14558787347</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="285">
+<name>Mapper</name>
+<description>See where your Facebook friends are from.&#13;</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[FaceBook.getFriends]}]]></tileSource>
+<accessUrl>http://www.bookfaced.com/fb/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="287">
+<name>Facebook Widget Slideshow</name>
+<description>Make an imageLoop slideshow on Facebook and show it to friends in your profile.</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:imageLoop  ,  operName:makeImageLoop  ,  type:leaf  ,  input:[<iUrl None>]  ,  output:[]  ,  parents:[FaceBook.getFriends]}]]></tileSource>
+<accessUrl>http://www.facebook.com/tos.php</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="289">
+<name>favrats</name>
+<description>favrats makes product suggestions based on your Facebook friends favorite movies, music, books or TV shows.</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:leaf  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[FaceBook.getFriends]}]]></tileSource>
+<accessUrl>http://www.favrats.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="291">
+<name>GeckoGo</name>
+<description>Travel planning site for independent travelers integrating Google Maps, Flickr, and various social networks for photo albums, trip planning, blogging and guide browsing.&#13;&#13;</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[FaceBook.getFriends]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://www.geckogo.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="293">
+<name>iPhoneLocator for Facebook</name>
+<description>Social mobile tracking with the iPhone on Facebook. Find iPhone-using friends near you.&#13;</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[FaceBook.getFriends]}]]></tileSource>
+<accessUrl>http://www.facebook.com/apps/application.php?id=10355565129</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="295">
+<name>Ipoki</name>
+<description>A GPS-based social network that allows people to share geolocation data using a small application installed in their mobile devices. Follow in Google Earth real-time, send photos to Flickr, map to blogs, and more.&#13;</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Twitter  ,  operName:getLatestUserPosts  ,  type:root  ,  input:[<userID Conversation>+++<number 15>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[FaceBook.getFriends+++Twitter.getLatestUserPosts]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://www.ipoki.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="297">
+<name>Look What I Found </name>
+<description>Look is a unique one-page eBay search engine. No repeat searching, no multiple pages. Available on Facebook.&#13;</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:eBay  ,  operName:findLocation  ,  type:root  ,  input:[<keyWords harry potter>]  ,  output:[address+++detailsURL]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[eBay.findLocation]}    {tpName:eBay  ,  operName:findProducts  ,  type:leaf  ,  input:[<keyWords harry potter>+++<count 10>]  ,  output:[title+++detailsURL+++stockPhotoURL]  ,  parents:[FaceBook.getFriends]}]]></tileSource>
+<accessUrl>http://www.lookwhatihavefound.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="299">
+<name>Map A List</name>
+<description>A wizard for creating and managing customized Google maps of address lists. Also has a Facebook app for mapping your friends.&#13;</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:YahooGeocoding  ,  operName:geoCodeByAdr  ,  type:root  ,  input:[<street street>+++<city newYork>+++<location freeText>]  ,  output:[Latitude+++Longitude+++Address+++City+++State+++Zip+++Country]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[FaceBook.getFriends+++YahooGeocoding.geoCodeByAdr]}]]></tileSource>
+<accessUrl>http://mapalist.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="301">
+<name>MapMate</name>
+<description>MapMate is a new way to update your Facebook status. You can plot your current location and set your status anywhere using Virtual Earth.&#13;</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getEvent  ,  type:root  ,  input:[<eventId 5388533932>]  ,  output:[eid+++name+++description+++start_time+++end_time+++pic+++pic_big+++thumbnailUrl+++creator+++city+++state+++country]  ,  parents:[]}    {tpName:VirtualEarth  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[FaceBook.getEvent]}]]></tileSource>
+<accessUrl>http://apps.facebook.com/mapmate/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="303">
+<name>MapYourBuddies</name>
+<description>After you have logged in to MapYourBuddies, this mashup will display your friends from Facebook on a Google Map and give gift recommendations from Amazon based on your friends favorite music.&#13;</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:amazon  ,  operName:findLocation  ,  type:root  ,  input:[<keyWords harry potter>]  ,  output:[address+++detailsURL]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[FaceBook.getFriends+++amazon.findLocation]}    {tpName:amazon  ,  operName:findProducts  ,  type:leaf  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[FaceBook.getFriends]}]]></tileSource>
+<accessUrl>http://people.emich.edu/mchiang4/MapYourBuddies/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="305">
+<name>Music Creek</name>
+<description>Play music videos of artists continuously, sync them between YouTube and local iTunes, and sync them with your iPod or iPhone. Also provides video playlists based on top ranking of iTMS and other sources.&#13;</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:root  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:Lastfm  ,  operName:getWeeklyTopArtists  ,  type:root  ,  input:[]  ,  output:[name+++playUrl]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[FaceBook.getFriends+++Lastfm.getTracksByArtist+++Lastfm.getWeeklyTopArtists]}]]></tileSource>
+<accessUrl>http://www.musiccreek.net/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="307">
+<name>My Camps Facebook App</name>
+<description>Facebook application for searching, rating, reviewing, and sharing summer camps. Put your favorite camps on the map and meet other friends who share the same experiences.</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[FaceBook.getFriends]}]]></tileSource>
+<accessUrl>http://www.facebook.com/apps/application.php?id=5869214005</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="309">
+<name>NetTickr</name>
+<description>Allows users to add RSS feeds, applications, email and web sites to their personal Ticker. NetTickr is always scanning the users net for new items and displays the content in the users NetTickr.</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Twitter  ,  operName:getLatestPosts  ,  type:root  ,  input:[<number 10>]  ,  output:[messageID+++text+++createdAt+++userID+++screenName+++location+++description+++imageUrl+++url]  ,  parents:[]}    {tpName:MySpace  ,  operName:Photos  ,  type:root  ,  input:[<userid null>]  ,  output:[title+++description+++imageUrl]  ,  parents:[]}    {tpName:MySpace  ,  operName:Videos  ,  type:root  ,  input:[<userid null>]  ,  output:[title+++description+++link]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[FaceBook.getFriends+++Flickr.getGeotaggedPhotos+++Twitter.getLatestPosts+++MySpace.Photos+++MySpace.Videos]}]]></tileSource>
+<accessUrl>http://www.nettickr.de/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="311">
+<name>Nightfeed</name>
+<description>Nightfeed.com is a social, user-driven mashup of Google Maps and Facebook designed to let friends find nightlife.</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:amazon  ,  operName:findLocation  ,  type:root  ,  input:[<keyWords harry potter>]  ,  output:[address+++detailsURL]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[FaceBook.getFriends+++amazon.findLocation]}]]></tileSource>
+<accessUrl>http://www.nightfeed.com</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="313">
+<name>Phreetings App for Facebook</name>
+<description>Make photo and video e-greetings using Flickr and YouTube content: search, drag and drop, type message and Send.</description>
+<tileSource><![CDATA[{tpName:FaceBook  ,  operName:getFriends  ,  type:root  ,  input:[<number 10>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:amazon  ,  operName:findLocation  ,  type:root  ,  input:[<keyWords harry potter>]  ,  output:[address+++detailsURL]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[amazon.findLocation]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[FaceBook.getFriends]}    {tpName:FaceBook  ,  operName:getUserInfoById  ,  type:leaf  ,  input:[<userID 676712790>]  ,  output:[id+++name+++city+++state+++country+++zipCode+++status+++statusLastChanged+++profileUrl+++photoUrl+++thumbnailUrl+++aboutMe]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://apps.facebook.com/phreetings</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="315">
+<name>AllOrNone.org Pearl Jam</name>
+<description>Pearl Jam fansite with links and pictures pulled from various web services.</description>
+<tileSource><![CDATA[{tpName:delicious  ,  operName:getPostsByTag  ,  type:root  ,  input:[<tag google>]  ,  output:[title+++postUrl+++description+++tags]  ,  parents:[]}    {tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:GoogleLocalSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[title+++googleMapUrl+++latitude+++longitude+++streetAddress+++city+++region+++country+++ddUrl+++ddUrlToHere+++ddUrlFromHere+++mapImage]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Upcoming.findEvents+++Flickr.getGeotaggedPhotos+++delicious.getPostsByTag+++GoogleLocalSearch.search]}]]></tileSource>
+<accessUrl>http://www.allornone.org/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="317">
+<name>EventPedia</name>
+<description>EventPedia provide user with events information ranging from festival to sport events on USA according to date and addresses.</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Upcoming.findEvents]}]]></tileSource>
+<accessUrl>http://www.eventpedia.net</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="319">
+<name>Eventpedia</name>
+<description>See events coming to your neighborhood via this mashup of Google Maps and Upcoming.org.</description>
+<tileSource><![CDATA[{tpName:GoogleLocalSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[title+++googleMapUrl+++latitude+++longitude+++streetAddress+++city+++region+++country+++ddUrl+++ddUrlToHere+++ddUrlFromHere+++mapImage]  ,  parents:[]}    {tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[GoogleLocalSearch.search]}]]></tileSource>
+<accessUrl>http://www.eventpedia.net/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="321">
+<name>Find Parking via ParkingCarma</name>
+<description>Mashup of events from Upcoming.org with local parking facilities. Advanced reservations are also possible at some locations.&#13;</description>
+<tileSource><![CDATA[{tpName:GoogleLocalSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[title+++googleMapUrl+++latitude+++longitude+++streetAddress+++city+++region+++country+++ddUrl+++ddUrlToHere+++ddUrlFromHere+++mapImage]  ,  parents:[]}    {tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[GoogleLocalSearch.search]}]]></tileSource>
+<accessUrl>http://www.parkingcarma.com/its/DesktopDefault.aspx?tabid=65</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="323">
+<name>Happeningz</name>
+<description>A simple mashup of Google maps and upcoming.org events. It is complete with tag clouds, tag searches and city searches. Currently SF bay area events are subscribed, it is trivial to scan other cities too.&#13;</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Upcoming.findEvents]}]]></tileSource>
+<accessUrl>http://www.happeningz.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="325">
+<name>JibMap</name>
+<description>Mashup of Google Maps API and Upcoming.org events. Good use of Ajax. Currently for Twin Cities only.</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Upcoming.findEvents]}]]></tileSource>
+<accessUrl>http://www.jibmap.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="327">
+<name>Frisbee Mashup</name>
+<description>Frisbee Mashup newes photos, events, movies, bookmarks and special feeds are published on five pages, frisbee, dog frisbee, disc golf, ultimate and freestyle.</description>
+<tileSource><![CDATA[{tpName:delicious  ,  operName:getPostsByTag  ,  type:root  ,  input:[<tag google>]  ,  output:[title+++postUrl+++description+++tags]  ,  parents:[]}    {tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Upcoming.findEvents+++delicious.getPostsByTag+++Flickr.getGeotaggedPhotos+++Youtube.searchVideo]}]]></tileSource>
+<accessUrl>http://www.pageflakes.com/ole1.ashx?page=1200720</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="329">
+<name>Adactio Elsewhere</name>
+<description>Jeremy Keith combines a variety of personal information from across the web in one place via Ajax scripting and the APIs from Upcoming.org, Flickr, Amazon, and Del.icio.us.</description>
+<tileSource><![CDATA[{tpName:delicious  ,  operName:getPostsByTag  ,  type:root  ,  input:[<tag google>]  ,  output:[title+++postUrl+++description+++tags]  ,  parents:[]}    {tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Upcoming.findEvents+++delicious.getPostsByTag+++Flickr.getGeotaggedPhotos+++amazon.findProducts]}]]></tileSource>
+<accessUrl>http://elsewhere.adactio.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="331">
+<name>rel8r.com</name>
+<description>An experimental discovery tool that searches tags from various social network-type sites including Flickr, Technorati, and Upcoming. </description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos+++Upcoming.findEvents]}]]></tileSource>
+<accessUrl>http://www.rel8r.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="333">
+<name>musiCal</name>
+<description>Gives an RSS feed of who from your top 50 artists in last.fm are coming to your town.</description>
+<tileSource><![CDATA[{tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:root  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[Lastfm.getTracksByArtist]}]]></tileSource>
+<accessUrl>http://www.noesbueno.com/musical/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="335">
+<name>Upcomingscrobbler</name>
+<description>Upcomingscrobbler brings together Last.fm and Upcoming.org to tell you where you can see your favourite bands perform live.</description>
+<tileSource><![CDATA[{tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:root  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[Lastfm.getTracksByArtist]}]]></tileSource>
+<accessUrl>http://www.triv.org.uk/~mavit/upcomingscrobbler/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="337">
+<name>Netzwelt.de Free MP3s</name>
+<description>Netzwelt.de is a German online magazine. They mashed up free and legal promo MP3s on the net with Upcoming.org tour dates, Amazon CD reviews, YouTube videos and akuma MP3 download store.</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:root  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Upcoming.findEvents+++amazon.findProducts+++Youtube.searchVideo+++Lastfm.getTracksByArtist]}]]></tileSource>
+<accessUrl>http://www.netzwelt.de/mp3audio/index.html</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="339">
+<name>Official Flickr Map</name>
+<description>Millions of Flickr photos have been geotagged and placed on a Yahoo Map. Uses the recently added Geo features of Flickr. Add a special tag for photos from Upcoming.org events and they will be linked to that page automatically.</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[Upcoming.findEvents]}    {tpName:YahooMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://www.flickr.com/map/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="341">
+<name>MetroMash</name>
+<description>Yahoo Maps, Local Search, Traffic Reports and Upcoming Events all mashed together.&#13;</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:YahooTraffic  ,  operName:getTrafficForAddress  ,  type:root  ,  input:[<street 1 Microsoft Way>+++<city Redmond>+++<state WA>+++<radius 10>]  ,  output:[title+++type+++description+++latitude+++longitude+++direction+++severity+++reportDate+++updateDate+++endDate+++imageURL]  ,  parents:[]}    {tpName:YahooSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Upcoming.findEvents+++YahooTraffic.getTrafficForAddress+++YahooSearch.search]}]]></tileSource>
+<accessUrl>http://www.metromash.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="343">
+<name>Upcoming.org mobilised</name>
+<description>Mobile-optimised version of Upcoming.org allows quick searching of events,venues &amp; metros. Where available, small maps of the venue is displayed using yahoo maps.</description>
+<tileSource><![CDATA[{tpName:Upcoming  ,  operName:findEvents  ,  type:root  ,  input:[<searchText music>]  ,  output:[id+++name+++description+++start_date+++end_date+++start_time+++end_time+++personal+++selfpromotion+++metro_id+++venue_id+++user_id+++category_id+++date_posted+++latitude+++longitude+++geocoding_precision+++geocoding_ambiguous]  ,  parents:[]}    {tpName:YahooImage  ,  operName:search  ,  type:leaf  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[Upcoming.findEvents]}]]></tileSource>
+<accessUrl>http://mobilised.net/upcoming.org/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="345">
+<name>Clipegg</name>
+<description>Clipegg aggregates links to popular media published on social media sites. You can quickly read the most popular news, watch the latest videos and top images.</description>
+<tileSource><![CDATA[{tpName:Digg  ,  operName:getStories  ,  type:root  ,  input:[<number 10>]  ,  output:[title+++description+++user+++userThumbnail+++topic+++storyID+++link+++submitDate+++diggs+++comments+++href+++status]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[Digg.getStories]}]]></tileSource>
+<accessUrl>http://clipegg.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="347">
+<name>DiggMap</name>
+<description>A visualization for Digg.com that shows diggs in realtime on a world map.</description>
+<tileSource><![CDATA[{tpName:Digg  ,  operName:getStories  ,  type:root  ,  input:[<number 10>]  ,  output:[title+++description+++user+++userThumbnail+++topic+++storyID+++link+++submitDate+++diggs+++comments+++href+++status+++location]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[Digg.getStories]}]]></tileSource>
+<accessUrl>http://www.bittrees.com/diggmap</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="349">
+<name>DuggBack</name>
+<description>DuggBack is a service that lets you quickly find all the available mirrors and web caches for a popular Digg story.</description>
+<tileSource><![CDATA[{tpName:Digg  ,  operName:getStories  ,  type:root  ,  input:[<number 10>]  ,  output:[title+++description+++user+++userThumbnail+++topic+++storyID+++link+++submitDate+++diggs+++comments+++href+++status+++location]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[Digg.getStories]}]]></tileSource>
+<accessUrl>http://www.duggback.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="351">
+<name>Query the Net</name>
+<description>Search engine that provides a variety of results from Yahoo, Google, YouTube, Ask, Digg, and others.</description>
+<tileSource><![CDATA[{tpName:Digg  ,  operName:getStories  ,  type:root  ,  input:[<number 10>]  ,  output:[title+++description+++user+++userThumbnail+++topic+++storyID+++link+++submitDate+++diggs+++comments+++href+++status+++location]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Digg.getStories+++Youtube.searchVideo]}]]></tileSource>
+<accessUrl>http://querythe.net</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="353">
+<name>Shareaholic Firefox Plugin</name>
+<description>This Firefox extension allows you to submit the webpage you are viewing to digg, del.icio.us, Facebook, and other places. It also tells you whether the webpage you are on has been dugg and commented on, and how many times it has been saved on del.icio.us.&#13;</description>
+<tileSource><![CDATA[{tpName:Digg  ,  operName:getStories  ,  type:root  ,  input:[<number 10>]  ,  output:[title+++description+++user+++userThumbnail+++topic+++storyID+++link+++submitDate+++diggs+++comments+++href+++status+++location]  ,  parents:[]}    {tpName:delicious  ,  operName:getPostsByTag  ,  type:root  ,  input:[<tag google>]  ,  output:[title+++postUrl+++description+++tags]  ,  parents:[]}    {tpName:delicious  ,  operName:getTags  ,  type:root  ,  input:[]  ,  output:[tags]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Digg.getStories+++delicious.getPostsByTag+++delicious.getTags]}]]></tileSource>
+<accessUrl>http://shareaholic.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="355">
+<name>SleekPage</name>
+<description>SleekPage is a search engine that shows search results from various popular sites, such as Digg.com, Yahoo Answers, YouTube, Google Blog Search and Amazon.com, in a single page.</description>
+<tileSource><![CDATA[{tpName:Digg  ,  operName:getStories  ,  type:root  ,  input:[<number 10>]  ,  output:[title+++description+++user+++userThumbnail+++topic+++storyID+++link+++submitDate+++diggs+++comments+++href+++status+++location]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:YahooAnswers  ,  operName:getAnswers  ,  type:root  ,  input:[<term computers>+++<count 10>]  ,  output:[subject+++content+++date+++link+++category+++userId+++userPhotoURL+++userNick+++numAnswers+++numComments+++chosenAnswererId+++chosenAnswererNick]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Digg.getStories+++YahooAnswers.getAnswers+++Youtube.searchVideo+++amazon.findProducts]}]]></tileSource>
+<accessUrl>http://www.sleekpage.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="357">
+<name>Digg Stalker</name>
+<description>Find those with similar interests and also monitor the strength of your network on digg.</description>
+<tileSource><![CDATA[{tpName:Digg  ,  operName:getStories  ,  type:root  ,  input:[<number 10>]  ,  output:[title+++description+++user+++userThumbnail+++topic+++storyID+++link+++submitDate+++diggs+++comments+++href+++status+++location]  ,  parents:[]}    {tpName:YahooSearch  ,  operName:search  ,  type:leaf  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[Digg.getStories]}]]></tileSource>
+<accessUrl>http://postworthy.com/Worthy/ex/Digg_Stalker/108.aspx</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="359">
+<name>Jamzee</name>
+<description>Create YouTube playlists with your favorite music or videos, import them into iTunes, share it with your friends, add them to your MySpace or Facebook.</description>
+<tileSource><![CDATA[{tpName:MySpace  ,  operName:Videos  ,  type:root  ,  input:[<userid null>]  ,  output:[title+++description+++link]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:leaf  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[MySpace.Videos]}]]></tileSource>
+<accessUrl>http://www.jamzee.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="361">
+<name>Showcator</name>
+<description>This site updates itself with the latest show info from MySpace. It finds the best fit, location wise, for each show that it discovers, and also maps it. View shows by location, date, band, or venue.</description>
+<tileSource><![CDATA[{tpName:MySpace  ,  operName:Photos  ,  type:root  ,  input:[<userid null>]  ,  output:[title+++description+++imageUrl+++latitude+++longitude]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[MySpace.Photos]}]]></tileSource>
+<accessUrl>http://www.showcator.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="363">
+<name>Google Hot Keys</name>
+<description>A Firefox and Internet Explorer 7 extension that adds split-screen previews, deadlink checking and hotkeys to Google, Technorati, Ask and Live searches.</description>
+<tileSource><![CDATA[{tpName:Technorati  ,  operName:searchBlog  ,  type:root  ,  input:[]  ,  output:[title+++description+++url+++publishDate]  ,  parents:[]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Technorati.searchBlog+++GoogleWebSearch.search]}]]></tileSource>
+<accessUrl>http://googlehotkeys.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="365">
+<name>Celebrity CryoSites</name>
+<description>Images, videos, and news about your favorite celebrities from Yahoo, YouTube and Technorati.</description>
+<tileSource><![CDATA[{tpName:Technorati  ,  operName:searchBlog  ,  type:root  ,  input:[]  ,  output:[title+++description+++url+++publishDate]  ,  parents:[]}    {tpName:YahooImage  ,  operName:search  ,  type:root  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Technorati.searchBlog+++YahooImage.search+++Youtube.searchVideo]}]]></tileSource>
+<accessUrl>http://www.cryosites.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="367">
+<name>Musiic.net</name>
+<description>Search tool for music fans where you can find MP3s, YouTube videos, Flickr images, news, songs, events, blog posts, podcasts, websites, and articles about artists.</description>
+<tileSource><![CDATA[{tpName:Technorati  ,  operName:searchBlog  ,  type:root  ,  input:[]  ,  output:[title+++description+++url+++publishDate]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Lastfm  ,  operName:getTracksByArtist  ,  type:root  ,  input:[<artist Cher>]  ,  output:[name+++playUrl+++imageUrl+++thumbnailUrl]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Technorati.searchBlog+++Youtube.searchVideo+++Flickr.getGeotaggedPhotos+++Lastfm.getTracksByArtist]}]]></tileSource>
+<accessUrl>http://www.musiic.net/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="369">
+<name>My Bikram Yoga</name>
+<description>MyBikramYoga.com is dedicated in bringing you the latest in the Bikram yoga community, news, blogs, images and videos.</description>
+<tileSource><![CDATA[{tpName:Technorati  ,  operName:searchBlog  ,  type:root  ,  input:[]  ,  output:[title+++description+++url+++publishDate]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Technorati.searchBlog+++Youtube.searchVideo+++Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>http://www.mybikramyoga.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="371">
+<name>Oamos</name>
+<description>Oamos pings search engines for up-to-date news, images, synonyms, music, and videos in relation to your topics. Meta-inspiratios engine.</description>
+<tileSource><![CDATA[{tpName:Technorati  ,  operName:searchBlog  ,  type:root  ,  input:[]  ,  output:[title+++description+++url+++publishDate]  ,  parents:[]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:YahooSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Technorati.searchBlog+++Flickr.getGeotaggedPhotos+++GoogleWebSearch.search+++YahooSearch.search+++amazon.findProducts]}]]></tileSource>
+<accessUrl>http://www.oamos.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="373">
+<name>musiclovr</name>
+<description>Music mashup that allows searching of data from Amazon, news from Yahoo, and blogs via Technorati.</description>
+<tileSource><![CDATA[{tpName:Technorati  ,  operName:searchBlog  ,  type:root  ,  input:[]  ,  output:[title+++description+++url+++publishDate]  ,  parents:[]}    {tpName:YahooImage  ,  operName:search  ,  type:root  ,  input:[<term pretty>+++<number 10>]  ,  output:[title+++imageUrl+++thumbnailUrl+++publisher+++description]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:root  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[]}    {tpName:amazon  ,  operName:findProducts  ,  type:root  ,  input:[<keyWords Harry Potter>]  ,  output:[title+++detailsURL+++category+++stockPhotoURL]  ,  parents:[]}    {tpName:YahooVideo  ,  operName:search  ,  type:root  ,  input:[<term cars>+++<number flash>+++<number 10>]  ,  output:[title+++description+++videoURL+++thumbnailImageURL]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[Technorati.searchBlog+++Flickr.getGeotaggedPhotos+++amazon.findProducts+++YahooImage.search+++YahooVideo.search+++Youtube.searchVideo]}]]></tileSource>
+<accessUrl>http://www.musiclovr.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="375">
+<name>Pipelicious</name>
+<description>A mashup of del.iciou.us tags with a Yahoo Pipe containing aggregated results from Blogger, Technorati Google Blog Search and several others. Click on a tag to see what people in the blogosphere are saying about that topic today.</description>
+<tileSource><![CDATA[{tpName:Technorati  ,  operName:searchBlog  ,  type:root  ,  input:[]  ,  output:[title+++description+++url+++publishDate]  ,  parents:[]}    {tpName:GoogleWebSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:YahooSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:delicious  ,  operName:getPostsByTag  ,  type:root  ,  input:[<tag google>]  ,  output:[title+++postUrl+++description+++tags]  ,  parents:[]}    {tpName:Output  ,  operName:outputData  ,  type:leaf  ,  input:[<inputParam 0>]  ,  output:[]  ,  parents:[delicious.getPostsByTag+++GoogleWebSearch.search+++Technorati.searchBlog+++YahooSearch.search]}]]></tileSource>
+<accessUrl>http://pipelicious.visualrinse.com/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="377">
+<name>BuzzVideo</name>
+<description>The latest videos and related details from YouTube, Technorati and Yahoo Search.</description>
+<tileSource><![CDATA[{tpName:Technorati  ,  operName:searchBlog  ,  type:root  ,  input:[]  ,  output:[title+++description+++url+++publishDate]  ,  parents:[]}    {tpName:YahooSearch  ,  operName:search  ,  type:root  ,  input:[<query robin>]  ,  output:[rawUrl+++title+++content]  ,  parents:[]}    {tpName:Youtube  ,  operName:searchVideo  ,  type:root  ,  input:[<searchText football>+++<author robin>+++<count 10>+++<category Sports>]  ,  output:[title+++thumbnailUrl+++description+++linkurl+++location]  ,  parents:[Technorati.searchBlog+++YahooSearch.search]}]]></tileSource>
+<accessUrl>http://www.buzzvideo.info/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="379">
+<name>Blosh</name>
+<description>Blosh finds blogs mentioning locations and displays them on a map.</description>
+<tileSource><![CDATA[{tpName:Technorati  ,  operName:searchBlog  ,  type:root  ,  input:[<term cars>]  ,  output:[title+++description+++url+++publishDate+++location]  ,  parents:[]}    {tpName:GoogleMap  ,  operName:addPushpinByAdr  ,  type:leaf  ,  input:[<address 0>]  ,  output:[]  ,  parents:[Technorati.searchBlog]}]]></tileSource>
+<accessUrl>http://blosh.net/</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="381">
+<name>ViewRelatedPhotos</name>
+<description>Search products from MSNShopping, then search the titile on Filckr, finally view the result on VirtualEarth.</description>
+<tileSource><![CDATA[{tpName:MSNShopping  ,  operName:getProducts  ,  type:root  ,  input:[<text xbox 360>+++<number 30>]  ,  output:[productUrl+++url+++id+++categoryId+++title+++brand+++vendorName+++description+++rating+++price+++vendorId]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:midNode  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[MSNShopping.getProducts]}    {tpName:VirtualEarth  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>None</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="383">
+<name>ViewRelatedProducts</name>
+<description>Search products from MSNShopping, then search the titile on Filckr, finally view the result on VirtualEarth.</description>
+<tileSource><![CDATA[{tpName:MSNShopping  ,  operName:getProducts  ,  type:root  ,  input:[<text xbox 360>+++<number 30>]  ,  output:[productUrl+++url+++id+++categoryId+++title+++brand+++vendorName+++description+++rating+++price+++vendorId]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:midNode  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[MSNShopping.getProducts]}    {tpName:VirtualEarth  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>None</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="385">
+<name>ViewRelatedProductsOnVirtualEarth</name>
+<description>Search products from MSNShopping, then search the titile on Filckr, finally view the result on VirtualEarth.</description>
+<tileSource><![CDATA[{tpName:MSNShopping  ,  operName:getProducts  ,  type:root  ,  input:[<text xbox 360>+++<number 30>]  ,  output:[productUrl+++url+++id+++categoryId+++title+++brand+++vendorName+++description+++rating+++price+++vendorId]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:midNode  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[MSNShopping.getProducts]}    {tpName:VirtualEarth  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>None</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="387">
+<name>RelatedProductsOnVirtualEarth</name>
+<description>Search products from MSNShopping, then search the titile on Filckr, finally view the result on VirtualEarth.</description>
+<tileSource><![CDATA[{tpName:MSNShopping  ,  operName:getProducts  ,  type:root  ,  input:[<text xbox 360>+++<number 30>]  ,  output:[productUrl+++url+++id+++categoryId+++title+++brand+++vendorName+++description+++rating+++price+++vendorId]  ,  parents:[]}    {tpName:Flickr  ,  operName:getGeotaggedPhotos  ,  type:midNode  ,  input:[<search_text beach>+++<number 15>]  ,  output:[title+++url+++thumbnailUrl+++owner+++linkUrl+++originalUrl+++latitude+++longitude+++id]  ,  parents:[MSNShopping.getProducts]}    {tpName:VirtualEarth  ,  operName:addPushpin  ,  type:leaf  ,  input:[<latitude 0>+++<longitude 0>+++<url 0>+++<title My Pushpin>+++<description This is a pushpin on the earth>]  ,  output:[]  ,  parents:[Flickr.getGeotaggedPhotos]}]]></tileSource>
+<accessUrl>None</accessUrl>
+</mashupApp>
+<mashupApp mashupAppId="389">
+<name>EBI-Mashup</name>
+<description>This is an EBI mashup application. </description>
+<tileSource><![CDATA[{tpName:EB-eye  ,  operName:getResults  ,  type:root  ,  input:[<domain cancer>+++<query cancer>+++<fields cat>+++<size 10>]  ,  output:[field+++fileldValue]  ,  parents:[]}    {tpName:EBI-ArrayExpress  ,  operName:findExpAndData  ,  type:leaf  ,  input:[<keywords {EB-eye.getResults.fileldValue}>+++<species holon>]  ,  output:[name+++description+++species+++experimentType]  ,  parents:[EB-eye.getResults]}]]></tileSource>
+<accessUrl>None</accessUrl>
+</mashupApp>
+</mashupApps>

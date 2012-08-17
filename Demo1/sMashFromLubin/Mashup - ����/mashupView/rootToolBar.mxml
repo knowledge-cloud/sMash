@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="73" height="166" 
+    paddingTop="10" horizontalAlign="center"   backgroundAlpha="0.8" verticalGap="0">
+    
+    <mx:Metadata>
+    [Event(name="up", type="dart.mashup.mashup.RootToolBarEvent")]
+    [Event(name="down", type="dart.mashup.mashup.RootToolBarEvent")]
+    [Event(name="left", type="dart.mashup.mashup.RootToolBarEvent")]
+    [Event(name="right", type="dart.mashup.mashup.RootToolBarEvent")]
+    [Event(name="zoomIn", type="dart.mashup.mashup.RootToolBarEvent")]
+    [Event(name="zoomOut", type="dart.mashup.mashup.RootToolBarEvent")]
+     [Event(name="fullScreen", type="dart.mashup.mashup.RootToolBarEvent")]
+    </mx:Metadata>
+        
+    <mx:Script>
+        <![CDATA[
+  			import dart.mashup.mashup.RootToolBarEvent;
+        ]]>
+    </mx:Script>
+    <mx:LinkButton id="btnUp" icon="@Embed('/assets/up.gif')" 
+            width="16" height="16" click="dispatchEvent(new RootToolBarEvent(RootToolBarEvent.UP))" toolTip="up"/>       
+
+    <mx:HBox>
+     <mx:LinkButton id="btnLeft"  height="16" icon="@Embed('/assets/left.gif')" 
+            width="16" click="dispatchEvent(new RootToolBarEvent(RootToolBarEvent.LEFT))"  toolTip="left"/> 
+      <mx:Spacer width="3" />
+    <mx:LinkButton id="btnRight" icon="@Embed('/assets/right.gif')" 
+            width="16" height="16" click="dispatchEvent(new RootToolBarEvent(RootToolBarEvent.RIGHT))" toolTip="right"/>            
+    </mx:HBox>
+    <mx:LinkButton id="btnDown" icon="@Embed('/assets/down.gif')" 
+            width="16" height="16" click="dispatchEvent(new RootToolBarEvent(RootToolBarEvent.DOWN))" toolTip="down"/> 
+     <mx:Spacer height="5" />  	
+    <mx:LinkButton id="btnZoomIn" icon="@Embed('/assets/zoomin.gif')" 
+            width="25" click="dispatchEvent(new RootToolBarEvent(RootToolBarEvent.ZOOMIN))" toolTip="zoom in"/>  
+	<mx:Spacer height="5" />  	            
+    <mx:LinkButton id="btnZoomOut" icon="@Embed('/assets/zoomout.gif')" 
+            width="25" click="dispatchEvent(new RootToolBarEvent(RootToolBarEvent.ZOOMOUT))" toolTip="zoom out"/>
+    <mx:Spacer height="5" />  	
+    <mx:LinkButton id="btnFullScr" icon="@Embed('/assets/fullscreen.gif')" 
+            width="25" click="dispatchEvent(new RootToolBarEvent(RootToolBarEvent.FULLSCREEN))" toolTip="fullscreen/normal mode"/>                                            
+</mx:VBox>

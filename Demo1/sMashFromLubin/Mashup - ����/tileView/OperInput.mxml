@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" showEffect="Fade" hideEffect="Fade" creationComplete="fillEditor()">
+    <mx:Metadata>
+    	[Event(name="removeInputParam", type="dart.mashup.tile.ParamListEvent")]
+    </mx:Metadata>
+    
+    <mx:Script>
+        <![CDATA[
+        	import dart.mashup.tile.ParamListEvent;
+        [Bindable]
+        public var classDic:Array;
+        [Bindable]
+        public var classNameArr:Array;
+        
+        [Bindable]
+        public var required:Array = new Array("true", "false");
+        public var index:int = 0;
+        public var paraName:String = null;
+        public var isRequired:String = "true";
+        public var sClass:String = null;
+        public var sClassAttr:String = null;
+        public var value:String = null;
+        public var desc:String = null;
+        public function getClassAttr(className:String):Array
+        {
+        	var tmp:Array;
+        	
+        	for(var i:int = 0; i < classDic.length; i++){
+        		var tName:String = classDic[i].className;
+        		if(tName == className){
+        			tmp =  classDic[i].attrArray;
+        			break;
+        		}	
+        	}
+        	
+        	return tmp;
+        }
+        public function removeParam():void
+        {
+        	var e:ParamListEvent = new ParamListEvent(ParamListEvent.REMOVE_INPUT_PARAM);
+        	e.p = this;
+        	dispatchEvent(e);
+        	
+        }
+        
+        public function setSelectedClass(s:String):void
+        {
+        	cbClass.selectedItem = s;
+        }
+        
+        public function setSelectedClassAttr(s:String):void
+        {
+        	cbAttr.selectedItem = s;
+        }
+        
+        public function fill(name:String, isRequired:String, sClass:String, sClassAttr:String, value:String, desc:String):void
+        {
+        	this.paraName = name == null ? "" : name;
+        	this.isRequired = isRequired;
+        	this.sClass = sClass;
+        	this.sClassAttr= sClassAttr;
+        	this.value = value == null ? "" : value;
+        	this.desc= desc == null ? "" : desc;
+        }
+        
+        private function fillEditor():void
+        {
+        	this.pName.text = paraName == null ? "" : paraName;
+        	this.cbRequired.selectedItem = isRequired;
+        	if(sClass != null){
+        		this.cbClass.selectedItem = sClass;
+        		var tmp:Array = getClassAttr(sClass);
+        		this.cbAttr.dataProvider = tmp;
+        		this.cbAttr.selectedItem = sClassAttr;
+        	}
+        	this.pValue.text = value == null ? "" : value;
+        	this.pDesc.text = desc == null ? "" : desc;        	
+        }
+        
+        ]]>
+    </mx:Script>
+    <mx:HBox id="box1">
+	    <mx:Label text="ParaName:" width="81"/>
+	    <mx:TextInput width="89" id="pName"/>
+	   	<mx:Label text="isRequired:" width="75"/>
+	    <mx:ComboBox width="90" dataProvider="{required}" id="cbRequired">
+	    </mx:ComboBox>	    
+	    <mx:Label text="Class:"/>
+	    <mx:ComboBox width="90" dataProvider="{classNameArr}" id="cbClass"></mx:ComboBox>
+	    <mx:Label text="Attribute:"/>
+	    <mx:ComboBox width="100" dataProvider="{getClassAttr(cbClass.selectedItem as String)}" id="cbAttr"></mx:ComboBox> 	
+    </mx:HBox>
+    <mx:HBox id="box2">
+	    <mx:Label text="DefaultValue:"/>
+	    <mx:TextInput width="89" id="pValue"/>
+	    <mx:Label text="Description:" width="75"/>
+	    <mx:TextInput width="385" id="pDesc"/>
+
+	    <mx:LinkButton label="-" color="#193C0B" width="21" fontWeight="normal" click="removeParam();" toolTip="delete this param"/>
+    </mx:HBox>
+ </mx:VBox>

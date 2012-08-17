@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<catalog>
+    <ontology ontologyId="1">
+		<name>geo</name>
+        <description>geographic coordinates of a location</description>
+        <attributes>
+        	<attribute>
+				<name>latitude</name>
+				<desc>latitude of a location</desc>
+			</attribute>
+        	<attribute>
+				<name>longitude</name>
+				<desc>longitude of a location</desc>
+			</attribute>
+        </attributes>
+        <image>assets/classIcon/class.png</image>
+    </ontology>
+    <ontology ontologyId="2">
+		<name>adr</name>
+        <description>address information of a location</description>
+        <attributes>
+        	<attribute>
+				<name>street-address</name>
+				<desc>street address</desc>
+			</attribute>
+        	<attribute>
+				<name>locality</name>
+				<desc>city name</desc>
+			</attribute>
+        	<attribute>
+				<name>country</name>
+				<desc>country name</desc>
+			</attribute>			
+			<attribute>
+				<name>region</name>
+				<desc>state or province</desc>
+			</attribute>
+			<attribute>
+				<name>zipCode</name>
+				<desc>zipCode of a place</desc>
+			</attribute>
+			<attribute>
+				<name>location</name>
+				<desc>a location</desc>
+			</attribute>						
+        </attributes>
+        <image>assets/classIcon/class.png</image>
+    </ontology>
+    <ontology ontologyId="3">
+		<name>Event</name>
+        <description>event information</description>
+        <attributes>
+        	<attribute>
+				<name>summary</name>
+				<desc>event introduction</desc>
+			</attribute>
+        	<attribute>
+				<name>description</name>
+				<desc>event description</desc>
+			</attribute>
+			<attribute>
+				<name>start</name>
+				<desc>event start time</desc>
+			</attribute>
+			<attribute>
+				<name>end</name>
+				<desc>event end time</desc>
+			</attribute>					
+        </attributes>
+        <image>assets/classIcon/class.png</image>
+    </ontology>    
+<ontology ontologyId="7">
+<name>photo</name>
+<description>describe a photo or image</description>
+<attributes>
+<attribute>
+<name>thumbnailImageUrl</name>
+<desc>thumbnailImageUrl</desc>
+</attribute>
+<attribute>
+<name>imageUrl</name>
+<desc>imageUrl</desc>
+</attribute>
+</attributes>
+<image>assets/classIcon/class.png</image>
+</ontology>
+<ontology ontologyId="9">
+<name>Object</name>
+<description>This is the root class for all the classes</description>
+<attributes>
+<attribute>
+<name>title</name>
+<desc>A short strring that describes the object</desc>
+</attribute>
+<attribute>
+<name>url</name>
+<desc>for describe url</desc>
+</attribute>
+<attribute>
+<name>hexValue</name>
+<desc>a hex value color</desc>
+</attribute>
+<attribute>
+<name>description</name>
+<desc>a description of the object</desc>
+</attribute>
+<attribute>
+<name>ipAddress</name>
+<desc>an ip address</desc>
+</attribute>
+<attribute>
+<name>name</name>
+<desc>the name of something</desc>
+</attribute>
+<attribute>
+<name>string</name>
+<desc>some words that cannot describe using classes</desc>
+</attribute>
+<attribute>
+<name>id</name>
+<desc>id of something, such as userId, category_id...</desc>
+</attribute>
+<attribute>
+<name>integer</name>
+<desc>integer</desc>
+</attribute>
+<attribute>
+<name>number</name>
+<desc>not an integer</desc>
+</attribute>
+<attribute>
+<name>date</name>
+<desc>date</desc>
+</attribute>
+<attribute>
+<name>time</name>
+<desc>time</desc>
+</attribute>
+</attributes>
+<image>assets/classIcon/class.png</image>
+</ontology>
+<ontology ontologyId="10">
+<name>person</name>
+<description>describe a person</description>
+<attributes>
+<attribute>
+<name>userName</name>
+<desc>a nick</desc>
+</attribute>
+<attribute>
+<name>age</name>
+<desc>age</desc>
+</attribute>
+</attributes>
+<image>assets/classIcon/class.png</image>
+</ontology>
+<ontology ontologyId="11">
+<name>news</name>
+<description>describe news</description>
+<attributes>
+</attributes>
+<image>assets/classIcon/class.png</image>
+</ontology>
+<ontology ontologyId="12">
+<name>movie</name>
+<description>describe movie</description>
+<attributes>
+</attributes>
+<image>assets/classIcon/class.png</image>
+</ontology>
+<ontology ontologyId="13">
+<name>music</name>
+<description>describe music</description>
+<attributes>
+</attributes>
+<image>assets/classIcon/class.png</image>
+</ontology>
+<ontology ontologyId="14">
+<name>stock</name>
+<description>describe stock</description>
+<attributes>
+<attribute>
+<name>stockSymbol</name>
+<desc>stockSymbol</desc>
+</attribute>
+</attributes>
+<image>assets/classIcon/class.png</image>
+</ontology>
+<ontology ontologyId="15">
+<name>product</name>
+<description>describe a product</description>
+<attributes>
+<attribute>
+<name>price</name>
+<desc>price</desc>
+</attribute>
+</attributes>
+<image>assets/classIcon/class.png</image>
+</ontology>
+<ontology ontologyId="16">
+<name>video</name>
+<description>describe a video</description>
+<attributes>
+<attribute>
+<name>format</name>
+<desc>format</desc>
+</attribute>
+<attribute>
+<name>videoUrl</name>
+<desc>videoUrl</desc>
+</attribute>
+</attributes>
+<image>assets/classIcon/class.png</image>
+</ontology>
+<ontology ontologyId="17">
+<name>blog</name>
+<description>describe a blog</description>
+<attributes>
+</attributes>
+<image>assets/classIcon/class.png</image>
+</ontology>
+<ontology ontologyId="18">
+<name>post</name>
+<description>describe a post</description>
+<attributes>
+</attributes>
+<image>assets/classIcon/class.png</image>
+</ontology>
+<ontology ontologyId="19">
+<name>track</name>
+<description>describe a track</description>
+<attributes>
+</attributes>
+<image>assets/classIcon/class.png</image>
+</ontology>
+<ontology ontologyId="20">
+<name>story</name>
+<description>describe a story</description>
+<attributes>
+</attributes>
+<image>assets/classIcon/class.png</image>
+</ontology>
+</catalog>
