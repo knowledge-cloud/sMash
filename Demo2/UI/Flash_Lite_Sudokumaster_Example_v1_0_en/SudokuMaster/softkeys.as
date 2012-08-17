@@ -1,0 +1,1 @@
+﻿/* * Copyright (c) 2008 Nokia Corporation. */function setSKLabels(aLSK, aRSK):Void {	_root.main.currentLSK = aLSK;	_root.main.currentRSK = aRSK;    _root.main.LSK.lsk_txt.text=aLSK;    _root.main.RSK.rsk_txt.text=aRSK;}

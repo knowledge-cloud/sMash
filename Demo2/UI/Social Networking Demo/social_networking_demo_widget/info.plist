@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Nokia//DTD PLIST 1.0//EN" "http://www.nokia.com/NOKIA_COM_1/DTDs/plist-1.0.dtd">
+<plist version="1.0">
+    <dict>
+		<key>DisplayName</key>
+		<string>Social Networking Demo</string>
+		<key>Identifier</key>
+		<string>com.demos.socialNetworkingDemo</string>
+		<key>Version</key>
+		<string>1.0</string>
+		<key>MainHTML</key>
+		<string>main.html</string>
+		<key>AllowNetworkAccess</key>
+		<true/>
+		<key>MiniViewEnabled</key>
+		<true />
+    </dict>
+</plist>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<block xmlns="http://localhost/block/namespace" name="Taobao Products">
+    <description>...</description>
+    <params>
+		<param name="music_searches">
+			<description>...</description>
+		</param>
+    </params>
+    <outputSet>
+        <description>...</description>
+    </outputSet>
+</block>

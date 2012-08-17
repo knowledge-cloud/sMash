@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+}
+
+
+#homeScreenContainer{
+	display:block;
+	background: rgb(0,0,0);
+	width:312px;
+	height:85px;
+}   
+
+#widgetContainer{
+	display:none;
+}
+

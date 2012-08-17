@@ -1,0 +1,1 @@
+SWFDecompiler_V5.3_Pro_XiaZaiBa.exe是硕思公司的SWF Decompiler工具，用来反编译SWF文件以利用其中的元件。现在互联网上大部分该软件都是未注册的版本，我这个是破解版本，可以直接使用，无限制。

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<block xmlns="http://localhost/block/namespace"
+       name="Get city Location of China v1.0">
+  <description>This block can give you the location (lat, long) of cities in China</description>
+  <params>
+  </params>
+  <outputSet>
+    <description>This blocks out put is an array stored cities latitude, longitude and name</description>
+  </outputSet>
+</block>
