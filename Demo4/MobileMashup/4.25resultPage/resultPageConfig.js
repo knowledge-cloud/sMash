@@ -1,0 +1,1 @@
+var resultConfigItems = [{target: "invoke2.title",left: "0.021875",top: "0.11458333333333333",width: "0.928125",height: "0.0625",type: "TEXTAREA",name: "title1",},{target: "invoke2.thumbnailUrl",left: "0.028125",top: "0.1875",width: "0.921875",height: "0.6291666666666666",type: "IMAGE",name: "",},];

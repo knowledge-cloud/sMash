@@ -1,0 +1,31 @@
+<mashup xmlns="http://www.zju.edu.cn">
+  <variables/>
+  <process>
+    <getTerminalInput name="song " label="song " type="string" control="text" value="Time"/>
+    <getTerminalInput name="artist" label="artist" type="string" control="text" value="Cher"/>
+    <invoke id="invoke2" portType="LyricWiki" operation="getLyric">
+      <inputVariables>
+        <inputVariable name="artist" type="string" value="${artist}"/>
+        <inputVariable name="song" type="string" value="${song }"/>
+      </inputVariables>
+      <outputVariables>
+        <outputVariable name="url" type="string"/>
+        <outputVariable name="artistO" type="string"/>
+        <outputVariable name="lyrics" type="string"/>
+        <outputVariable name="songO" type="string"/>
+      </outputVariables>
+    </invoke>
+    <invoke id="invoke3" portType="Lastfm" operation="getArtistInfo">
+      <inputVariables>
+        <inputVariable name="artist" type="string" value="${invoke2.artistO}"/>
+      </inputVariables>
+      <outputVariables>
+        <outputVariable name="largeImage" type="string"/>
+        <outputVariable name="url" type="string"/>
+        <outputVariable name="name" type="string"/>
+        <outputVariable name="megaImage" type="string"/>
+        <outputVariable name="summary" type="string"/>
+      </outputVariables>
+    </invoke>
+  </process>
+</mashup>

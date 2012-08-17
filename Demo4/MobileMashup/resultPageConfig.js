@@ -1,0 +1,1 @@
+var resultConfigItems = [{target: "invoke2.lyrics",left: "0.025",top: "0.11666666666666667",width: "0.9375",height: "0.10416666666666667",type: "TEXTAREA",name: "",},{target: "invoke3.largeImage",left: "0.021875",top: "0.22916666666666666",width: "0.9375",height: "0.6666666666666666",type: "IMAGE",name: "",},];
