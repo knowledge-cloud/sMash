@@ -1,0 +1,1 @@
+修改Pub\apache2\conf\httpd.conf，搜索H:/Pub，改成相应的盘符，如D:/Pub。

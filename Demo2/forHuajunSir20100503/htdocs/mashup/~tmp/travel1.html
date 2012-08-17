@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Mashup Runtime Page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/css0.css" />
+<!--script type="text/javascript">var SWF_URL = 'js/fhr.swf';</script-->
+<!--script type="text/javascript" src="js/fhr.js"></script-->
+<!--script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&amp;region=CN"></script-->
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/json2.js"></script>
+<script type="text/javascript" src="js/md5.js"></script>
+
+<script type="text/javascript" src="js/framework.js"></script>
+<script type="text/javascript" src="js/mapuri.js"></script>
+<script type="text/javascript" src="js/node.js"></script>
+<script type="text/javascript">var framework = new Framework();</script>
+<script type="text/javascript" src="block/Block10/script"></script>
+<script type="text/javascript" src="block/Block9/script"></script>
+<script type="text/javascript" src="block/Block20/script"></script>
+<script type="text/javascript" src="block/Block1/script"></script>
+<script type="text/javascript" src="block/Block15/script"></script>
+
+<script type="text/javascript">
+//<![CDATA[
+var diagramConfig = 
+[{
+	id: 'Map Traveler 4',
+	typeId: 'Block15',
+	inputs: [
+		{name: 'positions', type: 0, blockId: 'Douban Activities 2'}
+	]
+}
+,
+{
+	id: 'Virtual Earth r7 3',
+	typeId: 'Block1',
+	inputs: [{name: 'position', type: 0, blockId: 'Map Traveler 4'},{name: 'pushpin', type: 0, blockId: 'Douban Activities 2'}]},{id: 'Douban Activities 2',typeId: 'Block20',inputs: [{name: 'locations', type: 0, blockId: 'Phone Number Locator r2 0'}]},{id: 'Sample Contacts r2 1',typeId: 'Block9',inputs: []},{id: 'Phone Number Locator r2 0',typeId: 'Block10',inputs: [{name: 'phones', type: 0, blockId: 'Sample Contacts r2 1'}]}];
+
+window.onload = function() {
+	framework.initialize(diagramConfig);framework.beginExecution();
+};
+
+//]]>
+</script>
+</head>
+<body>
+	<div id="display"></div>
+</body>
+</html>

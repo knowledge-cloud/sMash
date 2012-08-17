@@ -1,0 +1,1 @@
+alert("in native2.js");

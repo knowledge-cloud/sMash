@@ -1,0 +1,8 @@
+<br/>
+Mobile Web Server demonstration web page<br/>
+<br/>
+<FORM ACTION="handler">
+	Enter Your Name
+	<INPUT TYPE=TEXT class="inputtext" NAME="name" MAXLENGTH="50">
+	<INPUT TYPE=SUBMIT class="submitButton" VALUE="Send">
+</FORM>

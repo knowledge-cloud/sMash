@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<block xmlns="http://localhost/block/namespace" name="Sample Music">
+    <description>This block can generate a sample song list on the mobile phone...</description>
+    <params>
+    </params>
+    <outputSet>
+        <description>...</description>
+    </outputSet>
+</block>

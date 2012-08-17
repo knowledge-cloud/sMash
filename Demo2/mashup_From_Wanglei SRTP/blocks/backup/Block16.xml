@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<block xmlns="http://localhost/block/namespace"
+       name="Live Search r5">
+  <description>This is a map service</description>
+  <params>
+    <param name="searches">
+      <description>This is a map service</description>
+    </param>
+  </params>
+  <outputSet>
+
+    <description>This is the output of the block</description>
+  </outputSet>
+</block>

@@ -1,0 +1,8 @@
+AuthType Basic
+AuthName 'Restricted Files'
+AuthBasicProvider file
+AuthUserFile conf/passwords.txt
+AuthGroupFile conf/groups.txt
+Require group admin
+Satisfy All
+Require user chen

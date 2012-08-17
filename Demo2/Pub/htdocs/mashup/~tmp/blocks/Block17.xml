@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<block xmlns="http://localhost/block/namespace" name="User Search">
+    <description>...</description>
+    <params>
+		<param name="album_searches">
+			<description>...</description>
+		</param>
+		<param name="artists">
+			<description>...</description>
+		</param>
+    </params>
+    <outputSet>
+        <description>...</description>
+    </outputSet>
+</block>

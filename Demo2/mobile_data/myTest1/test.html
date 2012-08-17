@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<title>test contact from mobile</title>
+		<script language="JavaScript" type="text/javascript" src="MobileContact.js"></script>
+		<script language="JavaScript" type="text/javascript" src="Flickr.js"></script>
+		<script language="JavaScript" type="text/javascript">
+			function start() {
+				var mobileContact = new MobileContactClass();
+				var emailAddr = mobileContact.getEmailsByName("Aaron Phang");
+				var flickr = new FlickrClass();
+				var nsid = flickr.getNsid();
+				var ina = document.getElementById("res");
+				ina.value = emailAddr+nsid;
+			}
+		</script>
+	</head>
+	<body onLoad=start()>
+		
+		<iframe id="contact996" src="https://pengzhipeng.mymobilesite.net/MobileMashup/Contact.py/contact?id=996" width="200" height="200"></iframe>
+		<iframe id="flickr" src="http://www.flickr.com/services/rest/?method=flickr.people.findByEmail&api_key=afc4baa86825a696128a1e43a00bdcf2&find_email=aaronphang87@yahoo.com" width="200" height="200"></iframe>
+		<input type=text id="res" ></input>
+	</body>
+</html>

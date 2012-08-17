@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<block xmlns="http://localhost/block/namespace" name="List Viewer">
+    <description>This is a block using a list to take on data</description>
+    <params>
+		<param name="data">
+			<description>Data wanted to be taken on</description>
+		</param>
+    </params>
+    <outputSet>
+        <description>...</description>
+    </outputSet>
+</block>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<block xmlns="http://localhost/block/namespace" name="Douban Activities">
+    <description>...</description>
+    <params>
+		<param name="locations">
+			<description>...</description>
+		</param>
+    </params>
+    <outputSet>
+        <description>...</description>
+    </outputSet>
+</block>

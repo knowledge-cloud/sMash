@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<block xmlns="http://localhost/block/namespace" name="Contacts (Revised)">
+    <description>This is a weather report service queried by latitude and longitude</description>
+    <params>
+        <!--<param name="locations">
+            <description>Here input your query locations</description>
+        </param>-->
+    </params>
+    <outputSet>
+        <description>This block can generate a contact list of your cell phone with some infomation</description>
+    </outputSet>
+</block>

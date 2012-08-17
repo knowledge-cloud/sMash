@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<blocks name="blocks">
+  <block id="Block0" name="Cities / China v1.0" />
+  <block id="Block1" name="Virtual Earth r7" />
+  <block id="Block2" name="Weather Report v1.0" />
+  <block id="Block3" name="Cities / Australia v1.0" />
+  <block id="Block5" name="Flickr Photos r2" />
+  <block id="Block8" name="Contacts r2" />
+  <block id="Block9" name="Sample Contacts r2" />
+  <block id="Block10" name="Phone Number Locator r2" />
+  <block id="Block11" name="Douban User Search" />
+  <block id="Block12" name="Douban Friends" />
+  <block id="Block13" name="Address Locator" />
+  <block id="Block14" name="Douban Actions" />
+  <block id="Block15" name="Map Traveler" />
+  <block id="Block16" name="Sample Music" />
+  <block id="Block17" name="Douban Music Search" />
+  <block id="Block18" name="Taobao Product Search" />
+  <block id="Block19" name="List Viewer" />
+  <block id="Block20" name="Douban Activities" />
+  <block id="Block21" name="Douban Favorites" />
+  <block id="Block22" name="Music" />
+</blocks>

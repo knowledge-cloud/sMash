@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<blocks>
+  <block id="Block0" name="Get city Location of China v1.0" />
+  <block id="Block1" name="Virtual Earth r7 (HIDN)" />
+  <block id="Block2" name="Weather Report v1.0" />
+  <block id="Block3" name="Get city Location of Australia v1.0" />
+  <block id="Block4" name="Image Slider r1" />
+  <block id="Block5" name="Flickr Photos r2" />
+  <block id="Block6" name="Weather Report v1.0" />
+</blocks>

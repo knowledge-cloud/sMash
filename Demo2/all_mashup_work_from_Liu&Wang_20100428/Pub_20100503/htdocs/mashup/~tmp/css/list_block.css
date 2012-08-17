@@ -1,0 +1,31 @@
+#mydiv {
+    background-color: #BBBBFF;
+}
+
+ul {
+    padding: 5px 15px 5px 15px;
+}
+
+li {
+  list-style: none;
+}
+
+h3.title {
+  font-size: small;
+  margin: 5px 5px 5px 10px;
+}
+
+img.icon {
+  float: left;
+  width: 80px;
+}
+
+p.description {
+  font-size: x-small;
+  margin: 5px 5px 5px 10px;
+}
+
+p.otherkeys {
+  font-size: x-small;
+  margin: 5px 5px 5px 10px;
+}

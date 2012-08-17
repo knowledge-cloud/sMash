@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<blocks>
+  <block id="Block0" name="Virtual Earth" />
+  <block id="Block1" name="Virtual Earth" />
+  <block id="Block2" name="Virtual Earth" />
+  <block id="Block3" name="Virtual Earth" />
+  <block id="Block4" name="Virtual Earth" />
+  <block id="Block5" name="Vritual Earth" />
+  <block id="Block6" name="Virtual Earth v1.0" />
+  <block id="Block7" name="Virtual Earth r1 (HIDN)" />
+  <block id="Block8" name="Virtual Earth r1 (HIDN)" />
+  <block id="Block9" name="Virtual Earth r1 (HIDN)" />
+  <block id="Block10" name="Virtual Earth r1 (HIDN)" />
+  <block id="Block11" name="Virtual Earth r2 (HIDN)" />
+  <block id="Block12" name="Virtual Earth r3 (HIDN)" />
+  <block id="Block13" name="Virtual Earth r4 (HIDN)" />
+  <block id="Block14" name="Virtual Earth r5 (HIDN)" />
+  <block id="Block15" name="Virtual Earth r6 (HIDN)" />
+  <block id="Block16" name="Get city Location v1.0" />
+  <block id="Block17" name="Virtual Earth r7 (HIDN)" />
+  <block id="Block18" name="Virtual Earth r7 (HIDN)" />
+  <block id="Block19" name="Live Search" />
+  <block id="Block20" name="Live Search" />
+  <block id="Block21" name="Live Search r3" />
+  <block id="Block22" name="Live Search r3" />
+  <block id="Block23" name="Live Search r5" />
+  <block id="Block24" name="Weather Report v1.0" />
+  <block id="Block25" name="Get city Location of UK v1.0" />
+</blocks>

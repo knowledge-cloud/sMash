@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<block xmlns="http://localhost/block/namespace"
+       name="Image Slider r1">
+  <description>...</description>
+  <params>    <param name="imageRecords">      <description>...</description>    </param>
+  </params>
+</block>

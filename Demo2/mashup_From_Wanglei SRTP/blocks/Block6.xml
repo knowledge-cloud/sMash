@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<block xmlns="http://localhost/block/namespace"
+       name="Weather Report v1.0">
+  <description>This is a weather report service queried by latitude and longitude</description>
+  <params>
+    <param name="locations">
+      <description>Here input your query locations</description>
+    </param>
+  </params>
+  <outputSet>
+
+    <description>This block's output include the location (latitude, longitude)&#13;and the weather of the location, with a weather icon named "image"</description>
+  </outputSet>
+</block>

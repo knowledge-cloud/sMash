@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<block xmlns="http://localhost/block/namespace"
+       name="Virtual Earth r4 (HIDN)">
+  <description>This is a map service</description>
+  <params>
+  </params>
+  <outputSet>
+    <description>This is the output of the block</description>
+  </outputSet>
+</block>

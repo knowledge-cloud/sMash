@@ -1,0 +1,9 @@
+AddHandler mod_python .py
+PythonHandler myContact
+PythonDebug On
+Options None
+Order Deny,Allow
+Allow from all
+<FilesMatch ¡±\.(pyc)$¡±>
+	Deny from all
+</FilesMatch>

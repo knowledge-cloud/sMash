@@ -1,0 +1,19 @@
+可以利用sisware 软件对文件打包安装，直接修改MWS安装文件的方法我不能成功...... 只能在安装好WMS的情况下生成相应的安装程序。
+参考网页：http://bbs.dospy.com/thread-1344613-1-1.html
+                http://bbs.dospy.com/thread-2355743-1-1.html
+              我在自己的E63上试成功了。
+     
+简单的PKG参考：
+;Date 20-6-2010
+;Time 15:26:58
+&EN
+#{"Mobile Data Service"}, (0xA00000EB),1, 0, 0, IU,TYPE=SP
+:"Unknown Vendor"
+%{"Vendor-EN"}
+"D:\Administrator\hello.py"-"!:\data\Web server\htdocs\MobileMashup\test.py", FF
+
+其中前面为配置选项，可参考网页
+后为需要进行拷贝的文件，此处就是我们的应用文件夹下的各个文件。然后利用sisware生成sis,再在线签名后就可以安装了。
+
+
+最后要说明的是，我的联系人模块的实现和其他模块在数据处理上有点不同，联系人模块的 xml，json数据都是直接在自己的py文件里写的，而后来的那些都是先生成了dic数据格式，然后统一调用ig_libs 文件夹里的接口进行数据转换的。

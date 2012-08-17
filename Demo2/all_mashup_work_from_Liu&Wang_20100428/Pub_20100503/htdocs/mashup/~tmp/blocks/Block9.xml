@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<block xmlns="http://localhost/block/namespace" name="Sample Contacts">
+    <description>This block can generate a sample contact list for testing without a mobile phone...</description>
+    <params>
+    </params>
+    <outputSet>
+        <description>...</description>
+    </outputSet>
+</block>

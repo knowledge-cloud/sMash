@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<block xmlns="http://localhost/block/namespace"
+       name="Flickr Photos r2">
+  <description>This block can give you a number of photos of China from flickr,&#13;</description>
+  <params>
+  </params>
+  <outputSet>
+    <description>This block's output is an array of photos information,&#13;Of course url included, other informations are:&#13;
+    latitude, longitude, id, owner, title, farm, server and secret</description>
+
+  </outputSet>
+</block>

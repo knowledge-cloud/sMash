@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<block xmlns="http://localhost/block/namespace"
+       name="Virtual Earth v0.7">
+  <description>This is a map service</description>
+  <params>
+    <param name="pushpin">
+      <description>This is a pushpin you want to add on the map</description>
+    </param>
+    <param name="position">
+      <description>This is the position you want to center the map at</description>
+    </param>
+  </params>
+  <outputSet>
+    <description>This is the output of the block</description>
+  </outputSet>
+</block>

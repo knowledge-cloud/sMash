@@ -1,0 +1,5 @@
+SetHandler mod_python
+PythonHandler rest
+PythonDebug On
+PythonOption mod_python.session.httponly 1
+Options None

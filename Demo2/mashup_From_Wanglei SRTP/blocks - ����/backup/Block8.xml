@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<block xmlns="http://localhost/block/namespace" name="Earth v1.1">
+    <description>This is a map service using Microsoft Vritual Earth API,&#013;&#010;This ...</description>
+    <params>
+        <param name="pushpins">
+            <description>This is a pushipin you want to add to the map</description>
+        </param>
+    </params>
+</block>
+

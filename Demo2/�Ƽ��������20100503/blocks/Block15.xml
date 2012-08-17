@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<block xmlns="http://localhost/block/namespace"
+       name="MapTraveler">
+  <description>This is a map service</description>
+  <params>
+    <param name="positions">
+      <description>This is the positions you want to travel around</description>
+    </param>
+  </params>
+  <outputSet>
+    <description>This is the output of the block</description>
+  </outputSet>
+</block>

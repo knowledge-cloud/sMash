@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<block xmlns="http://localhost/block/namespace" name="Vritual Earth">
+    <description>This is a map service using Microsoft Vritual Earth API,&#013;&#010;This ...</description>
+    <params>
+        <param name="latitute">
+            <description>This param stands for the latitute you want to add pushpin</description>
+        </param>
+        <param name="longitute">
+            <description>This param stands for the longitute you want to add pushpin</description>
+        </param>
+        <param name="pushpinSource">
+            <description>This is the source of your pushpin, such as pictures and so on</description>
+        </param>
+    </params>
+</block>
+

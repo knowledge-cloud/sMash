@@ -1,0 +1,77 @@
+function(svc) {
+
+
+	this.initialize = function() {
+		svc.notifyInitializationCompleted();
+	};
+	
+	
+	
+	function doSearch(query, count) {
+		if (query == "")
+			throw "You must provide a query!";
+			
+		if (isNaN(count) || count == 0)
+			count = 20;
+		else if (count == 0 || count > 50)
+			count = 20;
+		
+		   //YOUR_APPID  testign&Sources=web+spell&Web.Count=  1  
+		var jsonUrl = "http://api.search.live.net/json.aspx?AppId=00000000440134D2&Market=en-US&Query=" + escape(query);
+		jsonUrl += "&Sources=web&Web.Count=" + parseInt(count);
+		alert(jsonUrl);
+		//jsonUrl += "&first=0&sourcetype=web&form=popfly";
+
+	
+		var xhr = window.event ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
+		xhr.open('get', jsonUrl, false);
+		xhr.send(null);
+		
+		if (xhr.status != 200)
+			throw 'invalid http status code...';
+	
+		var jsonText = xhr.responseText;
+	
+		if (jsonText.length == 0)
+		{
+			 throw "Sorry, the Windows Live Search block encountered a problem which it could not solve.";
+		}
+		else {
+			eval(jsonText);
+			var res = LiveSearchGetResponse().web.results;
+			var total = LiveSearchGetResponse().web.total;
+			var resultNodeCount = res.length;
+			var LiveSearchResults = new Array(resultNodeCount);
+			for(var i = 0; i < resultNodeCount; i++)
+			{
+				  //LiveSearchResults[i] = new LiveSearchResult(res[i].title, res[i].description, res[i].url, res[i].displayUrl, res[i].cacheUrl, total);
+				  alert(res[i].title);
+			}
+		};
+			
+			
+	}
+
+
+	this.beginUpdateInputs = function(newInputs) {
+
+		if (newInputs.searches) {
+			
+			for (var key in newInputs.searches) {
+				var search = newInputs.searches[key];
+				doSearch(search.query, search.count);
+			}
+			
+		}
+
+		svc.notifyInputsChanged(newInputs);
+	};
+
+
+	this.beginOutput = function() {
+		
+		svc.notifyOutputReady();
+	};
+	
+
+}

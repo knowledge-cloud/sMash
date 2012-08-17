@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<mashups>
+  <mashup id="mashup_1" name="Photos On Map" url="x-flickr-bingmap">
+    <description>Pin photos from flickr on bing map</description>
+    <block name="Bing Map"></block>
+    <block name="Flickr Photos"></block>
+  </mashup>
+  <mashup id="mashup_2" name="Weather Report" url="x-weatherreport">
+    <description>Forecast weather and push icons on bing map</description>
+    <block name="Bing Map"></block>
+    <block name="Google Weather"></block>
+    <block name="Cities"></block>
+  </mashup>
+  <mashup id="mashup_3" name="Douban Friends On Map" url="x-doubanf-bingmap">
+    <description>Push douban friends on bing map by their locations</description>
+    <block name="Douban User Search"></block>
+    <block name="Address Locator"></block>
+    <block name="Contact"></block>
+    <block name="Bing Map"></block>
+  </mashup>
+  <mashup id="mashup_4" name="Douban Friends" url="x-doubanf-list">
+    <description>List all the friends on douban</description>
+    <block name="Douban User Search"></block>
+    <block name="List Viewer"></block>
+    <block name="Contact"></block>
+  </mashup>
+  <mashup id="mashup_5" name="List Photos" url="x-flickr-list">
+    <description>List phtotos on flickr</description>
+    <block name="Flickr Photos"></block>
+    <block name="List Viewer"></block>
+  </mashup>
+  <mashup id="mashup_6" name="List Music" url="x-taobao">
+    <description>Find Douban music which sells on taobao</description>
+    <block name="Sample Music"></block>
+    <block name="Douban User Search"></block>
+    <block name="Taobao Product Search"></block>
+    <block name="List Viewer"></block>
+  </mashup>
+</mashups>

@@ -1,0 +1,26 @@
+AuthType Basic
+AuthName 'myGPS'
+AuthBasicProvider file
+AuthUserFile conf/passwords.txt
+AuthGroupFile conf/groups.txt
+ 
+# If you want to give access to all users
+#Require valid-user
+ 
+# If you want to give access to only yourself or some groups (add all needed groups delimited with space)
+Require group admin
+ 
+# If you want to give access to some users (add all needed users delimited with space)
+#Require user quest
+ 
+AddHandler mod_python .py
+PythonHandler myGPS
+PythonDebug On 
+Options None
+ 
+Order Deny,Allow
+Allow from all
+ 
+<FilesMatch "\.(pyc)$">
+   Deny from all
+</FilesMatch>

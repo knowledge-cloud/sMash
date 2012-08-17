@@ -1,0 +1,75 @@
+================================================================================
+Flash Lite: Sudoku Example
+Copyright (c) 2008 Nokia Corporation.
+================================================================================ 
+
+This example demonstrates how to design a simple Flash Lite Sudoku game, add dynamic layout control for multiple screen resolutions, and use several input methods (key, touch, and key & touch).
+
+
+CONTENTS OF THE PACKAGE
+-------------------------------------------------------------------------------
+SudokuMaster.fla:  Adobe Flash Professional CS3 project file
+board.as: ActionScript file
+cell.as: ActionScript file
+config.as: ActionScript file
+game.as: ActionScript file
+keys.as: ActionScript file
+layout.as: ActionScript file
+listener.as: ActionScript t file
+mymouse.as: ActionScript file
+mysoftpad.as: ActionScript file
+mytimer.as: ActionScript file
+optionsmenu.as: ActionScript file
+softkeys.as: ActionScript file
+win.as: ActionScript file
+release_note.txt: This file 
+
+
+USING THE APPLICATION
+-------------------------------------------------------------------------------
+The application has only one view.
+
+Keys:
+- Use navigation keys to navigate through the Sudoku board.
+- Use the keypad to enter a number into a cell.
+- Use the Select key to open the softpad and select a number.
+            
+Touch:
+- Tap and hold to navigate the Sudoku board.
+- Release to select and enter a number.
+-You can also tap a cell to select and enter a number.
+
+
+BUILD & INSTALLATION INSTRUCTIONS
+-------------------------------------------------------------------------------
+1.  Open SudokuMaster.fla using Adobe Flash Professional CS3 (or newer). 
+2.  Compile the project and test it using Adobe Device Central.
+3.  Send and execute the SudokuMaster.swf file to a device supporting Flash Lite 2.x.
+
+
+COMPATIBILITY
+-------------------------------------------------------------------------------
+All devices supporting Flash Lite 2.x and higher (S60 3rd Edition, FP1 and newer, Series 40 3rd Edition FP2 and higher).
+
+Tested on Nokia 5800 XpressMusic, Nokia E90 Communicator, Nokia N95, Nokia N95 8GB, Nokia N76, 
+Nokia 7510 Supernova, and Nokia E71.
+
+
+ADDITIONAL DOCUMENTATION
+-------------------------------------------------------------------------------
+For a detailed description of the architecture and installation instructions see the document Sudoku Master - Designing a Flash Lite Game for Keypad and Touch Devices available at Forum Nokia.
+
+KNOWN ISSUES
+-------------------------------------------------------------------------------
+- Using the "C" key crashes the Flash Lite player (bug) on some devices.
+    
+
+CHANGE HISTORY
+--------------------------------------------------------------------------------
+Version 1.0	Initial release 
+
+
+EVALUATE THIS RESOURCE  
+--------------------------------------------------------------------------------
+Please spare a moment to help us improve documentation quality and recognise the 
+examples you find most valuable, by rating this resource at http://www.forum.nokia.com/main/1%2C%2C90%2C00.html?surveyId=69bf5031-3f6b-45bc-92a6-e783eb881a4e/Flash_Lite_Sudoku_Example_v1_0_en.zip.

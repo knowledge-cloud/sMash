@@ -1,0 +1,455 @@
+[Tue Apr 27 20:50:24 2010] [notice] Digest: generating secret for digest authentication ...
+[Tue Apr 27 20:50:24 2010] [notice] Digest: done
+[Tue Apr 27 20:50:24 2010] [notice] Apache/2.2.11 (Win32) configured -- resuming normal operations
+[Tue Apr 27 20:50:24 2010] [notice] Server built: Dec 10 2008 00:10:06
+[Tue Apr 27 20:50:24 2010] [notice] Parent: Created child process 936
+Apache server shutdown initiated...
+Digest: generating secret for digest authentication ...
+[Tue Apr 27 20:50:25 2010] [notice] Digest: done
+[Tue Apr 27 20:50:25 2010] [notice] Child 936: Child process is running
+[Tue Apr 27 20:50:25 2010] [notice] Child 936: Acquired the start mutex.
+[Tue Apr 27 20:50:25 2010] [notice] Child 936: Starting 64 worker threads.
+[Tue Apr 27 20:50:25 2010] [notice] Child 936: Starting thread to listen on port 8888.
+[Tue Apr 27 20:50:25 2010] [notice] Child 936: Starting thread to listen on port 80.
+[Tue Apr 27 20:50:39 2010] [notice] mod_fcgid: call E:/Pub/htdocs/mashup/~tmp/demo-scripts/make-mashup.php with wrapper E:/Pub/php/php-cgi.exe
+[Tue Apr 27 20:52:01 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 20:52:43 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=[{id%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20[{name%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27}]}%2C{id%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20[]}]&ref=Block8|Block19
+[Tue Apr 27 20:52:43 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Tue Apr 27 21:02:26 2010] [error] [client 192.168.0.214] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://192.168.0.1:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:07:41 2010] [error] [client 192.168.0.214] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://192.168.0.1:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:07:41 2010] [error] [client 192.168.0.214] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://192.168.0.1:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:10:04 2010] [error] [client 192.168.0.214] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://192.168.0.1:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:10:04 2010] [error] [client 192.168.0.214] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://192.168.0.1:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:10:15 2010] [error] [client 192.168.0.214] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://192.168.0.1:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:10:15 2010] [error] [client 192.168.0.214] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://192.168.0.1:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:10:33 2010] [error] [client 192.168.0.214] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://192.168.0.1:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:10:33 2010] [error] [client 192.168.0.214] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://192.168.0.1:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:10:47 2010] [error] [client 192.168.0.214] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://192.168.0.1:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:10:47 2010] [error] [client 192.168.0.214] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://192.168.0.1:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:11:28 2010] [error] [client 192.168.0.214] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://192.168.0.1:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:21:31 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Tue Apr 27 21:21:48 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Tue Apr 27 21:39:22 2010] [notice] mod_fcgid: call E:/Pub/htdocs/xhr-proxy/proxy.php with wrapper E:/Pub/php/php-cgi.exe
+[Tue Apr 27 21:39:23 2010] [notice] mod_fcgid: call E:/Pub/htdocs/xhr-proxy/proxy.php with wrapper E:/Pub/php/php-cgi.exe
+[Tue Apr 27 21:39:23 2010] [notice] mod_fcgid: call E:/Pub/htdocs/xhr-proxy/proxy.php with wrapper E:/Pub/php/php-cgi.exe
+[Tue Apr 27 21:43:08 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%202%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Douban%20User%20Search%201%27%7D%5D%7D%2C%7Bid%3A%20%27Douban%20User%20Search%201%27%2CtypeId%3A%20%27Block11%27%2Cinputs%3A%20%5B%7Bname%3A%20%27queries%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock11%7CBlock19
+[Tue Apr 27 21:45:55 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%202%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Douban%20User%20Search%201%27%7D%5D%7D%2C%7Bid%3A%20%27Douban%20User%20Search%201%27%2CtypeId%3A%20%27Block11%27%2Cinputs%3A%20%5B%7Bname%3A%20%27queries%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock11%7CBlock19
+[Tue Apr 27 21:45:58 2010] [warn] mod_fcgid: process 2776 graceful kill fail, sending SIGKILL
+[Tue Apr 27 21:45:58 2010] [warn] mod_fcgid: process 2200 graceful kill fail, sending SIGKILL
+[Tue Apr 27 21:45:58 2010] [warn] mod_fcgid: process 4056 graceful kill fail, sending SIGKILL
+[Tue Apr 27 21:46:17 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%202%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Douban%20User%20Search%201%27%7D%5D%7D%2C%7Bid%3A%20%27Douban%20User%20Search%201%27%2CtypeId%3A%20%27Block11%27%2Cinputs%3A%20%5B%7Bname%3A%20%27queries%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock11%7CBlock19
+[Tue Apr 27 21:47:22 2010] [error] [client 192.168.0.214] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://192.168.0.1:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:49:32 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:52:14 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:52:19 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:52:37 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=[{id%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20[{name%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27}]}%2C{id%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20[]}]&ref=Block8|Block19
+[Tue Apr 27 21:52:37 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Tue Apr 27 21:53:36 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:53:57 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Tue Apr 27 21:56:23 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=[{id%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20[{name%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27}]}%2C{id%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20[]}]&ref=Block8|Block19
+[Tue Apr 27 21:56:32 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Tue Apr 27 21:57:17 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27Douban%20User%20Search%202%27%2CtypeId%3A%20%27Block11%27%2Cinputs%3A%20%5B%7Bname%3A%20%27queries%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Douban%20User%20Search%202%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19%7CBlock11
+[Tue Apr 27 21:58:58 2010] [notice] mod_fcgid: call E:/Pub/htdocs/mashup/~tmp/demo-scripts/block-js.php with wrapper E:/Pub/php/php-cgi.exe
+[Tue Apr 27 22:04:44 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27Douban%20User%20Search%202%27%2CtypeId%3A%20%27Block11%27%2Cinputs%3A%20%5B%7Bname%3A%20%27queries%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Douban%20User%20Search%202%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19%7CBlock11
+[Tue Apr 27 22:06:13 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27Douban%20User%20Search%202%27%2CtypeId%3A%20%27Block11%27%2Cinputs%3A%20%5B%7Bname%3A%20%27queries%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Douban%20User%20Search%202%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19%7CBlock11
+[Tue Apr 27 22:06:58 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27Douban%20User%20Search%202%27%2CtypeId%3A%20%27Block11%27%2Cinputs%3A%20%5B%7Bname%3A%20%27queries%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Douban%20User%20Search%202%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19%7CBlock11
+[Tue Apr 27 22:09:34 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27Douban%20User%20Search%202%27%2CtypeId%3A%20%27Block11%27%2Cinputs%3A%20%5B%7Bname%3A%20%27queries%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Douban%20User%20Search%202%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19%7CBlock11
+[Tue Apr 27 22:10:17 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27Douban%20User%20Search%202%27%2CtypeId%3A%20%27Block11%27%2Cinputs%3A%20%5B%7Bname%3A%20%27queries%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Douban%20User%20Search%202%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19%7CBlock11
+[Tue Apr 27 22:11:10 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27Douban%20User%20Search%202%27%2CtypeId%3A%20%27Block11%27%2Cinputs%3A%20%5B%7Bname%3A%20%27queries%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Douban%20User%20Search%202%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19%7CBlock11
+[Tue Apr 27 22:12:22 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27Douban%20User%20Search%202%27%2CtypeId%3A%20%27Block11%27%2Cinputs%3A%20%5B%7Bname%3A%20%27queries%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Douban%20User%20Search%202%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19%7CBlock11
+[Tue Apr 27 22:12:48 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27Douban%20User%20Search%202%27%2CtypeId%3A%20%27Block11%27%2Cinputs%3A%20%5B%7Bname%3A%20%27queries%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Douban%20User%20Search%202%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19%7CBlock11
+[Tue Apr 27 22:20:00 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27Douban%20User%20Search%202%27%2CtypeId%3A%20%27Block11%27%2Cinputs%3A%20%5B%7Bname%3A%20%27queries%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Douban%20User%20Search%202%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19%7CBlock11
+[Tue Apr 27 23:07:49 2010] [notice] Parent: Received shutdown signal -- Shutting down the server.
+[Tue Apr 27 23:07:49 2010] [notice] Child 936: Exit event signaled. Child process is ending.
+[Tue Apr 27 23:07:50 2010] [notice] Child 936: Released the start mutex
+[Tue Apr 27 23:07:51 2010] [notice] Child 936: All worker threads have exited.
+[Tue Apr 27 23:07:51 2010] [notice] Child 936: Child process is exiting
+[Tue Apr 27 23:07:52 2010] [notice] Parent: Child process exited successfully.
+[Tue Apr 27 23:08:02 2010] [notice] Digest: generating secret for digest authentication ...
+[Tue Apr 27 23:08:02 2010] [notice] Digest: done
+[Tue Apr 27 23:08:02 2010] [notice] Apache/2.2.11 (Win32) configured -- resuming normal operations
+[Tue Apr 27 23:08:02 2010] [notice] Server built: Dec 10 2008 00:10:06
+[Tue Apr 27 23:08:02 2010] [notice] Parent: Created child process 3608
+Apache server shutdown initiated...
+Digest: generating secret for digest authentication ...
+[Tue Apr 27 23:08:02 2010] [notice] Digest: done
+[Tue Apr 27 23:08:02 2010] [notice] Child 3608: Child process is running
+[Tue Apr 27 23:08:03 2010] [notice] Child 3608: Acquired the start mutex.
+[Tue Apr 27 23:08:03 2010] [notice] Child 3608: Starting 64 worker threads.
+[Tue Apr 27 23:08:03 2010] [notice] Child 3608: Starting thread to listen on port 8888.
+[Tue Apr 27 23:08:03 2010] [notice] Child 3608: Starting thread to listen on port 80.
+[Wed Apr 28 04:15:32 2010] [warn] (OS 64)指定的网络名不再可用。  : winnt_accept: Asynchronous AcceptEx failed.
+[Wed Apr 28 04:17:00 2010] [notice] mod_fcgid: call E:/Pub/htdocs/mashup/~tmp/demo-scripts/make-mashup.php with wrapper E:/Pub/php/php-cgi.exe
+[Wed Apr 28 06:39:45 2010] [notice] mod_fcgid: call E:/Pub/htdocs/xhr-proxy/proxy.php with wrapper E:/Pub/php/php-cgi.exe
+[Wed Apr 28 06:39:45 2010] [notice] mod_fcgid: call E:/Pub/htdocs/xhr-proxy/proxy.php with wrapper E:/Pub/php/php-cgi.exe
+[Wed Apr 28 06:55:15 2010] [notice] mod_fcgid: call E:/Pub/htdocs/xhr-proxy/proxy.php with wrapper E:/Pub/php/php-cgi.exe
+[Wed Apr 28 06:57:37 2010] [warn] mod_fcgid: process 2988 graceful kill fail, sending SIGKILL
+[Wed Apr 28 08:22:07 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/block, referer: http://localhost:8888/make-mashup?map=%5B%5D&ref=
+[Wed Apr 28 08:22:07 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/block, referer: http://localhost:8888/make-mashup?map=%5B%5D&ref=
+[Wed Apr 28 08:22:21 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/block, referer: http://localhost:8888/make-mashup?map=%5B%5D&ref=
+[Wed Apr 28 08:22:23 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/block, referer: http://localhost:8888/make-mashup?map=%5B%5D&ref=
+[Wed Apr 28 08:22:34 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/block, referer: http://localhost:8888/make-mashup?map=%5B%5D&ref=
+[Wed Apr 28 08:22:43 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/block, referer: http://localhost:8888/make-mashup?map=%5B%5D&ref=
+[Wed Apr 28 08:23:31 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/block, referer: http://localhost:8888/make-mashup?map=%5B%5D&ref=
+[Wed Apr 28 08:23:35 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/block, referer: http://localhost:8888/make-mashup?map=%5B%5D&ref=
+[Wed Apr 28 08:23:50 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/block, referer: http://localhost:8888/make-mashup?map=%5B%5D&ref=
+[Wed Apr 28 08:23:51 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/block, referer: http://localhost:8888/make-mashup?map=%5B%5D&ref=
+[Wed Apr 28 08:26:58 2010] [error] [client 127.0.0.1] File does not exist: E:/Pub/htdocs/mashup/~tmp/null, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27List%20Viewer%201%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Contacts%20r2%200%27%7D%5D%7D%2C%7Bid%3A%20%27Contacts%20r2%200%27%2CtypeId%3A%20%27Block8%27%2Cinputs%3A%20%5B%5D%7D%5D&ref=Block8%7CBlock19
+[Wed Apr 28 08:29:45 2010] [notice] Parent: Received shutdown signal -- Shutting down the server.
+[Wed Apr 28 08:29:45 2010] [notice] Child 3608: Exit event signaled. Child process is ending.
+[Wed Apr 28 08:29:46 2010] [notice] Child 3608: Released the start mutex
+[Wed Apr 28 08:29:47 2010] [notice] Child 3608: All worker threads have exited.
+[Wed Apr 28 08:29:47 2010] [notice] Child 3608: Child process is exiting
+[Wed Apr 28 08:29:49 2010] [notice] Parent: Child process exited successfully.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Wed Apr 28 21:45:28 2010] [notice] Digest: generating secret for digest authentication ...
+[Wed Apr 28 21:45:28 2010] [notice] Digest: done
+[Wed Apr 28 21:45:28 2010] [notice] Apache/2.2.11 (Win32) configured -- resuming normal operations
+[Wed Apr 28 21:45:28 2010] [notice] Server built: Dec 10 2008 00:10:06
+[Wed Apr 28 21:45:29 2010] [notice] Parent: Created child process 5520
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+Apache server interrupted...
+ determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Wed Apr 28 21:45:29 2010] [notice] Digest: generating secret for digest authentication ...
+[Wed Apr 28 21:45:29 2010] [notice] Digest: done
+[Wed Apr 28 21:45:29 2010] [notice] Child 5520: Child process is running
+[Wed Apr 28 21:45:30 2010] [notice] Child 5520: Acquired the start mutex.
+[Wed Apr 28 21:45:30 2010] [notice] Child 5520: Starting 64 worker threads.
+[Wed Apr 28 21:45:30 2010] [notice] Child 5520: Starting thread to listen on port 8888.
+[Wed Apr 28 21:45:55 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Wed Apr 28 21:45:55 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Wed Apr 28 21:45:58 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Wed Apr 28 21:46:02 2010] [notice] mod_fcgid: call H:/Pub/htdocs/mashup/~tmp/demo-scripts/make-mashup.php with wrapper H:/Pub/php/php-cgi.exe
+[Wed Apr 28 21:54:43 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=api.xml doesn't exist!: voronoi_recommendation_cgi.exe
+[Wed Apr 28 22:20:00 2010] [notice] Parent: Received shutdown signal -- Shutting down the server.
+[Wed Apr 28 22:20:00 2010] [notice] Child 5520: Exit event signaled. Child process is ending.
+[Wed Apr 28 22:20:01 2010] [notice] Child 5520: Released the start mutex
+[Wed Apr 28 22:20:02 2010] [notice] Child 5520: All worker threads have exited.
+[Wed Apr 28 22:20:02 2010] [notice] Child 5520: Child process is exiting
+[Wed Apr 28 22:20:03 2010] [notice] Parent: Child process exited successfully.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Thu Apr 29 09:10:23 2010] [notice] Digest: generating secret for digest authentication ...
+[Thu Apr 29 09:10:23 2010] [notice] Digest: done
+[Thu Apr 29 09:10:23 2010] [notice] Apache/2.2.11 (Win32) configured -- resuming normal operations
+[Thu Apr 29 09:10:23 2010] [notice] Server built: Dec 10 2008 00:10:06
+[Thu Apr 29 09:10:23 2010] [notice] Parent: Created child process 4100
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+Apache server interrupted...
+ determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Thu Apr 29 09:10:24 2010] [notice] Digest: generating secret for digest authentication ...
+[Thu Apr 29 09:10:24 2010] [notice] Digest: done
+[Thu Apr 29 09:10:24 2010] [notice] Child 4100: Child process is running
+[Thu Apr 29 09:10:24 2010] [notice] Child 4100: Acquired the start mutex.
+[Thu Apr 29 09:10:24 2010] [notice] Child 4100: Starting 64 worker threads.
+[Thu Apr 29 09:10:24 2010] [notice] Child 4100: Starting thread to listen on port 8888.
+[Thu Apr 29 09:21:14 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=To VirtualEarth: mobile_mashup_recommendation_cgi.exe
+[Thu Apr 29 09:22:11 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=To VirtualEarth: mobile_mashup_recommendation_cgi.exe
+[Thu Apr 29 09:50:35 2010] [notice] Parent: Received shutdown signal -- Shutting down the server.
+[Thu Apr 29 09:50:35 2010] [notice] Child 4100: Exit event signaled. Child process is ending.
+[Thu Apr 29 09:50:36 2010] [notice] Child 4100: Released the start mutex
+[Thu Apr 29 09:50:37 2010] [notice] Child 4100: All worker threads have exited.
+[Thu Apr 29 09:50:37 2010] [notice] Child 4100: Child process is exiting
+[Thu Apr 29 09:50:38 2010] [notice] Parent: Child process exited successfully.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Fri Apr 30 15:05:55 2010] [notice] Digest: generating secret for digest authentication ...
+[Fri Apr 30 15:05:55 2010] [notice] Digest: done
+[Fri Apr 30 15:05:55 2010] [notice] Apache/2.2.11 (Win32) configured -- resuming normal operations
+[Fri Apr 30 15:05:55 2010] [notice] Server built: Dec 10 2008 00:10:06
+[Fri Apr 30 15:05:55 2010] [notice] Parent: Created child process 5692
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+Apache server interrupted...
+ determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Fri Apr 30 15:05:55 2010] [notice] Digest: generating secret for digest authentication ...
+[Fri Apr 30 15:05:55 2010] [notice] Digest: done
+[Fri Apr 30 15:05:55 2010] [notice] Child 5692: Child process is running
+[Fri Apr 30 15:05:55 2010] [notice] Child 5692: Acquired the start mutex.
+[Fri Apr 30 15:05:55 2010] [notice] Child 5692: Starting 64 worker threads.
+[Fri Apr 30 15:05:55 2010] [notice] Child 5692: Starting thread to listen on port 8888.
+[Fri Apr 30 15:06:21 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Fri Apr 30 15:06:45 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:06:45 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:06:48 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:06:48 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:06:48 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock9.xml
+[Fri Apr 30 15:06:49 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:06:50 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:06:51 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock9.xml
+[Fri Apr 30 15:06:51 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:06:52 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:06:53 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:07:44 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:07:44 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:07:44 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:07:45 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:07:45 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:08:08 2010] [notice] Parent: Received shutdown signal -- Shutting down the server.
+[Fri Apr 30 15:08:08 2010] [notice] Child 5692: Exit event signaled. Child process is ending.
+[Fri Apr 30 15:08:09 2010] [notice] Child 5692: Released the start mutex
+[Fri Apr 30 15:08:10 2010] [notice] Child 5692: All worker threads have exited.
+[Fri Apr 30 15:08:10 2010] [notice] Child 5692: Child process is exiting
+[Fri Apr 30 15:08:11 2010] [notice] Parent: Child process exited successfully.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Fri Apr 30 15:08:17 2010] [notice] Digest: generating secret for digest authentication ...
+[Fri Apr 30 15:08:18 2010] [notice] Digest: done
+[Fri Apr 30 15:08:18 2010] [notice] Apache/2.2.11 (Win32) configured -- resuming normal operations
+[Fri Apr 30 15:08:18 2010] [notice] Server built: Dec 10 2008 00:10:06
+[Fri Apr 30 15:08:18 2010] [notice] Parent: Created child process 3516
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+Apache server interrupted...
+ determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Fri Apr 30 15:08:18 2010] [notice] Digest: generating secret for digest authentication ...
+[Fri Apr 30 15:08:18 2010] [notice] Digest: done
+[Fri Apr 30 15:08:18 2010] [notice] Child 3516: Child process is running
+[Fri Apr 30 15:08:18 2010] [notice] Child 3516: Acquired the start mutex.
+[Fri Apr 30 15:08:18 2010] [notice] Child 3516: Starting 64 worker threads.
+[Fri Apr 30 15:08:18 2010] [notice] Child 3516: Starting thread to listen on port 8888.
+[Fri Apr 30 15:08:32 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock9.xml
+[Fri Apr 30 15:08:32 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock9.xml
+[Fri Apr 30 15:08:34 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:08:34 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml
+[Fri Apr 30 15:09:15 2010] [notice] Parent: Received shutdown signal -- Shutting down the server.
+[Fri Apr 30 15:09:15 2010] [notice] Child 3516: Exit event signaled. Child process is ending.
+[Fri Apr 30 15:09:16 2010] [notice] Child 3516: Released the start mutex
+[Fri Apr 30 15:09:17 2010] [notice] Child 3516: All worker threads have exited.
+[Fri Apr 30 15:09:17 2010] [notice] Child 3516: Child process is exiting
+[Fri Apr 30 15:09:18 2010] [notice] Parent: Child process exited successfully.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Fri Apr 30 15:12:53 2010] [notice] Digest: generating secret for digest authentication ...
+[Fri Apr 30 15:12:53 2010] [notice] Digest: done
+[Fri Apr 30 15:12:53 2010] [notice] Apache/2.2.11 (Win32) configured -- resuming normal operations
+[Fri Apr 30 15:12:53 2010] [notice] Server built: Dec 10 2008 00:10:06
+[Fri Apr 30 15:12:53 2010] [notice] Parent: Created child process 1740
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+Apache server interrupted...
+ determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Fri Apr 30 15:12:54 2010] [notice] Digest: generating secret for digest authentication ...
+[Fri Apr 30 15:12:54 2010] [notice] Digest: done
+[Fri Apr 30 15:12:54 2010] [notice] Child 1740: Child process is running
+[Fri Apr 30 15:12:54 2010] [notice] Child 1740: Acquired the start mutex.
+[Fri Apr 30 15:12:54 2010] [notice] Child 1740: Starting 64 worker threads.
+[Fri Apr 30 15:12:54 2010] [notice] Child 1740: Starting thread to listen on port 8888.
+[Fri Apr 30 15:13:57 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Fri Apr 30 15:14:13 2010] [notice] mod_fcgid: call H:/Pub/htdocs/mashup/~tmp/demo-scripts/make-mashup.php with wrapper H:/Pub/php/php-cgi.exe
+[Fri Apr 30 15:14:16 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Fri Apr 30 15:15:19 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock8.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:15:20 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:15:20 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:15:20 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock8.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:15:24 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock8.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:15:25 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock8.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:15:25 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock8.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:15:26 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock8.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:15:26 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock8.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:15:26 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:15:27 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock8.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:15:28 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock9.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:15:29 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:15:29 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock1.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:15:29 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock8.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:15:30 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/blocks.xmlBlock8.xml, referer: http://localhost:8888/block.swf
+[Fri Apr 30 15:17:13 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/undefined, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27Sample%20Music%201%27%2CtypeId%3A%20%27Block16%27%2Cinputs%3A%20%5B%5D%7D%2C%7Bid%3A%20%27List%20Viewer%200%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Sample%20Music%201%27%7D%5D%7D%5D&ref=Block19%7CBlock16
+[Fri Apr 30 15:18:49 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/undefined, referer: http://localhost:8888/make-mashup?map=%5B%7Bid%3A%20%27Taobao%20Product%20Search%203%27%2CtypeId%3A%20%27Block18%27%2Cinputs%3A%20%5B%5D%7D%2C%7Bid%3A%20%27Douban%20Music%20Search%202%27%2CtypeId%3A%20%27Block17%27%2Cinputs%3A%20%5B%5D%7D%2C%7Bid%3A%20%27Sample%20Music%201%27%2CtypeId%3A%20%27Block16%27%2Cinputs%3A%20%5B%5D%7D%2C%7Bid%3A%20%27List%20Viewer%200%27%2CtypeId%3A%20%27Block19%27%2Cinputs%3A%20%5B%7Bname%3A%20%27data%27%2C%20type%3A%200%2C%20blockId%3A%20%27Sample%20Music%201%27%7D%5D%7D%5D&ref=Block19%7CBlock16%7CBlock17%7CBlock18
+[Fri Apr 30 15:25:21 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=To VirtualEarth: mobile_mashup_recommendation_cgi.exe, referer: http://localhost:8888/editor
+[Fri Apr 30 15:25:21 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=To VirtualEarth: mobile_mashup_recommendation_cgi.exe, referer: http://localhost:8888/editor
+[Fri Apr 30 15:25:21 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=To VirtualEarth: mobile_mashup_recommendation_cgi.exe
+[Fri Apr 30 15:25:38 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=To VirtualEarth: mobile_mashup_recommendation_cgi.exe, referer: http://localhost:8888/editor
+[Fri Apr 30 15:25:38 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=To VirtualEarth: mobile_mashup_recommendation_cgi.exe, referer: http://localhost:8888/editor
+[Fri Apr 30 15:25:39 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=To VirtualEarth: mobile_mashup_recommendation_cgi.exe
+[Fri Apr 30 15:25:50 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=To VirtualEarth: mobile_mashup_recommendation_cgi.exe
+[Fri Apr 30 15:25:51 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=To VirtualEarth: mobile_mashup_recommendation_cgi.exe
+[Fri Apr 30 15:25:51 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=To VirtualEarth: mobile_mashup_recommendation_cgi.exe
+[Fri Apr 30 15:26:42 2010] [error] [client 127.0.0.1] script not found or unable to stat: H:/Pub/apache2/cgi-bin/mobile_mashup_recommendation_cgi.exe
+[Fri Apr 30 15:26:48 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=To VirtualEarth: mobile_mashup_recommendation_cgi.cgi
+[Fri Apr 30 15:27:06 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=To VirtualEarth: mobile_mashup_recommendation_cgi.exe
+[Fri Apr 30 15:27:25 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=To VirtualEarth: mobile_mashup_recommendation_cgi.exe
+[Sat May 01 10:41:04 2010] [error] [client 127.0.0.1] script not found or unable to stat: H:/Pub/apache2/cgi-bin/recommendedBlockList.exe
+[Sat May 01 10:43:41 2010] [error] [client 127.0.0.1] script not found or unable to stat: H:/Pub/apache2/cgi-bin/recommendedBlockList.exe
+[Sat May 01 10:45:10 2010] [error] [client 127.0.0.1] script not found or unable to stat: H:/Pub/apache2/cgi-bin/recommendedBlockList.exe
+[Sat May 01 14:02:27 2010] [error] [client 127.0.0.1] H:/Pub/apache2/cgi-bin/blocks.xml is not executable; ensure interpreted scripts have "#!" first line
+[Sat May 01 14:02:27 2010] [error] [client 127.0.0.1] (9)Bad file descriptor: don't know how to spawn child process: H:/Pub/apache2/cgi-bin/blocks.xml
+[Sat May 01 14:02:32 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Sat May 01 14:03:05 2010] [error] [client 127.0.0.1] H:/Pub/apache2/cgi-bin/blocks.xml is not executable; ensure interpreted scripts have "#!" first line
+[Sat May 01 14:03:05 2010] [error] [client 127.0.0.1] (9)Bad file descriptor: don't know how to spawn child process: H:/Pub/apache2/cgi-bin/blocks.xml
+[Sat May 01 14:27:02 2010] [error] [client 127.0.0.1] script not found or unable to stat: H:/Pub/apache2/cgi-bin/recommendedBlockList.exe
+[Sat May 01 17:06:52 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=post: mobile_mashup_recommendation_cgi.exe
+[Sat May 01 17:07:00 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=post: mobile_mashup_recommendation_cgi.exe
+[Sat May 01 17:08:10 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=post: mobile_mashup_recommendation_cgi.exe
+[Sat May 01 17:08:12 2010] [error] [client 127.0.0.1] malformed header from script. Bad header=post: mobile_mashup_recommendation_cgi.exe
+[Sun May 02 08:55:53 2010] [notice] Parent: Received shutdown signal -- Shutting down the server.
+[Sun May 02 08:55:53 2010] [notice] Child 1740: Exit event signaled. Child process is ending.
+[Sun May 02 08:55:55 2010] [notice] Child 1740: Released the start mutex
+[Sun May 02 08:55:56 2010] [notice] Child 1740: All worker threads have exited.
+[Sun May 02 08:55:57 2010] [notice] Child 1740: Child process is exiting
+[Sun May 02 08:56:05 2010] [notice] Parent: Child process exited successfully.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Sun May 02 09:41:51 2010] [notice] Digest: generating secret for digest authentication ...
+[Sun May 02 09:41:51 2010] [notice] Digest: done
+[Sun May 02 09:41:51 2010] [notice] Apache/2.2.11 (Win32) configured -- resuming normal operations
+[Sun May 02 09:41:51 2010] [notice] Server built: Dec 10 2008 00:10:06
+[Sun May 02 09:41:51 2010] [notice] Parent: Created child process 1212
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+Apache server interrupted...
+ determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Sun May 02 09:41:51 2010] [notice] Digest: generating secret for digest authentication ...
+[Sun May 02 09:41:51 2010] [notice] Digest: done
+[Sun May 02 09:41:51 2010] [notice] Child 1212: Child process is running
+[Sun May 02 09:41:51 2010] [notice] Child 1212: Acquired the start mutex.
+[Sun May 02 09:41:51 2010] [notice] Child 1212: Starting 64 worker threads.
+[Sun May 02 09:41:51 2010] [notice] Child 1212: Starting thread to listen on port 8888.
+[Sun May 02 14:25:56 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:25:57 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:26:05 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:26:18 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:27:00 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block59.xml
+[Sun May 02 14:27:00 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block59.xml
+[Sun May 02 14:27:10 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block59.xml
+[Sun May 02 14:27:16 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block59.xml
+[Sun May 02 14:27:16 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block59.xml
+[Sun May 02 14:27:18 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:29:18 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:29:18 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:29:22 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:35:01 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:35:01 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:51:46 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:51:47 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:51:47 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:51:48 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:51:48 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block1.xml
+[Sun May 02 14:51:50 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block1.xml
+[Sun May 02 14:51:51 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block1.xml
+[Sun May 02 14:51:54 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:51:57 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block8.xml
+[Sun May 02 14:51:57 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block1.xml
+[Sun May 02 14:51:58 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block8.xml
+[Sun May 02 14:51:59 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block8.xml
+[Sun May 02 14:52:01 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block1.xml
+[Sun May 02 14:52:01 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block1.xml
+[Sun May 02 14:52:01 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block8.xml
+[Sun May 02 14:52:04 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:54:11 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:54:12 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block1.xml
+[Sun May 02 14:54:12 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Sun May 02 14:54:41 2010] [notice] mod_fcgid: call H:/Pub/htdocs/mashup/~tmp/demo-scripts/make-mashup.php with wrapper H:/Pub/php/php-cgi.exe
+[Sun May 02 15:02:17 2010] [notice] mod_fcgid: call H:/Pub/htdocs/mashup/~tmp/demo-scripts/block-js.php with wrapper H:/Pub/php/php-cgi.exe
+[Sun May 02 15:04:22 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block19.xml
+[Sun May 02 15:04:24 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block19.xml
+[Sun May 02 15:04:32 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block19.xml
+[Sun May 02 15:04:33 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block11.xml
+[Sun May 02 15:04:33 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block11.xml
+[Sun May 02 15:04:33 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block11.xml
+[Sun May 02 15:04:43 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block11.xml
+[Sun May 02 15:04:43 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block19.xml
+[Sun May 02 15:04:45 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block11.xml
+[Sun May 02 15:04:47 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block11.xml
+[Sun May 02 15:04:54 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block22.xml
+[Sun May 02 15:04:54 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block22.xml
+[Sun May 02 15:04:56 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block11.xml
+[Sun May 02 15:05:40 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block19.xml
+[Sun May 02 15:05:40 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block19.xml
+[Sun May 02 15:05:42 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block11.xml
+[Sun May 02 15:05:42 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block19.xml
+[Sun May 02 15:22:51 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block104.xml, referer: http://localhost:8888/block.swf
+[Sun May 02 15:22:51 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block104.xml, referer: http://localhost:8888/block.swf
+[Sun May 02 15:22:57 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block104.xml, referer: http://localhost:8888/block.swf
+[Sun May 02 15:23:05 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block104.xml, referer: http://localhost:8888/block.swf
+[Sun May 02 15:23:06 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block104.xml, referer: http://localhost:8888/block.swf
+[Sun May 02 15:23:10 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block104.xml, referer: http://localhost:8888/block.swf
+[Sun May 02 15:23:11 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block104.xml, referer: http://localhost:8888/block.swf
+[Sun May 02 15:23:11 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block104.xml, referer: http://localhost:8888/block.swf
+[Sun May 02 22:16:52 2010] [notice] Parent: Received shutdown signal -- Shutting down the server.
+[Sun May 02 22:16:52 2010] [notice] Child 1212: Exit event signaled. Child process is ending.
+[Sun May 02 22:16:53 2010] [notice] Child 1212: Released the start mutex
+[Sun May 02 22:16:54 2010] [notice] Child 1212: All worker threads have exited.
+[Sun May 02 22:16:55 2010] [notice] Child 1212: Child process is exiting
+[Sun May 02 22:16:58 2010] [notice] Parent: Child process exited successfully.
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Mon May 03 10:19:15 2010] [notice] Digest: generating secret for digest authentication ...
+[Mon May 03 10:19:15 2010] [notice] Digest: done
+[Mon May 03 10:19:15 2010] [notice] Apache/2.2.11 (Win32) configured -- resuming normal operations
+[Mon May 03 10:19:15 2010] [notice] Server built: Dec 10 2008 00:10:06
+[Mon May 03 10:19:15 2010] [notice] Parent: Created child process 4072
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+Apache server interrupted...
+ determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Mon May 03 10:19:16 2010] [notice] Digest: generating secret for digest authentication ...
+[Mon May 03 10:19:16 2010] [notice] Digest: done
+[Mon May 03 10:19:16 2010] [notice] Child 4072: Child process is running
+[Mon May 03 10:19:16 2010] [notice] Child 4072: Acquired the start mutex.
+[Mon May 03 10:19:16 2010] [notice] Child 4072: Starting 64 worker threads.
+[Mon May 03 10:19:16 2010] [notice] Child 4072: Starting thread to listen on port 8888.
+[Mon May 03 10:19:54 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block104.xml, referer: http://localhost:8888/block.swf
+[Mon May 03 10:19:54 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block104.xml, referer: http://localhost:8888/block.swf
+[Mon May 03 10:20:23 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block104.xml, referer: http://localhost:8888/block.swf
+[Mon May 03 10:34:58 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml, referer: http://localhost:8888/block.swf
+[Mon May 03 10:34:58 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml, referer: http://localhost:8888/block.swf
+[Mon May 03 10:35:01 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml, referer: http://localhost:8888/block.swf
+[Mon May 03 10:39:40 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml, referer: http://localhost:8888/block.swf
+[Mon May 03 10:39:40 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml, referer: http://localhost:8888/block.swf
+[Mon May 03 10:39:44 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml, referer: http://localhost:8888/block.swf
+[Mon May 03 10:40:47 2010] [notice] mod_fcgid: call H:/Pub/htdocs/mashup/~tmp/demo-scripts/make-mashup.php with wrapper H:/Pub/php/php-cgi.exe
+[Mon May 03 10:41:31 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Mon May 03 10:41:32 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Mon May 03 10:41:34 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Mon May 03 14:24:38 2010] [error] [client 222.205.46.35] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Mon May 03 14:24:41 2010] [error] [client 222.205.46.35] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Mon May 03 14:26:49 2010] [error] [client 10.214.33.156] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Mon May 03 14:26:49 2010] [error] [client 10.214.33.156] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Mon May 03 14:26:52 2010] [error] [client 10.214.33.156] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Mon May 03 14:26:56 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/crossdomain.xml
+[Mon May 03 15:48:50 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Mon May 03 15:48:51 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Mon May 03 15:49:06 2010] [error] [client 10.214.33.156] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Mon May 03 15:49:08 2010] [error] [client 10.214.33.156] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Mon May 03 15:49:09 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/crossdomain.xml
+[Mon May 03 15:49:53 2010] [error] [client 10.214.33.156] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Mon May 03 20:18:23 2010] [notice] mod_fcgid: call H:/Pub/htdocs/mashup/~tmp/xhr-proxy/proxy.php with wrapper H:/Pub/php/php-cgi.exe
+[Mon May 03 20:18:23 2010] [notice] mod_fcgid: call H:/Pub/htdocs/mashup/~tmp/xhr-proxy/proxy.php with wrapper H:/Pub/php/php-cgi.exe
+[Mon May 03 20:18:52 2010] [notice] mod_fcgid: call H:/Pub/htdocs/mashup/~tmp/xhr-proxy/proxy.php with wrapper H:/Pub/php/php-cgi.exe
+[Mon May 03 20:18:52 2010] [notice] mod_fcgid: call H:/Pub/htdocs/mashup/~tmp/xhr-proxy/proxy.php with wrapper H:/Pub/php/php-cgi.exe
+[Mon May 03 20:19:56 2010] [warn] mod_fcgid: process 3964 graceful kill fail, sending SIGKILL
+[Mon May 03 20:28:03 2010] [warn] mod_fcgid: process 4940 graceful kill fail, sending SIGKILL
+[Mon May 03 20:28:03 2010] [warn] mod_fcgid: process 4416 graceful kill fail, sending SIGKILL
+[Mon May 03 20:28:03 2010] [warn] mod_fcgid: process 4512 graceful kill fail, sending SIGKILL
+[Mon May 03 20:47:17 2010] [notice] mod_fcgid: call H:/Pub/htdocs/mashup/~tmp/demo-scripts/block-js.php with wrapper H:/Pub/php/php-cgi.exe
+[Mon May 03 20:47:17 2010] [notice] mod_fcgid: call H:/Pub/htdocs/mashup/~tmp/demo-scripts/block-js.php with wrapper H:/Pub/php/php-cgi.exe
+[Mon May 03 22:13:01 2010] [notice] Parent: Received shutdown signal -- Shutting down the server.
+Apache server interrupted...
+otice] Child 4072: Exit event signaled. Child process is ending.
+[Mon May 03 22:13:03 2010] [notice] Child 4072: Released the start mutex
+[Mon May 03 22:13:04 2010] [notice] Child 4072: All worker threads have exited.
+[Mon May 03 22:13:06 2010] [notice] Child 4072: Child process is exiting
+[Mon May 03 22:13:15 2010] [notice] Parent: Child process exited successfully.
+Apache server shutdown initiated...
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Wed May 05 15:34:42 2010] [notice] Digest: generating secret for digest authentication ...
+[Wed May 05 15:34:42 2010] [notice] Digest: done
+[Wed May 05 15:34:42 2010] [notice] Apache/2.2.11 (Win32) configured -- resuming normal operations
+[Wed May 05 15:34:42 2010] [notice] Server built: Dec 10 2008 00:10:06
+[Wed May 05 15:34:42 2010] [notice] Parent: Created child process 4112
+httpd.exe: Could not reliably determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+Apache server interrupted...
+ determine the server's fully qualified domain name, using 10.214.33.156 for ServerName
+[Wed May 05 15:34:42 2010] [notice] Digest: generating secret for digest authentication ...
+[Wed May 05 15:34:42 2010] [notice] Digest: done
+[Wed May 05 15:34:42 2010] [notice] Child 4112: Child process is running
+[Wed May 05 15:34:42 2010] [notice] Child 4112: Acquired the start mutex.
+[Wed May 05 15:34:42 2010] [notice] Child 4112: Starting 64 worker threads.
+[Wed May 05 15:34:42 2010] [notice] Child 4112: Starting thread to listen on port 8888.
+[Wed May 05 15:34:49 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Wed May 05 15:34:50 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Wed May 05 15:34:52 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/favicon.ico
+[Wed May 05 15:34:54 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block6.xml
+[Wed May 05 15:34:55 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block6.xml
+[Wed May 05 15:34:57 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block6.xml
+[Wed May 05 15:35:06 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block6.xml
+[Wed May 05 15:35:06 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block6.xml
+[Wed May 05 15:35:08 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block6.xml
+[Wed May 05 15:35:20 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Wed May 05 15:35:22 2010] [error] [client 127.0.0.1] File does not exist: H:/Pub/htdocs/mashup/~tmp/blocks/Block4.xml
+[Wed May 05 22:07:13 2010] [notice] Parent: Received shutdown signal -- Shutting down the server.
+[Wed May 05 22:07:13 2010] [notice] Child 4112: Exit event signaled. Child process is ending.
+[Wed May 05 22:07:14 2010] [notice] Child 4112: Released the start mutex
+[Wed May 05 22:07:15 2010] [notice] Child 4112: All worker threads have exited.
+[Wed May 05 22:07:15 2010] [notice] Child 4112: Child process is exiting
+[Wed May 05 22:07:17 2010] [notice] Parent: Child process exited successfully.

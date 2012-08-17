@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<block xmlns="http://localhost/block/namespace"
+       name="Virtual Earth v1.0">
+  <description>This is a map service</description>
+  <params>
+    <param name="longitute">
+      <description>This is the longitute of the location you are searching for</description>
+    </param>
+    <param name="latitute">
+      <description>This is the latitute of the location you are searching for</description>
+    </param>
+  </params>
+  <outputSet>
+    <description>This is the output of the block</description>
+  </outputSet>
+</block>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<block xmlns="http://localhost/block/namespace" name="Live Search">
+    <description>This is a live search service ... </description>
+    <params>
+        <param name="query">
+            <description>This is what you want to search...</description>
+        </param>
+        <param name="count">
+            <description>This is the number of results you want to get...</description>
+        </param>
+    </params>
+</block>

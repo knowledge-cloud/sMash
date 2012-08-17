@@ -1,0 +1,12 @@
+updates-20100503:
+
+* blocks.xml
+(The newest version is in H:\My Documents\mobile_mashup\UI\mashup-editor\¾É°æ±¾µÄmashup-editorÔ´Âë\blocks)
+1. Add description to LiuYing's blocks according to modifed ontology.
+2. Add Contact, Music, GPS adn GSM block description which are mobile blocks.
+
+* ontology.xml
+(The newest version is in C:\Users\AaronPhang\Documents\Visual Studio 2008\Projects\voronoi_recommendation_cgi\voronoi_recommendation_cgi)
+1. Add some necessary attributes during the modifying of blocks.xml.
+
+* Block clear function added.
